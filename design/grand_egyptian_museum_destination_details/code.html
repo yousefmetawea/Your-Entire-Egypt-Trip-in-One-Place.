@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-variant":"#e6e2db","secondary-fixed":"#ffdeae","on-secondary-fixed-variant":"#5d4213","secondary-fixed-dim":"#e8c086","outline-variant":"#c4c7c7","on-error-container":"#93000a","primary-fixed":"#e5e2e1","on-tertiary-container":"#948565","tertiary-fixed":"#f3e0bb","surface-container-lowest":"#ffffff","primary":"#060607","on-primary-container":"#888686","error-container":"#ffdad6","surface-container-low":"#f7f3ec","background":"#fdf9f2","error":"#ba1a1a","tertiary-container":"#271e06","surface-container-high":"#ebe8e1","surface-container-highest":"#e6e2db","inverse-on-surface":"#f4f0e9","on-surface-variant":"#444748","on-background":"#1c1c18","on-surface":"#1c1c18","on-tertiary-fixed-variant":"#51452a","inverse-surface":"#31302c","surface-bright":"#fdf9f2","primary-container":"#1f1f1f","on-primary-fixed-variant":"#474746","tertiary":"#0b0600","tertiary-fixed-dim":"#d6c5a1","on-secondary-fixed":"#281800","on-tertiary-fixed":"#231a04","on-primary":"#ffffff","on-error":"#ffffff","primary-fixed-dim":"#c8c6c5","on-secondary":"#ffffff","inverse-primary":"#c8c6c5","secondary":"#775928","secondary-container":"#ffd79b","surface-dim":"#dddad3","on-primary-fixed":"#1b1b1c","outline":"#747878","surface":"#fdf9f2","surface-container":"#f1ede6","surface-tint":"#5f5e5e","on-secondary-container":"#7a5c2b","on-tertiary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-lg":"1.5rem","margin":"1.5rem","gutter-lg":"2.5rem","space-2xl":"4rem","gutter":"1.5rem","space-md":"1rem","margin-md":"3rem","gutter-sm":"1rem","space-sm":"0.5rem","margin-lg":"5rem","space-xl":"2.5rem","space-xs":"0.25rem"},"fontFamily":{"display-hero":["Playfair Display"],"title-md":["Plus Jakarta Sans"],"headline-md":["Playfair Display"],"label-caps":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"display-hero-mobile":["Playfair Display"],"headline-sm":["Playfair Display"],"headline-lg-mobile":["Playfair Display"],"label-md":["Plus Jakarta Sans"],"headline-lg":["Playfair Display"],"title-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"]},"fontSize":{"display-hero":["64px",{"lineHeight":"72px","letterSpacing":"-0.02em","fontWeight":"400"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"headline-md":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"500"}],"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.12em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","letterSpacing":"0em","fontWeight":"400"}],"body-sm":["13px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"400"}],"display-hero-mobile":["40px",{"lineHeight":"48px","letterSpacing":"-0.01em","fontWeight":"400"}],"headline-sm":["24px",{"lineHeight":"32px","letterSpacing":"0em","fontWeight":"600"}],"headline-lg-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"400"}],"label-md":["13px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.015em","fontWeight":"400"}],"title-lg":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-md":["15px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}]}}}}</script></head><body class="bg-surface-container-low text-on-surface font-body-md text-body-md min-h-screen selection:bg-secondary selection:text-on-secondary"><header class="fixed top-0 left-0 right-0 z-50 px-gutter-sm lg:px-margin-lg pt-space-sm"><div class="h-20 max-w-[1440px] mx-auto bg-surface/85 backdrop-blur-xl rounded-full px-space-lg flex items-center justify-between shadow-[0_16px_36px_-8px_rgba(31,31,31,0.08),0_4px_12px_-2px_rgba(176,141,87,0.05)]"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm group" data-path="discover" href="#"><img alt="Discover Cairo Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBe2c6YebTafFx6VmT90UJ8cD-0yv_raH9UuxtACefLj6sKg56198qVYhTmvMRm6WafSPBWT0Ju4YwY8G9D4BUCHlevw6oz3-mIgJlAYECh3Sjk2lj7ojp8N10iZR0aDqQQRfWKkZHfjutvPeEbpozNS9DqeLAvYfj6-P0dq3Tq0phiMNFKPuH7y49Spc536Nq41ZlgGsZjkcSGaIafDbg4iVwPSQ-AekEGsrtP81w"/><span class="font-headline-sm text-headline-sm text-primary tracking-tight hidden sm:inline-block">Cairo</span></a></div><nav class="hidden lg:flex items-center gap-space-xl" data-active-classes="text-primary font-bold"><a class="text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md tracking-normal" data-path="discover" href="#">Discover</a><a class="text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md tracking-normal" data-path="plan-a-trip" href="#">Plan a Trip</a><a class="text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md tracking-normal" data-path="stay-and-transport" href="#">Stay &amp; Transport</a><a class="text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md tracking-normal" data-path="my-trip" href="#">My Trip</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-high/60 text-on-surface-variant font-label-caps text-label-caps uppercase tracking-widest"><span>USD</span><span class="text-outline">·</span><span>EN</span></div><a class="px-space-lg py-space-sm rounded-full bg-primary-container text-on-primary hover:bg-secondary hover:text-on-secondary transition-all shadow-[0_4px_20px_-4px_rgba(31,31,31,0.15)] font-title-md text-title-md" data-path="plan-a-trip" href="#">Plan My Trip</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface-container-low min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Navigation & Breadcrumbs Bar -->
+<div class="w-full max-w-[1440px] mx-auto px-gutter-sm md:px-margin-md lg:px-margin-lg pt-space-lg pb-space-sm">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm bg-surface-container-lowest/80 backdrop-blur-md rounded-full px-space-lg py-space-sm shadow-[0_4px_20px_-4px_rgba(31,31,31,0.04)]">
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Discover Cairo</a>
+<span class="text-tertiary-fixed-dim">/</span>
+<a class="hover:text-primary transition-colors" href="#">Giza Plateau</a>
+<span class="text-tertiary-fixed-dim">/</span>
+<span class="text-secondary font-bold">Grand Egyptian Museum (GEM)</span>
+</nav>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-low hover:bg-surface-container transition-all text-on-surface-variant hover:text-primary font-label-caps text-label-caps uppercase tracking-wider" id="shareBtn">
+<span class="material-symbols-outlined text-[16px] text-secondary">share</span>
+<span>Share</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-low hover:bg-surface-container transition-all text-on-surface-variant hover:text-primary font-label-caps text-label-caps uppercase tracking-wider" id="bookmarkBtn">
+<span class="material-symbols-outlined text-[16px] text-secondary" id="bookmarkIcon">bookmark_border</span>
+<span id="bookmarkLabel">Save to Vault</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Editorial Master Title & Metadata -->
+<section class="w-full max-w-[1440px] mx-auto px-gutter-sm md:px-margin-md lg:px-margin-lg pt-space-md pb-space-lg">
+<div class="flex flex-wrap items-center gap-space-xs mb-space-sm">
+<span class="px-space-md py-space-xs rounded-full bg-surface-container text-secondary font-label-caps text-label-caps uppercase tracking-widest">Architectural Icon</span>
+<span class="px-space-md py-space-xs rounded-full bg-secondary-fixed/50 text-on-secondary-fixed-variant font-label-caps text-label-caps uppercase tracking-widest">UNESCO Heritage Partner</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps uppercase tracking-widest">World's Largest Archaeological Museum</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-end">
+<div class="lg:col-span-8 flex flex-col gap-space-xs">
+<h1 class="font-display-hero text-display-hero text-primary tracking-tight font-normal leading-[1.08]">
+          Grand Egyptian Museum <span class="italic font-normal text-secondary font-headline-md">(GEM)</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl pt-space-xs">
+          The monumental jewel of the Giza Plateau, housing over 100,000 antiquities and the complete Tutankhamun collection overlooking the Pyramids.
+        </p>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-[0_4px_20px_-4px_rgba(31,31,31,0.04)]">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Connoisseur Standing</span>
+<span class="flex items-center gap-1 font-label-md text-label-md text-secondary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<strong class="text-primary">4.9</strong> / 5.0
+          </span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Evaluated by 3,420 members</span>
+<span class="flex items-center gap-1 text-[#2e7d32] font-semibold">
+<span class="w-2 h-2 rounded-full bg-[#2e7d32]"></span> Open Today
+          </span>
+</div>
+</div>
+</div>
+<!-- Quick Metadata Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md mt-space-lg pt-space-md bg-surface-container-lowest/60 rounded-xl px-space-lg py-space-md shadow-sm">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed/40 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[18px]">location_on</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Location</span>
+<span class="font-title-md text-title-md text-primary">Alexandria Desert Rd, Giza</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed/40 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[18px]">hourglass_empty</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Duration</span>
+<span class="font-title-md text-title-md text-primary">4–5 Hours Curated</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed/40 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[18px]">schedule</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Visiting Hours</span>
+<span class="font-title-md text-title-md text-primary">9:00 AM – 6:00 PM</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed/40 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Curated Status</span>
+<span class="font-title-md text-title-md text-primary">Private Slots Active</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Asymmetric Image Gallery Showcase -->
+<section class="w-full max-w-[1440px] mx-auto px-gutter-sm md:px-margin-md lg:px-margin-lg pb-space-2xl">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<!-- Main Prominent Facade -->
+<div class="md:col-span-8 group relative rounded-xl overflow-hidden shadow-[0_16px_36px_-8px_rgba(31,31,31,0.08)] bg-primary-container h-[420px] md:h-[580px]">
+<img alt="Architectural facade of the Grand Egyptian Museum with warm evening desert light" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" src="https://lh3.googleusercontent.com/aida/ALJJyrAAeZZogviqTwsKzOyFsSstNSqBKFVjJLmYLv-5CWRnNvJsEF7CA3bbByXE_8cC8SHktwuYyPXApYwTdyTaJ7ni0yV1XtXeFPSANOxn8dnOZK05CVv1kr8jcp6HUN6gXfOpfrEoUogGJ95wWC85jAommn4J7-wlfVgDKdlJNlwdLBQZKFBp9Z5jC4qOrkdTOnOz9WdXfM3O1BFi1QH5bfPOlVIOuUzL9e1YGFmWy5w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent flex flex-col justify-end p-space-lg md:p-space-xl">
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-secondary-fixed mb-space-xs">Monumental Architecture · Heneghan Peng</span>
+<h2 class="font-headline-md text-headline-md text-on-primary">The Alabaster Facade &amp; Sunbeam Axis</h2>
+<p class="font-body-sm text-body-sm text-surface-container-high/90 max-w-xl hidden sm:block">A translucent 1-kilometer alabaster wall filtering the Saharan sun into a radiant interior expanse.</p>
+</div>
+</div>
+<!-- Secondary Split Images -->
+<div class="md:col-span-4 flex flex-col gap-space-md h-[420px] md:h-[580px]">
+<!-- Secondary Image 1: Atrium & Ramses II -->
+<div class="group relative rounded-xl overflow-hidden flex-1 shadow-[0_12px_28px_-6px_rgba(31,31,31,0.06)] bg-primary-container">
+<img alt="Grand Egyptian Museum interior atrium showing Ramses II colossus" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9n1ZfjAluHzWjWi1v2v0GSyaxKK-7DisqIV0pGa7YMWFqQaBDLGArVB0-oWsuJor6RrzSCP9NqyuV0fV9Tdx4U7tfPoUZr7HY7ulqI04QJGTWh5Pe3sqltICyNHP7u7Wr9lJJhroDKms0-9UNhz9JmkfEUpJGUVJU-49-WmEddZmxdiQUQB74mE2xrHY5c8dvF2sEXAk2t66XTDXox_lSMfRXKvMjlr2QmsbKig"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/10 to-transparent flex flex-col justify-end p-space-md">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary-fixed">Colossus of Ramses II</span>
+<span class="font-title-md text-title-md text-on-primary">The Sunlit Grand Atrium</span>
+</div>
+</div>
+<!-- Secondary Image 2: Golden Tutankhamun Gallery -->
+<div class="group relative rounded-xl overflow-hidden flex-1 shadow-[0_12px_28px_-6px_rgba(31,31,31,0.06)] bg-primary-container">
+<img alt="Tutankhamun golden treasure gallery display" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoFRHVirkTBeu_nUVPEcV3kP0OqRqpxebGBZlrxM16cH0ji5oWSpLohRRLUE__rOp9XEQw4CK4p_095hHLYQMXTl02lzAVaonaUqWA_7P0lL40q8-2vL_ezHg4BHKMWG_CVfKvyVgfxwA-2-omSEvCiavmaQDm0mUjiNEoKLuTTzDrtrqhCAPObVeI_tX6pndTsELWk0PWRgdoJKcVzE8rUmXaZUH1VO6QOc6TKg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/10 to-transparent flex flex-col justify-end p-space-md">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary-fixed">The Royal Treasures</span>
+<span class="font-title-md text-title-md text-on-primary">Complete Tutankhamun Suite</span>
+</div>
+<!-- Walkthrough Overlay Badge Button -->
+<button class="absolute top-space-md right-space-md px-space-md py-space-xs rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-primary font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-space-xs shadow-md hover:bg-secondary hover:text-on-secondary transition-all">
+<span class="material-symbols-outlined text-[16px]">photo_library</span>
+<span>View All 42 Curated Photos</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 2-Column Split Content Layout (2/3 Left, 1/3 Right Sticky) -->
+<section class="w-full max-w-[1440px] mx-auto px-gutter-sm md:px-margin-md lg:px-margin-lg pb-space-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-start">
+<!-- LEFT COLUMN (2/3) -->
+<div class="lg:col-span-8 flex flex-col gap-space-2xl">
+<!-- Narrative Overview Section -->
+<div class="bg-surface-container-lowest p-space-xl md:p-space-2xl rounded-xl shadow-[0_4px_20px_-4px_rgba(31,31,31,0.04)]">
+<div class="flex items-center gap-space-sm mb-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-secondary">Curated Architectural Overview</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary font-normal mb-space-md leading-tight">
+            An Architectural Horizon Realigning 5,000 Years of Royalty
+          </h2>
+<div class="space-y-space-md text-body-md font-body-md text-on-surface-variant">
+<p class="leading-relaxed">
+              Conceived as an astronomical ray of light, the Grand Egyptian Museum occupies a deliberate geological threshold precisely two kilometers northwest of the Great Pyramid of Giza. Its geometric triangulated footprint sits upon the plateau rim, orchestrating sightlines where visual axes shoot directly toward the apexes of Khufu and Khafre.
+            </p>
+<p class="leading-relaxed">
+              Covering roughly 500,000 square meters, GEM is not merely the world's most expansive single-civilization museum; it is a sacred architectural reliquary. Its polished translucent alabaster facade filters intense desert solar radiation into gentle, milky luminescence, casting shifting geometries across monumental basalt and granite antiquities throughout the day.
+            </p>
+</div>
+<!-- Highlight Quotation / Stat Bar -->
+<div class="mt-space-lg p-space-lg rounded-xl bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<span class="font-display-hero text-headline-md font-normal text-secondary">100,000+</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Preserved Antiquities in Vaults</span>
+</div>
+<div class="w-full sm:w-[1px] h-[1px] sm:h-12 bg-outline-variant/50"></div>
+<div class="flex flex-col">
+<span class="font-display-hero text-headline-md font-normal text-secondary">5,398</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Tutankhamun Objects Unveiled</span>
+</div>
+<div class="w-full sm:w-[1px] h-[1px] sm:h-12 bg-outline-variant/50"></div>
+<div class="flex flex-col">
+<span class="font-display-hero text-headline-md font-normal text-secondary">2.1 km</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Axis to the Great Pyramid</span>
+</div>
+</div>
+</div>
+<!-- Curated Highlights Interactive Section -->
+<div class="bg-surface-container-lowest p-space-xl md:p-space-2xl rounded-xl shadow-[0_4px_20px_-4px_rgba(31,31,31,0.04)]">
+<div class="flex items-center justify-between mb-space-lg flex-wrap gap-space-sm">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-secondary">Key Discoveries</span>
+<h2 class="font-headline-md text-headline-md text-primary font-normal">Curated Gallery Highlights</h2>
+</div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant bg-surface-container px-space-md py-space-xs rounded-full">
+              4 Signature Encounters
+            </span>
+</div>
+<!-- Accordion Group -->
+<div class="space-y-space-sm" id="highlightsAccordion">
+<!-- Item 1 -->
+<div class="rounded-xl bg-surface-container-low transition-all duration-300 highlight-card overflow-hidden">
+<button class="w-full px-space-lg py-space-md flex items-center justify-between text-left focus:outline-none" onclick="toggleHighlight(0)">
+<div class="flex items-center gap-space-md">
+<span class="font-display-hero text-headline-sm text-secondary font-normal">01</span>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary">The Atrium &amp; Colossus of Ramses II</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">3,200 years old · 83 metric tons of red Aswan granite</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary transition-transform duration-300 transform rotate-180" id="highlight-icon-0">expand_circle_down</span>
+</button>
+<div class="px-space-lg pb-space-lg pt-space-xs text-body-md font-body-md text-on-surface-variant" id="highlight-body-0">
+<p>
+                  Standing triumphant in the museum’s sun-drenched four-story atrium, this monolithic sculpture of King Ramses II greeted ancient travelers at the temple of Ptah in Memphis. Positioned with exact optical engineering, sunlight illuminates the Pharaoh's features twice annually, continuing a tradition that spans three millennia.
+                </p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="rounded-xl bg-surface-container-low transition-all duration-300 highlight-card overflow-hidden">
+<button class="w-full px-space-lg py-space-md flex items-center justify-between text-left focus:outline-none" onclick="toggleHighlight(1)">
+<div class="flex items-center gap-space-md">
+<span class="font-display-hero text-headline-sm text-secondary font-normal">02</span>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary">The Ascending Grand Staircase</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">64 monumental royal statues chronologically aligned towards eternity</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary transition-transform duration-300" id="highlight-icon-1">expand_circle_down</span>
+</button>
+<div class="px-space-lg pb-space-lg pt-space-xs text-body-md font-body-md text-on-surface-variant hidden" id="highlight-body-1">
+<p>
+                  A theatrical pilgrimage through six millennia. Visitors ascend alongside enthroned kings, deities, and sarcophagi organized into four vertical themes: Royal Image, Divine Houses, Sacred Kingship, and Eternity. The dramatic flight concludes at an immense glass portal with sweeping, unobstructed vistas of Khufu's pyramid.
+                </p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="rounded-xl bg-surface-container-low transition-all duration-300 highlight-card overflow-hidden">
+<button class="w-full px-space-lg py-space-md flex items-center justify-between text-left focus:outline-none" onclick="toggleHighlight(2)">
+<div class="flex items-center gap-space-md">
+<span class="font-display-hero text-headline-sm text-secondary font-normal">03</span>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary">The Complete Tutankhamun Galleries</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">5,398 sacred artifacts united under one roof for the first time in history</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary transition-transform duration-300" id="highlight-icon-2">expand_circle_down</span>
+</button>
+<div class="px-space-lg pb-space-lg pt-space-xs text-body-md font-body-md text-on-surface-variant hidden" id="highlight-body-2">
+<p>
+                  Spanning 7,000 square meters of controlled ambient illumination, this permanent exhibition presents Howard Carter's entire 1922 discovery. Highlights include the solid gold death mask (11 kg of 24-karat gold), the nested gold leaf shrines, royal chariots, ivory gaming boards, and intimate childhood garments never previously exhibited publicly.
+                </p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="rounded-xl bg-surface-container-low transition-all duration-300 highlight-card overflow-hidden">
+<button class="w-full px-space-lg py-space-md flex items-center justify-between text-left focus:outline-none" onclick="toggleHighlight(3)">
+<div class="flex items-center gap-space-md">
+<span class="font-display-hero text-headline-sm text-secondary font-normal">04</span>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary">The Khufu Solar Boat Museum</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">4,600-year-old cedar ritual barge transferred intact from the Giza sand</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary transition-transform duration-300" id="highlight-icon-3">expand_circle_down</span>
+</button>
+<div class="px-space-lg pb-space-lg pt-space-xs text-body-md font-body-md text-on-surface-variant hidden" id="highlight-body-3">
+<p>
+                  Suspended in an architecturally custom climatic chamber, this 43-meter royal cedar vessel was safely transported intact across the desert sands via a smart-cushioned motorized cart. It represents mankind’s oldest surviving intact wooden vessel, crafted to carry King Khufu through the underworld sky.
+                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Essential Tips for First-Time Connoisseurs -->
+<div class="bg-surface-container-lowest p-space-xl md:p-space-2xl rounded-xl shadow-[0_4px_20px_-4px_rgba(31,31,31,0.04)]">
+<div class="mb-space-lg">
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-secondary">Concierge Briefing</span>
+<h2 class="font-headline-md text-headline-md text-primary font-normal">Essential Tips for Connoisseurs</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Tip 1 -->
+<div class="p-space-lg rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-[24px]">hotel_class</span>
+<h3 class="font-title-md text-title-md text-primary">VIP &amp; Early Access</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Reserve the exclusive 8:30 AM private morning slot. You will enter the grand atrium nearly an hour before coach delegations arrive, offering unobstructed contemplation of Ramses II.
+              </p>
+</div>
+<!-- Tip 2 -->
+<div class="p-space-lg rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-[24px]">directions_walk</span>
+<h3 class="font-title-md text-title-md text-primary">Footwear &amp; Pacing</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Wear cushioned footwear suited for stone surfaces. Traversing the Grand Staircase and adjacent galleries requires over 1.2 kilometers of continuous walking across polished granite floors.
+              </p>
+</div>
+<!-- Tip 3 -->
+<div class="p-space-lg rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-[24px]">photo_camera</span>
+<h3 class="font-title-md text-title-md text-primary">Photography Protocol</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Non-flash handheld photography and smartphone capture are fully permitted in all public galleries. Professional tripods and commercial gimbal rigs mandate prior concierge permits.
+              </p>
+</div>
+<!-- Tip 4 -->
+<div class="p-space-lg rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-[24px]">ac_unit</span>
+<h3 class="font-title-md text-title-md text-primary">Climate &amp; Sun Angles</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Interior galleries maintain a constant museum climate of 21°C. At approximately 3:00 PM, the western glass pavilion aligns with the sun, illuminating the Giza plateau in golden hues.
+              </p>
+</div>
+</div>
+</div>
+<!-- Interactive District Location & Transit Map -->
+<div class="bg-surface-container-lowest p-space-xl md:p-space-2xl rounded-xl shadow-[0_4px_20px_-4px_rgba(31,31,31,0.04)]">
+<div class="flex items-center justify-between mb-space-md flex-wrap gap-space-sm">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-secondary">Geographic Orientation</span>
+<h2 class="font-headline-md text-headline-md text-primary font-normal">Plateau Position &amp; Transit Times</h2>
+</div>
+<div class="flex items-center gap-space-xs font-label-caps text-label-caps text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">near_me</span>
+<span>Giza District Coordinates</span>
+</div>
+</div>
+<!-- Stylized Architectural Map Card -->
+<div class="w-full h-80 rounded-xl overflow-hidden relative shadow-inner bg-surface-container" data-location="Grand Egyptian Museum, Giza, Cairo, Egypt" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCixHi0ATO6K4Q8WWF0QdiivR6q61Aulm4bb0JLgCv4qTglO7PUbRMp4d2k5icJdlhdFjBGdDZYO-LfRLDnwoEj-otuw1aUHfikfnGX39UlvJ5xi5MR7SBKSIv5-sJgOjMaRPWtbE7W8laatDBsCRBmUxaVRYvhsR1TXAv5pB0JAEIS7ewjaiXMlFEvRX_EKuS4oi46Jq9cMApwX_Ar9bSy6MqMVnqQL_Rq9TYr5Q')">
+<div class="absolute top-space-md left-space-md bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-space-sm rounded-lg shadow-md max-w-xs">
+<div class="flex items-center gap-space-xs text-secondary mb-1">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+<span class="font-label-caps text-label-caps uppercase font-bold">Primary Entrance</span>
+</div>
+<p class="font-title-md text-title-md text-primary">Alexandria Desert Highway</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Giza Plateau Gateway Gate 01</p>
+</div>
+<!-- Transit Badge Floating Overlay -->
+<div class="absolute bottom-space-md right-space-md flex flex-col gap-space-xs">
+<div class="bg-primary-container/95 text-on-primary px-space-md py-space-xs rounded-full backdrop-blur-md flex items-center gap-space-xs shadow-md font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">directions_car</span>
+<span><strong>7 mins</strong> from Giza Pyramids</span>
+</div>
+<div class="bg-primary-container/95 text-on-primary px-space-md py-space-xs rounded-full backdrop-blur-md flex items-center gap-space-xs shadow-md font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">schedule</span>
+<span><strong>35 mins</strong> from Zamalek / Nile</span>
+</div>
+</div>
+</div>
+<!-- Travel Connections Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md mt-space-md pt-space-sm">
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary">flight</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Sphinx Int'l Airport</span>
+<span class="font-title-md text-title-md text-primary">20 mins chauffeur</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary">hotel</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Mena House Historic Wing</span>
+<span class="font-title-md text-title-md text-primary">5 mins private buggy</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary">account_balance</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Downtown Cairo</span>
+<span class="font-title-md text-title-md text-primary">40 mins via Ring Road</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Nearby Places to Explore Row -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-secondary">Complete Your Sojourn</span>
+<h2 class="font-headline-md text-headline-md text-primary font-normal">Nearby Plateau Sanctuaries</h2>
+</div>
+<a class="hidden sm:flex items-center gap-space-xs font-label-caps text-label-caps uppercase tracking-wider text-secondary hover:text-primary transition-colors" href="#">
+<span>View Plateau Map</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Card 1 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(31,31,31,0.04)] hover:shadow-xl transition-all duration-300 flex flex-col">
+<div class="h-44 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Panoramic landscape of the Great Pyramids of Giza and Sphinx during late afternoon golden hour with sand dunes in the foreground" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXHpFM1AvBX7B8xDPi5nQQRO7oYkoOCVLHdcd6wK4dpTH9vkObi58UHrQ2v6s48oz4Sl617V8_aH7I9dUiode3PEWyNZPu0OgZMAYxLL66rwsMMaao4lHxrTYBpS0tERnZ9gfzHBjeDI9nTcTp6_G5M4Z8Sda1fMLkxzS58Q-U_0D8aQHGwgBKKvhoZS-dSdtjjNHUUm3T0-VykASIlvDEWj7u_eilzN7X8ZPf8Q"/>
+<span class="absolute top-space-sm left-space-sm px-space-sm py-space-xs rounded bg-surface/90 backdrop-blur-sm text-secondary font-label-caps text-label-caps uppercase">2.1 km away</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Ancient Wonder · 3–4 Hours</span>
+<h3 class="font-title-lg text-title-lg text-primary mt-space-xs group-hover:text-secondary transition-colors">Giza Pyramids &amp; Great Sphinx</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs line-clamp-2">
+                    The iconic necropolis of Khufu, Khafre, and Menkaure with secluded VIP camel trek routes across desert ridges.
+                  </p>
+</div>
+<div class="pt-space-md flex items-center justify-between text-secondary font-label-caps text-label-caps uppercase">
+<span>Explore Experience</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(31,31,31,0.04)] hover:shadow-xl transition-all duration-300 flex flex-col">
+<div class="h-44 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Historic Marriott Mena House luxury restaurant terrace overlooking lush emerald gardens with the Pyramid of Cheops in the backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIFj9SMGWqbBcIZV_cbsA1YqX3rZFDrRcemH0z6ChsHF77R-lKvVMAfoIgLLP5j1259sMCpD-rDW75GDJ7SYcJusphR5uyVG9z6ICXSWTTls2gBIG_Qz02oHk244IApLs_muMnYlEgMy1Q53MMKAKCzvPg_vD3U54BBaSECscnTukXJe7K8r0qpd2eK0V84LPBQ68FguB2IJh88_f0w5KuuePWc7JIa7O49eEScQ"/>
+<span class="absolute top-space-sm left-space-sm px-space-sm py-space-xs rounded bg-surface/90 backdrop-blur-sm text-secondary font-label-caps text-label-caps uppercase">1.8 km away</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Luxury Dining · 2 Hours</span>
+<h3 class="font-title-lg text-title-lg text-primary mt-space-xs group-hover:text-secondary transition-colors">Mena House Gardens &amp; 139</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs line-clamp-2">
+                    Lush palm courtyards offering afternoon tea and champagne tastings right beneath the silhouette of the Great Pyramid.
+                  </p>
+</div>
+<div class="pt-space-md flex items-center justify-between text-secondary font-label-caps text-label-caps uppercase">
+<span>Reserve Table</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(31,31,31,0.04)] hover:shadow-xl transition-all duration-300 flex flex-col">
+<div class="h-44 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="The Step Pyramid of Djoser in Saqqara with desert landscape and ancient limestone mastaba tombs under clear Egyptian blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoN84bCSSy_F6FVG7_o6ijWzfGC91Z5iGe95HdA4VKnAlOXjEhOE-FkDCQy0Cje_3p7oUIYl9bMWhakcEby9kn6dWw1b3HgsRAQCue2ItzJ4mhSzRN1O_jUeO6BQFkfzR_lWC3SE031s9DebVpM_N-sFQMFgsEGs-YY3i3cN8KNFmByI8ihuH7Le4h88DhSf8P8AXO3dYvxvw9rjdP0E6Dytts5Bg1T02L7YbFBQ"/>
+<span class="absolute top-space-sm left-space-sm px-space-sm py-space-xs rounded bg-surface/90 backdrop-blur-sm text-secondary font-label-caps text-label-caps uppercase">18 km away</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Heritage Discovery · Half Day</span>
+<h3 class="font-title-lg text-title-lg text-primary mt-space-xs group-hover:text-secondary transition-colors">Saqqara &amp; Djoser Necropolis</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs line-clamp-2">
+                    Imhotep’s first monumental stone architectural marvel alongside the recently excavated Serapeum vault tombs.
+                  </p>
+</div>
+<div class="pt-space-md flex items-center justify-between text-secondary font-label-caps text-label-caps uppercase">
+<span>Explore Experience</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Sticky Booking & Planning Card (1/3) -->
+<aside class="lg:col-span-4 sticky top-24">
+<div class="bg-surface-container-lowest rounded-xl p-space-lg md:p-space-xl shadow-[0_16px_36px_-8px_rgba(31,31,31,0.08),0_4px_12px_-2px_rgba(176,141,87,0.05)] flex flex-col gap-space-lg">
+<!-- Card Header & Badge -->
+<div class="flex flex-col gap-space-xs pb-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-secondary font-bold">Concierge Vault</span>
+<span class="px-space-sm py-0.5 rounded-full bg-[#e8f5e9] text-[#2e7d32] font-label-caps text-[10px] tracking-wider uppercase font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2e7d32]"></span> Available
+              </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary font-normal">
+              Concierge Visit Pass &amp; Planning
+            </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Guaranteed priority timed access, private museum Egyptologist guide, and direct VIP security clearance.
+            </p>
+</div>
+<!-- Ticket Selection Tabs -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Select Pass Tier</span>
+<!-- Option 1: Fast-Track VIP Concierge Entry (Active by default) -->
+<label class="p-space-md rounded-xl bg-surface-container cursor-pointer transition-all duration-200 block" id="ticketVipLabel">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<input checked="" class="mt-1 accent-primary" name="passType" onchange="updateTicketSelection('vip')" type="radio" value="vip"/>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-title-md text-title-md text-primary">Fast-Track VIP Pass</span>
+<span class="px-space-xs py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-caps text-[9px] uppercase tracking-wider font-bold">Recommended</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Skip-the-line with accredited Egyptologist curator</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-title-lg text-title-lg text-primary block">EGP 2,400</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">~$50 USD</span>
+</div>
+</div>
+</label>
+<!-- Option 2: Standard Foreign Visitor -->
+<label class="p-space-md rounded-xl bg-surface-container-low cursor-pointer transition-all duration-200 block hover:bg-surface-container" id="ticketStdLabel">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<input class="mt-1 accent-primary" name="passType" onchange="updateTicketSelection('standard')" type="radio" value="standard"/>
+<div>
+<span class="font-title-md text-title-md text-primary">Adult Foreign Visitor</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">General access to Grand Hall &amp; galleries</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-title-lg text-title-lg text-primary block">EGP 1,200</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">~$25 USD</span>
+</div>
+</div>
+</label>
+</div>
+<!-- Verified Intel Note -->
+<div class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-[#2e7d32]">check_circle</span>
+<span>Last updated: Oct 18, 2024 · Ministry of Tourism Verified</span>
+</div>
+<!-- Schedule & Duration Breakdown -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm font-body-sm text-body-sm">
+<div class="flex items-start justify-between pb-space-xs">
+<span class="text-on-surface-variant">Regular Admission:</span>
+<span class="text-primary font-semibold text-right">9:00 AM – 6:00 PM <span class="font-normal text-on-surface-variant block text-xs">(Last gate 4:30 PM)</span></span>
+</div>
+<div class="flex items-start justify-between pb-space-xs">
+<span class="text-on-surface-variant">Sunset &amp; Evening Tours:</span>
+<span class="text-secondary font-semibold text-right">Thu &amp; Fri until 9:00 PM</span>
+</div>
+<div class="flex items-start justify-between">
+<span class="text-on-surface-variant">Pacing Requirement:</span>
+<span class="text-primary font-semibold">4 to 5 Hours Ideal</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-space-sm">
+<button class="w-full py-space-md px-space-lg rounded-full bg-primary-container text-on-primary hover:bg-secondary hover:text-on-secondary transition-all font-title-md text-title-md flex items-center justify-center gap-space-sm shadow-[0_4px_20px_-4px_rgba(31,31,31,0.2)]" id="addToTripBtn">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span id="addToTripText">Add to Trip Itinerary</span>
+</button>
+<button class="w-full py-space-sm px-space-lg rounded-full bg-surface-container text-primary hover:bg-secondary hover:text-on-secondary transition-all font-title-md text-title-md flex items-center justify-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">directions_car</span>
+<span>Book VIP Chauffeur &amp; Guide</span>
+</button>
+</div>
+<!-- Micro Perks Assurance -->
+<ul class="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant pt-space-xs">
+<li class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">check</span>
+<span>Instant mobile barcode pass via Apple / Google Wallet</span>
+</li>
+<li class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">check</span>
+<span>Complimentary cancellation up to 24 hours prior</span>
+</li>
+<li class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">check</span>
+<span>Curated audio headset in 12 languages included</span>
+</li>
+<li class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">check</span>
+<span>Direct door-to-door coordination from Zamalek / Downtown</span>
+</li>
+</ul>
+<!-- Concierge Support Mini Banner -->
+<div class="p-space-sm rounded-lg bg-surface-container flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-[16px]">support_agent</span>
+</div>
+<div class="flex flex-col text-xs">
+<span class="font-semibold text-primary">Need Bespoke Arrangements?</span>
+<a class="text-secondary hover:underline" href="#">Contact Cairo Concierge Desk 24/7</a>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</section>
+<!-- Interactive Logic -->
+<script>
+    function toggleHighlight(index) {
+      for (let i = 0; i < 4; i++) {
+        const body = document.getElementById(`highlight-body-${i}`);
+        const icon = document.getElementById(`highlight-icon-${i}`);
+        if (i === index) {
+          const isCurrentlyHidden = body.classList.contains('hidden');
+          if (isCurrentlyHidden) {
+            body.classList.remove('hidden');
+            icon.classList.add('rotate-180');
+          } else {
+            body.classList.add('hidden');
+            icon.classList.remove('rotate-180');
+          }
+        } else {
+          body.classList.add('hidden');
+          icon.classList.remove('rotate-180');
+        }
+      }
+    }
+
+    function updateTicketSelection(type) {
+      const vipLabel = document.getElementById('ticketVipLabel');
+      const stdLabel = document.getElementById('ticketStdLabel');
+      if (type === 'vip') {
+        vipLabel.classList.add('bg-surface-container');
+        vipLabel.classList.remove('bg-surface-container-low');
+        stdLabel.classList.remove('bg-surface-container');
+        stdLabel.classList.add('bg-surface-container-low');
+      } else {
+        stdLabel.classList.add('bg-surface-container');
+        stdLabel.classList.remove('bg-surface-container-low');
+        vipLabel.classList.remove('bg-surface-container');
+        vipLabel.classList.add('bg-surface-container-low');
+      }
+    }
+
+    // Bookmark Toggle
+    let isBookmarked = false;
+    const bookmarkBtn = document.getElementById('bookmarkBtn');
+    const bookmarkIcon = document.getElementById('bookmarkIcon');
+    const bookmarkLabel = document.getElementById('bookmarkLabel');
+
+    if (bookmarkBtn) {
+      bookmarkBtn.addEventListener('click', () => {
+        isBookmarked = !isBookmarked;
+        if (isBookmarked) {
+          bookmarkIcon.textContent = 'bookmark';
+          bookmarkIcon.style.fontVariationSettings = "'FILL' 1";
+          bookmarkLabel.textContent = 'Saved in Vault';
+          bookmarkBtn.classList.add('bg-secondary-fixed/50', 'text-primary');
+        } else {
+          bookmarkIcon.textContent = 'bookmark_border';
+          bookmarkIcon.style.fontVariationSettings = "'FILL' 0";
+          bookmarkLabel.textContent = 'Save to Vault';
+          bookmarkBtn.classList.remove('bg-secondary-fixed/50', 'text-primary');
+        }
+      });
+    }
+
+    // Add to Trip Button Interaction
+    const addToTripBtn = document.getElementById('addToTripBtn');
+    const addToTripText = document.getElementById('addToTripText');
+
+    if (addToTripBtn) {
+      addToTripBtn.addEventListener('click', () => {
+        addToTripText.textContent = 'Added to My Trip ✓';
+        addToTripBtn.classList.add('bg-secondary', 'text-on-secondary');
+        setTimeout(() => {
+          addToTripText.textContent = 'Add to Trip Itinerary';
+          addToTripBtn.classList.remove('bg-secondary', 'text-on-secondary');
+        }, 3000);
+      });
+    }
+
+    // Share Feedback
+    const shareBtn = document.getElementById('shareBtn');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', () => {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(window.location.href);
+          const originalText = shareBtn.querySelector('span:last-child').textContent;
+          shareBtn.querySelector('span:last-child').textContent = 'Link Copied';
+          setTimeout(() => {
+            shareBtn.querySelector('span:last-child').textContent = originalText;
+          }, 2000);
+        }
+      });
+    }
+  </script>
+</div></main><footer class="w-full bg-surface text-on-surface pt-space-2xl pb-space-xl shadow-[0_-1px_12px_rgba(0,0,0,0.02)]"><div class="max-w-[1440px] mx-auto px-gutter-sm md:px-margin-md lg:px-margin-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter-lg pb-space-2xl"><div class="lg:col-span-4 flex flex-col gap-space-md"><div class="flex items-center gap-space-sm"><img alt="Discover Cairo Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBe2c6YebTafFx6VmT90UJ8cD-0yv_raH9UuxtACefLj6sKg56198qVYhTmvMRm6WafSPBWT0Ju4YwY8G9D4BUCHlevw6oz3-mIgJlAYECh3Sjk2lj7ojp8N10iZR0aDqQQRfWKkZHfjutvPeEbpozNS9DqeLAvYfj6-P0dq3Tq0phiMNFKPuH7y49Spc536Nq41ZlgGsZjkcSGaIafDbg4iVwPSQ-AekEGsrtP81w"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Cairo</span></div><p class="font-body-md text-body-md text-on-surface-variant max-w-sm">An elite bespoke concierge and narrative travel guide navigating the living cultural tapestry, mid-century elegance, and ancient grandeur of Greater Cairo.</p><div class="flex items-center gap-space-sm pt-space-sm"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary">Private Curations · 24/7 Concierge</span></div></div><div class="lg:col-span-2 flex flex-col gap-space-sm"><h3 class="font-label-caps text-label-caps uppercase tracking-widest text-secondary">Districts</h3><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-primary transition-colors" data-path="discover" href="#">Giza Plateau</a></li><li><a class="hover:text-primary transition-colors" data-path="discover" href="#">Downtown &amp; Midan</a></li><li><a class="hover:text-primary transition-colors" data-path="discover" href="#">Islamic Cairo</a></li><li><a class="hover:text-primary transition-colors" data-path="discover" href="#">Coptic Cairo</a></li><li><a class="hover:text-primary transition-colors" data-path="discover" href="#">Zamalek &amp; Gezira</a></li></ul></div><div class="lg:col-span-2 flex flex-col gap-space-sm"><h3 class="font-label-caps text-label-caps uppercase tracking-widest text-secondary">Concierge</h3><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-primary transition-colors" data-path="plan-a-trip" href="#">Private Itineraries</a></li><li><a class="hover:text-primary transition-colors" data-path="stay-and-transport" href="#">Chauffeured Fleets</a></li><li><a class="hover:text-primary transition-colors" data-path="stay-and-transport" href="#">Heritage Villas</a></li><li><a class="hover:text-primary transition-colors" data-path="my-trip" href="#">Live Support</a></li><li><a class="hover:text-primary transition-colors" data-path="my-trip" href="#">Travel Vault</a></li></ul></div><div class="lg:col-span-4 flex flex-col gap-space-md"><h3 class="font-label-caps text-label-caps uppercase tracking-widest text-secondary">The Gazette</h3><p class="font-body-sm text-body-sm text-on-surface-variant">Seasonal journals, private gallery access, and secluded desert sojourns sent monthly.</p><div class="flex items-center gap-space-xs bg-surface-container-low rounded-full p-space-xs"><input class="bg-transparent px-space-md py-space-xs font-body-sm text-body-sm text-on-surface focus:outline-none flex-1 placeholder:text-outline" placeholder="Your email address" type="email"/><button class="px-space-lg py-space-xs rounded-full bg-secondary text-on-secondary hover:bg-primary transition-all font-label-md text-label-md">Subscribe</button></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="flex items-center gap-space-md"><p>© 2025 Discover Cairo Concierge. All privileges reserved.</p><a class="hover:text-primary transition-colors" href="#">Terms</a><a class="hover:text-primary transition-colors" href="#">Privacy</a><a class="hover:text-primary transition-colors" href="#">Sanctuary Protocol</a></div><div class="flex items-center gap-space-lg font-label-caps text-label-caps uppercase tracking-wider"><a class="hover:text-secondary transition-colors" href="#">Journal</a><a class="hover:text-secondary transition-colors" href="#">Archives</a><a class="hover:text-secondary transition-colors" href="#">Instagram</a><a class="hover:text-secondary transition-colors" href="#">Telegram</a></div></div></div></footer></body></html>
