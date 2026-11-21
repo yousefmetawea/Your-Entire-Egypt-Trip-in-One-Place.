@@ -1,7 +1,7 @@
 # Decisions
 
-**Status:** Phase 0 — alignment and setup  
-**Last updated:** 2026-11-20
+**Status:** Phase 1 — design system implemented; pending review  
+**Last updated:** 2026-11-21
 
 ## Product
 
@@ -18,9 +18,9 @@
 - Single monorepo using npm workspaces.
 - Workspaces: `client/` and `server/`. Shared project documentation stays in `docs/`.
 - `design/` contains the Stitch source material and is not modified by application work.
-- Phase 0 is local-only. Hosting providers are undecided.
-- Base branch: `main`. Phase work uses dedicated phase branches; this phase uses `phase-0-setup`.
-- No Git commit or push is part of Phase 0.
+- Phases 0 and 1 are local-only. Hosting providers are undecided.
+- Base branch: `main`. Phase work uses dedicated branches: `phase-0-setup` and, currently, `phase-1-design-system`.
+- Phase 0 is committed. Phase 1 is implemented but remains uncommitted and unpushed pending review.
 
 ## Tooling
 
@@ -36,7 +36,20 @@
 - The root `npm run dev` command starts both applications with `concurrently`.
 - React Router is deferred to Phase 2.
 - MongoDB, Mongoose, authentication, CORS, rate limiting, and product API routes are deferred to their planned phases.
-- No test runner is installed in Phase 0 because there is no product logic to test yet.
+- No test runner is installed because there is no product logic to test yet.
+- Phase 1 added Framer Motion and self-hosted Fontsource packages for Playfair Display and Plus Jakarta Sans. No icon library was added.
+
+## Design system (Phase 1)
+
+- Tailwind CSS v4 tokens are configured CSS-first in `client/src/styles/theme.css` from the Stitch design system. There is no `tailwind.config.*`.
+- The canvas is `#F7F3EC`; primary surfaces use `#1F1F1F` (`#060607` is the primary token), and secondary/interactive text is `#775928`. `#B08D57` and `#D9C7A3` are decorative bronze/sand aliases and are not used for text or interactive contrast.
+- Typography is Playfair Display for editorial/display text and Plus Jakarta Sans for interface and body text, self-hosted through Fontsource. This resolves the `docs/PLAN.md` §3 Inter reference in favor of `DESIGN.md` and the Stitch exports.
+- Implemented primitives: Container, Section, Button, Card, Chip, Badge/StatusBadge, Input, Select, Tabs, and Modal. Navbar and Footer are presentational only, with no routing or invented product links.
+- Slider, DatePicker, Toast, and Skeleton are deferred until their screen designs exist.
+- Component APIs are typed. Styling uses a small `cn` class joiner; no CVA, `tailwind-merge`, or icon library was added.
+- Framer Motion is limited to shared variants and coordinated entrances. CSS handles hover and focus transitions; `MotionConfig reducedMotion="user"` and global CSS honour reduced-motion preferences. There are no ambient loops.
+- The temporary showcase at `/` reviews tokens, typography, components, motion, and a static English RTL preview. It is not a product page and will be replaced in Phase 2.
+- Phase 1 is implemented but not yet approved. Do not start Phase 2 or add product routes without explicit approval.
 
 ## Localization
 
@@ -45,8 +58,8 @@
 - The selected language is stored in `localStorage` under `discover-cairo.language`; English is used when no valid preference exists.
 - The MVP does not use locale-prefixed URLs, preserving the route plan in `docs/PLAN.md`.
 - Runtime language changes update `<html lang>` and `<html dir>` to `ltr` or `rtl`.
-- UI copy will live in translation resources rather than hardcoded component strings once UI work begins.
-- Layouts will use flow-relative CSS/Tailwind properties and `rtl:` variants where necessary. No RTL-specific plugin is selected.
+- UI copy will live in translation resources rather than hardcoded component strings once UI work begins. The Phase 1 showcase copy is review-only.
+- Layouts will use flow-relative CSS/Tailwind properties and `rtl:` variants where necessary. No RTL-specific plugin is selected. Phase 1 adds logical-property RTL foundations and a static English RTL preview only.
 - Dates, numbers, and currency will use built-in `Intl` APIs.
 - Dynamic content such as place names and descriptions will use a localized shape (English required, Arabic optional, English fallback). The exact data and API shape will be finalized in Phase 2/10.
 - User-generated content will not be translated automatically.
