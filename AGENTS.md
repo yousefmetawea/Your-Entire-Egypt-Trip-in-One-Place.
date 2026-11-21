@@ -8,12 +8,12 @@
 - `design/` is the visual source of truth. Never redesign existing screens or modify `design/` without permission, and preserve decisions/architecture already recorded in `docs/PLAN.md`.
 - Keep Git commits small, meaningful, and scoped to the current phase or change. Do not commit or push unless the user explicitly asks.
 
-## Repo state (Phase 2 implemented, pending review)
+## Repo state (Phase 3 implemented, pending review)
 
-- npm-workspaces monorepo with `client/` and `server/`. Phase 1 is committed; Phase 2 adds the app shell, typed domain model, mock services, and tests.
-- Phase work lives on dedicated branches (current: `phase-2-app-shell`); `main` is the base branch. Phase 0 and Phase 1 are committed; Phase 2 changes are uncommitted.
+- npm-workspaces monorepo with `client/` and `server/`. Phases 0–2 are committed; Phase 3 adds the Landing and Discover screens on top of the app shell, typed domain model, mock services, and tests.
+- Phase work lives on dedicated branches (current: `phase-3-landing-discover`); `main` is the base branch. Phase 3 changes are uncommitted.
 - Node requirement: `>=22.12.0` (verified locally with Node `v26.13.1`, npm `11.20.0`).
-- Vitest is installed for client-side service and pure-logic tests. No CI or deployment configuration exists yet. Hosting is undecided; Phases 0–2 are local-only.
+- Vitest is installed for client-side service and pure-logic tests. No CI or deployment configuration exists yet. Hosting is undecided; Phases 0–3 are local-only.
 - TypeScript is pinned to `~6.0.3` because `typescript-eslint` 8 does not support TypeScript 7. Do not upgrade to TS 7 until the ESLint parser supports it.
 - Real `.env` files are local and ignored; only `.env.example` files are tracked. Never commit secrets.
 
@@ -41,13 +41,14 @@ npm run format:check
 - `client/`: Vite 8 + React + TypeScript strict + Tailwind CSS v4 via `@tailwindcss/vite` + `i18next`/`react-i18next`.
 - `server/`: Express 5 + TypeScript strict, ESM with `NodeNext`; relative imports require `.js` extensions. `tsx watch` for development, `dotenv` for env loading. Only a health endpoint exists.
 - Root uses npm workspaces with one root `package-lock.json`.
-- React Router `7.18.6` drives the Phase 2 app shell. MongoDB, Mongoose, authentication, CORS, and product API routes are deferred to their planned phases. Do not add Socket.io or Redis (PLAN §8).
+- React Router `7.18.6` drives the app shell. MongoDB, Mongoose, authentication, CORS, and product API routes are deferred to their planned phases. Do not add Socket.io or Redis (PLAN §8).
 - Installed during Phase 0: Vite, Tailwind CSS, i18next, Express, and the lint/format toolchain. Phase 1 added Framer Motion and self-hosted Fontsource packages for Playfair Display and Plus Jakarta Sans. Phase 2 added React Router and Vitest. Do not install other PLAN §4 recommended defaults (dnd-kit, TanStack Query, Zustand, React Hook Form + Zod, map provider, AI provider, PDF export) without user approval. Map and AI providers are unresolved in §9.
 - Tailwind v4 tokens live CSS-first in `client/src/styles/theme.css`; there is no Tailwind config file. Reusable UI lives in `client/src/components/`; the Phase 1 review page remains in `client/src/showcase/` behind the dev-only `/design-system` route.
-- Phase 1 primitives: Container, Section, Button, Card, Chip, Badge/StatusBadge, Input, Select, Tabs, Modal, presentational Navbar/Footer. Slider, DatePicker, Toast, and Skeleton are deferred until their screen designs exist. Icons are minimal inline SVG; no icon library was added.
-- Phase 2 adds `client/src/app/` (router, root layout, site layout, error boundary, loading), `client/src/pages/` placeholders, `client/src/types/`, `client/src/services/` (contracts plus localStorage-backed mock implementation), and `client/src/lib/` date/app helpers. The existing Phase 1 Navbar and Footer are reused inside `SiteLayout`; links point only to existing routes, and no hamburger menu was added. Auth routes can move to a separate layout later.
-- Routes: `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, `/my-trip`, `/login`, `/register`, and a 404, all currently inside the shared site layout. `/design-system` is registered only in development and is isolated from the product layout.
-- Phase 2 is implemented but not yet approved. Do not start Phase 3, add product screens, or commit Phase 2 without explicit approval.
+- Phase 1 primitives: Container, Section, Button, Card, Chip, Badge/StatusBadge, Input, Select, Tabs, Modal, presentational Navbar/Footer. Phase 3 adds Skeleton. Slider, DatePicker, and Toast remain deferred until their screen designs exist. Icons are minimal inline SVG; no icon library was added.
+- Phase 2 adds `client/src/app/` (router, root layout, site layout, error boundary, loading), `client/src/pages/` placeholders, `client/src/types/`, `client/src/services/` (contracts plus localStorage-backed mock implementation), and `client/src/lib/` date/app helpers. Auth routes can move to a separate layout later.
+- Phase 3 implements Landing (`/`) and Discover (`/discover`) with the shared Navbar and Footer. The Navbar uses an accessible mobile disclosure menu; links point only to existing routes. Pure catalog/discover/featured logic lives in `client/src/lib/`; data loading uses `client/src/hooks/useCatalog.ts`. Landing and Discover UI lives in `client/src/components/landing/`, `client/src/components/discover/`, `client/src/components/places/`, and `client/src/components/trips/`.
+- Routes: `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, `/my-trip`, `/login`, `/register`, and a 404, all currently inside the shared site layout. `/` and `/discover` are implemented; the remaining product routes are still placeholders. `/design-system` is registered only in development and is isolated from the product layout.
+- Phase 3 is implemented but not yet approved. Do not start Phase 4, add product screens beyond Landing/Discover, or commit Phase 3 without explicit approval.
 - `docs/decisions.md` records confirmed choices. Update it when a decision changes; do not contradict it silently.
 
 ## Localization
@@ -56,7 +57,7 @@ npm run format:check
 - i18next resources live in `client/src/i18n/locales/`; selected language is stored in `localStorage` under `discover-cairo.language`.
 - Locale is not in URLs for the MVP. Runtime changes update `<html lang>` and `<html dir>`.
 - Use flow-relative CSS/Tailwind properties and `rtl:` variants where needed; no RTL plugin is installed. Phase 1 adds logical-property RTL foundations and a static English RTL preview only.
-- No language-switcher UI exists yet. Arabic typography, product naming, dialect/voice, and mirrored visual layouts are not in Stitch and require user approval. Showcase copy is review-only, Phase 2 placeholders are English-only, and later product UI copy will use translation resources.
+- No language-switcher UI exists yet. Arabic typography, product naming, dialect/voice, and mirrored visual layouts are not in Stitch and require user approval. Showcase copy is review-only, Phase 2 placeholders are English-only, and Phase 3 product copy uses translation resources (English only for now).
 
 ## Design source of truth
 
@@ -64,13 +65,15 @@ npm run format:check
 - `design/<screen>/screen.png` is the visual truth; `code.html` is the Stitch export showing exact layout/classes.
 - Screens with exports: landing, GEM destination details, smart trip creator, itinerary builder, stay & transport, my trip dashboard, AI companion. The two landing exports (`discover_cairo_curated_luxury_travel_companion`, `discover_cairo_luxury_travel_concierge`) are byte-identical.
 - Directories with only `screen.png` are imagery/mood assets, not screen designs.
-- Separate mobile designs for landing, itinerary builder, and My Trip are missing. Propose responsive behavior, but ask before significant mobile-specific UI decisions.
+- Separate mobile designs for landing, itinerary builder, and My Trip are missing. Propose responsive behavior, but ask before significant mobile-specific UI decisions. Phase 3's inferred responsive Landing/Discover behavior and mobile disclosure Navbar were approved.
+- Discover has no dedicated Stitch export; Phase 3 derives it from the approved landing design.
 - Stitch HTML is reference only: it uses Tailwind CDN, Google Fonts, inline demo JS, and remote `lh3.googleusercontent.com` images. Reimplement it in the app; do not copy it as production code or hotlink assets without permission.
 - Typography is resolved in favor of the design source: **Playfair Display + Plus Jakarta Sans**, self-hosted via Fontsource in Phase 1. The `docs/PLAN.md` §3 Inter reference is superseded; record any future change in `docs/decisions.md`.
 
 ## Product behavior constraints
 
 - Label every price `Estimated price` with a `Last updated` date; label demo data in the UI; never claim live prices or availability.
+- Landing and Discover must keep demo disclosures visible and must not invent place content, imagery, prices, or trips. Ready-made trips show an empty state until verified trips exist; duration filters disclose that seeded visit lengths are not yet available.
 - Booking is hybrid: internal requests start `Pending` until confirmed; external links show an `External booking` badge.
 - The AI companion may only suggest. Trip changes must be applied after explicit user confirmation.
 - Match designs on desktop and mobile, respect `prefers-reduced-motion`, and keep semantic HTML, keyboard access, focus states, alt text, and contrast.

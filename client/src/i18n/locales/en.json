@@ -1,1 +1,217 @@
-{}
+{
+  "nav": {
+    "mainLabel": "Main navigation",
+    "discover": "Discover",
+    "plan": "Plan a Trip",
+    "stayTransport": "Stay & Transport",
+    "myTrip": "My Trip",
+    "planCta": "Plan My Trip",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
+  },
+  "home": {
+    "hero": {
+      "badge": "Your Cairo journey starts here",
+      "title": "Discover Cairo.",
+      "titleAccent": "Your Way.",
+      "description": "Explore the stories, landmarks, and culture that make Cairo unforgettable.",
+      "demo": "Demo experience · No live prices or availability",
+      "search": {
+        "whereLabel": "Where to explore?",
+        "wherePlaceholder": "Giza, Islamic Cairo, Zamalek",
+        "datesLabel": "Dates",
+        "fromLabel": "From",
+        "toLabel": "To",
+        "travelersLabel": "Travelers",
+        "travelersPlaceholder": "2",
+        "submit": "Search places",
+        "plan": "Plan My Trip"
+      },
+      "stats": {
+        "areas": "Six areas across Cairo & Giza",
+        "places": "12 demo places",
+        "categories": "History, culture & adventure",
+        "labels": "Details labeled as demo"
+      }
+    },
+    "chips": {
+      "all": "All places"
+    },
+    "featured": {
+      "eyebrow": "Featured places",
+      "title": "Curated places to begin with",
+      "description": "A small selection of demo places across Cairo and Giza, chosen to show the range of the catalog.",
+      "action": "Explore all places",
+      "demoNote": "Sample places only. Descriptions, imagery, and visit details are being prepared.",
+      "loading": "Loading featured places",
+      "errorTitle": "We couldn’t load the featured places.",
+      "errorDescription": "Please try again. No place data has been changed.",
+      "retry": "Retry",
+      "emptyTitle": "Featured places are not available yet.",
+      "emptyDescription": "Explore the full demo catalog instead."
+    },
+    "trips": {
+      "eyebrow": "Ready-made journeys",
+      "title": "No ready-made journeys yet.",
+      "description": "The curated trip catalog is empty in this demo. No fictional trips are shown. Explore the places catalog while verified journeys are prepared.",
+      "readyTitle": "Curated journeys, ready to explore.",
+      "readyDescription": "Thoughtful itineraries built around the places in the catalog.",
+      "explore": "Explore places",
+      "plan": "Plan a trip",
+      "loading": "Loading journeys",
+      "errorTitle": "We couldn’t load the journeys.",
+      "errorDescription": "Please try again. No journey data has been changed.",
+      "retry": "Retry",
+      "previous": "Previous journeys",
+      "next": "Next journeys",
+      "demo": "Demo journey",
+      "duration_one": "{{count}} day",
+      "duration_other": "{{count}} days",
+      "planSimilar": "Plan a similar trip"
+    },
+    "how": {
+      "eyebrow": "How it works",
+      "title": "A simple way to begin.",
+      "description": "Discovery is available now. Planning and booking tools are in development.",
+      "note": "Planning and booking tools are not part of this demo yet.",
+      "available": "Available now",
+      "inDevelopment": "In development",
+      "steps": {
+        "explore": {
+          "title": "Explore the catalog",
+          "body": "Browse demo places across Cairo and Giza, organized by area and interest."
+        },
+        "refine": {
+          "title": "Refine your shortlist",
+          "body": "Search by name or area, then explore places by category."
+        },
+        "shape": {
+          "title": "Shape your days",
+          "body": "The trip creator will turn your choices into a day-by-day itinerary."
+        },
+        "keep": {
+          "title": "Keep it together",
+          "body": "Your trip dashboard will hold the plan, stay, and transport details in one place."
+        }
+      }
+    },
+    "trust": {
+      "eyebrow": "Honest by design",
+      "title": "Clear labels, no live-price claims.",
+      "description": "A Greater Cairo focus, with demo data labeled and future prices handled honestly.",
+      "items": {
+        "focus": {
+          "title": "Cairo & Giza focus",
+          "body": "Places are organized across six areas in Cairo and Giza."
+        },
+        "demo": {
+          "title": "Demo data, labeled",
+          "body": "Sample records are marked as demo; factual details are not yet supplied."
+        },
+        "prices": {
+          "title": "No live-price claims",
+          "body": "No prices or availability are shown as live in this demo."
+        },
+        "planning": {
+          "title": "Planning is in development",
+          "body": "Discovery is available now; planning and booking tools are not part of this demo."
+        }
+      }
+    }
+  },
+  "discover": {
+    "eyebrow": "Explore the catalog",
+    "title": "Find places worth building a trip around.",
+    "description": "Search and filter demo places across Cairo and Giza by name, area, category, and visit length.",
+    "demoBadge": "Demo catalog",
+    "demoNote": "Sample places only. Details and imagery are being prepared.",
+    "filters": {
+      "title": "Refine the catalog",
+      "searchLabel": "Search places",
+      "searchPlaceholder": "Search by name or area",
+      "categoryLabel": "Category",
+      "allCategories": "All categories",
+      "areaLabel": "Area",
+      "allAreas": "All areas",
+      "durationLabel": "Visit length",
+      "allDurations": "Any visit length",
+      "clear": "Clear filters",
+      "submit": "Search places",
+      "durationNote": "Visit lengths are not yet available for the demo places, so a duration filter may return no results.",
+      "resultCount_one": "Showing {{shown}} of {{total}} demo place",
+      "resultCount_other": "Showing {{shown}} of {{total}} demo places"
+    },
+    "context": {
+      "label": "Trip context",
+      "travelers_one": "{{count}} traveler",
+      "travelers_other": "{{count}} travelers",
+      "dates": "{{from}} – {{to}}",
+      "from": "From {{date}}",
+      "until": "Until {{date}}",
+      "note": "{{summary}} · Kept in the URL for the trip planner; not used to filter places yet."
+    },
+    "states": {
+      "loading": "Loading places",
+      "errorTitle": "We couldn’t load the places.",
+      "errorDescription": "Please try again. No place data has been changed.",
+      "retry": "Retry",
+      "emptyTitle": "No places match these filters.",
+      "emptyDescription": "Try a different search or clear the filters to see the full demo catalog.",
+      "clear": "Clear filters",
+      "catalogEmptyTitle": "The catalog is empty.",
+      "catalogEmptyDescription": "No demo places are available right now."
+    }
+  },
+  "place": {
+    "demo": "Demo place",
+    "view": "View place",
+    "detailsPending": "Details are being prepared for this place.",
+    "durationNotListed": "Visit length not listed",
+    "areaLabel": "Area",
+    "categoryLabel": "Category"
+  },
+  "catalog": {
+    "categories": {
+      "history": "History",
+      "culture": "Culture",
+      "adventure": "Adventure",
+      "food": "Food"
+    },
+    "areas": {
+      "giza": "Giza",
+      "downtown": "Downtown Cairo",
+      "islamic-cairo": "Islamic Cairo",
+      "coptic-cairo": "Coptic Cairo",
+      "zamalek": "Zamalek",
+      "old-cairo": "Old Cairo"
+    },
+    "durations": {
+      "under-2h": "Under 2 hours",
+      "2-4h": "2–4 hours",
+      "over-4h": "Over 4 hours"
+    }
+  },
+  "duration": {
+    "minutes": "{{count}} min",
+    "hours": "{{count}} hr",
+    "hoursMinutes": "{{hours}} hr {{minutes}} min"
+  },
+  "footer": {
+    "description": "Discover places, shape a thoughtful itinerary, and keep the details of your Egypt trip together.",
+    "note": "Demo experience · No live bookings",
+    "legal": "© 2026 Discover Cairo. Demo experience; no live prices or availability.",
+    "exploreHeading": "Explore",
+    "planHeading": "Plan",
+    "accountHeading": "Account",
+    "discover": "Discover",
+    "stayTransport": "Stay & Transport",
+    "plan": "Plan a Trip",
+    "myTrip": "My Trip",
+    "signIn": "Sign in",
+    "createAccount": "Create account"
+  },
+  "common": {
+    "loading": "Loading...",
+    "demo": "Demo"
+  }
+}

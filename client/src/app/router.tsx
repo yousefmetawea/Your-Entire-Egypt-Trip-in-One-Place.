@@ -28,12 +28,20 @@ const routes: RouteObject[] = [
           {
             index: true,
             element: <HomePage />,
-            handle: { title: 'Home' },
+            handle: {
+              title: 'Cairo & Giza travel companion',
+              description:
+                'Explore the stories, landmarks, and culture that make Cairo unforgettable, with a clearly labeled demo catalog for Cairo and Giza.',
+            },
           },
           {
             path: 'discover',
             element: <DiscoverPage />,
-            handle: { title: 'Discover' },
+            handle: {
+              title: 'Discover places',
+              description:
+                'Search and filter demo places across Cairo and Giza by name, area, category, and visit length. Sample data is clearly labeled.',
+            },
           },
           {
             path: 'places/:slug',

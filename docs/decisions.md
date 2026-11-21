@@ -1,6 +1,6 @@
 # Decisions
 
-**Status:** Phase 2 — app shell, domain model, mock services, and tests implemented; pending review
+**Status:** Phase 3 — Landing and Discover implemented; pending review
 **Last updated:** 2026-11-21
 
 ## Product
@@ -18,9 +18,9 @@
 - Single monorepo using npm workspaces.
 - Workspaces: `client/` and `server/`. Shared project documentation stays in `docs/`.
 - `design/` contains the Stitch source material and is not modified by application work.
-- Phases 0–2 are local-only. Hosting providers are undecided.
-- Base branch: `main`. Phase work uses dedicated branches: `phase-0-setup`, `phase-1-design-system`, and, currently, `phase-2-app-shell`.
-- Phase 0 and Phase 1 are committed. Phase 2 is implemented but remains uncommitted and unpushed pending review.
+- Phases 0–3 are local-only. Hosting providers are undecided.
+- Base branch: `main`. Phase work uses dedicated branches: `phase-0-setup`, `phase-1-design-system`, `phase-2-app-shell`, and, currently, `phase-3-landing-discover`.
+- Phases 0–2 are committed. Phase 3 is implemented but remains uncommitted and unpushed pending review.
 
 ## Tooling
 
@@ -39,6 +39,7 @@
 - Vitest `5.1.1` runs client-side service and pure-logic tests in a Node environment through `npm test`. No component-testing dependencies were added.
 - Phase 1 added Framer Motion and self-hosted Fontsource packages for Playfair Display and Plus Jakarta Sans. No icon library was added.
 - Phase 2 added React Router and Vitest. No data-fetching or client-state library was added.
+- Phase 3 added no dependencies. Landing and Discover use the existing services, React Router, i18next, Framer Motion, and inline SVG icons.
 
 ## Design system (Phase 1)
 
@@ -46,16 +47,16 @@
 - The canvas is `#F7F3EC`; primary surfaces use `#1F1F1F` (`#060607` is the primary token), and secondary/interactive text is `#775928`. `#B08D57` and `#D9C7A3` are decorative bronze/sand aliases and are not used for text or interactive contrast.
 - Typography is Playfair Display for editorial/display text and Plus Jakarta Sans for interface and body text, self-hosted through Fontsource. This resolves the `docs/PLAN.md` §3 Inter reference in favor of `DESIGN.md` and the Stitch exports.
 - Implemented primitives: Container, Section, Button, Card, Chip, Badge/StatusBadge, Input, Select, Tabs, and Modal. Navbar and Footer remain presentational; optional link components allow router-aware links without coupling the components directly to React Router.
-- Slider, DatePicker, Toast, and Skeleton are deferred until their screen designs exist.
+- Phase 3 adds Skeleton. Slider, DatePicker, and Toast remain deferred until their screen designs exist.
 - Component APIs are typed. Styling uses a small `cn` class joiner; no CVA, `tailwind-merge`, or icon library was added.
 - Framer Motion is limited to shared variants and coordinated entrances. CSS handles hover and focus transitions; `MotionConfig reducedMotion="user"` and global CSS honour reduced-motion preferences. There are no ambient loops.
 - The Phase 1 showcase reviews tokens, typography, components, motion, and a static English RTL preview. In Phase 2 it moved to the dev-only `/design-system` route, outside the product layout, and is excluded from production builds.
-- Phase 1 is committed. Phase 2 is implemented but not yet approved; do not start Phase 3 without explicit approval.
+- Phase 1 is committed. Phase 2 is committed. Phase 3 is implemented but not yet approved; do not start Phase 4 without explicit approval.
 
 ## App shell and mock data (Phase 2)
 
 - The product routes are `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, `/my-trip`, `/login`, `/register`, and a catch-all 404. They currently share `SiteLayout`.
-- `SiteLayout` reuses the Phase 1 Navbar and Footer. Navbar links point only to `/discover`, `/plan`, `/stay-transport`, and `/my-trip`; the CTA points to `/plan`; Footer links point only to existing routes. No hamburger menu was added. Authentication routes can move to a separate layout later without changing the shell components.
+- `SiteLayout` reuses the Phase 1 Navbar and Footer. Navbar links point only to `/discover`, `/plan`, `/stay-transport`, and `/my-trip`; the CTA points to `/plan`; Footer links point only to existing routes. Phase 3 adds an accessible mobile disclosure menu with Escape and outside-click dismissal. Authentication routes can move to a separate layout later without changing the shell components.
 - `RootLayout` provides the skip link, scroll restoration, route titles, and the outer Suspense boundary. `SiteLayout` provides the Navbar, semantic `<main id="main">`, an inner Suspense boundary, and the Footer. `RootErrorBoundary` is the route error boundary. Page routes are lazy-loaded; the 404 route is lazy as well.
 - Navbar, Footer, and `ButtonLink` accept optional link components. The product shell supplies a React Router adapter, while the Phase 1 showcase keeps default anchor behavior.
 - The Phase 1 showcase is registered only in development as `/design-system`; production builds do not include its route or chunk.
@@ -70,6 +71,23 @@
 - Placeholder copy is English-only for Phase 2 and does not claim live data. The i18n foundation remains; Arabic product copy and mirrored layouts still require approval.
 - Tests cover the date helpers, seeded catalog behavior, trip creation/persistence/validation, activity ordering, and booking request validation. They use Vitest's Node environment and the mock services directly.
 
+## Landing and Discover (Phase 3)
+
+- Landing (`/`) and Discover (`/discover`) are implemented. Discover has no dedicated Stitch export and is derived from the approved landing design. Inferred responsive behavior and the mobile disclosure Navbar were approved.
+- Landing reuses the shared Navbar and Footer, shows a hero search, category shortcuts, five featured places, a ready-made-trips empty state, a how-it-works section, and a factual trust strip.
+- The featured allowlist is fixed to `pyramids-of-giza`, `grand-egyptian-museum`, `khan-el-khalili`, `hanging-church`, and `cairo-tower`. No `featured` field was added to the domain model.
+- Hero actions are separate: “Search places” submits the catalog search to Discover; “Plan My Trip” navigates to `/plan`.
+- Discover state lives in the URL: `q`, `category`, `area`, and `duration` are filters; `from`, `to`, and `travelers` are trip context and do not filter places. Dates are validated as real ISO calendar dates, `to` cannot precede `from`, travelers must be a positive safe integer, invalid values are ignored, serialization is stable, and back/forward navigation is supported.
+- Search is submit-based rather than live/debounced. Category chips on Landing navigate to Discover with the selected category; on Discover they update the URL filter.
+- Duration buckets are `under-2h`, `2-4h`, and `over-4h`. Unknown durations are included only when no duration filter is selected; the UI discloses that seeded visit lengths are null and a duration filter may return no results.
+- Place cards link to the existing `/places/:slug` placeholder. Missing details use “Visit length not listed” and “Details are being prepared for this place.”
+- Place imagery is not supplied. Placeholders use token-based gradients and subtle arch linework; no remote images or Stitch screenshots are used as product imagery.
+- Ready-made trips remain an empty state because the seed is empty. No fictional trips are shown; the carousel component is data-driven for future verified content.
+- Landing and Discover keep demo disclosures visible. Prices are not claimed as live; the trust strip avoids unverified tourism claims.
+- `Skeleton` is used for catalog loading states. No new dependencies were added; scroll-snap and inline SVG icons cover the UI needs.
+- English Phase 3 copy lives in `client/src/i18n/locales/en.json`; no Arabic product copy was invented. Route titles and meta descriptions are set for Landing and Discover.
+- Unit tests cover catalog helpers, URL parsing/serialization, filtering, and featured selection. Component and browser automation tests were not added.
+
 ## Localization
 
 - English is the default language. Arabic is supported, including RTL direction.
@@ -77,7 +95,7 @@
 - The selected language is stored in `localStorage` under `discover-cairo.language`; English is used when no valid preference exists.
 - The MVP does not use locale-prefixed URLs, preserving the route plan in `docs/PLAN.md`.
 - Runtime language changes update `<html lang>` and `<html dir>` to `ltr` or `rtl`.
-- UI copy will live in translation resources rather than hardcoded component strings once product UI work begins. The Phase 1 showcase copy is review-only, and Phase 2 placeholder copy is English-only.
+- UI copy lives in translation resources rather than hardcoded component strings. The Phase 1 showcase copy is review-only, Phase 2 placeholder copy is English-only, and Phase 3 product copy is English-only in `en.json` until Arabic copy is approved.
 - Layouts will use flow-relative CSS/Tailwind properties and `rtl:` variants where necessary. No RTL-specific plugin is selected. Phase 1 adds logical-property RTL foundations and a static English RTL preview only.
 - Dates, numbers, and currency will use built-in `Intl` APIs.
 - Dynamic content such as place names and descriptions uses a localized shape (English required, Arabic optional, English fallback), defined in Phase 2. The API shape remains a Phase 10 concern.

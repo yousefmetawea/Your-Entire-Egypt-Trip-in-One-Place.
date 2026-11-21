@@ -66,6 +66,8 @@ export function DesignSystemShowcase() {
         cta={{ label: 'Review status', href: '#status' }}
         actions={<Badge tone="outline">Phase 1 review</Badge>}
         ariaLabel="Design system showcase sections"
+        menuLabel="Open showcase navigation"
+        closeMenuLabel="Close showcase navigation"
       />
 
       <main id="main" className="pt-24 md:pt-28">

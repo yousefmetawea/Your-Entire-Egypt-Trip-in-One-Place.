@@ -7,4 +7,5 @@ export * from './Input';
 export * from './Modal';
 export * from './Section';
 export * from './Select';
+export * from './Skeleton';
 export * from './Tabs';
