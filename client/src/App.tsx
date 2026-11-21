@@ -1,7 +1,7 @@
-import { DesignSystemShowcase } from './showcase/DesignSystemShowcase';
+import { AppRouter } from './app/router';
 
 function App() {
-  return <DesignSystemShowcase />;
+  return <AppRouter />;
 }
 
 export default App;

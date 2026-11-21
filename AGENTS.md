@@ -8,12 +8,12 @@
 - `design/` is the visual source of truth. Never redesign existing screens or modify `design/` without permission, and preserve decisions/architecture already recorded in `docs/PLAN.md`.
 - Keep Git commits small, meaningful, and scoped to the current phase or change. Do not commit or push unless the user explicitly asks.
 
-## Repo state (Phase 1 implemented, pending review)
+## Repo state (Phase 2 implemented, pending review)
 
-- npm-workspaces monorepo with `client/` and `server/`; product features have not started.
-- Phase work lives on dedicated branches (current: `phase-1-design-system`); `main` is the base branch. Phase 0 is committed; Phase 1 changes are uncommitted.
+- npm-workspaces monorepo with `client/` and `server/`. Phase 1 is committed; Phase 2 adds the app shell, typed domain model, mock services, and tests.
+- Phase work lives on dedicated branches (current: `phase-2-app-shell`); `main` is the base branch. Phase 0 and Phase 1 are committed; Phase 2 changes are uncommitted.
 - Node requirement: `>=22.12.0` (verified locally with Node `v26.13.1`, npm `11.20.0`).
-- No test runner, CI, or deployment configuration exists yet. Hosting is undecided; Phases 0 and 1 are local-only.
+- Vitest is installed for client-side service and pure-logic tests. No CI or deployment configuration exists yet. Hosting is undecided; Phases 0–2 are local-only.
 - TypeScript is pinned to `~6.0.3` because `typescript-eslint` 8 does not support TypeScript 7. Do not upgrade to TS 7 until the ESLint parser supports it.
 - Real `.env` files are local and ignored; only `.env.example` files are tracked. Never commit secrets.
 
@@ -26,13 +26,14 @@ npm run dev:client   # client only, http://localhost:5173
 npm run dev:server   # server only, http://localhost:4000
 npm run lint
 npm run typecheck
+npm test
 npm run build
 npm run format
 npm run format:check
 ```
 
 - Server health check: `GET http://localhost:4000/api/health`.
-- There is no test command yet.
+- Client tests: `npm test`; watch mode: `npm run test:watch --workspace client`.
 - Workspace-specific scripts: `npm run <script> --workspace client` or `--workspace server`.
 
 ## Architecture
@@ -40,11 +41,13 @@ npm run format:check
 - `client/`: Vite 8 + React + TypeScript strict + Tailwind CSS v4 via `@tailwindcss/vite` + `i18next`/`react-i18next`.
 - `server/`: Express 5 + TypeScript strict, ESM with `NodeNext`; relative imports require `.js` extensions. `tsx watch` for development, `dotenv` for env loading. Only a health endpoint exists.
 - Root uses npm workspaces with one root `package-lock.json`.
-- React Router is deferred to Phase 2. MongoDB, Mongoose, authentication, CORS, and product API routes are deferred to their planned phases. Do not add Socket.io or Redis (PLAN §8).
-- Installed during Phase 0: Vite, Tailwind CSS, i18next, Express, and the lint/format toolchain. Phase 1 added Framer Motion and self-hosted Fontsource packages for Playfair Display and Plus Jakarta Sans. Do not install other PLAN §4 recommended defaults (dnd-kit, TanStack Query, Zustand, React Hook Form + Zod, map provider, AI provider, PDF export) without user approval. Map and AI providers are unresolved in §9.
-- Tailwind v4 tokens live CSS-first in `client/src/styles/theme.css`; there is no Tailwind config file. Reusable UI lives in `client/src/components/` and the temporary review page in `client/src/showcase/`.
+- React Router `7.18.6` drives the Phase 2 app shell. MongoDB, Mongoose, authentication, CORS, and product API routes are deferred to their planned phases. Do not add Socket.io or Redis (PLAN §8).
+- Installed during Phase 0: Vite, Tailwind CSS, i18next, Express, and the lint/format toolchain. Phase 1 added Framer Motion and self-hosted Fontsource packages for Playfair Display and Plus Jakarta Sans. Phase 2 added React Router and Vitest. Do not install other PLAN §4 recommended defaults (dnd-kit, TanStack Query, Zustand, React Hook Form + Zod, map provider, AI provider, PDF export) without user approval. Map and AI providers are unresolved in §9.
+- Tailwind v4 tokens live CSS-first in `client/src/styles/theme.css`; there is no Tailwind config file. Reusable UI lives in `client/src/components/`; the Phase 1 review page remains in `client/src/showcase/` behind the dev-only `/design-system` route.
 - Phase 1 primitives: Container, Section, Button, Card, Chip, Badge/StatusBadge, Input, Select, Tabs, Modal, presentational Navbar/Footer. Slider, DatePicker, Toast, and Skeleton are deferred until their screen designs exist. Icons are minimal inline SVG; no icon library was added.
-- Phase 1 is implemented but not yet approved. Do not start Phase 2, add product routes, or replace the showcase without explicit approval.
+- Phase 2 adds `client/src/app/` (router, root layout, site layout, error boundary, loading), `client/src/pages/` placeholders, `client/src/types/`, `client/src/services/` (contracts plus localStorage-backed mock implementation), and `client/src/lib/` date/app helpers. The existing Phase 1 Navbar and Footer are reused inside `SiteLayout`; links point only to existing routes, and no hamburger menu was added. Auth routes can move to a separate layout later.
+- Routes: `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, `/my-trip`, `/login`, `/register`, and a 404, all currently inside the shared site layout. `/design-system` is registered only in development and is isolated from the product layout.
+- Phase 2 is implemented but not yet approved. Do not start Phase 3, add product screens, or commit Phase 2 without explicit approval.
 - `docs/decisions.md` records confirmed choices. Update it when a decision changes; do not contradict it silently.
 
 ## Localization
@@ -53,7 +56,7 @@ npm run format:check
 - i18next resources live in `client/src/i18n/locales/`; selected language is stored in `localStorage` under `discover-cairo.language`.
 - Locale is not in URLs for the MVP. Runtime changes update `<html lang>` and `<html dir>`.
 - Use flow-relative CSS/Tailwind properties and `rtl:` variants where needed; no RTL plugin is installed. Phase 1 adds logical-property RTL foundations and a static English RTL preview only.
-- No language-switcher UI exists yet. Arabic typography, product naming, dialect/voice, and mirrored visual layouts are not in Stitch and require user approval. Showcase copy is review-only; product UI copy will use translation resources.
+- No language-switcher UI exists yet. Arabic typography, product naming, dialect/voice, and mirrored visual layouts are not in Stitch and require user approval. Showcase copy is review-only, Phase 2 placeholders are English-only, and later product UI copy will use translation resources.
 
 ## Design source of truth
 
@@ -75,6 +78,6 @@ npm run format:check
 ## Verification
 
 - Use the current phase's "Done when" checks plus the global definition of done in PLAN §11 as acceptance criteria.
-- Run `npm run lint`, `npm run typecheck`, and `npm run build` after changes.
+- Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build` after changes.
 - Compare each screen against both its `screen.png` and the running page; do not settle for approximate styling.
 - Record architecture decisions in `docs/decisions.md` and do not contradict them silently.

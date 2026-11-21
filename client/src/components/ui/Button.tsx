@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
 import { cn } from '../../lib/cn';
+import type { LayoutLinkComponent } from '../../lib/link';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'bronze' | 'inverse';
 
@@ -83,12 +84,16 @@ export function Button({
 
 export interface ButtonLinkProps
   extends AnchorHTMLAttributes<HTMLAnchorElement>, ButtonContentProps {
+  href: string;
+  as?: LayoutLinkComponent;
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
 }
 
 export function ButtonLink({
+  as: Component = 'a',
+  href,
   variant = 'primary',
   size = 'md',
   fullWidth = false,
@@ -99,7 +104,7 @@ export function ButtonLink({
   ...rest
 }: ButtonLinkProps) {
   return (
-    <a className={classes(variant, size, fullWidth, className)} {...rest}>
+    <Component href={href} className={classes(variant, size, fullWidth, className)} {...rest}>
       {startIcon ? (
         <span className="inline-flex shrink-0" aria-hidden="true">
           {startIcon}
@@ -111,6 +116,6 @@ export function ButtonLink({
           {endIcon}
         </span>
       ) : null}
-    </a>
+    </Component>
   );
 }
