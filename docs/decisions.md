@@ -1,6 +1,6 @@
 # Decisions
 
-**Status:** Phase 3 — Landing and Discover implemented; pending review
+**Status:** Phase 4 — Destination Explorer implemented; pending review
 **Last updated:** 2026-11-21
 
 ## Product
@@ -18,9 +18,9 @@
 - Single monorepo using npm workspaces.
 - Workspaces: `client/` and `server/`. Shared project documentation stays in `docs/`.
 - `design/` contains the Stitch source material and is not modified by application work.
-- Phases 0–3 are local-only. Hosting providers are undecided.
-- Base branch: `main`. Phase work uses dedicated branches: `phase-0-setup`, `phase-1-design-system`, `phase-2-app-shell`, and, currently, `phase-3-landing-discover`.
-- Phases 0–2 are committed. Phase 3 is implemented but remains uncommitted and unpushed pending review.
+- Phases 0–4 are local-only. Hosting providers are undecided.
+- Base branch: `main`. Phase work uses dedicated branches: `phase-0-setup`, `phase-1-design-system`, `phase-2-app-shell`, `phase-3-landing-discover`, and, currently, `phase-4-destination-explorer`.
+- Phases 0–3 are committed. Phase 4 is implemented but remains uncommitted and unpushed pending review.
 
 ## Tooling
 
@@ -40,6 +40,7 @@
 - Phase 1 added Framer Motion and self-hosted Fontsource packages for Playfair Display and Plus Jakarta Sans. No icon library was added.
 - Phase 2 added React Router and Vitest. No data-fetching or client-state library was added.
 - Phase 3 added no dependencies. Landing and Discover use the existing services, React Router, i18next, Framer Motion, and inline SVG icons.
+- Phase 4 added no dependencies. The Destination Explorer reuses the existing services, design-system primitives, React Router, i18next, and inline SVG icons.
 
 ## Design system (Phase 1)
 
@@ -51,7 +52,7 @@
 - Component APIs are typed. Styling uses a small `cn` class joiner; no CVA, `tailwind-merge`, or icon library was added.
 - Framer Motion is limited to shared variants and coordinated entrances. CSS handles hover and focus transitions; `MotionConfig reducedMotion="user"` and global CSS honour reduced-motion preferences. There are no ambient loops.
 - The Phase 1 showcase reviews tokens, typography, components, motion, and a static English RTL preview. In Phase 2 it moved to the dev-only `/design-system` route, outside the product layout, and is excluded from production builds.
-- Phase 1 is committed. Phase 2 is committed. Phase 3 is implemented but not yet approved; do not start Phase 4 without explicit approval.
+- Phases 1 and 2 are committed. Phase 3 is committed. Phase 4 is implemented but not yet approved; do not start Phase 5 without explicit approval.
 
 ## App shell and mock data (Phase 2)
 
@@ -88,6 +89,23 @@
 - English Phase 3 copy lives in `client/src/i18n/locales/en.json`; no Arabic product copy was invented. Route titles and meta descriptions are set for Landing and Discover.
 - Unit tests cover catalog helpers, URL parsing/serialization, filtering, and featured selection. Component and browser automation tests were not added.
 
+## Destination Explorer (Phase 4)
+
+- `/places/:slug` implements the Destination Explorer. It loads stored place data through `usePlace`, renders loading/not-found/error states with retry, and sets the route title and meta description.
+- The gallery supports empty, single, pair, and three-plus-image layouts. The first image loads eagerly and the rest lazily. Empty galleries use the existing token-based `PlaceMedia` placeholder rather than inventing imagery.
+- Clicking a gallery image opens a native `<dialog>` lightbox with a counter, previous/next controls, Escape/arrow/Home/End keys, backdrop dismissal, focus restoration, and credit/license/source links when supplied.
+- Description and history render only when stored; otherwise a combined empty state explains that details are being prepared. Opening hours show a weekly list with a partial-data note. Estimated prices are formatted in their stored currency with a conditional `Estimated price` badge and a `Last updated` fallback; no conversion or live-price claim is made. Average visit duration uses the stored value or an explicit missing state.
+- The map is a polished `MapPreview` placeholder with no provider or network integration. It indicates whether coordinates exist and labels the interactive map as a later phase.
+- Nearby places load from `nearbyPlaceIds` via `places.getById` (up to three) and are hidden when no IDs exist. Errors show an inline retry state.
+- Tips render only when stored; the seed has no tips. No tips, hours, prices, descriptions, coordinates, or nearby relationships were invented.
+- Add to Trip uses `TripService.addPlaceToDraft(placeId, place?)`. The optional loaded place snapshot lets the dev-only fixture work without adding synthetic data to the production seed. It creates a draft titled “My Cairo trip” when none exists, adds to the first day at 09:00, uses `avgVisitMinutes` or 0 with an explicit missing-duration note, and stores the ticket price as the estimated cost. Duplicate places are blocked across all days. Feedback is inline; there is no Toast.
+- A trip with no days now appends a day containing the new activity instead of dropping the activity.
+- The mobile action bar is fixed below `md`, hides near the footer via an IntersectionObserver sentinel, and is the only visible Add action on mobile. The in-flow action remains in the sticky practical-info card on desktop.
+- The dev-only fixture at `/places/layout-fixture` uses synthetic copy, data-URI SVG images, and clearly labeled demo data. It is dynamically imported only under `import.meta.env.DEV`; production builds contain no fixture markers.
+- English Phase 4 copy lives under `placeDetails` in `client/src/i18n/locales/en.json`. No Arabic product copy was invented.
+- Tests cover price/time/date formatting, opening-hours summaries, gallery layout/keyboard helpers, and draft creation/duplicate/snapshot behavior. Component and browser automation tests were not added.
+- Lighthouse mobile verification is blocked because Chrome/Chromium is unavailable. Visual and interaction checks were performed in Firefox instead; no Lighthouse score is claimed.
+
 ## Localization
 
 - English is the default language. Arabic is supported, including RTL direction.
@@ -95,7 +113,7 @@
 - The selected language is stored in `localStorage` under `discover-cairo.language`; English is used when no valid preference exists.
 - The MVP does not use locale-prefixed URLs, preserving the route plan in `docs/PLAN.md`.
 - Runtime language changes update `<html lang>` and `<html dir>` to `ltr` or `rtl`.
-- UI copy lives in translation resources rather than hardcoded component strings. The Phase 1 showcase copy is review-only, Phase 2 placeholder copy is English-only, and Phase 3 product copy is English-only in `en.json` until Arabic copy is approved.
+- UI copy lives in translation resources rather than hardcoded component strings. The Phase 1 showcase copy is review-only, Phase 2 placeholder copy is English-only, and Phase 3/Phase 4 product copy is English-only in `en.json` until Arabic copy is approved.
 - Layouts will use flow-relative CSS/Tailwind properties and `rtl:` variants where necessary. No RTL-specific plugin is selected. Phase 1 adds logical-property RTL foundations and a static English RTL preview only.
 - Dates, numbers, and currency will use built-in `Intl` APIs.
 - Dynamic content such as place names and descriptions uses a localized shape (English required, Arabic optional, English fallback), defined in Phase 2. The API shape remains a Phase 10 concern.

@@ -38,6 +38,8 @@ export interface ImageAsset {
   width?: number;
   height?: number;
   credit?: string;
+  license?: string;
+  sourceUrl?: string;
 }
 
 export type Weekday =

@@ -9,6 +9,7 @@ const placeholders: readonly PlacePlaceholderField[] = [
   'ticketPrice',
   'avgVisitMinutes',
   'nearbyPlaceIds',
+  'tips',
 ];
 
 function createDemoPlace(input: Pick<Place, 'id' | 'slug' | 'name' | 'area' | 'category'>): Place {
@@ -23,6 +24,7 @@ function createDemoPlace(input: Pick<Place, 'id' | 'slug' | 'name' | 'area' | 'c
     avgVisitMinutes: null,
     tags: [],
     nearbyPlaceIds: [],
+    tips: null,
     isDemo: true,
     placeholders: [...placeholders],
   };

@@ -18,6 +18,7 @@ import type {
   TransportOption,
   TransportType,
   Trip,
+  TripActivity,
   TripActivitySource,
   TripDayId,
   TripId,
@@ -72,6 +73,14 @@ export interface CreateTripActivityInput {
   notes?: string;
 }
 
+export interface AddPlaceToDraftResult {
+  trip: Trip;
+  dayId: TripDayId;
+  activity: TripActivity;
+  added: boolean;
+  createdTrip: boolean;
+}
+
 export type CreateBookingRequestInput =
   | {
       kind: 'airport-transfer';
@@ -111,6 +120,7 @@ export interface TripService {
   create(input: CreateTripInput): Promise<Trip>;
   update(id: TripId, patch: UpdateTripInput): Promise<Trip>;
   remove(id: TripId): Promise<void>;
+  addPlaceToDraft(placeId: PlaceId, place?: Place): Promise<AddPlaceToDraftResult>;
   addActivity(tripId: TripId, dayId: TripDayId, input: CreateTripActivityInput): Promise<Trip>;
   removeActivity(tripId: TripId, dayId: TripDayId, activityId: string): Promise<Trip>;
   reorderActivities(tripId: TripId, dayId: TripDayId, activityIds: string[]): Promise<Trip>;

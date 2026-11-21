@@ -22,7 +22,13 @@ export type PlacePlaceholderField =
   | 'openingHours'
   | 'ticketPrice'
   | 'avgVisitMinutes'
-  | 'nearbyPlaceIds';
+  | 'nearbyPlaceIds'
+  | 'tips';
+
+export interface PlaceTip {
+  title: LocalizedText;
+  body: LocalizedText;
+}
 
 export interface Place {
   id: PlaceId;
@@ -39,6 +45,7 @@ export interface Place {
   avgVisitMinutes: number | null;
   tags: string[];
   nearbyPlaceIds: PlaceId[];
+  tips: PlaceTip[] | null;
   isDemo: boolean;
   placeholders: PlacePlaceholderField[];
 }

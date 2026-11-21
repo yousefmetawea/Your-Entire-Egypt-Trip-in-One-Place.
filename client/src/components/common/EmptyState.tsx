@@ -8,6 +8,7 @@ export interface EmptyStateProps {
   actions?: ReactNode;
   icon?: ReactNode;
   role?: 'status' | 'alert';
+  headingLevel?: 1 | 2 | 3;
   className?: string;
 }
 
@@ -17,8 +18,11 @@ export function EmptyState({
   actions,
   icon,
   role = 'status',
+  headingLevel = 2,
   className,
 }: EmptyStateProps) {
+  const Heading = `h${headingLevel}` as 'h1' | 'h2' | 'h3';
+
   return (
     <Card
       variant="surface"
@@ -36,7 +40,7 @@ export function EmptyState({
       ) : null}
 
       <div className="max-w-xl">
-        <h2 className="type-section text-primary">{title}</h2>
+        <Heading className="type-section text-primary">{title}</Heading>
         <p className="type-body mt-space-sm text-on-surface-variant">{description}</p>
       </div>
 
