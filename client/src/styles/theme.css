@@ -1,0 +1,151 @@
+@theme {
+  --font-display: 'Playfair Display', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+
+  --color-surface: #fdf9f2;
+  --color-surface-dim: #dddad3;
+  --color-surface-bright: #fdf9f2;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f7f3ec;
+  --color-surface-container: #f1ede6;
+  --color-surface-container-high: #ebe8e1;
+  --color-surface-container-highest: #e6e2db;
+  --color-surface-variant: #e6e2db;
+  --color-on-surface: #1c1c18;
+  --color-on-surface-variant: #444748;
+  --color-inverse-surface: #31302c;
+  --color-inverse-on-surface: #f4f0e9;
+  --color-outline: #747878;
+  --color-outline-variant: #c4c7c7;
+  --color-surface-tint: #5f5e5e;
+
+  --color-primary: #060607;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1f1f1f;
+  --color-on-primary-container: #888686;
+  --color-inverse-primary: #c8c6c5;
+  --color-primary-fixed: #e5e2e1;
+  --color-primary-fixed-dim: #c8c6c5;
+  --color-on-primary-fixed: #1b1b1c;
+  --color-on-primary-fixed-variant: #474746;
+
+  --color-secondary: #775928;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #ffd79b;
+  --color-on-secondary-container: #7a5c2b;
+  --color-secondary-fixed: #ffdeae;
+  --color-secondary-fixed-dim: #e8c086;
+  --color-on-secondary-fixed: #281800;
+  --color-on-secondary-fixed-variant: #5d4213;
+
+  --color-tertiary: #0b0600;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #271e06;
+  --color-on-tertiary-container: #948565;
+  --color-tertiary-fixed: #f3e0bb;
+  --color-tertiary-fixed-dim: #d6c5a1;
+  --color-on-tertiary-fixed: #231a04;
+  --color-on-tertiary-fixed-variant: #51452a;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --color-background: #fdf9f2;
+  --color-on-background: #1c1c18;
+
+  --color-bronze: #b08d57;
+  --color-sand: #d9c7a3;
+  --color-hairline: #ede8df;
+  --color-hairline-strong: #eadec9;
+  --color-success: #2e7d32;
+  --color-success-container: #e8f5e9;
+
+  --text-display-hero: 4rem;
+  --text-display-hero--line-height: 4.5rem;
+  --text-display-hero--letter-spacing: -0.02em;
+  --text-display-hero--font-weight: 400;
+
+  --text-display-hero-mobile: 2.5rem;
+  --text-display-hero-mobile--line-height: 3rem;
+  --text-display-hero-mobile--letter-spacing: -0.01em;
+  --text-display-hero-mobile--font-weight: 400;
+
+  --text-headline-lg: 3rem;
+  --text-headline-lg--line-height: 3.5rem;
+  --text-headline-lg--letter-spacing: -0.015em;
+  --text-headline-lg--font-weight: 400;
+
+  --text-headline-lg-mobile: 2rem;
+  --text-headline-lg-mobile--line-height: 2.5rem;
+  --text-headline-lg-mobile--letter-spacing: -0.01em;
+  --text-headline-lg-mobile--font-weight: 400;
+
+  --text-headline-md: 2rem;
+  --text-headline-md--line-height: 2.5rem;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-md--font-weight: 500;
+
+  --text-headline-sm: 1.5rem;
+  --text-headline-sm--line-height: 2rem;
+  --text-headline-sm--letter-spacing: 0em;
+  --text-headline-sm--font-weight: 600;
+
+  --text-title-lg: 1.25rem;
+  --text-title-lg--line-height: 1.75rem;
+  --text-title-lg--letter-spacing: -0.01em;
+  --text-title-lg--font-weight: 600;
+
+  --text-title-md: 1rem;
+  --text-title-md--line-height: 1.5rem;
+  --text-title-md--letter-spacing: 0em;
+  --text-title-md--font-weight: 600;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.75rem;
+  --text-body-lg--letter-spacing: 0em;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 0.9375rem;
+  --text-body-md--line-height: 1.5rem;
+  --text-body-md--letter-spacing: 0em;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 0.8125rem;
+  --text-body-sm--line-height: 1.25rem;
+  --text-body-sm--letter-spacing: 0.01em;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-caps: 0.6875rem;
+  --text-label-caps--line-height: 1rem;
+  --text-label-caps--letter-spacing: 0.12em;
+  --text-label-caps--font-weight: 700;
+
+  --text-label-md: 0.8125rem;
+  --text-label-md--line-height: 1.125rem;
+  --text-label-md--letter-spacing: 0.02em;
+  --text-label-md--font-weight: 600;
+
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2.5rem;
+  --spacing-space-2xl: 4rem;
+  --spacing-gutter-sm: 1rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-lg: 2.5rem;
+  --spacing-margin: 1.5rem;
+  --spacing-margin-md: 3rem;
+  --spacing-margin-lg: 5rem;
+
+  --container-page: 90rem;
+
+  --radius-card: 1.25rem;
+
+  --shadow-resting: 0 4px 20px -4px rgb(31 31 31 / 0.04), 0 2px 6px -2px rgb(176 141 87 / 0.03);
+  --shadow-floating: 0 16px 36px -8px rgb(31 31 31 / 0.08), 0 4px 12px -2px rgb(176 141 87 / 0.05);
+  --shadow-hover: 0 20px 40px -10px rgb(31 31 31 / 0.1);
+  --shadow-modal: 0 28px 80px -24px rgb(6 6 7 / 0.45);
+}
