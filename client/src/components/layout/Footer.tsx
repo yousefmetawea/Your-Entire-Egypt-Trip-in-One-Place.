@@ -1,5 +1,6 @@
 import type { FormEvent, HTMLAttributes, ReactNode } from 'react';
 import { cn } from '../../lib/cn';
+import type { LayoutLinkComponent } from '../../lib/link';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 
@@ -32,6 +33,7 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
   newsletter?: FooterNewsletter;
   legal?: ReactNode;
   metaLinks?: readonly FooterLink[];
+  linkComponent?: LayoutLinkComponent;
 }
 
 export function Footer({
@@ -43,9 +45,12 @@ export function Footer({
   newsletter,
   legal,
   metaLinks = [],
+  linkComponent,
   className,
   ...rest
 }: FooterProps) {
+  const Link: LayoutLinkComponent = linkComponent ?? 'a';
+
   function handleNewsletterSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
@@ -78,12 +83,12 @@ export function Footer({
       <div className="mx-auto w-full max-w-page px-gutter-sm md:px-margin-md lg:px-margin-lg">
         <div className="grid grid-cols-1 gap-gutter-lg pb-space-2xl md:grid-cols-2 lg:grid-cols-12">
           <div className="flex flex-col gap-space-md lg:col-span-4">
-            <a
+            <Link
               href={brandHref}
               className="w-fit font-display text-headline-md leading-none tracking-tight text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
             >
               {brandLabel}
-            </a>
+            </Link>
 
             {description ? (
               <p className="max-w-sm font-sans text-body-md text-on-surface-variant">
@@ -116,12 +121,12 @@ export function Footer({
                   <ul className="flex flex-col gap-space-xs">
                     {column.links.map((link) => (
                       <li key={`${link.href}-${link.label}`}>
-                        <a
+                        <Link
                           href={link.href}
                           className="font-sans text-body-sm text-on-surface-variant transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                         >
                           {link.label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -178,13 +183,13 @@ export function Footer({
             {metaLinks.length > 0 ? (
               <div className="flex flex-wrap items-center gap-space-lg font-sans text-label-caps uppercase">
                 {metaLinks.map((link) => (
-                  <a
+                  <Link
                     key={`${link.href}-${link.label}`}
                     href={link.href}
                     className="transition-colors hover:text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             ) : null}

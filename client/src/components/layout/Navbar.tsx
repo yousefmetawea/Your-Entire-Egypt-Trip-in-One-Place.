@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/cn';
+import type { LayoutLinkComponent } from '../../lib/link';
 import { ButtonLink } from '../ui/Button';
 
 export interface NavLink {
@@ -20,9 +21,11 @@ export interface NavbarProps {
   brandHref: string;
   links: readonly NavLink[];
   cta?: NavbarCta;
+  ctaLinkComponent?: LayoutLinkComponent;
   actions?: ReactNode;
   ariaLabel: string;
   position?: NavbarPosition;
+  linkComponent?: LayoutLinkComponent;
   className?: string;
 }
 
@@ -37,11 +40,15 @@ export function Navbar({
   brandHref,
   links,
   cta,
+  ctaLinkComponent,
   actions,
   ariaLabel,
   position = 'fixed',
+  linkComponent,
   className,
 }: NavbarProps) {
+  const Link: LayoutLinkComponent = linkComponent ?? 'a';
+
   return (
     <header
       className={cn(
@@ -51,18 +58,18 @@ export function Navbar({
       )}
     >
       <div className="mx-auto flex h-20 max-w-page items-center justify-between gap-space-md rounded-full bg-surface/85 px-space-md shadow-floating backdrop-blur-xl sm:px-space-lg">
-        <a
+        <Link
           href={brandHref}
           className="inline-flex min-w-0 shrink items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
         >
           <span className="truncate font-display text-[1.55rem] leading-none tracking-tight text-primary">
             {brandLabel}
           </span>
-        </a>
+        </Link>
 
         <nav aria-label={ariaLabel} className="hidden items-center gap-space-xl lg:flex">
           {links.map((link) => (
-            <a
+            <Link
               key={`${link.href}-${link.label}`}
               href={link.href}
               aria-current={link.active ? 'page' : undefined}
@@ -72,7 +79,7 @@ export function Navbar({
               )}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -84,12 +91,12 @@ export function Navbar({
           {cta ? (
             <>
               <span className="shrink-0 sm:hidden">
-                <ButtonLink href={cta.href} size="sm">
+                <ButtonLink as={ctaLinkComponent} href={cta.href} size="sm">
                   {cta.label}
                 </ButtonLink>
               </span>
               <span className="hidden shrink-0 sm:block">
-                <ButtonLink href={cta.href} size="md">
+                <ButtonLink as={ctaLinkComponent} href={cta.href} size="md">
                   {cta.label}
                 </ButtonLink>
               </span>
