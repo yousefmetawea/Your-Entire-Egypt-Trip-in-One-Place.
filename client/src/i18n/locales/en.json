@@ -170,6 +170,125 @@
     "areaLabel": "Area",
     "categoryLabel": "Category"
   },
+  "placeDetails": {
+    "meta": {
+      "title": "{{name}} · Demo place",
+      "description": "Plan a visit to {{name}} in {{area}}. Demo details include estimated prices, opening hours, and visit length; no live availability.",
+      "notFoundTitle": "Place not found",
+      "errorTitle": "Place details unavailable"
+    },
+    "breadcrumb": {
+      "label": "Breadcrumb",
+      "discover": "Discover"
+    },
+    "demo": {
+      "badge": "Demo place",
+      "note": "This is a demo place. Descriptions, prices, hours, and availability are not live.",
+      "fixtureBadge": "Dev fixture",
+      "fixtureNote": "Synthetic layout fixture for development only. Content and imagery are placeholders, not real destination information."
+    },
+    "gallery": {
+      "label": "Place gallery",
+      "emptyTitle": "Imagery is being prepared.",
+      "emptyDescription": "No photographs are available for this demo place yet.",
+      "open": "Open image {{index}} of {{total}}",
+      "more": "+{{count}} more",
+      "credit": "Photo: {{credit}}",
+      "license": "License: {{license}}",
+      "source": "View image source",
+      "counter": "{{index}} of {{total}}",
+      "close": "Close gallery",
+      "previous": "Previous image",
+      "next": "Next image"
+    },
+    "about": {
+      "eyebrow": "The story",
+      "title": "About this place",
+      "historyLabel": "History",
+      "emptyTitle": "Description coming soon.",
+      "emptyDescription": "Verified description and history for this place are not available yet."
+    },
+    "practical": {
+      "eyebrow": "Plan your visit",
+      "title": "Practical details",
+      "priceLabel": "Estimated price",
+      "estimated": "Estimated",
+      "lastUpdated": "Last updated {{date}}",
+      "lastUpdatedMissing": "Last updated date not provided",
+      "priceMissing": "Price information is not available yet.",
+      "hoursLabel": "Opening hours",
+      "hoursMissing": "Opening hours are not available yet.",
+      "daily": "Daily, {{opens}}–{{closes}}",
+      "seeWeekly": "See weekly hours",
+      "viewHours": "View weekly hours",
+      "closed": "Closed",
+      "hoursUnavailable": "Hours unavailable",
+      "partialNote": "Only partial weekly hours are available.",
+      "durationLabel": "Suggested visit",
+      "durationMissing": "Visit length not listed",
+      "areaLabel": "Area",
+      "categoryLabel": "Category",
+      "quickFactsLabel": "Quick facts"
+    },
+    "addToTrip": {
+      "idle": "Add to draft trip",
+      "checking": "Checking your trip…",
+      "adding": "Adding…",
+      "added": "Added to draft",
+      "inTrip": "Already in draft",
+      "retry": "Try again",
+      "error": "We couldn’t add this place. Please try again.",
+      "demoNote": "This adds the place to a local demo draft only. No booking or live availability.",
+      "addedNote": "Added to {{trip}} · Day {{day}}, {{date}}.",
+      "addedNoteNoDate": "Added to {{trip}} · Day {{day}}.",
+      "inTripNote": "Already in {{trip}} · Day {{day}}, {{date}}.",
+      "inTripNoteNoDate": "Already in {{trip}} · Day {{day}}.",
+      "addedGeneric": "Added to your demo draft trip.",
+      "inTripGeneric": "Already in your demo draft trip.",
+      "createdNote": "A new demo draft trip was created for you."
+    },
+    "weekdays": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "map": {
+      "eyebrow": "Location",
+      "title": "Where you’ll find it",
+      "mapLabel": "Map preview",
+      "available": "Coordinates are recorded for this demo place.",
+      "missing": "Coordinates are not available for this demo place.",
+      "phase": "Interactive map in a later phase"
+    },
+    "nearby": {
+      "eyebrow": "Keep exploring",
+      "title": "Nearby places",
+      "description": "Other demo places in the catalog that may pair well with this visit.",
+      "loading": "Loading nearby places",
+      "errorTitle": "We couldn’t load nearby places.",
+      "errorDescription": "Please try again. No place data has been changed.",
+      "retry": "Retry",
+      "emptyTitle": "No nearby places to show yet.",
+      "emptyDescription": "Related places have not been added to this demo catalog yet."
+    },
+    "tips": {
+      "eyebrow": "Good to know",
+      "title": "Tips for first-time visitors"
+    },
+    "states": {
+      "loading": "Loading place details",
+      "notFoundTitle": "This place is not in the demo catalog.",
+      "notFoundDescription": "The link may be outdated, or the place may not be available in this demo.",
+      "errorTitle": "We couldn’t load this place.",
+      "errorDescription": "Please try again. No place data has been changed.",
+      "retry": "Retry",
+      "backToDiscover": "Back to Discover"
+    }
+  },
   "catalog": {
     "categories": {
       "history": "History",

@@ -25,6 +25,7 @@ function makePlace(
     avgVisitMinutes: null,
     tags: [],
     nearbyPlaceIds: [],
+    tips: null,
     isDemo: true,
     placeholders: [],
     ...overrides,

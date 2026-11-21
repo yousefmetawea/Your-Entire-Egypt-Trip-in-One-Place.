@@ -189,6 +189,14 @@ export function ClockIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function PlusIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path d="M10 4v12M4 10h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export function CheckIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>

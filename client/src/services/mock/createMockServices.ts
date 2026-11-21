@@ -10,10 +10,11 @@ import type {
   TripId,
   UserId,
 } from '../../types';
-import { enumerateDates, isIsoDate } from '../../lib/date';
+import { enumerateDates, getTodayIsoDate, isIsoDate } from '../../lib/date';
 import type {
   AccommodationQuery,
   AccommodationService,
+  AddPlaceToDraftResult,
   BookingRequestService,
   CreateBookingRequestInput,
   CreateTripActivityInput,
@@ -42,6 +43,7 @@ export interface MockServiceOptions {
   latencyMs?: number;
   storage?: MockStorage;
   currentUserId?: UserId;
+  now?: () => Date;
 }
 
 function assertNonEmpty(value: string, field: string): void {
@@ -106,6 +108,7 @@ function filterPlaces(items: readonly Place[], query: PlaceQuery): Place[] {
 export function createMockServices(options: MockServiceOptions = {}): Services {
   const latencyMs = options.latencyMs ?? DEFAULT_LATENCY_MS;
   const currentUserId = options.currentUserId ?? DEMO_USER_ID;
+  const now = options.now ?? (() => new Date());
   const storage = options.storage ?? createBrowserStorage();
   const store = createMockStore(storage);
 
@@ -161,6 +164,48 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
     }));
 
     return trip;
+  }
+
+  function createDraftTrip(today: IsoDate): Trip {
+    return {
+      id: crypto.randomUUID(),
+      userId: currentUserId,
+      title: 'My Cairo trip',
+      startDate: today,
+      endDate: today,
+      travelers: 1,
+      budget: null,
+      interests: [],
+      preferences: {},
+      status: 'draft',
+      days: [
+        {
+          id: crypto.randomUUID(),
+          date: today,
+          activities: [],
+        },
+      ],
+      accommodationId: null,
+      savedPlaceIds: [],
+      isDemo: true,
+    };
+  }
+
+  function findDraftPlaceActivity(
+    trip: Trip,
+    placeId: string,
+  ): { day: TripDay; activity: TripActivity } | null {
+    for (const day of trip.days) {
+      const activity = day.activities.find(
+        (item) => item.source.type === 'place' && item.source.placeId === placeId,
+      );
+
+      if (activity) {
+        return { day, activity };
+      }
+    }
+
+    return null;
   }
 
   const places: PlaceService = {
@@ -330,6 +375,78 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
           trips: state.trips.filter((trip) => trip.id !== id),
         }));
         return undefined;
+      });
+    },
+    addPlaceToDraft(placeId, placeSnapshot) {
+      return run(() => {
+        const place =
+          placeSnapshot && placeSnapshot.id === placeId ? placeSnapshot : findPlaceById(placeId);
+        const mine = store.getState().trips.filter((trip) => trip.userId === currentUserId);
+        let trip = mine.find((item) => item.status === 'draft') ?? null;
+        let createdTrip = false;
+
+        if (!trip) {
+          trip = createDraftTrip(getTodayIsoDate(now()));
+          createdTrip = true;
+        }
+
+        const existing = findDraftPlaceActivity(trip, placeId);
+
+        if (existing) {
+          const result: AddPlaceToDraftResult = {
+            trip,
+            dayId: existing.day.id,
+            activity: existing.activity,
+            added: false,
+            createdTrip: false,
+          };
+
+          return result;
+        }
+
+        const firstDay = trip.days[0];
+        const day: TripDay = firstDay ?? {
+          id: crypto.randomUUID(),
+          date: trip.startDate,
+          activities: [],
+        };
+        const activity: TripActivity = {
+          id: crypto.randomUUID(),
+          source: { type: 'place', placeId },
+          startTime: '09:00',
+          durationMin: place.avgVisitMinutes ?? 0,
+          travelMin: 0,
+          estimatedCost: place.ticketPrice,
+          order: day.activities.length,
+          ...(place.avgVisitMinutes === null ? { notes: 'Visit duration is not yet listed.' } : {}),
+        };
+        const updatedTrip: Trip = {
+          ...trip,
+          days: firstDay
+            ? trip.days.map((item) =>
+                item.id === day.id ? { ...item, activities: [...item.activities, activity] } : item,
+              )
+            : [{ ...day, activities: [activity] }],
+        };
+
+        if (createdTrip) {
+          store.update((state) => ({
+            ...state,
+            trips: [...state.trips, updatedTrip],
+          }));
+        } else {
+          saveTrip(updatedTrip);
+        }
+
+        const result: AddPlaceToDraftResult = {
+          trip: updatedTrip,
+          dayId: day.id,
+          activity,
+          added: true,
+          createdTrip,
+        };
+
+        return result;
       });
     },
     addActivity(tripId, dayId, input: CreateTripActivityInput) {

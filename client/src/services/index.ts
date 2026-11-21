@@ -6,6 +6,7 @@ export { ServiceError, isServiceError } from './errors';
 export type {
   AccommodationQuery,
   AccommodationService,
+  AddPlaceToDraftResult,
   BookingRequestService,
   CreateBookingRequestInput,
   CreateTripActivityInput,
