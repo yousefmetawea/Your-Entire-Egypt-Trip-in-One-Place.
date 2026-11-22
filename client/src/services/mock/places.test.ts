@@ -31,8 +31,8 @@ describe('mock place service', () => {
     ]);
     expect(places.every((place) => place.isDemo)).toBe(true);
     expect(places.every((place) => place.images.length === 0)).toBe(true);
-    expect(places.every((place) => place.placeholders.includes('description'))).toBe(true);
-    expect(places.every((place) => place.placeholders.includes('ticketPrice'))).toBe(true);
+    expect(places.every((place) => place.placeholders.includes('history'))).toBe(true);
+    expect(places.every((place) => place.placeholders.includes('images'))).toBe(true);
   });
 
   it('filters places by area, category, and search text', async () => {

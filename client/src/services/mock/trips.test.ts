@@ -142,11 +142,15 @@ describe('mock trip service', () => {
       expect(result.activity).toMatchObject({
         source: { type: 'place', placeId: place.id },
         startTime: '09:00',
-        durationMin: null,
+        durationMin: 75,
         travelMin: null,
-        estimatedCost: null,
+        estimatedCost: {
+          amount: 350,
+          currency: 'EGP',
+          isEstimated: true,
+          priceUpdatedAt: '2026-04-10',
+        },
         order: 0,
-        notes: 'Visit duration is not yet listed.',
       });
 
       const reloaded = await createServices(storage, now).trips.listMine();

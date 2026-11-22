@@ -1,72 +1,73 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { Place, PlaceId } from '../types';
+import type { Place } from '../types';
 import { services } from '../services';
+import { findNearbyPlaces, type NearbyPlaceDistance } from '../lib/map/distance';
 
 export type NearbyPlacesStatus = 'idle' | 'loading' | 'ready' | 'error';
 
 export interface NearbyPlacesResult {
-  places: Place[];
+  placesWithDistance: NearbyPlaceDistance[];
   status: NearbyPlacesStatus;
   retry: () => void;
 }
 
 interface NearbyPlacesState {
-  placeId: PlaceId | null;
-  places: Place[];
+  placeId: string | null;
+  placesWithDistance: NearbyPlaceDistance[];
   status: NearbyPlacesStatus;
 }
 
-function idleState(placeId: PlaceId | null): NearbyPlacesState {
-  return { placeId, places: [], status: 'idle' };
-}
-
-export function useNearbyPlaces(place: Place | null, limit = 3): NearbyPlacesResult {
-  const [state, setState] = useState<NearbyPlacesState>(() => idleState(null));
+export function useNearbyPlaces(place: Place | null, limit = 6): NearbyPlacesResult {
+  const [state, setState] = useState<NearbyPlacesState>({
+    placeId: null,
+    placesWithDistance: [],
+    status: 'idle',
+  });
   const [attempt, setAttempt] = useState(0);
   const placeId = place?.id ?? null;
-  const nearbyIdsKey = place?.nearbyPlaceIds.slice(0, limit).join('|') ?? '';
-  const current =
-    state.placeId === placeId
-      ? state
-      : {
-          placeId,
-          places: [],
-          status: nearbyIdsKey ? ('loading' as const) : ('idle' as const),
-        };
 
   useEffect(() => {
-    if (!placeId || !nearbyIdsKey) {
+    if (!place) {
       return;
     }
 
     let active = true;
-    const ids = nearbyIdsKey.split('|');
 
-    Promise.all(ids.map((id) => services.places.getById(id)))
-      .then((places) => {
-        if (active) {
-          setState({ placeId, places, status: 'ready' });
-        }
+    // Load full catalog to find nearby straight-line or authored places
+    services.places
+      .list()
+      .then((allPlaces) => {
+        if (!active) return;
+        const matches = findNearbyPlaces(place, allPlaces).slice(0, limit);
+        setState({
+          placeId: place.id,
+          placesWithDistance: matches,
+          status: 'ready',
+        });
       })
       .catch(() => {
-        if (active) {
-          setState({ placeId, places: [], status: 'error' });
-        }
+        if (!active) return;
+        setState({
+          placeId: place.id,
+          placesWithDistance: [],
+          status: 'error',
+        });
       });
 
     return () => {
       active = false;
     };
-  }, [attempt, nearbyIdsKey, placeId]);
+  }, [attempt, place, limit]);
 
   const retry = useCallback(() => {
-    if (!placeId || !nearbyIdsKey) {
-      return;
-    }
+    if (!placeId) return;
+    setState((prev) => ({ ...prev, status: 'loading' }));
+    setAttempt((c) => c + 1);
+  }, [placeId]);
 
-    setState({ placeId, places: [], status: 'loading' });
-    setAttempt((currentAttempt) => currentAttempt + 1);
-  }, [nearbyIdsKey, placeId]);
-
-  return { places: current.places, status: current.status, retry };
+  return {
+    placesWithDistance: state.placeId === placeId ? state.placesWithDistance : [],
+    status: state.placeId === placeId ? state.status : 'loading',
+    retry,
+  };
 }
