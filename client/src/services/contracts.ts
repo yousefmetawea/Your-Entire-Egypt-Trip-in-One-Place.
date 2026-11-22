@@ -5,7 +5,10 @@ import type {
   AirportTransferDetails,
   BookingRequest,
   BookingRequestId,
+  BudgetTier,
   CairoArea,
+  CreatePlannedTripInput,
+  CreatePlannedTripResult,
   GuidedTourDetails,
   IsoDate,
   Money,
@@ -24,6 +27,8 @@ import type {
   TripId,
   TripPreferences,
 } from '../types';
+
+export type { CreatePlannedTripInput, CreatePlannedTripResult } from '../types';
 
 export interface PlaceQuery {
   search?: string;
@@ -45,6 +50,7 @@ export interface CreateTripInput {
   endDate: IsoDate;
   travelers: number;
   budget?: Money | null;
+  budgetTier?: BudgetTier | null;
   interests?: PlaceCategory[];
   preferences?: TripPreferences;
   accommodationId?: AccommodationId | null;
@@ -56,6 +62,7 @@ export type UpdateTripInput = Partial<
     | 'title'
     | 'travelers'
     | 'budget'
+    | 'budgetTier'
     | 'interests'
     | 'preferences'
     | 'status'
@@ -118,6 +125,7 @@ export interface TripService {
   listMine(): Promise<Trip[]>;
   getById(id: TripId): Promise<Trip>;
   create(input: CreateTripInput): Promise<Trip>;
+  createPlannedTrip(input: CreatePlannedTripInput): Promise<CreatePlannedTripResult>;
   update(id: TripId, patch: UpdateTripInput): Promise<Trip>;
   remove(id: TripId): Promise<void>;
   addPlaceToDraft(placeId: PlaceId, place?: Place): Promise<AddPlaceToDraftResult>;

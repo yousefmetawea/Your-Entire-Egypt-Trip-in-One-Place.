@@ -1,7 +1,7 @@
 # Decisions
 
-**Status:** Phase 4 — Destination Explorer implemented; pending review
-**Last updated:** 2026-11-21
+**Status:** Phase 5 — Smart Trip Creator implemented; pending review
+**Last updated:** 2026-11-22
 
 ## Product
 
@@ -18,9 +18,9 @@
 - Single monorepo using npm workspaces.
 - Workspaces: `client/` and `server/`. Shared project documentation stays in `docs/`.
 - `design/` contains the Stitch source material and is not modified by application work.
-- Phases 0–4 are local-only. Hosting providers are undecided.
-- Base branch: `main`. Phase work uses dedicated branches: `phase-0-setup`, `phase-1-design-system`, `phase-2-app-shell`, `phase-3-landing-discover`, and, currently, `phase-4-destination-explorer`.
-- Phases 0–3 are committed. Phase 4 is implemented but remains uncommitted and unpushed pending review.
+- Phases 0–5 are local-only. Hosting providers are undecided.
+- Base branch: `main`. Phase work uses dedicated branches: `phase-0-setup`, `phase-1-design-system`, `phase-2-app-shell`, `phase-3-landing-discover`, `phase-4-destination-explorer`, and, currently, `phase-5-trip-creator`.
+- Phases 0–3 are committed. Phase 4 and Phase 5 are implemented but remain uncommitted and unpushed pending review.
 
 ## Tooling
 
@@ -41,6 +41,7 @@
 - Phase 2 added React Router and Vitest. No data-fetching or client-state library was added.
 - Phase 3 added no dependencies. Landing and Discover use the existing services, React Router, i18next, Framer Motion, and inline SVG icons.
 - Phase 4 added no dependencies. The Destination Explorer reuses the existing services, design-system primitives, React Router, i18next, and inline SVG icons.
+- Phase 5 added no dependencies. The trip creator reuses React Router, i18next, the design-system primitives, the service layer, and Vitest.
 
 ## Design system (Phase 1)
 
@@ -52,7 +53,7 @@
 - Component APIs are typed. Styling uses a small `cn` class joiner; no CVA, `tailwind-merge`, or icon library was added.
 - Framer Motion is limited to shared variants and coordinated entrances. CSS handles hover and focus transitions; `MotionConfig reducedMotion="user"` and global CSS honour reduced-motion preferences. There are no ambient loops.
 - The Phase 1 showcase reviews tokens, typography, components, motion, and a static English RTL preview. In Phase 2 it moved to the dev-only `/design-system` route, outside the product layout, and is excluded from production builds.
-- Phases 1 and 2 are committed. Phase 3 is committed. Phase 4 is implemented but not yet approved; do not start Phase 5 without explicit approval.
+- Phases 1 and 2 are committed. Phase 3 is committed. Phase 4 and Phase 5 are implemented but not yet approved; do not start Phase 6 without explicit approval.
 
 ## App shell and mock data (Phase 2)
 
@@ -98,13 +99,29 @@
 - The map is a polished `MapPreview` placeholder with no provider or network integration. It indicates whether coordinates exist and labels the interactive map as a later phase.
 - Nearby places load from `nearbyPlaceIds` via `places.getById` (up to three) and are hidden when no IDs exist. Errors show an inline retry state.
 - Tips render only when stored; the seed has no tips. No tips, hours, prices, descriptions, coordinates, or nearby relationships were invented.
-- Add to Trip uses `TripService.addPlaceToDraft(placeId, place?)`. The optional loaded place snapshot lets the dev-only fixture work without adding synthetic data to the production seed. It creates a draft titled “My Cairo trip” when none exists, adds to the first day at 09:00, uses `avgVisitMinutes` or 0 with an explicit missing-duration note, and stores the ticket price as the estimated cost. Duplicate places are blocked across all days. Feedback is inline; there is no Toast.
+- Add to Trip uses `TripService.addPlaceToDraft(placeId, place?)`. The optional loaded place snapshot lets the dev-only fixture work without adding synthetic data to the production seed. It creates a draft titled “My Cairo trip” when none exists, adds to the first day at 09:00, stores `avgVisitMinutes` as `durationMin` (nullable), sets `travelMin` to null, and stores the ticket price as the estimated cost. Duplicate places are blocked across all days. Feedback is inline; there is no Toast.
 - A trip with no days now appends a day containing the new activity instead of dropping the activity.
 - The mobile action bar is fixed below `md`, hides near the footer via an IntersectionObserver sentinel, and is the only visible Add action on mobile. The in-flow action remains in the sticky practical-info card on desktop.
 - The dev-only fixture at `/places/layout-fixture` uses synthetic copy, data-URI SVG images, and clearly labeled demo data. It is dynamically imported only under `import.meta.env.DEV`; production builds contain no fixture markers.
 - English Phase 4 copy lives under `placeDetails` in `client/src/i18n/locales/en.json`. No Arabic product copy was invented.
 - Tests cover price/time/date formatting, opening-hours summaries, gallery layout/keyboard helpers, and draft creation/duplicate/snapshot behavior. Component and browser automation tests were not added.
 - Lighthouse mobile verification is blocked because Chrome/Chromium is unavailable. Visual and interaction checks were performed in Firefox instead; no Lighthouse score is claimed.
+
+## Smart Trip Creator (Phase 5)
+
+- `/plan` implements the six-step planner: Dates, Travelers, Budget, Interests, Stay, and Transport. It has a progress indicator, per-step validation, Back/Continue, a persistent “Trip summary” panel, and a generate action. `/trip/:id` implements a minimal read-only itinerary page.
+- Dates are real ISO dates with start/end ordering and a 1–14 day limit. Travelers are whole numbers from 1 to 12. Budget tier is required and limited to Essential, Balanced, or Signature. Interests require at least one of History, Culture, or Adventure; Food is disabled and rejected because the seed has no food places. Stay and transport preferences accept the planned option sets, including “Any.”
+- Budget tier is stored on the trip and shown in the UI, but it does not change the generated itinerary. No verified price data exists, so treating budget as a style preference avoids inventing costs. All prices remain estimated and labeled when present.
+- Wizard progress is stored in `localStorage` under `discover-cairo.wizard.v1` with a versioned shape. Values, current step, generated trip ID, and the “include saved places” choice are persisted. The Hero “Plan My Trip” action prefills dates and travelers through `/plan?from=&to=&travelers=` using `createPlanHref`; the catalog search still uses Discover.
+- The planner reuses a single local draft. If one exists, generation replaces its itinerary while preserving its ID and title. A confirmation dialog is shown before replacing an existing draft. “Start over” clears wizard answers only; it does not delete the draft.
+- Saved places default to included. The generator prioritizes their areas, and the user can exclude them for a generation. The service returns warnings for omitted places, empty days, unmatched interests, missing details, and saved-place handling.
+- The pure generator lives in `client/src/lib/planner/itinerary.ts`. It matches by category or exact tag, groups candidates by catalog area, schedules one area per day, caps activities at three per day, and allocates extra days to areas with remaining places. Start times are fixed at 09:00, 11:30, and 14:00. Duration and cost come from stored place data; travel time is null. IDs are deterministic, and the generator uses no randomness, current time, network, or storage.
+- `TripService.createPlannedTrip` validates answers, finds the draft by `replaceTripId` or the first draft, derives saved place IDs from the draft, invokes the generator, blocks zero-match generation with a `VALIDATION` service error, and atomically creates or replaces the draft. It returns the trip, warnings, matched and omitted place IDs, and created/replaced flags.
+- The read-only trip page renders day cards and activity rows with place links, category/area badges, visit duration, travel time, estimated price, and last-updated metadata. Missing values use explicit labels. It shows an empty-day state, a summary with counts and preferences, and links back to the planner and Discover. There is no editing, reordering, map, booking, or live availability.
+- The planner and trip page have an inferred responsive layout because Stitch only provides a desktop Step 4-of-6 screen. The summary stacks below the step content on smaller screens; there is no sticky mobile action bar. Unsupported Stitch claims such as route feasibility, live transfer times, private chauffeur pricing, fixed five-day trips, and guide/pacing selectors were not implemented.
+- English Phase 5 copy lives under `planner` and `trip` in `client/src/i18n/locales/en.json`. No Arabic product copy was invented.
+- Tests cover planner validation, prefill, persistence, deterministic itinerary generation, and planned-trip service behavior. The suite passes 13 files and 94 tests. Component and browser automation tests were not added.
+- Lighthouse mobile verification remains blocked because Chrome/Chromium is unavailable. Visual and interaction checks are limited to Firefox; no Lighthouse score is claimed.
 
 ## Localization
 
@@ -113,7 +130,7 @@
 - The selected language is stored in `localStorage` under `discover-cairo.language`; English is used when no valid preference exists.
 - The MVP does not use locale-prefixed URLs, preserving the route plan in `docs/PLAN.md`.
 - Runtime language changes update `<html lang>` and `<html dir>` to `ltr` or `rtl`.
-- UI copy lives in translation resources rather than hardcoded component strings. The Phase 1 showcase copy is review-only, Phase 2 placeholder copy is English-only, and Phase 3/Phase 4 product copy is English-only in `en.json` until Arabic copy is approved.
+- UI copy lives in translation resources rather than hardcoded component strings. The Phase 1 showcase copy is review-only, Phase 2 placeholder copy is English-only, and Phase 3–5 product copy is English-only in `en.json` until Arabic copy is approved.
 - Layouts will use flow-relative CSS/Tailwind properties and `rtl:` variants where necessary. No RTL-specific plugin is selected. Phase 1 adds logical-property RTL foundations and a static English RTL preview only.
 - Dates, numbers, and currency will use built-in `Intl` APIs.
 - Dynamic content such as place names and descriptions uses a localized shape (English required, Arabic optional, English fallback), defined in Phase 2. The API shape remains a Phase 10 concern.

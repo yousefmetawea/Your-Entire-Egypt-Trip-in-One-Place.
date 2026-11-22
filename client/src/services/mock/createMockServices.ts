@@ -11,12 +11,24 @@ import type {
   UserId,
 } from '../../types';
 import { enumerateDates, getTodayIsoDate, isIsoDate } from '../../lib/date';
+import { getDraftPlaceIds } from '../../lib/planner/draft';
+import { generateItinerary } from '../../lib/planner/itinerary';
+import {
+  isAccommodationPreference,
+  isBudgetTier,
+  isSelectableInterest,
+  isTransportPreference,
+  MAX_TRAVELERS,
+  MAX_TRIP_DAYS,
+} from '../../lib/planner/options';
 import type {
   AccommodationQuery,
   AccommodationService,
   AddPlaceToDraftResult,
   BookingRequestService,
   CreateBookingRequestInput,
+  CreatePlannedTripInput,
+  CreatePlannedTripResult,
   CreateTripActivityInput,
   CreateTripInput,
   PlaceQuery,
@@ -79,6 +91,59 @@ function assertDate(value: string, field: string): void {
 function assertBudget(budget: Money | null | undefined): void {
   if (budget && (!Number.isFinite(budget.amount) || budget.amount < 0)) {
     throw new ServiceError('VALIDATION', 'Budget must be zero or greater.');
+  }
+}
+
+function assertBudgetTier(value: string | null | undefined): void {
+  if (value !== null && value !== undefined && !isBudgetTier(value)) {
+    throw new ServiceError('VALIDATION', 'Budget tier is invalid.');
+  }
+}
+
+function assertPlannerAnswers(input: CreatePlannedTripInput): void {
+  const { answers } = input;
+
+  assertDate(answers.startDate, 'Start date');
+  assertDate(answers.endDate, 'End date');
+  assertPositiveInteger(answers.travelers, 'Travelers');
+
+  if (answers.travelers > MAX_TRAVELERS) {
+    throw new ServiceError('VALIDATION', `Travelers must be ${MAX_TRAVELERS} or fewer.`);
+  }
+
+  if (!isBudgetTier(answers.budgetTier)) {
+    throw new ServiceError('VALIDATION', 'Select a budget tier.');
+  }
+
+  if (
+    answers.interests.length === 0 ||
+    !answers.interests.every((interest) => isSelectableInterest(interest))
+  ) {
+    throw new ServiceError('VALIDATION', 'Select at least one available interest.');
+  }
+
+  if (!isAccommodationPreference(answers.accommodationType)) {
+    throw new ServiceError('VALIDATION', 'Accommodation preference is invalid.');
+  }
+
+  if (!isTransportPreference(answers.transportType)) {
+    throw new ServiceError('VALIDATION', 'Transport preference is invalid.');
+  }
+
+  let dates: IsoDate[];
+
+  try {
+    dates = enumerateDates(answers.startDate, answers.endDate);
+  } catch (error) {
+    if (error instanceof RangeError) {
+      throw new ServiceError('VALIDATION', error.message);
+    }
+
+    throw error;
+  }
+
+  if (dates.length > MAX_TRIP_DAYS) {
+    throw new ServiceError('VALIDATION', `Trips can cover at most ${MAX_TRIP_DAYS} days.`);
   }
 }
 
@@ -175,6 +240,7 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
       endDate: today,
       travelers: 1,
       budget: null,
+      budgetTier: null,
       interests: [],
       preferences: {},
       status: 'draft',
@@ -292,6 +358,7 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
         assertDate(input.endDate, 'End date');
         assertPositiveInteger(input.travelers, 'Travelers');
         assertBudget(input.budget);
+        assertBudgetTier(input.budgetTier);
 
         let dates: IsoDate[];
 
@@ -313,6 +380,7 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
           endDate: input.endDate,
           travelers: input.travelers,
           budget: input.budget ?? null,
+          budgetTier: input.budgetTier ?? null,
           interests: input.interests ?? [],
           preferences: input.preferences ?? {},
           status: 'draft',
@@ -334,6 +402,71 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
         return trip;
       });
     },
+    createPlannedTrip(input: CreatePlannedTripInput) {
+      return run(() => {
+        assertPlannerAnswers(input);
+
+        let existing: Trip | null;
+
+        if (input.replaceTripId) {
+          existing = findTrip(input.replaceTripId);
+
+          if (existing.userId !== currentUserId) {
+            throw new ServiceError('NOT_FOUND', `Trip "${input.replaceTripId}" was not found.`);
+          }
+
+          if (existing.status !== 'draft') {
+            throw new ServiceError('VALIDATION', 'Only draft trips can be regenerated.');
+          }
+        } else {
+          existing =
+            store
+              .getState()
+              .trips.find((trip) => trip.userId === currentUserId && trip.status === 'draft') ??
+            null;
+        }
+
+        const savedPlaceIds = getDraftPlaceIds(existing);
+        const includeSavedPlaces = input.includeSavedPlaces ?? true;
+        const tripId = existing?.id ?? crypto.randomUUID();
+        const title = existing?.title ?? 'My Cairo trip';
+        const generated = generateItinerary({
+          tripId,
+          userId: currentUserId,
+          title,
+          answers: input.answers,
+          places: seedPlaces,
+          savedPlaceIds,
+          includeSavedPlaces,
+        });
+
+        if (!generated.ok) {
+          throw new ServiceError('VALIDATION', 'No demo places match the selected interests.');
+        }
+
+        const { trip, warnings, matchedPlaceIds, omittedPlaceIds } = generated.itinerary;
+
+        if (existing) {
+          saveTrip(trip);
+        } else {
+          store.update((state) => ({
+            ...state,
+            trips: [...state.trips, trip],
+          }));
+        }
+
+        const result: CreatePlannedTripResult = {
+          trip,
+          warnings,
+          matchedPlaceIds,
+          omittedPlaceIds,
+          createdTrip: !existing,
+          replacedTrip: Boolean(existing),
+        };
+
+        return result;
+      });
+    },
     update(id, patch: UpdateTripInput) {
       return run(() => {
         const trip = findTrip(id);
@@ -350,11 +483,16 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
           assertBudget(patch.budget);
         }
 
+        if (patch.budgetTier !== undefined) {
+          assertBudgetTier(patch.budgetTier);
+        }
+
         const updated: Trip = {
           ...trip,
           ...(patch.title !== undefined ? { title: patch.title.trim() } : {}),
           ...(patch.travelers !== undefined ? { travelers: patch.travelers } : {}),
           ...(patch.budget !== undefined ? { budget: patch.budget } : {}),
+          ...(patch.budgetTier !== undefined ? { budgetTier: patch.budgetTier } : {}),
           ...(patch.interests !== undefined ? { interests: patch.interests } : {}),
           ...(patch.preferences !== undefined ? { preferences: patch.preferences } : {}),
           ...(patch.status !== undefined ? { status: patch.status } : {}),
@@ -414,8 +552,8 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
           id: crypto.randomUUID(),
           source: { type: 'place', placeId },
           startTime: '09:00',
-          durationMin: place.avgVisitMinutes ?? 0,
-          travelMin: 0,
+          durationMin: place.avgVisitMinutes,
+          travelMin: null,
           estimatedCost: place.ticketPrice,
           order: day.activities.length,
           ...(place.avgVisitMinutes === null ? { notes: 'Visit duration is not yet listed.' } : {}),

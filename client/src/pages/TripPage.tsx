@@ -1,12 +1,38 @@
-import { PagePlaceholder } from '../components/layout/PagePlaceholder';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router';
+import { usePageMeta } from '../hooks/usePageMeta';
+import { useTrip } from '../hooks/useTrip';
+import { TripContent } from '../components/trips/TripContent';
+import { TripSkeleton } from '../components/trips/TripSkeleton';
+import { TripStates } from '../components/trips/TripStates';
 
 export default function TripPage() {
-  return (
-    <PagePlaceholder
-      eyebrow="Itinerary"
-      title="Your trip, day by day."
-      description="A calm workspace for the places, activities, and bookings that make up your itinerary."
-      phase="Phase 6"
-    />
-  );
+  const { t } = useTranslation();
+  const { id = '' } = useParams<{ id: string }>();
+  const { trip, places, status, retry } = useTrip(id);
+
+  const metaTitle = trip
+    ? t('trip.meta.title', { title: trip.title })
+    : status === 'not-found'
+      ? t('trip.states.notFoundTitle')
+      : status === 'error'
+        ? t('trip.states.errorTitle')
+        : null;
+  const metaDescription = trip ? t('trip.meta.description', { title: trip.title }) : null;
+
+  usePageMeta(metaTitle, metaDescription);
+
+  if (status === 'loading') {
+    return <TripSkeleton />;
+  }
+
+  if (status === 'error') {
+    return <TripStates status="error" onRetry={retry} />;
+  }
+
+  if (status === 'not-found' || !trip) {
+    return <TripStates status="not-found" />;
+  }
+
+  return <TripContent trip={trip} places={places} />;
 }

@@ -51,12 +51,20 @@ const routes: RouteObject[] = [
           {
             path: 'plan',
             element: <TripCreatorPage />,
-            handle: { title: 'Plan a trip' },
+            handle: {
+              title: 'Plan a trip',
+              description:
+                'Shape a demo Cairo itinerary in six short steps, from dates and travelers to interests and preferences.',
+            },
           },
           {
             path: 'trip/:id',
             element: <TripPage />,
-            handle: { title: 'Your trip' },
+            handle: {
+              title: 'Your trip',
+              description:
+                'Review a read-only demo itinerary generated from the Cairo and Giza demo catalog. No live prices or bookings.',
+            },
           },
           {
             path: 'stay-transport',

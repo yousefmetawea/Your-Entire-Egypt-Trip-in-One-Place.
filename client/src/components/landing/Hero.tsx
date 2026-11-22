@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { AppLink } from '../../app/AppLink';
 import { staggerContainer, staggerItem } from '../../lib/motion';
+import { createPlanHref } from '../../lib/planner/prefill';
 import { ArchPattern } from '../common/ArchPattern';
 import { Badge } from '../ui/Badge';
 import { ButtonLink } from '../ui/Button';
@@ -17,6 +19,9 @@ const stats = [
 
 export function Hero() {
   const { t } = useTranslation();
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
+  const [travelers, setTravelers] = useState('');
 
   return (
     <section className="relative isolate -mt-24 flex min-h-[44rem] flex-col justify-between overflow-hidden bg-primary-container text-on-primary md:-mt-28 md:min-h-[50rem]">
@@ -62,7 +67,14 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
-          <HeroSearch />
+          <HeroSearch
+            from={from}
+            to={to}
+            travelers={travelers}
+            onFromChange={setFrom}
+            onToChange={setTo}
+            onTravelersChange={setTravelers}
+          />
         </motion.div>
 
         <motion.div
@@ -73,7 +85,7 @@ export function Hero() {
         >
           <ButtonLink
             as={AppLink}
-            href="/plan"
+            href={createPlanHref({ from, to, travelers })}
             variant="inverse"
             size="md"
             endIcon={<ArrowRightIcon className="rtl:rotate-180" />}

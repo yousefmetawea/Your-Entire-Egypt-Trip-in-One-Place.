@@ -12,6 +12,8 @@ export type TripId = string;
 
 export type TripStatus = 'draft' | 'upcoming' | 'active' | 'completed' | 'cancelled';
 
+export type BudgetTier = 'essential' | 'balanced' | 'signature';
+
 export type TripDayId = string;
 
 export type TripActivityId = string;
@@ -23,8 +25,8 @@ export interface TripActivity {
   id: TripActivityId;
   source: TripActivitySource;
   startTime: string;
-  durationMin: number;
-  travelMin: number;
+  durationMin: number | null;
+  travelMin: number | null;
   estimatedCost: PriceQuote | null;
   order: number;
   notes?: string;
@@ -49,6 +51,7 @@ export interface Trip {
   endDate: IsoDate;
   travelers: number;
   budget: Money | null;
+  budgetTier?: BudgetTier | null;
   interests: PlaceCategory[];
   preferences: TripPreferences;
   status: TripStatus;
