@@ -23,6 +23,7 @@ import type {
   Trip,
   TripActivity,
   TripActivitySource,
+  TripDay,
   TripDayId,
   TripId,
   TripPreferences,
@@ -88,6 +89,11 @@ export interface AddPlaceToDraftResult {
   createdTrip: boolean;
 }
 
+export interface SaveItineraryInput {
+  title?: string;
+  days: TripDay[];
+}
+
 export type CreateBookingRequestInput =
   | {
       kind: 'airport-transfer';
@@ -132,6 +138,7 @@ export interface TripService {
   addActivity(tripId: TripId, dayId: TripDayId, input: CreateTripActivityInput): Promise<Trip>;
   removeActivity(tripId: TripId, dayId: TripDayId, activityId: string): Promise<Trip>;
   reorderActivities(tripId: TripId, dayId: TripDayId, activityIds: string[]): Promise<Trip>;
+  saveItinerary(tripId: TripId, input: SaveItineraryInput): Promise<Trip>;
 }
 
 export interface BookingRequestService {
@@ -147,4 +154,5 @@ export interface Services {
   readyMadeTrips: ReadyMadeTripService;
   trips: TripService;
   bookingRequests: BookingRequestService;
+  resetLocalData(): Promise<void>;
 }

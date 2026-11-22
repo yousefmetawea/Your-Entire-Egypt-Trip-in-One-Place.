@@ -1,4 +1,4 @@
-import type { CurrencyCode, OpeningHours, PriceQuote, Weekday } from '../types';
+import type { CurrencyCode, Money, OpeningHours, PriceQuote, Weekday } from '../types';
 import { formatIsoDate } from './date';
 
 const WEEKDAYS: readonly Weekday[] = [
@@ -70,8 +70,12 @@ function getPriceFormatter(currency: CurrencyCode): Intl.NumberFormat {
   return formatter;
 }
 
+export function formatMoney(money: Money): string {
+  return getPriceFormatter(money.currency).format(money.amount);
+}
+
 export function formatPriceQuote(quote: PriceQuote): string {
-  return getPriceFormatter(quote.currency).format(quote.amount);
+  return formatMoney(quote);
 }
 
 export function formatUpdatedDate(value: string | null | undefined): string | null {

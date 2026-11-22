@@ -63,7 +63,7 @@ const routes: RouteObject[] = [
             handle: {
               title: 'Your trip',
               description:
-                'Review a read-only demo itinerary generated from the Cairo and Giza demo catalog. No live prices or bookings.',
+                'Edit a local demo itinerary generated from the Cairo and Giza demo catalog. Changes save in this browser; no live prices or bookings.',
             },
           },
           {

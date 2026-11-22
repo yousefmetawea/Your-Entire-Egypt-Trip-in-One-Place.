@@ -3,6 +3,7 @@ import type {
   IsoDate,
   Money,
   Place,
+  PriceQuote,
   Trip,
   TripActivity,
   TripDay,
@@ -34,6 +35,7 @@ import type {
   PlaceQuery,
   PlaceService,
   ReadyMadeTripService,
+  SaveItineraryInput,
   Services,
   TransportQuery,
   TransportService,
@@ -80,6 +82,28 @@ function assertTime(value: string, field: string): void {
   if (!TIME_PATTERN.test(value)) {
     throw new ServiceError('VALIDATION', `${field} must use HH:mm.`);
   }
+}
+
+function assertNullableTime(value: string | null, field: string): void {
+  if (value !== null) {
+    assertTime(value, field);
+  }
+}
+
+function assertPriceQuote(value: PriceQuote, field: string): void {
+  if (!Number.isFinite(value.amount) || value.amount < 0) {
+    throw new ServiceError('VALIDATION', `${field} must be zero or greater.`);
+  }
+
+  if (value.currency !== 'USD' && value.currency !== 'EGP') {
+    throw new ServiceError('VALIDATION', `${field} currency is invalid.`);
+  }
+
+  if (!value.isEstimated) {
+    throw new ServiceError('VALIDATION', `${field} must be marked as estimated.`);
+  }
+
+  assertDate(value.priceUpdatedAt, `${field} last updated date`);
 }
 
 function assertDate(value: string, field: string): void {
@@ -220,6 +244,105 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
     }
 
     return day;
+  }
+
+  function assertItineraryDays(days: TripDay[]): void {
+    if (!Array.isArray(days) || days.length === 0) {
+      throw new ServiceError('VALIDATION', 'An itinerary must contain at least one day.');
+    }
+
+    if (days.length > MAX_TRIP_DAYS) {
+      throw new ServiceError('VALIDATION', `Trips can cover at most ${MAX_TRIP_DAYS} days.`);
+    }
+
+    const firstDate = days[0]?.date;
+    const lastDate = days[days.length - 1]?.date;
+
+    if (!firstDate || !lastDate) {
+      throw new ServiceError('VALIDATION', 'Every day must have a date.');
+    }
+
+    assertDate(firstDate, 'Day date');
+    assertDate(lastDate, 'Day date');
+
+    let expectedDates: IsoDate[];
+
+    try {
+      expectedDates = enumerateDates(firstDate, lastDate);
+    } catch (error) {
+      if (error instanceof RangeError) {
+        throw new ServiceError('VALIDATION', error.message);
+      }
+
+      throw error;
+    }
+
+    if (
+      expectedDates.length !== days.length ||
+      days.some((day, index) => day.date !== expectedDates[index])
+    ) {
+      throw new ServiceError('VALIDATION', 'Itinerary days must be consecutive and in order.');
+    }
+
+    const dayIds = new Set<string>();
+    const activityIds = new Set<string>();
+
+    for (const day of days) {
+      assertNonEmpty(day.id, 'Day ID');
+
+      if (dayIds.has(day.id)) {
+        throw new ServiceError('VALIDATION', `Day ID "${day.id}" is duplicated.`);
+      }
+
+      dayIds.add(day.id);
+
+      if (!Array.isArray(day.activities)) {
+        throw new ServiceError('VALIDATION', 'Every day must contain an activity list.');
+      }
+
+      for (const activity of day.activities) {
+        assertNonEmpty(activity.id, 'Activity ID');
+
+        if (activityIds.has(activity.id)) {
+          throw new ServiceError('VALIDATION', `Activity ID "${activity.id}" is duplicated.`);
+        }
+
+        activityIds.add(activity.id);
+        assertNullableTime(activity.startTime, 'Start time');
+
+        if (activity.durationMin !== null) {
+          assertNonNegative(activity.durationMin, 'Duration');
+        }
+
+        if (activity.travelMin !== null) {
+          assertNonNegative(activity.travelMin, 'Travel time');
+        }
+
+        if (activity.estimatedCost !== null) {
+          assertPriceQuote(activity.estimatedCost, 'Estimated cost');
+        }
+
+        if (activity.notes !== undefined && typeof activity.notes !== 'string') {
+          throw new ServiceError('VALIDATION', 'Activity notes must be text.');
+        }
+
+        if (activity.source.type === 'place') {
+          try {
+            findPlaceById(activity.source.placeId);
+          } catch (error) {
+            if (error instanceof ServiceError) {
+              throw new ServiceError('VALIDATION', error.message);
+            }
+
+            throw error;
+          }
+        } else if (activity.source.type === 'custom') {
+          assertNonEmpty(activity.source.title, 'Activity title');
+        } else {
+          throw new ServiceError('VALIDATION', 'Activity source is invalid.');
+        }
+      }
+    }
   }
 
   function saveTrip(trip: Trip): Trip {
@@ -670,6 +793,52 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
         return saveTrip(trip);
       });
     },
+    saveItinerary(tripId: TripId, input: SaveItineraryInput) {
+      return run(() => {
+        const trip = findTrip(tripId);
+
+        if (trip.userId !== currentUserId) {
+          throw new ServiceError('NOT_FOUND', `Trip "${tripId}" was not found.`);
+        }
+
+        if (input.title !== undefined) {
+          assertNonEmpty(input.title, 'Title');
+        }
+
+        assertItineraryDays(input.days);
+
+        const days: TripDay[] = input.days.map((day) => ({
+          id: day.id,
+          date: day.date,
+          activities: day.activities.map((activity, index) => ({
+            id: activity.id,
+            source: activity.source,
+            startTime: activity.startTime,
+            durationMin: activity.durationMin,
+            travelMin: activity.travelMin,
+            estimatedCost: activity.estimatedCost,
+            order: index,
+            ...(activity.notes !== undefined ? { notes: activity.notes } : {}),
+          })),
+        }));
+        const firstDay = days[0];
+        const lastDay = days[days.length - 1];
+
+        if (!firstDay || !lastDay) {
+          throw new ServiceError('VALIDATION', 'An itinerary must contain at least one day.');
+        }
+
+        const updated: Trip = {
+          ...trip,
+          ...(input.title !== undefined ? { title: input.title.trim() } : {}),
+          startDate: firstDay.date,
+          endDate: lastDay.date,
+          days,
+        };
+
+        return saveTrip(updated);
+      });
+    },
   };
 
   const bookingRequests: BookingRequestService = {
@@ -745,5 +914,9 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
     readyMadeTrips,
     trips,
     bookingRequests,
+    async resetLocalData() {
+      await wait();
+      store.reset();
+    },
   };
 }

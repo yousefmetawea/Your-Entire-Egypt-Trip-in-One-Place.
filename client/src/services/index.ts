@@ -16,6 +16,7 @@ export type {
   PlaceQuery,
   PlaceService,
   ReadyMadeTripService,
+  SaveItineraryInput,
   Services,
   TransportQuery,
   TransportService,

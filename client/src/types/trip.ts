@@ -24,7 +24,7 @@ export type TripActivitySource =
 export interface TripActivity {
   id: TripActivityId;
   source: TripActivitySource;
-  startTime: string;
+  startTime: string | null;
   durationMin: number | null;
   travelMin: number | null;
   estimatedCost: PriceQuote | null;
