@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { PlaceCategory, TripPreferences } from '../../types';
+import type { PlaceCategory, PlannerAnswers, TripPreferences } from '../../types';
 import { createMockServices } from './createMockServices';
 import { MOCK_STORE_KEY } from './store';
 import type { MockStoreState } from './store';
@@ -142,8 +142,8 @@ describe('mock trip service', () => {
       expect(result.activity).toMatchObject({
         source: { type: 'place', placeId: place.id },
         startTime: '09:00',
-        durationMin: 0,
-        travelMin: 0,
+        durationMin: null,
+        travelMin: null,
         estimatedCost: null,
         order: 0,
         notes: 'Visit duration is not yet listed.',
@@ -295,6 +295,136 @@ describe('mock trip service', () => {
         code: 'NOT_FOUND',
       });
       await expect(services.trips.listMine()).resolves.toEqual([]);
+    });
+  });
+
+  describe('createPlannedTrip', () => {
+    const answers: PlannerAnswers = {
+      startDate: '2026-12-01',
+      endDate: '2026-12-03',
+      travelers: 2,
+      budgetTier: 'balanced',
+      interests: ['history'],
+      accommodationType: 'any',
+      transportType: 'any',
+    };
+
+    it('creates a generated draft with days and persists it', async () => {
+      const storage = createMemoryStorage();
+      const services = createServices(storage);
+      const result = await services.trips.createPlannedTrip({ answers });
+
+      expect(result.createdTrip).toBe(true);
+      expect(result.replacedTrip).toBe(false);
+      expect(result.trip).toMatchObject({
+        title: 'My Cairo trip',
+        startDate: '2026-12-01',
+        endDate: '2026-12-03',
+        travelers: 2,
+        budget: null,
+        budgetTier: 'balanced',
+        status: 'draft',
+        isDemo: true,
+      });
+      expect(result.trip.days).toHaveLength(3);
+      expect(result.trip.days.flatMap((day) => day.activities).length).toBeGreaterThan(0);
+      expect(result.trip.days[0]?.id).toBe('day-2026-12-01');
+
+      const reloaded = await createServices(storage).trips.listMine();
+      expect(reloaded).toHaveLength(1);
+      expect(reloaded[0]?.days).toHaveLength(3);
+      expect(reloaded[0]?.budgetTier).toBe('balanced');
+    });
+
+    it('replaces an existing draft in place and preserves its title', async () => {
+      const services = createServices();
+      const existing = await services.trips.create({
+        title: 'Existing plan',
+        startDate: '2026-12-01',
+        endDate: '2026-12-02',
+        travelers: 1,
+      });
+      const result = await services.trips.createPlannedTrip({
+        answers: { ...answers, startDate: '2026-12-01', endDate: '2026-12-02' },
+        replaceTripId: existing.id,
+      });
+
+      expect(result.createdTrip).toBe(false);
+      expect(result.replacedTrip).toBe(true);
+      expect(result.trip.id).toBe(existing.id);
+      expect(result.trip.title).toBe('Existing plan');
+
+      const trips = await services.trips.listMine();
+      expect(trips).toHaveLength(1);
+      expect(trips[0]?.id).toBe(existing.id);
+    });
+
+    it('includes saved draft places when requested and excludes them otherwise', async () => {
+      const services = createServices();
+      const pyramids = await services.places.getBySlug('pyramids-of-giza');
+      await services.trips.addPlaceToDraft(pyramids.id);
+      const cultureAnswers: PlannerAnswers = {
+        ...answers,
+        interests: ['culture'],
+      };
+
+      const included = await services.trips.createPlannedTrip({
+        answers: cultureAnswers,
+        includeSavedPlaces: true,
+      });
+      expect(included.matchedPlaceIds).toContain(pyramids.id);
+      expect(included.trip.savedPlaceIds).toContain(pyramids.id);
+
+      const excluded = await services.trips.createPlannedTrip({
+        answers: cultureAnswers,
+        includeSavedPlaces: false,
+      });
+      expect(excluded.matchedPlaceIds).not.toContain(pyramids.id);
+      expect(excluded.trip.savedPlaceIds).toEqual([]);
+    });
+
+    it('rejects generation when no places match and leaves data unchanged', async () => {
+      const services = createServices();
+
+      await expect(
+        services.trips.createPlannedTrip({
+          answers: { ...answers, interests: ['food'] },
+        }),
+      ).rejects.toMatchObject({ code: 'VALIDATION' });
+      await expect(services.trips.listMine()).resolves.toEqual([]);
+    });
+
+    it('validates traveler and trip-length limits', async () => {
+      const services = createServices();
+
+      await expect(
+        services.trips.createPlannedTrip({
+          answers: { ...answers, travelers: 13 },
+        }),
+      ).rejects.toMatchObject({ code: 'VALIDATION' });
+
+      await expect(
+        services.trips.createPlannedTrip({
+          answers: {
+            ...answers,
+            startDate: '2026-12-01',
+            endDate: '2026-12-15',
+          },
+        }),
+      ).rejects.toMatchObject({ code: 'VALIDATION' });
+    });
+
+    it('regenerates the single draft without creating duplicates', async () => {
+      const services = createServices();
+      const first = await services.trips.createPlannedTrip({ answers });
+      const second = await services.trips.createPlannedTrip({ answers });
+
+      expect(second.trip.id).toBe(first.trip.id);
+      expect(second.createdTrip).toBe(false);
+      expect(second.replacedTrip).toBe(true);
+
+      const trips = await services.trips.listMine();
+      expect(trips).toHaveLength(1);
     });
   });
 });

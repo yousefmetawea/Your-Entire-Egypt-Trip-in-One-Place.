@@ -9,6 +9,8 @@ export type {
   AddPlaceToDraftResult,
   BookingRequestService,
   CreateBookingRequestInput,
+  CreatePlannedTripInput,
+  CreatePlannedTripResult,
   CreateTripActivityInput,
   CreateTripInput,
   PlaceQuery,

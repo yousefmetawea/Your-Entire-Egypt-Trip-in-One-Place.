@@ -12,14 +12,27 @@ const fieldClasses =
 const segmentClasses =
   'flex min-w-0 items-center gap-space-sm rounded-xl px-space-md py-space-sm transition-colors hover:bg-surface-container-low/60 focus-within:bg-surface-container-low/60';
 
-export function HeroSearch() {
+export interface HeroSearchProps {
+  from: string;
+  to: string;
+  travelers: string;
+  onFromChange: (value: string) => void;
+  onToChange: (value: string) => void;
+  onTravelersChange: (value: string) => void;
+}
+
+export function HeroSearch({
+  from,
+  to,
+  travelers,
+  onFromChange,
+  onToChange,
+  onTravelersChange,
+}: HeroSearchProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const fieldId = useId();
   const [query, setQuery] = useState('');
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-  const [travelers, setTravelers] = useState('');
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
@@ -75,7 +88,7 @@ export function HeroSearch() {
                 type="date"
                 aria-label={t('home.hero.search.fromLabel')}
                 value={from}
-                onChange={(event) => setFrom(event.target.value)}
+                onChange={(event) => onFromChange(event.target.value)}
                 className={fieldClasses}
               />
               <span className="hidden text-on-surface-variant sm:inline" aria-hidden="true">
@@ -86,7 +99,7 @@ export function HeroSearch() {
                 aria-label={t('home.hero.search.toLabel')}
                 value={to}
                 min={from || undefined}
-                onChange={(event) => setTo(event.target.value)}
+                onChange={(event) => onToChange(event.target.value)}
                 className={fieldClasses}
               />
             </div>
@@ -114,7 +127,7 @@ export function HeroSearch() {
               step={1}
               inputMode="numeric"
               value={travelers}
-              onChange={(event) => setTravelers(event.target.value)}
+              onChange={(event) => onTravelersChange(event.target.value)}
               placeholder={t('home.hero.search.travelersPlaceholder')}
               className={fieldClasses}
             />
