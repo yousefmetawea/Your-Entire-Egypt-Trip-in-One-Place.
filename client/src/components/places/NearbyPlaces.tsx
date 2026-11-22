@@ -2,6 +2,7 @@ import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Place } from '../../types';
 import { useNearbyPlaces } from '../../hooks/useNearbyPlaces';
+import { formatStraightLineDistance } from '../../lib/map/distance';
 import { EmptyState } from '../common/EmptyState';
 import { PlaceCard, PlaceCardSkeleton } from './PlaceCard';
 import { PlaceSectionHeading } from './PlaceSectionHeading';
@@ -15,12 +16,7 @@ export interface NearbyPlacesProps {
 export function NearbyPlaces({ place }: NearbyPlacesProps) {
   const { t } = useTranslation();
   const headingId = useId();
-  const { places, status, retry } = useNearbyPlaces(place);
-  const hasNearbyIds = place.nearbyPlaceIds.length > 0;
-
-  if (!hasNearbyIds) {
-    return null;
-  }
+  const { placesWithDistance, status, retry } = useNearbyPlaces(place);
 
   return (
     <section aria-labelledby={headingId}>
@@ -55,17 +51,32 @@ export function NearbyPlaces({ place }: NearbyPlacesProps) {
               </Button>
             }
           />
-        ) : places.length === 0 ? (
+        ) : placesWithDistance.length === 0 ? (
           <EmptyState
             title={t('placeDetails.nearby.emptyTitle')}
             description={t('placeDetails.nearby.emptyDescription')}
             icon={<InfoIcon />}
           />
         ) : (
-          <div className="grid grid-cols-1 gap-gutter-lg sm:grid-cols-2 xl:grid-cols-3">
-            {places.map((nearby) => (
-              <PlaceCard key={nearby.id} place={nearby} />
-            ))}
+          <div className="flex flex-col gap-space-md">
+            <p className="type-small text-on-surface-variant">
+              {t(
+                'map.nearbyRadiusNotice',
+                'Showing places within ~1 km (straight-line) of this visitor entrance.',
+              )}
+            </p>
+            <div className="grid grid-cols-1 gap-gutter-lg sm:grid-cols-2 xl:grid-cols-3">
+              {placesWithDistance.map(({ place: nearby, distanceKm }) => (
+                <div key={nearby.id} className="flex flex-col gap-1">
+                  <span className="type-label-sm text-secondary font-medium">
+                    {t('map.straightLineFromStop', '{{dist}} straight-line', {
+                      dist: formatStraightLineDistance(distanceKm),
+                    })}
+                  </span>
+                  <PlaceCard place={nearby} />
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>

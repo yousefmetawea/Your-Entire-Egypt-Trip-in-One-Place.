@@ -1,0 +1,179 @@
+/* Leaflet core CSS import */
+@import 'leaflet/dist/leaflet.css';
+
+:root {
+  /* Luxury filter variables for tile layer: can be tuned or disabled in one place */
+  --map-tile-filter: brightness(0.97) contrast(1.05) saturate(0.85) sepia(0.08);
+}
+
+/* Luxury tile layer treatment */
+.luxury-tile-layer {
+  filter: var(--map-tile-filter);
+  transition: filter 0.3s ease;
+}
+
+/* Custom Marker Styling */
+.luxury-marker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+}
+
+.luxury-marker-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background-color: var(--color-surface-container-lowest);
+  border: 2px solid var(--color-secondary);
+  box-shadow: 0 4px 12px rgba(6, 6, 7, 0.15);
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.luxury-marker-pin:hover,
+.luxury-marker-container.is-hovered .luxury-marker-pin {
+  transform: scale(1.12);
+  border-color: var(--color-primary);
+  box-shadow: 0 6px 16px rgba(119, 89, 40, 0.3);
+}
+
+.luxury-marker-container.is-selected .luxury-marker-pin {
+  transform: scale(1.2);
+  background-color: var(--color-secondary);
+  border-color: var(--color-surface-container-lowest);
+  box-shadow: 0 6px 20px rgba(119, 89, 40, 0.45);
+}
+
+.luxury-marker-order {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.luxury-marker-container.is-selected .luxury-marker-order {
+  color: var(--color-on-secondary);
+}
+
+.luxury-marker-category {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-surface-container-lowest);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.luxury-marker-label {
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background-color: rgba(253, 249, 242, 0.95);
+  border: 1px solid var(--color-hairline);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  white-space: nowrap;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+}
+
+/* Destination Single Marker (bronze star/pin) */
+.luxury-destination-marker {
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  background-color: var(--color-secondary);
+  border: 3px solid var(--color-surface-container-lowest);
+  box-shadow: 0 6px 18px rgba(119, 89, 40, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-on-secondary);
+}
+
+/* Custom Leaflet Controls, Popups & Attribution */
+.leaflet-container {
+  font-family: var(--font-sans) !important;
+  background-color: var(--color-surface-container-low) !important;
+  direction: ltr !important; /* Note: Leaflet internal coordinate canvas requires LTR */
+}
+
+/* Zoom controls */
+.leaflet-bar {
+  border: 1px solid var(--color-hairline) !important;
+  box-shadow: 0 4px 14px rgba(6, 6, 7, 0.1) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.leaflet-bar a {
+  background-color: var(--color-surface-container-lowest) !important;
+  color: var(--color-primary) !important;
+  border-bottom: 1px solid var(--color-hairline) !important;
+  transition: background-color 0.15s ease;
+}
+
+.leaflet-bar a:hover {
+  background-color: var(--color-surface-container) !important;
+  color: var(--color-secondary) !important;
+}
+
+/* Popups */
+.leaflet-popup-content-wrapper {
+  background-color: var(--color-surface-container-lowest) !important;
+  color: var(--color-on-surface) !important;
+  border-radius: 14px !important;
+  border: 1px solid var(--color-hairline-strong) !important;
+  box-shadow: 0 8px 24px rgba(6, 6, 7, 0.12) !important;
+  padding: 4px !important;
+}
+
+.leaflet-popup-tip {
+  background-color: var(--color-surface-container-lowest) !important;
+  border: 1px solid var(--color-hairline-strong) !important;
+}
+
+.leaflet-popup-content {
+  margin: 10px 14px !important;
+  font-family: var(--font-sans) !important;
+  line-height: 1.4 !important;
+}
+
+/* Attribution styling: clean, legible, tokens */
+.leaflet-control-attribution {
+  background: rgba(253, 249, 242, 0.85) !important;
+  color: var(--color-on-surface-variant) !important;
+  font-size: 10px !important;
+  font-family: var(--font-sans) !important;
+  padding: 2px 8px !important;
+  border-top-left-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+
+.leaflet-control-attribution a {
+  color: var(--color-secondary) !important;
+  text-decoration: underline;
+}

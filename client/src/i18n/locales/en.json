@@ -722,6 +722,28 @@
   "common": {
     "loading": "Loading...",
     "demo": "Demo",
-    "close": "Close"
+    "close": "Close",
+    "retry": "Retry"
+  },
+  "map": {
+    "tileErrorTitle": "Map tiles unavailable",
+    "tileErrorDesc": "We could not load the map tiles. You can retry loading or continue viewing the schedule.",
+    "stopsCount_one": "{{count}} mapped stop",
+    "stopsCount_other": "{{count}} mapped stops",
+    "unmappedNotice": "{{count}} without map location",
+    "unmappedHint": "Activities without coordinates",
+    "activateMobile": "Tap to explore interactive map",
+    "touchScrollHint": "Scroll past or tap to interact",
+    "stopNumber": "Stop {{order}}",
+    "startsAt": "Starts at {{time}}",
+    "duration": "~{{count}} min",
+    "viewPlaceDetails": "View place details →",
+    "noMappedStopsTitle": "No mapped stops for Day {{day}}",
+    "allUnmappedDesc": "Activities scheduled on this day do not have verified geographic coordinates.",
+    "straightLineDisclaimer": "Dashed connectors show itinerary order only. Distance and transit times are straight-line estimates or omitted.",
+    "noCoordinates": "No map location",
+    "entranceLocation": "Verified visitor entrance",
+    "nearbyRadiusNotice": "Showing places within ~1 km (straight-line) of this visitor entrance.",
+    "straightLineFromStop": "{{dist}} straight-line"
   }
 }
