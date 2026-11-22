@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { useTrip } from '../hooks/useTrip';
-import { TripContent } from '../components/trips/TripContent';
+import { ItineraryBuilder } from '../components/trip-builder/ItineraryBuilder';
 import { TripSkeleton } from '../components/trips/TripSkeleton';
 import { TripStates } from '../components/trips/TripStates';
 
@@ -34,5 +34,5 @@ export default function TripPage() {
     return <TripStates status="not-found" />;
   }
 
-  return <TripContent trip={trip} places={places} />;
+  return <ItineraryBuilder key={trip.id} trip={trip} places={places} />;
 }

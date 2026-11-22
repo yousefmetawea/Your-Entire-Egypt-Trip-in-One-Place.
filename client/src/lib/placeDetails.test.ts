@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { OpeningHours, Weekday } from '../types';
 import {
+  formatMoney,
   formatPriceQuote,
   formatTime,
   formatUpdatedDate,
@@ -47,6 +48,7 @@ describe('place details helpers', () => {
         priceUpdatedAt: '2026-11-01',
       }),
     ).toMatch(/^EGP\s1,250$/);
+    expect(formatMoney({ amount: 1250, currency: 'EGP' })).toMatch(/^EGP\s1,250$/);
   });
 
   it('formats valid update dates and ignores invalid values', () => {

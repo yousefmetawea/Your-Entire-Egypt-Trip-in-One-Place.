@@ -284,3 +284,99 @@ export function RouteIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function GripIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <circle cx="7.5" cy="5" r="1" fill="currentColor" />
+      <circle cx="12.5" cy="5" r="1" fill="currentColor" />
+      <circle cx="7.5" cy="10" r="1" fill="currentColor" />
+      <circle cx="12.5" cy="10" r="1" fill="currentColor" />
+      <circle cx="7.5" cy="15" r="1" fill="currentColor" />
+      <circle cx="12.5" cy="15" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function TrashIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M4.25 5.75h11.5M8 3.5h4M6 5.75l.6 10.1a1.5 1.5 0 0 0 1.5 1.4h3.8a1.5 1.5 0 0 0 1.5-1.4l.6-10.1M8.25 8.5v5.5M11.75 8.5v5.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function PencilIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="m4 13.5-.75 3.25L6.5 16l8.75-8.75a2.12 2.12 0 0 0-3-3L4 13.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="m10.75 5.75 3 3" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+export function UndoIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M7.5 6.25 3.75 10l3.75 3.75"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.25 10h7a4 4 0 0 1 4 4v.75"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function RedoIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="m12.5 6.25 3.75 3.75-3.75 3.75"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.75 10h-7a4 4 0 0 0-4 4v.75"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function AlertTriangleIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M8.6 3.6 2.5 15a1.2 1.2 0 0 0 1.05 1.75h12.9A1.2 1.2 0 0 0 17.5 15L11.4 3.6a1.63 1.63 0 0 0-2.8 0Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path d="M10 7v4M10 13.6v.4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}

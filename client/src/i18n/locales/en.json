@@ -450,7 +450,7 @@
   "trip": {
     "meta": {
       "title": "{{title}} · Demo itinerary",
-      "description": "A read-only demo itinerary for {{title}}, generated from the Cairo and Giza demo catalog. No live prices, availability, or bookings."
+      "description": "Edit a local demo itinerary for {{title}}, built from the Cairo and Giza demo catalog. Changes save in this browser; no live prices, availability, or bookings."
     },
     "eyebrow": "Your itinerary",
     "demoBadge": "Demo itinerary",
@@ -484,6 +484,160 @@
       "lastUpdated": "Last updated {{date}}",
       "lastUpdatedMissing": "Last updated date not provided",
       "priceMissing": "Price information is not available yet."
+    },
+    "builder": {
+      "eyebrow": "Build your itinerary",
+      "demoNote": "This is a local demo draft. Changes save in this browser. Prices, travel times, availability, and bookings are not live.",
+      "editTitle": "Edit title",
+      "titleDialog": {
+        "title": "Rename this itinerary",
+        "description": "Update the demo draft title. This does not change the itinerary itself.",
+        "label": "Itinerary title",
+        "required": "Enter an itinerary title.",
+        "tooLong": "Use 120 characters or fewer.",
+        "save": "Save title"
+      },
+      "save": {
+        "saved": "Saved locally",
+        "saving": "Saving…",
+        "error": "Changes could not be saved.",
+        "retry": "Retry"
+      },
+      "undo": "Undo",
+      "redo": "Redo",
+      "cancel": "Cancel",
+      "done": "Done",
+      "dayStatus": "Showing Day {{day}}, {{date}}.",
+      "dayTabs": {
+        "label": "Itinerary days",
+        "day": "Day {{number}}",
+        "activityCount_one": "{{count}} activity",
+        "activityCount_other": "{{count}} activities",
+        "addDay": "Add day",
+        "removeLastDay": "Remove last day",
+        "dragHint": "Drag activities to reorder them, or drop one on a day tab to move it. You can also change its day in the edit form.",
+        "dropHint": "Drop on a day tab to move this activity there.",
+        "dayLimit": "This demo itinerary is limited to 14 days."
+      },
+      "dayPanel": {
+        "description": "Reorder stops, adjust times, or add a catalog place or custom activity.",
+        "addActivity": "Add activity",
+        "addAnother": "Add another activity",
+        "emptyTitle": "No activities yet",
+        "emptyDescription": "Add a catalog place or a custom activity to this day.",
+        "scheduleTitle": "Schedule needs attention",
+        "missingStart_one": "{{count}} activity has no start time.",
+        "missingStart_other": "{{count}} activities have no start time.",
+        "orderIssue": "Stored start times are not in itinerary order.",
+        "overlap": "Some stored times and visit lengths appear to overlap."
+      },
+      "activities": {
+        "untitled": "Untitled activity",
+        "drag": "Reorder {{title}}",
+        "edit": "Edit {{title}}",
+        "remove": "Remove {{title}}"
+      },
+      "fields": {
+        "activityTitle": "Activity title",
+        "activityTitlePlaceholder": "e.g. Slow breakfast in Zamalek",
+        "startTime": "Start time",
+        "startTimeHint": "Optional. Leave blank if the time is not set.",
+        "duration": "Visit duration (minutes)",
+        "durationHint": "Optional. Enter 1–1,440 minutes.",
+        "cost": "Estimated cost per traveler",
+        "costHint": "Optional. Enter 0 for a free activity.",
+        "currency": "Currency",
+        "day": "Day",
+        "moveHint": "Choosing another day appends this activity to the end of that day.",
+        "notes": "Notes",
+        "notesPlaceholder": "Optional notes for this demo itinerary",
+        "customPriceNote": "Stored as your own estimate and dated today. This is not a live price.",
+        "placePriceLabel": "Estimated price",
+        "placePriceNote": "Catalog prices are read-only here. Only stored demo data is shown.",
+        "priceMissing": "Estimated price is not listed."
+      },
+      "editForm": {
+        "save": "Save changes",
+        "dayOption": "Day {{number}} · {{date}}"
+      },
+      "errors": {
+        "titleRequired": "Enter an activity title.",
+        "timeInvalid": "Use a valid time such as 09:00.",
+        "durationInvalid": "Enter a whole number from 1 to 1,440.",
+        "costInvalid": "Enter zero or a positive amount."
+      },
+      "addDialog": {
+        "title": "Add to Day {{day}}",
+        "description": "Choose a catalog place or add your own activity for {{date}}.",
+        "modeLabel": "Activity source",
+        "catalogTab": "From the catalog",
+        "customTab": "Custom activity",
+        "searchLabel": "Search places",
+        "searchPlaceholder": "Search by place or area",
+        "categoryLabel": "Category",
+        "allCategories": "All categories",
+        "add": "Add",
+        "added": "Already in trip",
+        "alreadyInTrip": "This place is already in your itinerary.",
+        "noResults": "No places match",
+        "noResultsDescription": "Try a different search or category.",
+        "addCustom": "Add custom activity"
+      },
+      "map": {
+        "eyebrow": "Order preview",
+        "title": "Day {{day}} route",
+        "badge": "Phase 7",
+        "orderLabel": "Activity order only",
+        "empty": "Add activities to preview their order.",
+        "more_one": "{{count}} more activity is not shown.",
+        "more_other": "{{count}} more activities are not shown.",
+        "description": "A geographic map is planned for Phase 7. No map provider is selected, so locations and distances are not available.",
+        "orderNote": "Numbers show itinerary order only. They do not represent geography, routes, travel times, or stops on a map."
+      },
+      "summary": {
+        "eyebrow": "At a glance",
+        "title": "Trip summary",
+        "customLabel": "Custom activities",
+        "customCount_one": "{{count}} custom",
+        "customCount_other": "{{count}} custom",
+        "costTitle": "Estimated activity costs",
+        "groupLabel_one": "Total for {{count}} traveler",
+        "groupLabel_other": "Total for {{count}} travelers",
+        "perTraveler": "{{amount}} per traveler",
+        "noCosts": "No estimated activity costs have been added yet.",
+        "unpriced_one": "{{count}} activity has no estimated price.",
+        "unpriced_other": "{{count}} activities have no estimated price.",
+        "costNote": "Costs are grouped by currency and are not converted. These are stored demo estimates, not live prices.",
+        "budgetTitle": "Budget check",
+        "budgetPreference": "Budget preference: {{tier}}.",
+        "budgetPreferenceMissing": "No budget preference has been set.",
+        "budgetProgressLabel": "Share of the entered budget used by estimated activity costs",
+        "budgetUsed": "{{percent}}% of your {{amount}} budget, based on estimated activity costs.",
+        "budgetNear": "You are close to the budget you entered.",
+        "budgetOver": "Estimated activity costs are at or above the budget you entered.",
+        "budgetCurrencyMismatch": "No activity costs are recorded in {{currency}}.",
+        "missingTitle": "Some details are missing",
+        "missingDurations_one": "{{count}} activity has no visit length.",
+        "missingDurations_other": "{{count}} activities have no visit length.",
+        "missingStarts_one": "{{count}} activity has no start time.",
+        "missingStarts_other": "{{count}} activities have no start time.",
+        "missingPrices_one": "{{count}} activity has no estimated price.",
+        "missingPrices_other": "{{count}} activities have no estimated price.",
+        "stayTransport": "Stay and transport are not added to this demo itinerary yet.",
+        "demoNote": "Changes save locally in this browser. No live prices, availability, or bookings."
+      },
+      "removeActivity": {
+        "title": "Remove this activity?",
+        "description": "“{{title}}” will be removed from Day {{day}}. You can undo this change.",
+        "action": "Remove activity"
+      },
+      "removeLastDay": {
+        "title": "Remove the last day?",
+        "description": "Day {{day}} has no activities and will be removed. You can undo this change.",
+        "descriptionWithActivities_one": "Day {{day}} has {{count}} activity. Removing the day will remove it too. You can undo this change.",
+        "descriptionWithActivities_other": "Day {{day}} has {{count}} activities. Removing the day will remove them too. You can undo this change.",
+        "action": "Remove last day"
+      }
     },
     "summary": {
       "eyebrow": "At a glance",
