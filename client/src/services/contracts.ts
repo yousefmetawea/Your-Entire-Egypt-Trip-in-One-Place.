@@ -39,6 +39,8 @@ export interface PlaceQuery {
 
 export interface AccommodationQuery {
   type?: AccommodationType;
+  area?: CairoArea;
+  amenity?: string;
 }
 
 export interface TransportQuery {
@@ -145,6 +147,8 @@ export interface BookingRequestService {
   create(input: CreateBookingRequestInput): Promise<BookingRequest>;
   listMine(): Promise<BookingRequest[]>;
   getById(id: BookingRequestId): Promise<BookingRequest>;
+  cancel(id: BookingRequestId): Promise<BookingRequest>;
+  simulateConfirm(id: BookingRequestId): Promise<BookingRequest>;
 }
 
 export interface Services {

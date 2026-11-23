@@ -56,11 +56,15 @@ describe('mock place service', () => {
     await expect(services.places.getNearby(place.id)).resolves.toEqual([]);
   });
 
-  it('returns empty typed collections for unseeded catalogs', async () => {
+  it('returns seeded catalogs for accommodation and transport, and empty collection for readyMadeTrips', async () => {
     const services = createServices();
 
-    await expect(services.accommodation.list()).resolves.toEqual([]);
-    await expect(services.transport.list()).resolves.toEqual([]);
+    const accommodations = await services.accommodation.list();
+    expect(accommodations.length).toBeGreaterThan(0);
+
+    const transport = await services.transport.list();
+    expect(transport.length).toBeGreaterThan(0);
+
     await expect(services.readyMadeTrips.list()).resolves.toEqual([]);
   });
 });

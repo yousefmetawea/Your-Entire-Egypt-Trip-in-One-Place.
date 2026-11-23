@@ -26,6 +26,54 @@ export interface ItinerarySummary {
   dayIdsWithScheduleIssues: string[];
 }
 
+export interface StaySummary {
+  accommodationId: string;
+  name: string;
+  nights: number | null;
+  nightlyMin: number | null;
+  nightlyMax: number | null;
+  currency: CurrencyCode | null;
+  estimatedTotalMin: number | null;
+  isUnpriced: boolean;
+}
+
+export interface TransportRequestsSummary {
+  totalRequests: number;
+  pendingCount: number;
+  confirmedCount: number;
+  cancelledCount: number;
+}
+
+export function computeStaySummary(
+  trip: Trip,
+  accommodationName: string | null,
+  priceRange: { min: number; max: number; currency: CurrencyCode } | null,
+): StaySummary | null {
+  if (!trip.accommodationId || !accommodationName) {
+    return null;
+  }
+
+  // Calculate nights from trip days
+  const nights = trip.days.length > 1 ? trip.days.length - 1 : trip.days.length === 1 ? 1 : null;
+  const isUnpriced = !priceRange;
+
+  const estimatedTotalMin =
+    !isUnpriced && nights !== null && typeof priceRange.min === 'number'
+      ? roundMoney(priceRange.min * nights)
+      : null;
+
+  return {
+    accommodationId: trip.accommodationId,
+    name: accommodationName,
+    nights,
+    nightlyMin: priceRange?.min ?? null,
+    nightlyMax: priceRange?.max ?? null,
+    currency: priceRange?.currency ?? null,
+    estimatedTotalMin,
+    isUnpriced,
+  };
+}
+
 export type BudgetLevel = 'under' | 'near' | 'over';
 
 export interface BudgetStatus {

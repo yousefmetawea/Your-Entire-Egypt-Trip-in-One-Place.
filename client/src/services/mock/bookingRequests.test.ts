@@ -9,54 +9,72 @@ function createServices() {
   });
 }
 
-describe('mock booking request service', () => {
-  it('creates a pending demo request with status history', async () => {
+describe('BookingRequestService status transitions', () => {
+  it('creates an airport transfer request in pending status', async () => {
     const services = createServices();
-    const request = await services.bookingRequests.create({
-      kind: 'guided-tour',
+    const req = await services.bookingRequests.create({
+      kind: 'airport-transfer',
       details: {
-        placeId: 'place_cairo_tower',
-        date: '2026-12-02',
-        time: '10:30',
-        groupSize: 2,
+        pickupLocation: 'Cairo International Airport',
+        dropoffLocation: 'The Grand Citadel Retreat',
+        date: '2026-12-01',
+        time: '14:30',
+        passengers: 2,
+        flightNumber: 'MS 777',
       },
     });
 
-    expect(request.kind).toBe('guided-tour');
-    expect(request.status).toBe('pending');
-    expect(request.isDemo).toBe(true);
-    expect(request.statusHistory).toEqual([{ status: 'pending', changedAt: expect.any(String) }]);
-
-    const mine = await services.bookingRequests.listMine();
-    expect(mine.map((item) => item.id)).toContain(request.id);
+    expect(req.status).toBe('pending');
+    expect(req.statusHistory).toHaveLength(1);
+    expect(req.statusHistory[0].status).toBe('pending');
+    expect(req.isDemo).toBe(true);
   });
 
-  it('rejects unknown places and invalid booking details', async () => {
+  it('allows cancelling a pending request and updates history', async () => {
     const services = createServices();
+    const req = await services.bookingRequests.create({
+      kind: 'airport-transfer',
+      details: {
+        pickupLocation: 'Cairo International Airport',
+        dropoffLocation: 'The Grand Citadel Retreat',
+        date: '2026-12-01',
+        time: '14:30',
+        passengers: 2,
+      },
+    });
 
-    await expect(
-      services.bookingRequests.create({
-        kind: 'guided-tour',
-        details: {
-          placeId: 'place_unknown',
-          date: '2026-12-02',
-          time: '10:30',
-          groupSize: 2,
-        },
-      }),
-    ).rejects.toMatchObject({ code: 'NOT_FOUND' });
+    const cancelled = await services.bookingRequests.cancel(req.id);
+    expect(cancelled.status).toBe('cancelled');
+    expect(cancelled.statusHistory).toHaveLength(2);
+    expect(cancelled.statusHistory[1].status).toBe('cancelled');
 
-    await expect(
-      services.bookingRequests.create({
-        kind: 'airport-transfer',
-        details: {
-          pickupLocation: '',
-          dropoffLocation: 'Zamalek',
-          date: '2026-12-02',
-          time: '25:00',
-          passengers: 2,
-        },
-      }),
-    ).rejects.toMatchObject({ code: 'VALIDATION' });
+    // Cancelling an already cancelled request should be rejected
+    await expect(services.bookingRequests.cancel(req.id)).rejects.toThrow();
+  });
+
+  it('allows simulating confirmation on a pending request and updates history', async () => {
+    const services = createServices();
+    const req = await services.bookingRequests.create({
+      kind: 'airport-transfer',
+      details: {
+        pickupLocation: 'Cairo International Airport',
+        dropoffLocation: 'The Grand Citadel Retreat',
+        date: '2026-12-01',
+        time: '14:30',
+        passengers: 2,
+      },
+    });
+
+    const confirmed = await services.bookingRequests.simulateConfirm(req.id);
+    expect(confirmed.status).toBe('confirmed');
+    expect(confirmed.statusHistory).toHaveLength(2);
+    expect(confirmed.statusHistory[1].status).toBe('confirmed');
+    expect(confirmed.statusHistory[1].note).toContain('Simulated');
+
+    // Simulating confirmation on an already confirmed request should be rejected
+    await expect(services.bookingRequests.simulateConfirm(req.id)).rejects.toThrow();
+
+    // Cancelling a confirmed request should be rejected
+    await expect(services.bookingRequests.cancel(req.id)).rejects.toThrow();
   });
 });

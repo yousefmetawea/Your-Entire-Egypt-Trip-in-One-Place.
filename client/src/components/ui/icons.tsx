@@ -14,6 +14,20 @@ export function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function ChevronUpIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="m5 12.5 5-5 5 5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function ChevronLeftIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
@@ -377,6 +391,34 @@ export function AlertTriangleIcon(props: SVGProps<SVGSVGElement>) {
         strokeLinejoin="round"
       />
       <path d="M10 7v4M10 13.6v.4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function BedIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M2.5 4.5v11M2.5 11.5h15v4M6 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 11.5V7a2.5 2.5 0 0 1 2.5-2.5h4.5a2.5 2.5 0 0 1 2.5 2.5v4.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function CarIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M4 14.5v1.5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.5M13 14.5v1.5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.5M3 10.5l1.5-5A1.5 1.5 0 0 1 5.9 4.3h8.2a1.5 1.5 0 0 1 1.4 1.2l1.5 5M2.5 10.5h15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1ZM5.5 12.5h.01M14.5 12.5h.01"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
