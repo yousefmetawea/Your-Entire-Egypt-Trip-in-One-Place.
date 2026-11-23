@@ -10,12 +10,12 @@ function createServices() {
 }
 
 describe('mock place service', () => {
-  it('returns the 12 approved demo places without invented details', async () => {
+  it('returns the approved demo places without invented details', async () => {
     const services = createServices();
     const places = await services.places.list();
 
-    expect(places).toHaveLength(12);
-    expect(places.map((place) => place.name.en)).toEqual([
+    expect(places).toHaveLength(26);
+    expect(places.slice(0, 12).map((place) => place.name.en)).toEqual([
       'Pyramids of Giza & Great Sphinx',
       'Grand Egyptian Museum',
       'Egyptian Museum',
@@ -30,17 +30,16 @@ describe('mock place service', () => {
       'Nilometer',
     ]);
     expect(places.every((place) => place.isDemo)).toBe(true);
-    expect(places.every((place) => place.images.length === 0)).toBe(true);
+    expect(places.every((place) => place.images.length > 0)).toBe(true);
     expect(places.every((place) => place.placeholders.includes('history'))).toBe(true);
-    expect(places.every((place) => place.placeholders.includes('images'))).toBe(true);
   });
 
   it('filters places by area, category, and search text', async () => {
     const services = createServices();
 
     await expect(services.places.list({ area: 'zamalek' })).resolves.toHaveLength(2);
-    await expect(services.places.list({ category: 'culture' })).resolves.toHaveLength(3);
-    await expect(services.places.list({ search: 'museum' })).resolves.toHaveLength(2);
+    await expect(services.places.list({ category: 'culture' })).resolves.toHaveLength(4);
+    await expect(services.places.list({ search: 'museum' })).resolves.toHaveLength(3);
   });
 
   it('looks places up by id and slug and reports missing records', async () => {
@@ -56,7 +55,7 @@ describe('mock place service', () => {
     await expect(services.places.getNearby(place.id)).resolves.toEqual([]);
   });
 
-  it('returns seeded catalogs for accommodation and transport, and empty collection for readyMadeTrips', async () => {
+  it('returns seeded catalogs for accommodation, transport, and readyMadeTrips', async () => {
     const services = createServices();
 
     const accommodations = await services.accommodation.list();
@@ -65,6 +64,7 @@ describe('mock place service', () => {
     const transport = await services.transport.list();
     expect(transport.length).toBeGreaterThan(0);
 
-    await expect(services.readyMadeTrips.list()).resolves.toEqual([]);
+    const readyMadeTrips = await services.readyMadeTrips.list();
+    expect(readyMadeTrips).toHaveLength(3);
   });
 });

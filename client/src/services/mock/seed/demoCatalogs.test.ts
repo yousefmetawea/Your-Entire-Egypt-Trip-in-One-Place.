@@ -2,29 +2,28 @@ import { describe, expect, it } from 'vitest';
 import { seedAccommodation } from './accommodation';
 import { seedTransport } from './transport';
 
-const CAIRO_BOUNDS = {
-  minLat: 29.5,
-  maxLat: 30.5,
-  minLng: 30.9,
-  maxLng: 31.6,
+const EGYPT_BOUNDS = {
+  minLat: 22.0,
+  maxLat: 31.8,
+  minLng: 25.0,
+  maxLng: 36.0,
 };
 
 describe('Demo Catalogs (Accommodation & Transport) verification tests', () => {
   it('verifies all accommodations have isDemo: true and valid properties', () => {
-    expect(seedAccommodation.length).toBe(8);
+    expect(seedAccommodation.length).toBe(12);
 
     for (const acc of seedAccommodation) {
       expect(acc.isDemo).toBe(true);
       expect(['hotel', 'hostel']).toContain(acc.type);
       expect(acc.externalUrl?.startsWith('https://example.com/')).toBe(true);
-      expect(acc.images).toEqual([]);
+      expect(acc.images.length).toBeGreaterThan(0);
 
       if (acc.location) {
-        expect(acc.location.lat).toBeGreaterThanOrEqual(CAIRO_BOUNDS.minLat);
-        expect(acc.location.lat).toBeLessThanOrEqual(CAIRO_BOUNDS.maxLat);
-        expect(acc.location.lng).toBeGreaterThanOrEqual(CAIRO_BOUNDS.minLng);
-        expect(acc.location.lng).toBeLessThanOrEqual(CAIRO_BOUNDS.maxLng);
-        expect(acc.location.lat).toBeLessThan(acc.location.lng);
+        expect(acc.location.lat).toBeGreaterThanOrEqual(EGYPT_BOUNDS.minLat);
+        expect(acc.location.lat).toBeLessThanOrEqual(EGYPT_BOUNDS.maxLat);
+        expect(acc.location.lng).toBeGreaterThanOrEqual(EGYPT_BOUNDS.minLng);
+        expect(acc.location.lng).toBeLessThanOrEqual(EGYPT_BOUNDS.maxLng);
       }
 
       if (acc.priceRange) {

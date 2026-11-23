@@ -16,7 +16,6 @@ interface GalleryTileProps {
   total: number;
   onOpen: (index: number) => void;
   priority?: boolean;
-  moreCount?: number;
   className?: string;
 }
 
@@ -26,7 +25,6 @@ function GalleryTile({
   total,
   onOpen,
   priority = false,
-  moreCount = 0,
   className,
 }: GalleryTileProps) {
   const { t } = useTranslation();
@@ -51,20 +49,6 @@ function GalleryTile({
         decoding="async"
         className="size-full object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
       />
-      <span
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/65 via-primary/5 to-transparent"
-        aria-hidden="true"
-      />
-      {image.credit ? (
-        <span className="pointer-events-none absolute bottom-space-sm start-space-sm max-w-[calc(100%-2rem)] truncate rounded-full bg-primary/70 px-space-sm py-1 type-label text-on-primary backdrop-blur-sm">
-          {t('placeDetails.gallery.credit', { credit: image.credit })}
-        </span>
-      ) : null}
-      {moreCount > 0 ? (
-        <span className="pointer-events-none absolute end-space-sm bottom-space-sm rounded-full bg-surface/90 px-space-md py-space-xs type-label text-primary backdrop-blur-sm">
-          {t('placeDetails.gallery.more', { count: moreCount })}
-        </span>
-      ) : null}
     </button>
   );
 }
@@ -117,7 +101,6 @@ export function PlaceGallery({ place }: PlaceGalleryProps) {
               total={place.images.length}
               onOpen={setActiveIndex}
               priority={index === 0}
-              moreCount={index === visible.length - 1 ? moreCount : 0}
               className="h-[320px] md:h-[580px]"
             />
           ))}
@@ -146,12 +129,23 @@ export function PlaceGallery({ place }: PlaceGalleryProps) {
                   index={index}
                   total={place.images.length}
                   onOpen={setActiveIndex}
-                  moreCount={index === visible.length - 1 ? moreCount : 0}
                   className="h-[220px] md:h-auto md:min-h-0"
                 />
               );
             })}
           </div>
+        </div>
+      )}
+
+      {moreCount > 0 && (
+        <div className="mt-space-sm flex justify-end">
+          <button
+            type="button"
+            onClick={() => setActiveIndex(visible.length)}
+            className="type-label inline-flex items-center gap-space-xs rounded-full bg-surface-container-high px-space-md py-space-xs text-primary transition-colors hover:bg-secondary/20 hover:text-secondary cursor-pointer border border-hairline"
+          >
+            {t('placeDetails.gallery.more', { count: moreCount })}
+          </button>
         </div>
       )}
 

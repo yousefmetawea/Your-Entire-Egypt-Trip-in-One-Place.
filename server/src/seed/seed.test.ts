@@ -9,6 +9,7 @@ import {
   TransportOptionModel,
   TripModel,
   BookingRequestModel,
+  ReadyMadeTripModel,
 } from '../models/index.js';
 import { runSeed } from './seed.js';
 
@@ -35,20 +36,23 @@ describe('Database Models & Idempotent Seed Runner', () => {
   it('runs seed script and populates catalog collections and dev test user', async () => {
     const result = await runSeed({ reset: true, createTestUser: true });
 
-    expect(result.placesUpserted).toBe(12);
-    expect(result.accommodationUpserted).toBe(8);
+    expect(result.placesUpserted).toBe(26);
+    expect(result.accommodationUpserted).toBe(12);
     expect(result.transportUpserted).toBe(4);
-    expect(result.readyMadeTripsUpserted).toBe(0);
+    expect(result.readyMadeTripsUpserted).toBe(3);
     expect(result.testUserCreated).toBe(true);
 
     const placeCount = await PlaceModel.countDocuments();
-    expect(placeCount).toBe(12);
+    expect(placeCount).toBe(26);
 
     const stayCount = await AccommodationModel.countDocuments();
-    expect(stayCount).toBe(8);
+    expect(stayCount).toBe(12);
 
     const transportCount = await TransportOptionModel.countDocuments();
     expect(transportCount).toBe(4);
+
+    const readyMadeCount = await ReadyMadeTripModel.countDocuments();
+    expect(readyMadeCount).toBe(3);
 
     const testUser = await UserModel.findOne({ email: 'alex@example.com' });
     expect(testUser).not.toBeNull();
@@ -63,19 +67,23 @@ describe('Database Models & Idempotent Seed Runner', () => {
   it('is completely idempotent when run a second time (no duplicates)', async () => {
     const secondResult = await runSeed({ reset: false, createTestUser: true });
 
-    expect(secondResult.placesUpserted).toBe(12);
-    expect(secondResult.accommodationUpserted).toBe(8);
+    expect(secondResult.placesUpserted).toBe(26);
+    expect(secondResult.accommodationUpserted).toBe(12);
     expect(secondResult.transportUpserted).toBe(4);
+    expect(secondResult.readyMadeTripsUpserted).toBe(3);
     expect(secondResult.testUserCreated).toBe(false); // already existed
 
     const placeCount = await PlaceModel.countDocuments();
-    expect(placeCount).toBe(12);
+    expect(placeCount).toBe(26);
 
     const stayCount = await AccommodationModel.countDocuments();
-    expect(stayCount).toBe(8);
+    expect(stayCount).toBe(12);
 
     const transportCount = await TransportOptionModel.countDocuments();
     expect(transportCount).toBe(4);
+
+    const readyMadeCount = await ReadyMadeTripModel.countDocuments();
+    expect(readyMadeCount).toBe(3);
 
     const userCount = await UserModel.countDocuments({ email: 'alex@example.com' });
     expect(userCount).toBe(1);

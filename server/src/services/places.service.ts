@@ -1,9 +1,9 @@
-import { PlaceModel, type IPlace } from '../models/Place.js';
+import { PlaceModel, type IPlace, type PlaceArea } from '../models/Place.js';
 import { ApiError } from '../errors/ApiError.js';
 
 export interface PlaceFilterQuery {
   search?: string;
-  area?: 'giza' | 'downtown' | 'islamic-cairo' | 'coptic-cairo' | 'zamalek' | 'old-cairo';
+  area?: PlaceArea;
   category?: 'history' | 'culture' | 'adventure' | 'food';
   page?: number;
   limit?: number;

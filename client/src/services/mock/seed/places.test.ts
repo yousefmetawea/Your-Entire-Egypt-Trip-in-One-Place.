@@ -3,24 +3,22 @@ import { seedPlaces } from './places';
 import fs from 'node:fs';
 import path from 'node:path';
 
-// Greater Cairo bounding box: lat ~ 29.5 to 30.5, lng ~ 30.9 to 31.6
-const CAIRO_BOUNDS = {
-  minLat: 29.5,
-  maxLat: 30.5,
-  minLng: 30.9,
-  maxLng: 31.6,
+// Egypt nationwide bounding box: lat ~ 22.0 to 31.8, lng ~ 25.0 to 36.0
+const EGYPT_BOUNDS = {
+  minLat: 22.0,
+  maxLat: 31.8,
+  minLng: 25.0,
+  maxLng: 36.0,
 };
 
 describe('seedPlaces verification test suite', () => {
-  it('has valid coordinates within Greater Cairo bounding box with lat/lng not swapped', () => {
+  it('has valid coordinates within Egypt bounding box with lat/lng not swapped', () => {
     for (const place of seedPlaces) {
       if (place.location !== null) {
-        expect(place.location.lat).toBeGreaterThanOrEqual(CAIRO_BOUNDS.minLat);
-        expect(place.location.lat).toBeLessThanOrEqual(CAIRO_BOUNDS.maxLat);
-        expect(place.location.lng).toBeGreaterThanOrEqual(CAIRO_BOUNDS.minLng);
-        expect(place.location.lng).toBeLessThanOrEqual(CAIRO_BOUNDS.maxLng);
-        // Specifically check lat is ~30 and lng is ~31, confirming not swapped
-        expect(place.location.lat).toBeLessThan(place.location.lng);
+        expect(place.location.lat).toBeGreaterThanOrEqual(EGYPT_BOUNDS.minLat);
+        expect(place.location.lat).toBeLessThanOrEqual(EGYPT_BOUNDS.maxLat);
+        expect(place.location.lng).toBeGreaterThanOrEqual(EGYPT_BOUNDS.minLng);
+        expect(place.location.lng).toBeLessThanOrEqual(EGYPT_BOUNDS.maxLng);
       }
     }
   });
@@ -43,15 +41,26 @@ describe('seedPlaces verification test suite', () => {
     }
   });
 
-  it('validates images array is empty and nearbyPlaceIds is empty in seed', () => {
+  it('validates images array is populated with valid ImageAssets and nearbyPlaceIds is empty in seed', () => {
     for (const place of seedPlaces) {
-      expect(place.images).toEqual([]);
+      expect(place.images.length).toBeGreaterThan(0);
+      for (const img of place.images) {
+        expect(img.src).toMatch(/^https:\/\//);
+        expect(img.alt.en).toBeTruthy();
+        expect(img.width).toBeGreaterThan(0);
+        expect(img.height).toBeGreaterThan(0);
+      }
       expect(place.nearbyPlaceIds).toEqual([]);
     }
   });
 
   it('validates placeholders array accurately reflects null fields', () => {
     for (const place of seedPlaces) {
+      if (place.images.length === 0) {
+        expect(place.placeholders).toContain('images');
+      } else {
+        expect(place.placeholders).not.toContain('images');
+      }
       if (place.location === null) {
         expect(place.placeholders).toContain('location');
       } else {

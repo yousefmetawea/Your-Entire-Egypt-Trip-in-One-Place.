@@ -40,7 +40,7 @@ export function PlaceCard({
       interactive
       className={cn('group flex h-full flex-col overflow-hidden', className)}
     >
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <PlaceMedia
           place={place}
           priority={priority}
@@ -51,19 +51,16 @@ export function PlaceCard({
           }
           className={cn(variant === 'feature' ? 'h-64 sm:h-80 lg:h-[23rem]' : 'h-56')}
         />
+      </div>
 
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent"
-          aria-hidden="true"
-        />
-
-        <div className="absolute inset-x-0 top-0 flex flex-wrap items-start justify-between gap-space-xs p-space-md">
+      <div className="flex flex-1 flex-col gap-space-md p-space-lg">
+        <div className="flex items-center justify-between gap-space-xs">
           <div className="flex flex-wrap items-center gap-space-xs">
-            <Badge tone="glass" size="sm">
+            <Badge tone="bronze" size="sm">
               {t(getAreaLabelKey(place.area))}
             </Badge>
-            <Badge tone="glass-dark" size="sm">
-              {t('place.demo')}
+            <Badge tone="outline" size="sm">
+              {t(getCategoryLabelKey(place.category))}
             </Badge>
           </div>
 
@@ -77,10 +74,10 @@ export function PlaceCard({
               }}
               aria-label={isSaved ? `Remove ${place.name.en} from saved` : `Save ${place.name.en}`}
               className={cn(
-                'size-8 rounded-full flex items-center justify-center transition-all backdrop-blur-md cursor-pointer',
+                'size-8 rounded-full flex items-center justify-center transition-all cursor-pointer border border-hairline',
                 isSaved
                   ? 'bg-secondary text-on-secondary shadow-sm'
-                  : 'bg-primary/40 text-surface hover:bg-primary/70 hover:text-secondary-fixed',
+                  : 'bg-surface-container-high text-primary hover:bg-secondary/20 hover:text-secondary',
               )}
               title={isSaved ? 'Saved to trip' : 'Save to trip'}
             >
@@ -89,28 +86,24 @@ export function PlaceCard({
           )}
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 p-space-md text-on-primary">
-          <p className="type-label text-secondary-fixed">
-            {t(getCategoryLabelKey(place.category))}
-          </p>
+        <div>
           <h3
             className={cn(
-              'type-card-title mt-space-xs',
+              'type-card-title text-primary',
               variant === 'feature' ? 'md:text-headline-md' : 'text-[1.35rem]',
             )}
           >
             <Link
               to={`/places/${place.slug}`}
-              className="rounded-sm transition-colors hover:text-secondary-fixed focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary-fixed"
+              className="rounded-sm transition-colors hover:text-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
             >
               {place.name.en}
             </Link>
           </h3>
+          <p className="type-body mt-space-xs line-clamp-3 text-on-surface-variant">
+            {description}
+          </p>
         </div>
-      </div>
-
-      <div className="flex flex-1 flex-col gap-space-md p-space-lg">
-        <p className="type-body line-clamp-3 text-on-surface-variant">{description}</p>
 
         <div className="mt-auto flex flex-wrap items-center justify-between gap-space-md pt-space-xs">
           <div className="flex flex-wrap items-center gap-space-md text-on-surface-variant">

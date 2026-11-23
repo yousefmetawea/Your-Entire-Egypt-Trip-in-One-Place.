@@ -692,7 +692,14 @@
       "islamic-cairo": "Islamic Cairo",
       "coptic-cairo": "Coptic Cairo",
       "zamalek": "Zamalek",
-      "old-cairo": "Old Cairo"
+      "old-cairo": "Old Cairo",
+      "luxor": "Luxor",
+      "aswan": "Aswan",
+      "alexandria": "Alexandria",
+      "red-sea": "Red Sea",
+      "sinai": "Sinai",
+      "western-desert": "Western Desert",
+      "siwa": "Siwa"
     },
     "durations": {
       "under-2h": "Under 2 hours",
