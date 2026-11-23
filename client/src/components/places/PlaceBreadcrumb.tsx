@@ -9,7 +9,9 @@ export interface PlaceBreadcrumbProps {
 }
 
 export function PlaceBreadcrumb({ place }: PlaceBreadcrumbProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language?.startsWith('ar');
+  const name = isAr && place.name.ar ? place.name.ar : place.name.en;
   const areaHref = createDiscoverHref({ filters: { area: place.area } });
 
   return (
@@ -41,8 +43,8 @@ export function PlaceBreadcrumb({ place }: PlaceBreadcrumbProps) {
           /
         </li>
         <li>
-          <span aria-current="page" className="text-secondary">
-            {place.name.en}
+          <span aria-current="page" className="text-secondary font-medium">
+            {name}
           </span>
         </li>
       </ol>

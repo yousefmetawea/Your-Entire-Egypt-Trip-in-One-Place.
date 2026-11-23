@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/cn';
+import { SplitText } from '../motion/SplitText';
 
 export type SectionHeaderAlign = 'start' | 'center';
 export type SectionHeaderTone = 'light' | 'dark';
@@ -59,7 +60,7 @@ export function SectionHeader({
           id={id}
           className={cn('type-headline mt-space-sm', dark ? 'text-on-primary' : 'text-primary')}
         >
-          {title}
+          <SplitText as="span">{title}</SplitText>
         </Heading>
         {description ? (
           <p

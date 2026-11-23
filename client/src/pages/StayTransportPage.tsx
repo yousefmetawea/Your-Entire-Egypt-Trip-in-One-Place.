@@ -8,6 +8,7 @@ import { Section } from '../components/ui/Section';
 import { Button } from '../components/ui/Button';
 import { Modal } from '../components/ui/Modal';
 import { EmptyState } from '../components/common/EmptyState';
+import { SplitText } from '../components/motion/SplitText';
 import { AccommodationCard } from '../components/stay-transport/AccommodationCard';
 import { AccommodationFilters } from '../components/stay-transport/AccommodationFilters';
 import { AccommodationMap } from '../components/stay-transport/AccommodationMap';
@@ -73,7 +74,7 @@ export default function StayTransportPage() {
               {t('stayTransport.header.eyebrow', 'Sanctuaries & Transit')}
             </span>
             <h1 className="type-display text-primary">
-              {t('stayTransport.header.title', 'Stay & Transport')}
+              <SplitText as="span">{t('stayTransport.header.title', 'Stay & Transport')}</SplitText>
             </h1>
             <p className="type-body-lg text-on-surface-variant">
               {t(

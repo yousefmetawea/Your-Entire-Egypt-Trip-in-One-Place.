@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PLANNER_STEPS } from '../../types';
 import { useTripPlanner } from '../../hooks/useTripPlanner';
 import { Badge } from '../ui/Badge';
@@ -140,15 +141,30 @@ export function PlannerWizard() {
               </p>
             ) : null}
 
-            <Card variant="surface" padding="lg" aria-busy={planner.isSubmitting}>
-              <PlannerStepContent
-                step={planner.step}
-                values={planner.values}
-                errors={planner.errors}
-                headingRef={headingRef}
-                onChange={planner.updateValues}
-                onToggleInterest={planner.toggleInterest}
-              />
+            <Card
+              variant="surface"
+              padding="lg"
+              aria-busy={planner.isSubmitting}
+              className="overflow-hidden"
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={planner.step}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <PlannerStepContent
+                    step={planner.step}
+                    values={planner.values}
+                    errors={planner.errors}
+                    headingRef={headingRef}
+                    onChange={planner.updateValues}
+                    onToggleInterest={planner.toggleInterest}
+                  />
+                </motion.div>
+              </AnimatePresence>
             </Card>
 
             <div className="mt-space-lg flex flex-col-reverse items-stretch justify-between gap-space-sm sm:flex-row sm:items-center">

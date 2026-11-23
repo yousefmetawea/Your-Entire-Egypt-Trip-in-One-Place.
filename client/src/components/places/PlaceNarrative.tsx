@@ -10,10 +10,14 @@ export interface PlaceNarrativeProps {
 }
 
 export function PlaceNarrative({ place }: PlaceNarrativeProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const headingId = useId();
-  const description = toParagraphs(place.description?.en);
-  const history = toParagraphs(place.history?.en);
+  const isAr = i18n.language === 'ar';
+  const descriptionRaw =
+    isAr && place.description?.ar ? place.description.ar : place.description?.en;
+  const historyRaw = isAr && place.history?.ar ? place.history.ar : place.history?.en;
+  const description = toParagraphs(descriptionRaw);
+  const history = toParagraphs(historyRaw);
   const isEmpty = description.length === 0 && history.length === 0;
 
   return (

@@ -3,7 +3,7 @@ import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { CairoArea } from '../../types';
 import {
-  CAIRO_AREAS,
+  EGYPT_AREAS,
   DURATION_FILTERS,
   getAreaLabelKey,
   getDurationFilterLabelKey,
@@ -65,7 +65,7 @@ export function DiscoverFilters({
 
   const areaOptions = [
     { value: '', label: t('discover.filters.allAreas') },
-    ...CAIRO_AREAS.map((area) => ({
+    ...EGYPT_AREAS.map((area) => ({
       value: area,
       label: t(getAreaLabelKey(area)),
     })),

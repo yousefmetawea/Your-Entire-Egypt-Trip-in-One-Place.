@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/cn';
 import type { LayoutLinkComponent } from '../../lib/link';
 import { Button, ButtonLink } from '../ui/Button';
@@ -107,55 +108,57 @@ export function Navbar({
     <header
       ref={headerRef}
       className={cn(
-        'z-50 px-gutter-sm pt-space-sm lg:px-margin-lg',
+        'z-50 pointer-events-none px-gutter-sm pt-space-sm lg:px-margin-lg',
         positionClasses[position],
         className,
       )}
     >
-      <div className="mx-auto flex h-20 max-w-page items-center justify-between gap-space-md rounded-full bg-surface/85 px-space-md shadow-floating backdrop-blur-xl sm:px-space-lg">
+      <div className="pointer-events-auto mx-auto flex h-16 max-w-page items-center justify-between gap-space-md rounded-full border border-sand/40 bg-surface/85 px-space-md shadow-floating backdrop-blur-2xl transition-all duration-300 sm:px-space-lg">
         <Link
           href={brandHref}
           onClick={() => setMenuOpen(false)}
-          className="inline-flex min-w-0 shrink items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
+          className="group inline-flex min-w-0 shrink items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
         >
-          <span className="truncate font-display text-[1.55rem] leading-none tracking-tight text-primary">
+          <span className="truncate font-display text-[1.45rem] font-bold leading-none tracking-tight text-primary transition-colors group-hover:text-secondary">
             {brandLabel}
           </span>
+          <span className="size-1.5 rounded-full bg-secondary" aria-hidden="true" />
         </Link>
 
-        <nav aria-label={ariaLabel} className="hidden items-center gap-space-lg lg:flex">
+        <nav
+          aria-label={ariaLabel}
+          className="hidden items-center gap-1 rounded-full border border-hairline/60 bg-surface-container-low/50 p-1 lg:flex"
+        >
           {links.map((link) => (
             <Link
               key={`${link.href}-${link.label}`}
               href={link.href}
               aria-current={link.active ? 'page' : undefined}
               className={cn(
-                'group relative py-1 font-sans text-title-md transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary',
-                link.active ? 'font-semibold text-primary' : 'text-on-surface-variant',
+                'relative rounded-full px-space-md py-1.5 font-sans text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary',
+                link.active ? 'text-primary' : 'text-on-surface-variant hover:text-primary',
               )}
             >
-              {link.label}
-              {link.active ? (
-                <span
-                  className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-secondary transition-all"
-                  aria-hidden="true"
-                />
-              ) : (
-                <span
-                  className="absolute inset-x-0 -bottom-1 h-0.5 scale-x-0 rounded-full bg-secondary/70 transition-transform duration-200 group-hover:scale-x-100"
-                  aria-hidden="true"
+              {link.active && (
+                <motion.span
+                  layoutId="navbar-active-indicator"
+                  className="absolute inset-0 rounded-full border border-hairline/60 bg-surface shadow-xs"
+                  transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                 />
               )}
+              <span className="relative z-10">{link.label}</span>
             </Link>
           ))}
         </nav>
 
         <div className="flex shrink-0 items-center gap-space-sm">
-          {actions ? <div className="flex items-center gap-space-sm">{actions}</div> : null}
+          {actions ? (
+            <div className="flex items-center gap-space-xs sm:gap-space-sm">{actions}</div>
+          ) : null}
 
           {cta ? (
             <span className="hidden shrink-0 lg:block">
-              <ButtonLink as={ctaLinkComponent} href={cta.href} size="md">
+              <ButtonLink as={ctaLinkComponent} href={cta.href} size="sm">
                 {cta.label}
               </ButtonLink>
             </span>
@@ -164,7 +167,7 @@ export function Navbar({
           <span ref={toggleWrapperRef} className="lg:hidden">
             <Button
               variant="ghost"
-              size="md"
+              size="sm"
               aria-label={menuOpen ? closeMenuLabel : menuLabel}
               aria-expanded={menuOpen}
               aria-controls={menuOpen ? menuId : undefined}
@@ -175,51 +178,57 @@ export function Navbar({
         </div>
       </div>
 
-      {menuOpen ? (
-        <div
-          id={menuId}
-          className="mx-auto mt-space-sm max-w-page rounded-card border border-hairline bg-surface/95 p-space-md shadow-floating backdrop-blur-xl lg:hidden"
-        >
-          <nav aria-label={ariaLabel} className="flex flex-col">
-            {links.map((link) => (
-              <Link
-                key={`${link.href}-${link.label}`}
-                href={link.href}
-                aria-current={link.active ? 'page' : undefined}
-                onClick={() => setMenuOpen(false)}
-                className={cn(
-                  'flex min-h-12 items-center rounded-xl px-space-sm py-space-sm font-sans text-title-md transition-colors hover:bg-surface-container-low hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary',
-                  link.active
-                    ? 'bg-secondary/10 text-primary font-semibold'
-                    : 'text-on-surface-variant',
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+      <AnimatePresence>
+        {menuOpen ? (
+          <motion.div
+            id={menuId}
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-auto mx-auto mt-space-sm max-w-page rounded-card border border-hairline bg-surface/95 p-space-md shadow-floating backdrop-blur-2xl lg:hidden"
+          >
+            <nav aria-label={ariaLabel} className="flex flex-col gap-1">
+              {links.map((link) => (
+                <Link
+                  key={`${link.href}-${link.label}`}
+                  href={link.href}
+                  aria-current={link.active ? 'page' : undefined}
+                  onClick={() => setMenuOpen(false)}
+                  className={cn(
+                    'flex min-h-11 items-center rounded-xl px-space-md py-space-xs font-sans text-sm font-medium transition-colors hover:bg-surface-container-low hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary',
+                    link.active
+                      ? 'bg-secondary/15 font-semibold text-primary'
+                      : 'text-on-surface-variant',
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-          {actions ? (
-            <div className="mt-space-md flex items-center justify-between border-t border-hairline pt-space-md">
-              {actions}
-            </div>
-          ) : null}
+            {actions ? (
+              <div className="mt-space-md flex items-center justify-between border-t border-hairline pt-space-md">
+                {actions}
+              </div>
+            ) : null}
 
-          {cta ? (
-            <div className="mt-space-md border-t border-hairline pt-space-md">
-              <ButtonLink
-                as={ctaLinkComponent}
-                href={cta.href}
-                size="md"
-                fullWidth
-                onClick={() => setMenuOpen(false)}
-              >
-                {cta.label}
-              </ButtonLink>
-            </div>
-          ) : null}
-        </div>
-      ) : null}
+            {cta ? (
+              <div className="mt-space-md border-t border-hairline pt-space-md">
+                <ButtonLink
+                  as={ctaLinkComponent}
+                  href={cta.href}
+                  size="md"
+                  fullWidth
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {cta.label}
+                </ButtonLink>
+              </div>
+            ) : null}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }

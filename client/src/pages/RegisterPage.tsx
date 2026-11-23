@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/useAuth';
 import { Container } from '../components/ui/Container';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
+import { SplitText } from '../components/motion/SplitText';
 
 export default function RegisterPage() {
+  const { t } = useTranslation();
   const { register } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,90 +40,120 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="py-16 md:py-24 min-h-[calc(100vh-16rem)] flex items-center justify-center">
-      <Container className="max-w-md w-full px-4">
-        <Card className="p-8 border border-neutral-200/80 shadow-md">
-          <div className="mb-8 text-center">
-            <span className="text-xs uppercase tracking-widest text-[#775928] font-medium block mb-2">
-              Begin your voyage
-            </span>
-            <h1 className="text-3xl font-serif text-neutral-900 tracking-tight">
-              Create your account
-            </h1>
-            <p className="text-sm text-neutral-600 mt-2">
-              Save your Cairo itinerary and manage private transport seamlessly.
-            </p>
+    <div className="min-h-[calc(100vh-16rem)] py-space-xl md:py-space-2xl">
+      <Container className="max-w-5xl">
+        <div className="grid grid-cols-1 items-center gap-gutter-lg lg:grid-cols-12">
+          {/* Visual Showcase Side (Editorial Clean Photography) */}
+          <div className="hidden lg:col-span-6 lg:block">
+            <div className="overflow-hidden rounded-2xl border border-sand/30 shadow-card bg-surface-container-lowest">
+              <div className="aspect-[4/5] w-full overflow-hidden bg-sand/20">
+                <img
+                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+                  alt={t('auth.register.imageAlt')}
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-space-md border-t border-hairline/60 bg-surface">
+                <div className="flex items-center gap-space-xs text-xs text-on-surface-variant">
+                  <span className="size-1.5 rounded-full bg-secondary" aria-hidden="true" />
+                  <span className="font-serif italic text-primary">
+                    {t('auth.register.imageCaption')}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {error && (
-            <div className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 text-sm">
-              {error}
-            </div>
-          )}
+          {/* Form Side */}
+          <div className="lg:col-span-6">
+            <Card className="border border-sand/30 p-space-xl md:p-space-2xl shadow-card bg-surface">
+              <div className="mb-space-lg">
+                <span className="type-label uppercase tracking-widest text-secondary font-medium block mb-space-xs">
+                  {t('auth.register.eyebrow')}
+                </span>
+                <h1 className="font-serif text-3xl md:text-4xl text-primary tracking-tight">
+                  <SplitText as="span">{t('auth.register.title')}</SplitText>
+                </h1>
+                <p className="type-body text-on-surface-variant mt-space-xs">
+                  {t('auth.register.subtitle')}
+                </p>
+              </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <Input
-                id="register-name"
-                label="Full Name"
-                type="text"
-                required
-                autoComplete="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Alex Morgan"
-                className="w-full"
-              />
-            </div>
+              {error && (
+                <div
+                  role="alert"
+                  className="mb-space-lg p-space-md rounded-xl bg-error-container/70 border border-error/30 text-error type-small"
+                >
+                  {error}
+                </div>
+              )}
 
-            <div>
-              <Input
-                id="register-email"
-                label="Email Address"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@example.com"
-                className="w-full"
-              />
-            </div>
+              <form onSubmit={handleSubmit} className="space-y-space-md">
+                <div>
+                  <Input
+                    id="register-name"
+                    label={t('auth.register.name')}
+                    type="text"
+                    required
+                    autoComplete="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Alex Morgan"
+                    className="w-full"
+                  />
+                </div>
 
-            <div>
-              <Input
-                id="register-password"
-                label="Password"
-                type="password"
-                required
-                autoComplete="new-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="At least 8 characters"
-                className="w-full"
-              />
-            </div>
+                <div>
+                  <Input
+                    id="register-email"
+                    label={t('auth.register.email')}
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@example.com"
+                    className="w-full"
+                  />
+                </div>
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full mt-2 py-3 text-sm font-semibold tracking-wide"
-            >
-              {isSubmitting ? 'Creating account...' : 'Create Account'}
-            </Button>
-          </form>
+                <div>
+                  <Input
+                    id="register-password"
+                    label={t('auth.register.password')}
+                    type="password"
+                    required
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder={t('auth.register.passwordHint')}
+                    className="w-full"
+                  />
+                </div>
 
-          <div className="mt-8 pt-6 border-t border-neutral-100 text-center text-sm text-neutral-600">
-            Already have an account?{' '}
-            <Link
-              to="/login"
-              state={{ from }}
-              className="text-[#775928] font-semibold hover:underline"
-            >
-              Sign in
-            </Link>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full mt-space-xs py-space-sm type-button"
+                >
+                  {isSubmitting ? t('auth.register.submitting') : t('auth.register.submit')}
+                </Button>
+              </form>
+
+              <div className="mt-space-xl pt-space-lg border-t border-hairline/80 text-center type-small text-on-surface-variant">
+                {t('auth.register.hasAccount')}{' '}
+                <Link
+                  to="/login"
+                  state={{ from }}
+                  className="text-secondary font-semibold hover:underline ms-1"
+                >
+                  {t('auth.register.signIn')}
+                </Link>
+              </div>
+            </Card>
           </div>
-        </Card>
+        </div>
       </Container>
     </div>
   );
