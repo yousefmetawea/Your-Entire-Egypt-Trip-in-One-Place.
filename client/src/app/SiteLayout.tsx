@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation } from 'react-router';
 import { Footer } from '../components/layout/Footer';
 import { Navbar } from '../components/layout/Navbar';
+import { LanguageSwitcher } from '../components/layout/LanguageSwitcher';
 import { APP_NAME } from '../lib/app';
 import { AppLink } from './AppLink';
 import { RouteLoading } from './RouteLoading';
@@ -97,6 +98,13 @@ export function SiteLayout() {
     </AppLink>
   );
 
+  const navbarActions = (
+    <div className="flex items-center gap-2 sm:gap-3">
+      <LanguageSwitcher />
+      {authActions}
+    </div>
+  );
+
   return (
     <>
       <Navbar
@@ -104,7 +112,7 @@ export function SiteLayout() {
         brandHref="/"
         links={links}
         cta={{ label: t('nav.planCta'), href: '/plan' }}
-        actions={authActions}
+        actions={navbarActions}
         ariaLabel={t('nav.mainLabel')}
         menuLabel={t('nav.openMenu')}
         closeMenuLabel={t('nav.closeMenu')}

@@ -8,6 +8,10 @@
     @apply min-h-screen bg-surface-container-low font-sans text-body-md text-on-surface antialiased;
   }
 
+  html[lang='ar'] body {
+    font-family: 'Alexandria', 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
   h1,
   h2,
   h3,
@@ -15,6 +19,16 @@
   h5,
   h6 {
     @apply font-display font-normal;
+  }
+
+  html[lang='ar'] h1,
+  html[lang='ar'] h2,
+  html[lang='ar'] h3,
+  html[lang='ar'] h4,
+  html[lang='ar'] h5,
+  html[lang='ar'] h6 {
+    font-family: 'Alexandria', 'Playfair Display', sans-serif;
+    letter-spacing: 0;
   }
 
   :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {

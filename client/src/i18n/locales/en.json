@@ -11,11 +11,11 @@
   },
   "home": {
     "hero": {
-      "badge": "Your Cairo journey starts here",
-      "title": "Discover Cairo.",
-      "titleAccent": "Your Way.",
-      "description": "Explore the stories, landmarks, and culture that make Cairo unforgettable.",
-      "demo": "Demo experience · No live prices or availability",
+      "badge": "Discover Egypt. Your Way.",
+      "title": "Egypt Is More Than",
+      "titleAccent": "You Imagine.",
+      "description": "Ancient wonders, vibrant cities, hidden gems, and unforgettable experiences. Your Egypt story starts here.",
+      "demo": "Estimated guidance · No live booking claims",
       "search": {
         "whereLabel": "Where to explore?",
         "wherePlaceholder": "Giza, Islamic Cairo, Zamalek",
@@ -708,7 +708,7 @@
   "footer": {
     "description": "Discover places, shape a thoughtful itinerary, and keep the details of your Egypt trip together.",
     "note": "Demo experience · No live bookings",
-    "legal": "© 2026 Discover Cairo. Demo experience; no live prices or availability.",
+    "legal": "© 2026 YourTrip. Transparent guidance; estimated prices.",
     "exploreHeading": "Explore",
     "planHeading": "Plan",
     "accountHeading": "Account",

@@ -123,26 +123,35 @@ export function Navbar({
           </span>
         </Link>
 
-        <nav aria-label={ariaLabel} className="hidden items-center gap-space-xl lg:flex">
+        <nav aria-label={ariaLabel} className="hidden items-center gap-space-lg lg:flex">
           {links.map((link) => (
             <Link
               key={`${link.href}-${link.label}`}
               href={link.href}
               aria-current={link.active ? 'page' : undefined}
               className={cn(
-                'font-sans text-title-md transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary',
-                link.active ? 'text-primary' : 'text-on-surface-variant',
+                'group relative py-1 font-sans text-title-md transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary',
+                link.active ? 'font-semibold text-primary' : 'text-on-surface-variant',
               )}
             >
               {link.label}
+              {link.active ? (
+                <span
+                  className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-secondary transition-all"
+                  aria-hidden="true"
+                />
+              ) : (
+                <span
+                  className="absolute inset-x-0 -bottom-1 h-0.5 scale-x-0 rounded-full bg-secondary/70 transition-transform duration-200 group-hover:scale-x-100"
+                  aria-hidden="true"
+                />
+              )}
             </Link>
           ))}
         </nav>
 
         <div className="flex shrink-0 items-center gap-space-sm">
-          {actions ? (
-            <div className="hidden items-center gap-space-md md:flex">{actions}</div>
-          ) : null}
+          {actions ? <div className="flex items-center gap-space-sm">{actions}</div> : null}
 
           {cta ? (
             <span className="hidden shrink-0 lg:block">
@@ -180,13 +189,21 @@ export function Navbar({
                 onClick={() => setMenuOpen(false)}
                 className={cn(
                   'flex min-h-12 items-center rounded-xl px-space-sm py-space-sm font-sans text-title-md transition-colors hover:bg-surface-container-low hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary',
-                  link.active ? 'bg-secondary/10 text-primary' : 'text-on-surface-variant',
+                  link.active
+                    ? 'bg-secondary/10 text-primary font-semibold'
+                    : 'text-on-surface-variant',
                 )}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
+
+          {actions ? (
+            <div className="mt-space-md flex items-center justify-between border-t border-hairline pt-space-md">
+              {actions}
+            </div>
+          ) : null}
 
           {cta ? (
             <div className="mt-space-md border-t border-hairline pt-space-md">
