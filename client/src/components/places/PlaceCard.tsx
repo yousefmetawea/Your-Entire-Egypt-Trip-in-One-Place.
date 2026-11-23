@@ -6,7 +6,7 @@ import { getAreaLabelKey, getCategoryLabelKey, getDurationLabel } from '../../li
 import { Badge } from '../ui/Badge';
 import { Card } from '../ui/Card';
 import { Skeleton } from '../ui/Skeleton';
-import { ArrowRightIcon, ClockIcon, MapPinIcon } from '../ui/icons';
+import { ArrowRightIcon, BookmarkIcon, ClockIcon, MapPinIcon } from '../ui/icons';
 import { PlaceMedia } from './PlaceMedia';
 
 export type PlaceCardVariant = 'feature' | 'compact';
@@ -16,6 +16,8 @@ export interface PlaceCardProps {
   variant?: PlaceCardVariant;
   priority?: boolean;
   className?: string;
+  isSaved?: boolean;
+  onToggleSave?: (placeId: string) => void;
 }
 
 export function PlaceCard({
@@ -23,6 +25,8 @@ export function PlaceCard({
   variant = 'compact',
   priority = false,
   className,
+  isSaved = false,
+  onToggleSave,
 }: PlaceCardProps) {
   const { t } = useTranslation();
   const durationLabel = getDurationLabel(place.avgVisitMinutes);
@@ -54,12 +58,35 @@ export function PlaceCard({
         />
 
         <div className="absolute inset-x-0 top-0 flex flex-wrap items-start justify-between gap-space-xs p-space-md">
-          <Badge tone="glass" size="sm">
-            {t(getAreaLabelKey(place.area))}
-          </Badge>
-          <Badge tone="glass-dark" size="sm">
-            {t('place.demo')}
-          </Badge>
+          <div className="flex flex-wrap items-center gap-space-xs">
+            <Badge tone="glass" size="sm">
+              {t(getAreaLabelKey(place.area))}
+            </Badge>
+            <Badge tone="glass-dark" size="sm">
+              {t('place.demo')}
+            </Badge>
+          </div>
+
+          {onToggleSave && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onToggleSave(place.id);
+              }}
+              aria-label={isSaved ? `Remove ${place.name.en} from saved` : `Save ${place.name.en}`}
+              className={cn(
+                'size-8 rounded-full flex items-center justify-center transition-all backdrop-blur-md cursor-pointer',
+                isSaved
+                  ? 'bg-secondary text-on-secondary shadow-sm'
+                  : 'bg-primary/40 text-surface hover:bg-primary/70 hover:text-secondary-fixed',
+              )}
+              title={isSaved ? 'Saved to trip' : 'Save to trip'}
+            >
+              <BookmarkIcon className="size-4" fill={isSaved ? 'currentColor' : 'none'} />
+            </button>
+          )}
         </div>
 
         <div className="absolute inset-x-0 bottom-0 p-space-md text-on-primary">
