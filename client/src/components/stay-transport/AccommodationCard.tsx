@@ -18,7 +18,15 @@ export function AccommodationCard({
   onSetAsStay,
   onOpenExternalModal,
 }: AccommodationCardProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
+  const name = isAr && accommodation.name.ar ? accommodation.name.ar : accommodation.name.en;
+  const imageAlt =
+    accommodation.images && accommodation.images[0]
+      ? isAr && accommodation.images[0].alt.ar
+        ? accommodation.images[0].alt.ar
+        : accommodation.images[0].alt.en
+      : name;
 
   return (
     <Card
@@ -32,7 +40,7 @@ export function AccommodationCard({
         <div className="relative h-48 w-full overflow-hidden bg-primary-container">
           <img
             src={accommodation.images[0].src}
-            alt={accommodation.images[0].alt.en}
+            alt={imageAlt}
             width={accommodation.images[0].width}
             height={accommodation.images[0].height}
             loading="lazy"
@@ -53,7 +61,7 @@ export function AccommodationCard({
                 <p className="type-label-sm uppercase text-secondary font-semibold">
                   {accommodation.type}
                 </p>
-                <h3 className="type-title-md font-bold text-primary">{accommodation.name.en}</h3>
+                <h3 className="type-title-md font-bold text-primary">{name}</h3>
               </div>
             </div>
 

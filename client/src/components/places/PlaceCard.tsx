@@ -28,9 +28,14 @@ export function PlaceCard({
   isSaved = false,
   onToggleSave,
 }: PlaceCardProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
+  const name = isAr && place.name.ar ? place.name.ar : place.name.en;
   const durationLabel = getDurationLabel(place.avgVisitMinutes);
-  const description = place.description?.en ?? t('place.detailsPending');
+  const description =
+    isAr && place.description?.ar
+      ? place.description.ar
+      : (place.description?.en ?? t('place.detailsPending'));
 
   return (
     <Card
@@ -97,7 +102,7 @@ export function PlaceCard({
               to={`/places/${place.slug}`}
               className="rounded-sm transition-colors hover:text-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
             >
-              {place.name.en}
+              {name}
             </Link>
           </h3>
           <p className="type-body mt-space-xs line-clamp-3 text-on-surface-variant">

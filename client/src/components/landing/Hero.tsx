@@ -1,124 +1,154 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { AppLink } from '../../app/AppLink';
-import { staggerContainer, staggerItem } from '../../lib/motion';
 import { createPlanHref } from '../../lib/planner/prefill';
-import { ArchPattern } from '../common/ArchPattern';
 import { Badge } from '../ui/Badge';
-import { ButtonLink } from '../ui/Button';
-import { ArrowRightIcon, CompassIcon, InfoIcon, LandmarkIcon, MapPinIcon } from '../ui/icons';
+import { LuxuryButton } from '../ui/LuxuryButton';
+import { ArrowRightIcon } from '../ui/icons';
 import { HeroSearch } from './HeroSearch';
 import { SplitText } from '../motion/SplitText';
+import { Marquee } from '../motion/Marquee';
+import { HeroImageDeck } from './HeroImageDeck';
 
-const stats = [
-  { key: 'areas', Icon: CompassIcon },
-  { key: 'places', Icon: LandmarkIcon },
-  { key: 'categories', Icon: MapPinIcon },
-  { key: 'labels', Icon: InfoIcon },
-] as const;
+const EGYPT_DESTINATION_TICKER_EN = [
+  'Giza & Ancient Cairo',
+  'Luxor & The Valley of Kings',
+  'Aswan & Philae Island',
+  'Siwa Oasis Salt Sanctuaries',
+  'White Desert Sculptures',
+  'Alexandria Mediterranean Port',
+  'Red Sea Coral Reefs',
+  'Mount Sinai & Saint Catherine',
+];
+
+const EGYPT_DESTINATION_TICKER_AR = [
+  'الجيزة والقاهرة التاريخية',
+  'الأقصر ووادي الملوك',
+  'أسوان ومعبد فيلة',
+  'ملاذات سيوة الملحية',
+  'منحوتات الصحراء البيضاء',
+  'الإسكندرية عروس المتوسط',
+  'شعاب البحر الأحمر المرجانية',
+  'جبل موسى ودير سانت كاترين',
+];
 
 export function Hero() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
+
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [travelers, setTravelers] = useState('');
 
+  const marqueeText = isAr
+    ? 'استكشف مصر — على طريقتك — رحلات استثنائية تفوق الخيال'
+    : 'DISCOVER EGYPT — YOUR WAY — EXPLORE BEYOND THE ORDINARY';
+
+  const tickerItems = isAr ? EGYPT_DESTINATION_TICKER_AR : EGYPT_DESTINATION_TICKER_EN;
+
   return (
-    <section className="relative isolate -mt-24 flex min-h-[46rem] flex-col justify-between overflow-hidden bg-primary text-on-primary md:-mt-28 md:min-h-[52rem]">
-      <div className="absolute inset-0" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_16%,rgba(214,169,107,0.22),transparent_45%),radial-gradient(circle_at_14%_86%,rgba(214,169,107,0.18),transparent_45%)]" />
-        <ArchPattern variant="hero" className="text-secondary/15" />
-        <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-primary via-primary/70 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/40 to-primary/80" />
+    <section className="relative isolate -mt-24 flex min-h-[52rem] flex-col justify-between overflow-hidden bg-primary text-on-primary md:-mt-28 md:min-h-[58rem]">
+      {/* Atmosphere Background */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(214,169,107,0.18),transparent_50%),radial-gradient(circle_at_20%_80%,rgba(40,56,46,0.6),transparent_55%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
       </div>
 
+      {/* Infinite Horizontal Typography Marquee Layer (OVO Legion Pattern) */}
+      <div className="pointer-events-none absolute inset-x-0 top-24 md:top-28 z-0 overflow-hidden opacity-15 select-none">
+        <Marquee
+          items={[marqueeText, marqueeText]}
+          speed={35}
+          className="py- space-xs"
+          itemClassName="font-serif text-[4.5rem] sm:text-[6.5rem] md:text-[8.5rem] lg:text-[10rem] font-bold uppercase tracking-tight text-surface leading-none"
+          separator="·"
+        />
+      </div>
+
+      {/* Main Asymmetric Hero Composition */}
       <div className="relative z-10 mx-auto flex w-full max-w-page flex-1 flex-col justify-center px-gutter-sm pb-space-xl pt-36 md:px-margin-md md:pt-44 lg:px-margin-lg">
-        <motion.div
-          className="max-w-3xl"
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div variants={staggerItem}>
-            <Badge tone="glass-dark" dot size="md">
-              {t('home.hero.badge')}
-            </Badge>
-          </motion.div>
+        <div className="grid grid-cols-1 items-center gap-gutter-lg lg:grid-cols-12">
+          {/* Left Editorial Headline & Controls */}
+          <div className="flex flex-col gap-space-md lg:col-span-7">
+            <div>
+              <Badge tone="glass-dark" dot size="md">
+                {t('home.hero.badge')}
+              </Badge>
+            </div>
 
-          <div className="type-display mt-space-lg text-surface-container-lowest leading-[1.08]">
-            <SplitText as="h1" delay={0.1}>
-              {t('home.hero.title')}
-            </SplitText>{' '}
-            <span className="italic text-secondary-fixed inline-block">
-              <SplitText delay={0.28}>{t('home.hero.titleAccent')}</SplitText>
-            </span>
-          </div>
-
-          <motion.p
-            variants={staggerItem}
-            className="type-body-lg mt-space-md max-w-2xl text-surface-container-high/90 leading-relaxed font-sans"
-          >
-            {t('home.hero.description')}
-          </motion.p>
-        </motion.div>
-
-        <motion.div
-          className="mt-space-xl w-full max-w-[71rem]"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <HeroSearch
-            from={from}
-            to={to}
-            travelers={travelers}
-            onFromChange={setFrom}
-            onToChange={setTo}
-            onTravelersChange={setTravelers}
-          />
-        </motion.div>
-
-        <motion.div
-          className="mt-space-md flex flex-wrap items-center gap-space-md"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.5 }}
-        >
-          <ButtonLink
-            as={AppLink}
-            href={createPlanHref({ from, to, travelers })}
-            variant="inverse"
-            size="md"
-            endIcon={<ArrowRightIcon className="rtl:rotate-180" />}
-          >
-            {t('home.hero.search.plan')}
-          </ButtonLink>
-
-          <p className="type-small flex items-center gap-space-xs text-surface-container-high/75">
-            <span className="size-1.5 rounded-full bg-secondary-fixed" aria-hidden="true" />
-            {t('home.hero.demo')}
-          </p>
-        </motion.div>
-      </div>
-
-      <div className="relative z-10 mx-auto w-full max-w-page px-gutter-sm pb-space-xl md:px-margin-md lg:px-margin-lg">
-        <div className="flex flex-wrap items-center justify-between gap-space-sm rounded-[1.5rem] border border-sand/20 bg-primary/90 px-space-lg py-space-sm text-surface-container-low shadow-floating backdrop-blur-md sm:rounded-full">
-          {stats.map(({ key, Icon }, index) => (
-            <div key={key} className="flex items-center gap-space-sm">
-              {index > 0 ? (
-                <span
-                  className="me-space-sm hidden size-1.5 rounded-full bg-secondary/30 md:block"
-                  aria-hidden="true"
-                />
-              ) : null}
-              <Icon className="size-4 text-secondary-fixed" />
-              <span className="type-title-sm text-surface-container-lowest font-sans">
-                {t(`home.hero.stats.${key}`)}
+            <div className="type-display text-surface leading-[1.06] max-w-2xl">
+              <SplitText as="h1" delay={0.1}>
+                {t('home.hero.title')}
+              </SplitText>{' '}
+              <span className="italic text-secondary-fixed inline-block">
+                <SplitText delay={0.28}>{t('home.hero.titleAccent')}</SplitText>
               </span>
             </div>
-          ))}
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="type-body-lg max-w-xl text-surface-container-high/90 leading-relaxed font-sans"
+            >
+              {t('home.hero.description')}
+            </motion.p>
+
+            {/* Seamless Search Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="mt-space-sm w-full max-w-2xl"
+            >
+              <HeroSearch
+                from={from}
+                to={to}
+                travelers={travelers}
+                onFromChange={setFrom}
+                onToChange={setTo}
+                onTravelersChange={setTravelers}
+              />
+            </motion.div>
+
+            {/* CTA with expanding circle hover effect + Trust Disclosure */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-space-xs flex flex-wrap items-center gap-space-md"
+            >
+              <LuxuryButton
+                href={createPlanHref({ from, to, travelers })}
+                variant="secondary"
+                size="md"
+                endIcon={<ArrowRightIcon className="rtl:rotate-180" />}
+              >
+                {t('home.hero.search.plan')}
+              </LuxuryButton>
+
+              <p className="type-small flex items-center gap-space-xs text-surface-container-high/75">
+                <span className="size-1.5 rounded-full bg-secondary-fixed" aria-hidden="true" />
+                {t('home.hero.demo')}
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Right Layered Animated Image Deck (Highest Priority Reference Pattern) */}
+          <div className="flex items-center justify-center lg:col-span-5 mt-space-lg lg:mt-0">
+            <HeroImageDeck />
+          </div>
         </div>
+      </div>
+
+      {/* Moving Regional Ticker Strip across bottom (OVO Legion Partners / Showcase pattern) */}
+      <div className="relative z-10 border-t border-sand/20 bg-primary/80 py-space-sm backdrop-blur-md">
+        <Marquee
+          items={tickerItems}
+          speed={40}
+          itemClassName="type-label-sm uppercase tracking-widest text-surface/80 font-medium"
+          separator="·"
+        />
       </div>
     </section>
   );

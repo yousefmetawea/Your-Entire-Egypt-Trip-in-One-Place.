@@ -23,12 +23,15 @@ export function CurtainTransition() {
           initial={{ y: '0%' }}
           animate={{ y: '-100%' }}
           transition={{
-            duration: 0.7,
-            delay: index * 0.05,
+            duration: 0.75,
+            delay: index * 0.045,
             ease: [0.76, 0, 0.24, 1],
           }}
-          className="relative h-full flex-1 border-r border-hairline/20 bg-surface-container-low shadow-sm"
-        />
+          className="relative h-full flex-1 border-e border-sand/30 bg-gradient-to-b from-surface via-surface-container-low to-surface-container shadow-2xl"
+        >
+          {/* Subtle gold bottom accent line on each curtain panel */}
+          <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-secondary/30 via-secondary to-secondary/30" />
+        </motion.div>
       ))}
     </div>
   );

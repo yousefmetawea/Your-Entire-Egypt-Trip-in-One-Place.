@@ -16,7 +16,11 @@ export function TransportCard({
   onRequestTransfer,
   onOpenExternalModal,
 }: TransportCardProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
+  const name = isAr && option.name.ar ? option.name.ar : option.name.en;
+  const description =
+    isAr && option.description?.ar ? option.description.ar : option.description?.en;
   const isInternal = option.bookable === 'internal';
 
   return (
@@ -31,7 +35,7 @@ export function TransportCard({
               <p className="type-label-sm uppercase text-secondary font-semibold">
                 {option.type.replace('-', ' ')}
               </p>
-              <h3 className="type-title-md font-bold text-primary">{option.name.en}</h3>
+              <h3 className="type-title-md font-bold text-primary">{name}</h3>
             </div>
           </div>
 
@@ -42,10 +46,8 @@ export function TransportCard({
           </Badge>
         </div>
 
-        {option.description ? (
-          <p className="type-small text-on-surface-variant leading-relaxed">
-            {option.description.en}
-          </p>
+        {description ? (
+          <p className="type-small text-on-surface-variant leading-relaxed">{description}</p>
         ) : null}
 
         {option.notes ? (

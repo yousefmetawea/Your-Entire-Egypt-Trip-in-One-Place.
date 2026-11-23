@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import type { Place } from '../../types';
 import { Card } from '../ui/Card';
 import { MapPinIcon } from '../ui/icons';
@@ -14,6 +15,8 @@ export function SavedPlacesGrid({
   onRemoveSavedPlace,
   actionLoading = false,
 }: SavedPlacesGridProps) {
+  const { i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
   return (
     <Card
       variant="surface"
@@ -52,41 +55,45 @@ export function SavedPlacesGrid({
         </div>
       ) : (
         <div className="flex flex-col gap-space-xs">
-          {places.map((place) => (
-            <div
-              key={place.id}
-              className="flex items-center justify-between p-space-sm rounded-xl bg-surface-container-low/70 hover:bg-surface-container transition-colors border border-hairline/30 group"
-            >
-              <div className="flex items-center gap-space-sm min-w-0">
-                <div className="size-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary shrink-0 font-serif font-bold">
-                  {place.name.en.charAt(0)}
-                </div>
+          {places.map((place) => {
+            const name = isAr && place.name.ar ? place.name.ar : place.name.en;
 
-                <div className="min-w-0">
-                  <h4 className="type-title text-sm text-primary font-medium truncate group-hover:text-secondary transition-colors">
-                    <Link to={`/places/${place.slug}`}>{place.name.en}</Link>
-                  </h4>
-                  <div className="flex items-center gap-space-xs text-xs text-on-surface-variant">
-                    <MapPinIcon className="size-3 text-secondary shrink-0" />
-                    <span className="capitalize truncate">{place.area.replace('-', ' ')}</span>
-                    <span className="text-hairline">·</span>
-                    <span className="capitalize">{place.category}</span>
+            return (
+              <div
+                key={place.id}
+                className="flex items-center justify-between p-space-sm rounded-xl bg-surface-container-low/70 hover:bg-surface-container transition-colors border border-hairline/30 group"
+              >
+                <div className="flex items-center gap-space-sm min-w-0">
+                  <div className="size-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary shrink-0 font-serif font-bold">
+                    {name.charAt(0)}
+                  </div>
+
+                  <div className="min-w-0">
+                    <h4 className="type-title text-sm text-primary font-medium truncate group-hover:text-secondary transition-colors">
+                      <Link to={`/places/${place.slug}`}>{name}</Link>
+                    </h4>
+                    <div className="flex items-center gap-space-xs text-xs text-on-surface-variant">
+                      <MapPinIcon className="size-3 text-secondary shrink-0" />
+                      <span className="capitalize truncate">{place.area.replace('-', ' ')}</span>
+                      <span className="text-hairline">·</span>
+                      <span className="capitalize">{place.category}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <button
-                type="button"
-                onClick={() => onRemoveSavedPlace(place.id)}
-                disabled={actionLoading}
-                aria-label={`Remove ${place.name.en} from saved places`}
-                className="size-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-danger hover:bg-danger/10 transition-colors shrink-0 ms-2"
-                title="Remove from saved"
-              >
-                &times;
-              </button>
-            </div>
-          ))}
+                <button
+                  type="button"
+                  onClick={() => onRemoveSavedPlace(place.id)}
+                  disabled={actionLoading}
+                  aria-label={`Remove ${name} from saved places`}
+                  className="size-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-danger hover:bg-danger/10 transition-colors shrink-0 ms-2"
+                  title="Remove from saved"
+                >
+                  &times;
+                </button>
+              </div>
+            );
+          })}
         </div>
       )}
     </Card>
