@@ -8,12 +8,12 @@
 - `design/` is the visual source of truth. Never redesign existing screens or modify `design/` without permission, and preserve decisions/architecture already recorded in `docs/PLAN.md`.
 - Keep Git commits small, meaningful, and scoped to the current phase or change. Do not commit or push unless the user explicitly asks.
 
-## Repo state (Phase 9 implemented, pending review)
+## Repo state (Phase 10 implemented, pending review)
 
-- npm-workspaces monorepo with `client/` and `server/`. Phases 0–8 are implemented; Phase 9 adds the My Trip Dashboard (`/my-trip`) with upcoming trip countdown, today's schedule / Day 1 preview, selected stay summary, airport transfer requests with status tracking and audit history, partial-aware custom SVG budget donut chart, and saved places grid.
-- Phase work lives on dedicated branches (current: `phase-9-my-trip-dashboard`); `main` is the base branch. Phase 9 changes are uncommitted.
+- npm-workspaces monorepo with `client/` and `server/`. Phases 0–10 are implemented; Phase 10 establishes the real backend API with Express 5, TypeScript strict, MongoDB Atlas (Mongoose 9), Argon2 password hashing, JWT session authentication via httpOnly cookies, centralized CSRF/origin enforcement, an idempotent zero-duplication seed pipeline, swappable client API services (`client/src/services/api/`), `AuthContext`, and real `/login` and `/register` pages.
+- Phase work lives on dedicated branches (current: `phase-10-backend`); `main` is the base branch. Phase 10 changes are uncommitted.
 - Node requirement: `>=22.12.0` (verified locally with Node `v26.13.1`, npm `11.20.0`).
-- Vitest is installed for client-side service and pure-logic tests. No CI or deployment configuration exists yet. Hosting is undecided; Phases 0–6 are local-only.
+- Vitest is installed for client-side and server-side unit, service, and integration tests (with in-memory MongoDB via `mongodb-memory-server`).
 - Lighthouse is not runnable locally because Chrome/Chromium is unavailable. Firefox is used for manual visual and interaction checks; do not claim a Lighthouse score.
 - TypeScript is pinned to `~6.0.3` because `typescript-eslint` 8 does not support TypeScript 7. Do not upgrade to TS 7 until the ESLint parser supports it.
 - Real `.env` files are local and ignored; only `.env.example` files are tracked. Never commit secrets.
@@ -40,19 +40,22 @@ npm run format:check
 ## Architecture
 
 - `client/`: Vite 8 + React + TypeScript strict + Tailwind CSS v4 via `@tailwindcss/vite` + `i18next`/`react-i18next`.
-- `server/`: Express 5 + TypeScript strict, ESM with `NodeNext`; relative imports require `.js` extensions. `tsx watch` for development, `dotenv` for env loading. Only a health endpoint exists.
+- `server/`: Express 5 + TypeScript strict, ESM with `NodeNext`; relative imports require `.js` extensions. `tsx watch` for development, `dotenv` for env loading. Features layered architecture: routes, controllers, services, Mongoose models, centralized error handling, and Zod validation middleware.
 - Root uses npm workspaces with one root `package-lock.json`.
-- React Router `7.18.6` drives the app shell. MongoDB, Mongoose, authentication, CORS, and product API routes are deferred to their planned phases. Do not add Socket.io or Redis (PLAN §8).
-- Installed during Phase 0: Vite, Tailwind CSS, i18next, Express, and the lint/format toolchain. Phase 1 added Framer Motion and self-hosted Fontsource packages for Playfair Display and Plus Jakarta Sans. Phase 2 added React Router and Vitest. Phase 6 added `@dnd-kit/core`, `@dnd-kit/sortable`, and `@dnd-kit/utilities`. Do not install other PLAN §4 recommended defaults (TanStack Query, Zustand, React Hook Form + Zod, map provider, AI provider, PDF export) without user approval. Map and AI providers are unresolved in §9.
+- React Router `7.18.6` drives the app shell. Phase 10 implements MongoDB, Mongoose, Argon2, JWT authentication, CORS, rate limiting, and core product API routes (/places, /catalog, /trips, /bookings, /auth). Do not add Socket.io or Redis (PLAN §8).
+- Installed during Phase 0: Vite, Tailwind CSS, i18next, Express, and the lint/format toolchain. Phase 1 added Framer Motion and self-hosted Fontsource packages for Playfair Display and Plus Jakarta Sans. Phase 2 added React Router and Vitest. Phase 6 added `@dnd-kit/core`, `@dnd-kit/sortable`, and `@dnd-kit/utilities`. Phase 10 added `mongoose`, `zod`, `jsonwebtoken`, `argon2`, `helmet`, `cors`, `express-rate-limit`, `cookie-parser`, `supertest`, and `mongodb-memory-server`. Do not install other PLAN §4 recommended defaults (TanStack Query, Zustand, React Hook Form + Zod, map provider, AI provider, PDF export) without user approval. Map and AI providers are unresolved in §9.
 - Tailwind v4 tokens live CSS-first in `client/src/styles/theme.css`; there is no Tailwind config file. Reusable UI lives in `client/src/components/`; the Phase 1 review page remains in `client/src/showcase/` behind the dev-only `/design-system` route.
 - Phase 1 primitives: Container, Section, Button, Card, Chip, Badge/StatusBadge, Input, Select, Tabs, Modal, presentational Navbar/Footer. Phase 3 adds Skeleton. Slider, DatePicker, and Toast remain deferred until their screen designs exist. Icons are minimal inline SVG; no icon library was added.
-- Phase 2 adds `client/src/app/` (router, root layout, site layout, error boundary, loading), `client/src/pages/` placeholders, `client/src/types/`, `client/src/services/` (contracts plus localStorage-backed mock implementation), and `client/src/lib/` date/app helpers. Auth routes can move to a separate layout later.
-- Phase 3 implements Landing (`/`) and Discover (`/discover`) with the shared Navbar and Footer. The Navbar uses an accessible mobile disclosure menu; links point only to existing routes. Pure catalog/discover/featured logic lives in `client/src/lib/`; data loading uses `client/src/hooks/useCatalog.ts`. Landing and Discover UI lives in `client/src/components/landing/`, `client/src/components/discover/`, `client/src/components/places/`, and `client/src/components/trips/`.
-- Phase 4 implements the Destination Explorer at `/places/:slug`: gallery/lightbox, description/history, practical info, opening hours, estimated price, map placeholder, nearby places, tips, and Add to Trip. Data loading uses `client/src/hooks/usePlace.ts`, `useNearbyPlaces.ts`, and `useDraftTripPlace.ts`; UI lives in `client/src/components/places/`. The dev-only `/places/layout-fixture` fixture is synthetic, exists only in development, and is excluded from production builds.
-- Phase 5 implements `/plan` as a six-step planner (dates, travelers, budget, interests, stay, transport) with a persistent summary, confirmation/reset dialogs, and a generated draft. State lives in `client/src/hooks/useTripPlanner.ts`; pure validation/prefill/persistence/draft/generator logic lives in `client/src/lib/planner/`; UI lives in `client/src/components/planner/`. The generator is deterministic and uses no randomness, current time, network, or storage. The Hero “Plan My Trip” action prefills dates/travelers through `/plan?from=&to=&travelers=`.
-- Phase 6 replaces the read-only `/trip/:id` page with an editable builder: day tabs, catalog/custom activities, inline edit, pointer/keyboard DnD reorder and cross-day moves, add/remove days, undo/redo, title editing, live summaries, and local save status. Editor state lives in `client/src/hooks/useTripEditor.ts`; pure reducer/timing/summary logic lives in `client/src/lib/builder/`; UI lives in `client/src/components/trip-builder/`. The map remains an explicit Phase 7 order-preview placeholder.
-- Routes: `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, `/my-trip`, `/login`, `/register`, and a 404, all currently inside the shared site layout. `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, and `/my-trip` are implemented; the remaining product routes (`/login`, `/register`) are still placeholders. `/design-system` is registered only in development and is isolated from the product layout.
-- Phase 9 is implemented but not yet approved. Do not start Phase 10, add product screens beyond the current set, or commit Phase 9 without explicit approval.
+- Phase 2 adds `client/src/app/` (router, root layout, site layout, error boundary, loading), `client/src/pages/` placeholders, `client/src/types/`, `client/src/services/` (contracts plus localStorage-backed mock implementation), and `client/src/lib/` date/app helpers.
+- Phase 3 implements Landing (`/`) and Discover (`/discover`) with the shared Navbar and Footer.
+- Phase 4 implements the Destination Explorer at `/places/:slug`.
+- Phase 5 implements `/plan` as a six-step planner.
+- Phase 6 implements the editable builder at `/trip/:id`.
+- Phase 8 implements the Stay and Transport page at `/stay-transport`.
+- Phase 9 implements the My Trip Dashboard at `/my-trip`.
+- Phase 10 implements the backend REST API, MongoDB models, idempotent seed script, Argon2 JWT authentication via httpOnly cookies, CSRF protection, client API services, AuthContext, `/login`, `/register`, and `ProtectedRoute` guarding `/my-trip`.
+- Routes: `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, `/my-trip`, `/login`, `/register`, and a 404, all inside the shared site layout. All product routes are fully functional. `/design-system` is registered only in development and is isolated from the product layout.
+- Phase 10 is implemented but not yet approved. Do not start Phase 11, add product screens beyond the current set, or commit Phase 10 without explicit approval.
 - `docs/decisions.md` records confirmed choices. Update it when a decision changes; do not contradict it silently.
 
 ## Localization

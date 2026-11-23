@@ -1,6 +1,6 @@
 # Decisions
 
-**Status:** Phase 9 — My Trip Dashboard implemented; pending review
+**Status:** Phase 10 — Back-End and Real Data implemented; pending review
 **Last updated:** 2026-11-23
 
 ## Product
@@ -161,6 +161,22 @@
   - **Saved Places:** renders places bookmarked in `trip.savedPlaceIds` using `PlaceCard` with a quick removal action and link to `/discover`. A subtle bookmark toggle was added to `PlaceCard` to populate saved places from the UI.
   - **Travel Passport:** deferred to Phase 12; no fake stamps or wax seals are fabricated.
   - **Sync:** synchronizes across tabs via the `storage` event and custom `discover-cairo:store-updated` events.
+
+## Back-End and Real Data (Phase 10)
+
+- **Database:** MongoDB Atlas with Mongoose 9. Schemas use stable string IDs (`User.id`, `Place.id`, `Accommodation.id`, `TransportOption.id`, `ReadyMadeTrip.id`, `Trip.id`, `BookingRequest.id`) with custom `toJSON` mapping `_id` to `id` for seamless client compatibility.
+- **Password Security:** Argon2id hashing with timing-safe verification prevents timing side-channel attacks.
+- **Authentication & Sessions:** JSON Web Tokens stored in 7-day `httpOnly`, `sameSite: 'lax'` cookies (`discover_cairo_token`). `secure: false` in development, `secure: true` in production. Tokens are never exposed to client-side JavaScript or stored in `localStorage`/`sessionStorage`.
+- **CSRF & Origin Protection:** Centralized middleware validates `Origin` against configured `CLIENT_ORIGIN`, rejects `sec-fetch-site: cross-site`, blocks standard HTML form submissions, requires `Content-Type: application/json` on state-mutating payloads, and expects custom header `X-Requested-With: XMLHttpRequest`.
+- **Seed Pipeline:** The database seed runner (`server/src/seed/seed.ts`) transpiles client seed files via TypeScript AST compilation, ensuring zero code duplication. Upserts by stable IDs ensure strict idempotency. Destructive database resets are permanently rejected when `NODE_ENV=production` without exception.
+- **Core APIs:**
+  - Places catalog with full-text search, area/category filtering, slug lookup, and nearby suggestions.
+  - Accommodations, transport options, and ready-made trips catalogs.
+  - User trips with ownership scoping, add-to-draft endpoint, and optimistic locking (`version` check).
+  - User booking requests (hybrid model) with status lifecycle and audit log; simulation confirmation endpoint is strictly gated behind `ENABLE_DEMO_ACTIONS`.
+- **Client Service Layer Integration:** `client/src/services/index.ts` defaults to `createApiServices()`, connecting the frontend to real backend endpoints with `credentials: 'include'`. The mock services layer is preserved for offline testing via `VITE_DATA_SOURCE=mock`.
+- **Client Auth UI:** `AuthContext` restores sessions from `GET /api/auth/me`. `/login` and `/register` pages connect to backend auth endpoints. `ProtectedRoute` redirects unauthenticated users attempting to access `/my-trip` to `/login`.
+- **Security Audit:** Zero vulnerabilities verified via `npm audit`.
 
 ## Localization
 
