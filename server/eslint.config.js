@@ -14,6 +14,15 @@ export default defineConfig([
       sourceType: 'module',
       globals: globals.node,
     },
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+    },
   },
   eslintConfigPrettier,
 ]);

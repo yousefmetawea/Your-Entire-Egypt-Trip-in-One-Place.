@@ -1,6 +1,10 @@
 import { createMockServices } from './mock/createMockServices';
+import { createApiServices } from './api/createApiServices';
 
-export const services = createMockServices();
+// Switchable data source: default to 'api', allow 'mock' via environment variable
+const dataSource = import.meta.env.VITE_DATA_SOURCE ?? 'api';
+
+export const services = dataSource === 'mock' ? createMockServices() : createApiServices();
 
 export { ServiceError, isServiceError } from './errors';
 export type {
