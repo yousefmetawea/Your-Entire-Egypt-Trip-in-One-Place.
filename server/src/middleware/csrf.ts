@@ -23,7 +23,9 @@ export function csrfProtection(req: Request, _res: Response, next: NextFunction)
 
   // In production, reject any state-mutating request without an origin or whose origin doesn't match clientOrigin
   if (origin && origin !== clientOrigin) {
-    return next(ApiError.forbidden(`Cross-origin request rejected from unauthorized origin: ${origin}`));
+    return next(
+      ApiError.forbidden(`Cross-origin request rejected from unauthorized origin: ${origin}`),
+    );
   }
 
   // In production or when sec-fetch-site indicates cross-site, enforce origin presence

@@ -130,9 +130,7 @@ describe('Core APIs Integration & Resource Security Tests', () => {
     });
 
     it('User B is blocked with 403 Forbidden when trying to access User A trip', async () => {
-      const res = await request(app)
-        .get(`/api/trips/${userATripId}`)
-        .set('Cookie', userBCookie);
+      const res = await request(app).get(`/api/trips/${userATripId}`).set('Cookie', userBCookie);
 
       expect(res.status).toBe(403);
       expect(res.body.error.code).toBe('FORBIDDEN');

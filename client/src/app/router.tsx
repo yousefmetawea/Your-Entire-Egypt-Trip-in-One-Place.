@@ -4,6 +4,7 @@ import type { RouteObject } from 'react-router';
 import { RootErrorBoundary } from './RootErrorBoundary';
 import { RootLayout } from './RootLayout';
 import { SiteLayout } from './SiteLayout';
+import { ProtectedRoute } from '../components/auth/ProtectedRoute';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const DiscoverPage = lazy(() => import('../pages/DiscoverPage'));
@@ -73,7 +74,11 @@ const routes: RouteObject[] = [
           },
           {
             path: 'my-trip',
-            element: <MyTripPage />,
+            element: (
+              <ProtectedRoute>
+                <MyTripPage />
+              </ProtectedRoute>
+            ),
             handle: {
               title: 'My trip',
               description:

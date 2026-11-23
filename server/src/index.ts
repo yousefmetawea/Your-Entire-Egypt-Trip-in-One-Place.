@@ -12,7 +12,9 @@ async function startServer(): Promise<void> {
 
     // 2. Start HTTP listener
     server = app.listen(env.port, () => {
-      console.log(`[Server] Discover Cairo API running on http://localhost:${env.port} (${env.nodeEnv})`);
+      console.log(
+        `[Server] Discover Cairo API running on http://localhost:${env.port} (${env.nodeEnv})`,
+      );
       console.log(`[Server] CORS whitelisted client origin: ${env.clientOrigin}`);
     });
   } catch (error) {

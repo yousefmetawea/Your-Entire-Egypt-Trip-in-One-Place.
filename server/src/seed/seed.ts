@@ -20,11 +20,7 @@ const __dirname = path.dirname(__filename);
 // Helper to load and transpile TypeScript seed files cleanly without importing them across rootDir boundaries
 // This avoids duplicating source seed data while maintaining perfect TS project boundary separation.
 async function readClientSeed<T>(filename: string, exportVar: string): Promise<T[]> {
-  const filePath = path.resolve(
-    __dirname,
-    '../../../client/src/services/mock/seed',
-    filename,
-  );
+  const filePath = path.resolve(__dirname, '../../../client/src/services/mock/seed', filename);
   const rawTs = await fs.readFile(filePath, 'utf-8');
 
   // Transpile TypeScript to plain JavaScript on the fly
@@ -65,7 +61,9 @@ export async function runSeed(options: SeedOptions = {}): Promise<SeedResult> {
 
   // Safety constraint: Never allow reset in production environment (no overrides or exceptions)
   if (reset && env.nodeEnv === 'production') {
-    throw new Error('Fatal Security Constraint: Database reset is strictly prohibited in production environment.');
+    throw new Error(
+      'Fatal Security Constraint: Database reset is strictly prohibited in production environment.',
+    );
   }
 
   // Connect only if not already connected

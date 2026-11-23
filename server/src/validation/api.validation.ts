@@ -94,7 +94,10 @@ export const updateTripSchema = z.object({
 
 export const saveItinerarySchema = z.object({
   title: z.string().trim().min(1).max(100).optional(),
-  days: z.array(tripDaySchema).min(1, 'Trip must have at least one day').max(14, 'Trip cannot exceed 14 days'),
+  days: z
+    .array(tripDaySchema)
+    .min(1, 'Trip must have at least one day')
+    .max(14, 'Trip cannot exceed 14 days'),
   version: z.number().int().positive().optional(),
 });
 

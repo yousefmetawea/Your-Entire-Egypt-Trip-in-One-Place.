@@ -1,11 +1,7 @@
 import { Router } from 'express';
 import { authRouter } from './auth.routes.js';
 import { placesRouter } from './places.routes.js';
-import {
-  accommodationRouter,
-  transportRouter,
-  readyMadeTripsRouter,
-} from './catalog.routes.js';
+import { accommodationRouter, transportRouter, readyMadeTripsRouter } from './catalog.routes.js';
 import { tripsRouter, bookingsRouter } from './userResources.routes.js';
 
 export const apiRouter = Router();

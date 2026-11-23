@@ -33,7 +33,10 @@ export class BookingsService {
     return booking;
   }
 
-  static async createBooking(userId: string, input: CreateBookingRequestDto): Promise<IBookingRequest> {
+  static async createBooking(
+    userId: string,
+    input: CreateBookingRequestDto,
+  ): Promise<IBookingRequest> {
     const bookingId = `booking_${crypto.randomUUID()}`;
     const now = new Date().toISOString();
 

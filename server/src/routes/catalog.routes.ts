@@ -1,10 +1,7 @@
 import { Router } from 'express';
 import { CatalogController } from '../controllers/api.controller.js';
 import { validateRequest } from '../middleware/validate.js';
-import {
-  accommodationQuerySchema,
-  transportQuerySchema,
-} from '../validation/api.validation.js';
+import { accommodationQuerySchema, transportQuerySchema } from '../validation/api.validation.js';
 
 export const accommodationRouter = Router();
 accommodationRouter.get(

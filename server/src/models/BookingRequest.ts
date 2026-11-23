@@ -84,7 +84,4 @@ const bookingRequestSchema = new Schema<IBookingRequest>(
 
 bookingRequestSchema.index({ userId: 1, createdAt: -1 });
 
-export const BookingRequestModel = model<IBookingRequest>(
-  'BookingRequest',
-  bookingRequestSchema,
-);
+export const BookingRequestModel = model<IBookingRequest>('BookingRequest', bookingRequestSchema);

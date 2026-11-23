@@ -15,7 +15,10 @@ const envSchema = z.object({
   mongodbUri: z.string().min(1, 'MONGODB_URI is required'),
   jwtSecret: z.string().min(32, 'JWT_SECRET must be at least 32 characters long'),
   jwtExpiresIn: z.string().default('7d'),
-  clientOrigin: z.string().url('CLIENT_ORIGIN must be a valid URL').default('http://localhost:5173'),
+  clientOrigin: z
+    .string()
+    .url('CLIENT_ORIGIN must be a valid URL')
+    .default('http://localhost:5173'),
   enableDemoActions: z
     .string()
     .optional()
@@ -54,7 +57,9 @@ export function loadEnv(source: NodeJS.ProcessEnv = process.env): Env {
     const errorDetails = parsed.error.issues
       .map((issue) => `  - ${issue.path.join('.')}: ${issue.message}`)
       .join('\n');
-    console.error(`\n❌ Configuration Error: Invalid server environment variables:\n${errorDetails}\n`);
+    console.error(
+      `\n❌ Configuration Error: Invalid server environment variables:\n${errorDetails}\n`,
+    );
     throw new Error('Invalid environment configuration');
   }
 

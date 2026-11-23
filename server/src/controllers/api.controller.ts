@@ -55,7 +55,11 @@ export class CatalogController {
     }
   }
 
-  static async getAccommodationById(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static async getAccommodationById(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     try {
       const accommodation = await CatalogService.getAccommodationById(req.params.id as string);
       res.status(200).json({ accommodation });
@@ -82,7 +86,11 @@ export class CatalogController {
     }
   }
 
-  static async getReadyMadeTripById(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static async getReadyMadeTripById(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     try {
       const trip = await CatalogService.getReadyMadeTripById(req.params.id as string);
       res.status(200).json({ trip });
@@ -123,7 +131,11 @@ export class TripsController {
 
   static async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const trip = await TripsService.updateTrip(req.params.id as string, req.user!.userId, req.body);
+      const trip = await TripsService.updateTrip(
+        req.params.id as string,
+        req.user!.userId,
+        req.body,
+      );
       res.status(200).json({ trip });
     } catch (error) {
       next(error);
@@ -154,7 +166,10 @@ export class TripsController {
 
   static async addPlaceToDraft(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const result = await TripsService.addPlaceToDraft(req.user!.userId, req.body.placeId as string);
+      const result = await TripsService.addPlaceToDraft(
+        req.user!.userId,
+        req.body.placeId as string,
+      );
       res.status(200).json(result);
     } catch (error) {
       next(error);
@@ -175,7 +190,10 @@ export class BookingsController {
 
   static async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const booking = await BookingsService.getUserBookingById(req.params.id as string, req.user!.userId);
+      const booking = await BookingsService.getUserBookingById(
+        req.params.id as string,
+        req.user!.userId,
+      );
       res.status(200).json({ booking });
     } catch (error) {
       next(error);
@@ -193,7 +211,10 @@ export class BookingsController {
 
   static async cancel(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const booking = await BookingsService.cancelBooking(req.params.id as string, req.user!.userId);
+      const booking = await BookingsService.cancelBooking(
+        req.params.id as string,
+        req.user!.userId,
+      );
       res.status(200).json({ booking });
     } catch (error) {
       next(error);

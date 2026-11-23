@@ -152,7 +152,13 @@ export class TripsService {
   static async addPlaceToDraft(
     userId: string,
     placeId: string,
-  ): Promise<{ trip: ITrip; dayId: string; activity: ITripActivity; added: boolean; createdTrip: boolean }> {
+  ): Promise<{
+    trip: ITrip;
+    dayId: string;
+    activity: ITripActivity;
+    added: boolean;
+    createdTrip: boolean;
+  }> {
     let trip = await TripModel.findOne({ userId, status: 'draft' });
     let createdTrip = false;
 

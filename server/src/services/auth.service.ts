@@ -77,10 +77,12 @@ export class AuthService {
     const userDoc = await UserModel.findOne({ email: normalizedEmail });
     if (!userDoc) {
       // Execute dummy verify to protect against timing attacks
-      await argon2.verify(
-        '$argon2id$v=19$m=65536,t=3,p=4$dummyhashdummyhashdummy$dummyhashdummyhashdummy',
-        input.password,
-      ).catch(() => false);
+      await argon2
+        .verify(
+          '$argon2id$v=19$m=65536,t=3,p=4$dummyhashdummyhashdummy$dummyhashdummyhashdummy',
+          input.password,
+        )
+        .catch(() => false);
       throw invalidCredentialsError;
     }
 
