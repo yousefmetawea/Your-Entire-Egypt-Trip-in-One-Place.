@@ -42,8 +42,8 @@ export default function LoginPage() {
         <div className="grid grid-cols-1 items-center gap-gutter-lg lg:grid-cols-12">
           {/* Visual Showcase Side (Editorial Clean Photography) */}
           <div className="hidden lg:col-span-6 lg:block">
-            <div className="overflow-hidden rounded-2xl border border-sand/30 shadow-card bg-surface-container-lowest">
-              <div className="aspect-[4/5] w-full overflow-hidden bg-sand/20">
+            <div className="overflow-hidden rounded-2xl border border-hairline shadow-floating bg-surface">
+              <div className="aspect-[4/5] w-full overflow-hidden bg-surface-container">
                 <img
                   src="https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80"
                   alt={t('auth.login.imageAlt')}
@@ -51,7 +51,7 @@ export default function LoginPage() {
                   loading="lazy"
                 />
               </div>
-              <div className="p-space-md border-t border-hairline/60 bg-surface">
+              <div className="p-space-md border-t border-hairline bg-surface">
                 <div className="flex items-center gap-space-xs text-xs text-on-surface-variant">
                   <span className="size-1.5 rounded-full bg-secondary" aria-hidden="true" />
                   <span className="font-serif italic text-primary">
@@ -64,7 +64,7 @@ export default function LoginPage() {
 
           {/* Form Side */}
           <div className="lg:col-span-6">
-            <Card className="border border-sand/30 p-space-xl md:p-space-2xl shadow-card bg-surface">
+            <Card className="border border-hairline p-space-xl md:p-space-2xl shadow-floating bg-surface">
               <div className="mb-space-lg">
                 <span className="type-label uppercase tracking-widest text-secondary font-medium block mb-space-xs">
                   {t('auth.login.eyebrow')}

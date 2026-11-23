@@ -13,7 +13,7 @@ export function FinalCtaSection() {
   return (
     <Section tone="canvas" spacing="md" className="overflow-hidden">
       <Container>
-        <div className="relative overflow-hidden rounded-[24px] sm:rounded-[36px] bg-primary text-on-primary p-space-xl sm:p-space-2xl lg:p-space-3xl border border-sand/30 shadow-2xl">
+        <div className="relative overflow-hidden rounded-[24px] sm:rounded-[36px] bg-primary text-on-primary p-space-xl sm:p-space-2xl lg:p-space-3xl border border-hairline shadow-2xl">
           {/* Ambient decorative glow */}
           <div
             className="absolute -top-32 -right-32 size-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none"
@@ -24,7 +24,7 @@ export function FinalCtaSection() {
             {/* Text & Action (col-span-7) */}
             <div className="flex flex-col gap-space-md lg:col-span-7">
               <ScrollReveal>
-                <span className="type-label-sm uppercase tracking-widest text-secondary-fixed font-semibold">
+                <span className="type-label-sm uppercase tracking-widest text-secondary font-semibold">
                   {isAr ? '(رحلتك تبدأ هنا)' : '(Your Journey Begins)'}
                 </span>
               </ScrollReveal>
@@ -51,7 +51,7 @@ export function FinalCtaSection() {
               >
                 <LuxuryButton
                   href="/plan"
-                  variant="secondary"
+                  variant="primary"
                   size="lg"
                   endIcon={<ArrowRightIcon className="rtl:rotate-180" />}
                 >
@@ -67,7 +67,7 @@ export function FinalCtaSection() {
             {/* Clean Photographic Showcase (col-span-5) — NO text over image */}
             <div className="lg:col-span-5">
               <ScrollReveal delay={0.2}>
-                <div className="overflow-hidden rounded-2xl border border-sand/40 bg-primary-container shadow-floating">
+                <div className="overflow-hidden rounded-2xl border border-hairline bg-surface-container shadow-floating">
                   <div className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] w-full overflow-hidden">
                     <img
                       src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80"
@@ -80,7 +80,7 @@ export function FinalCtaSection() {
                       loading="lazy"
                     />
                   </div>
-                  <div className="p-space-sm bg-primary/95 border-t border-sand/20">
+                  <div className="p-space-sm bg-primary/95 border-t border-white/20">
                     <p className="type-small text-surface-container-high text-xs italic">
                       {isAr
                         ? 'معبد فيلة ونهر النيل — أسوان'

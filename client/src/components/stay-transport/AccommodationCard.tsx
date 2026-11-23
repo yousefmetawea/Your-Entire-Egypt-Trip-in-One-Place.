@@ -37,7 +37,7 @@ export function AccommodationCard({
       }`}
     >
       {accommodation.images && accommodation.images[0] && (
-        <div className="relative h-48 w-full overflow-hidden bg-primary-container">
+        <div className="relative h-48 w-full overflow-hidden bg-surface-container">
           <img
             src={accommodation.images[0].src}
             alt={imageAlt}

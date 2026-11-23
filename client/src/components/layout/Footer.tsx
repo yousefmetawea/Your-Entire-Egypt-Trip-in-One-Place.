@@ -75,7 +75,7 @@ export function Footer({
   return (
     <footer
       className={cn(
-        'w-full border-t border-hairline/70 bg-surface-container-lowest/80 pt-space-3xl pb-space-2xl text-on-surface transition-colors',
+        'w-full border-t-[3px] border-secondary bg-surface-container-low pt-space-3xl pb-space-2xl text-on-surface transition-colors',
         className,
       )}
       {...rest}
@@ -165,7 +165,7 @@ export function Footer({
                   placeholder={newsletter.emailPlaceholder}
                   containerClassName="min-w-0 flex-1 px-3"
                 />
-                <Button type="submit" variant="bronze" size="sm" className="rounded-full shrink-0">
+                <Button type="submit" variant="primary" size="sm" className="rounded-full shrink-0">
                   {newsletter.submitLabel}
                 </Button>
               </form>

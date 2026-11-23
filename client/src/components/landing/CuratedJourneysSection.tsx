@@ -56,7 +56,7 @@ export function CuratedJourneysSection() {
 
             return (
               <ScrollReveal key={trip.id} delay={index * 0.12} className="h-full">
-                <article className="group flex h-full flex-col rounded-2xl border border-sand/40 bg-surface p-space-lg shadow-sm transition-all duration-500 hover:shadow-floating hover:border-secondary/60">
+                <article className="group flex h-full flex-col rounded-2xl border border-hairline bg-surface p-space-lg shadow-sm transition-all duration-500 hover:shadow-floating hover:border-secondary">
                   {/* Clean Image Container — NO text on top of image */}
                   <div className="aspect-[16/10] w-full overflow-hidden rounded-xl bg-surface-container-low border border-hairline/60">
                     <img

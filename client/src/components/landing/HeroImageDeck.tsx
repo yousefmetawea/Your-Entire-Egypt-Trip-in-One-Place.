@@ -112,7 +112,7 @@ export function HeroImageDeck({ className }: { className?: string }) {
             <motion.div
               key={item.id}
               className={cn(
-                'absolute inset-0 cursor-pointer overflow-hidden rounded-[20px] sm:rounded-[28px] border border-sand/40 bg-surface-container-lowest shadow-2xl transition-shadow',
+                'absolute inset-0 cursor-pointer overflow-hidden rounded-[20px] sm:rounded-[28px] border border-hairline bg-surface shadow-2xl transition-shadow',
                 isTop ? 'z-30 shadow-floating' : 'pointer-events-none z-10',
               )}
               initial={false}
@@ -134,7 +134,7 @@ export function HeroImageDeck({ className }: { className?: string }) {
               }}
             >
               {/* Clean image container — NO text on top of the image */}
-              <div className="h-full w-full overflow-hidden bg-primary-container">
+              <div className="h-full w-full overflow-hidden bg-surface-container">
                 <img
                   src={item.src}
                   alt={isAr ? item.altAr : item.altEn}
@@ -160,10 +160,10 @@ export function HeroImageDeck({ className }: { className?: string }) {
               transition={{ duration: 0.3 }}
               className="truncate"
             >
-              <p className="type-title-sm truncate text-on-primary">
+              <p className="type-title-sm truncate text-primary font-medium">
                 {isAr ? activeImage.titleAr : activeImage.titleEn}
               </p>
-              <p className="type-label text-secondary-fixed truncate">
+              <p className="type-label text-on-surface-variant truncate">
                 {isAr ? activeImage.regionAr : activeImage.regionEn}
               </p>
             </motion.div>
@@ -187,8 +187,8 @@ export function HeroImageDeck({ className }: { className?: string }) {
               className={cn(
                 'h-1.5 rounded-full transition-all duration-300',
                 idx === currentIndex
-                  ? 'w-6 bg-secondary-fixed'
-                  : 'w-1.5 bg-surface/30 hover:bg-surface/60',
+                  ? 'w-6 bg-secondary'
+                  : 'w-1.5 bg-primary/20 hover:bg-primary/50',
               )}
             />
           ))}

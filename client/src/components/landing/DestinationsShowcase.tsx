@@ -80,7 +80,7 @@ export function DestinationsShowcase() {
                     {/* Clean Image Container — ABSOLUTELY NO text over image */}
                     <div
                       className={cn(
-                        'w-full overflow-hidden rounded-2xl border border-sand/40 bg-surface-container-low shadow-sm transition-all duration-700 group-hover:shadow-floating group-hover:border-secondary/60',
+                        'w-full overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-sm transition-all duration-700 group-hover:shadow-floating group-hover:border-secondary',
                         config.aspect,
                       )}
                     >

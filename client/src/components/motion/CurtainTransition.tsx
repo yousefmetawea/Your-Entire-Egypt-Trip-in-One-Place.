@@ -27,9 +27,9 @@ export function CurtainTransition() {
             delay: index * 0.045,
             ease: [0.76, 0, 0.24, 1],
           }}
-          className="relative h-full flex-1 border-e border-sand/30 bg-gradient-to-b from-surface via-surface-container-low to-surface-container shadow-2xl"
+          className="relative h-full flex-1 border-e border-hairline/60 bg-gradient-to-b from-surface via-surface-container-low to-surface-container shadow-2xl"
         >
-          {/* Subtle gold bottom accent line on each curtain panel */}
+          {/* Subtle signature crimson bottom accent line on each curtain panel */}
           <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-secondary/30 via-secondary to-secondary/30" />
         </motion.div>
       ))}

@@ -112,7 +112,7 @@ export function FaqSection() {
                     {/* Rotating Plus Icon */}
                     <span
                       className={cn(
-                        'flex size-9 shrink-0 items-center justify-center rounded-full border border-sand/60 bg-surface-container-low text-secondary transition-transform duration-300',
+                        'flex size-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface text-secondary transition-transform duration-300',
                         isOpen && 'rotate-45 bg-secondary text-on-secondary border-secondary',
                       )}
                       aria-hidden="true"
@@ -144,8 +144,8 @@ export function FaqSection() {
           {/* OVO Legion Signature "Colored Block" CTA Card (col-span-4) */}
           <div className="lg:col-span-4">
             <ScrollReveal delay={0.25}>
-              <div className="rounded-2xl border border-sand/40 bg-primary p-space-xl text-on-primary shadow-floating">
-                <span className="type-label-sm uppercase tracking-widest text-secondary-fixed font-semibold block mb-space-xs">
+              <div className="rounded-2xl border border-hairline bg-primary p-space-xl text-on-primary shadow-floating">
+                <span className="type-label-sm uppercase tracking-widest text-secondary font-semibold block mb-space-xs">
                   {isAr ? 'هل لديك استفسار آخر؟' : 'Still have questions?'}
                 </span>
                 <h3 className="font-serif text-2xl text-surface font-medium leading-snug">
@@ -159,7 +159,7 @@ export function FaqSection() {
                     : 'Whether coordinating private Nile cruises, desert expeditions, or specialized transport, we are here to help.'}
                 </p>
 
-                <div className="mt-space-lg pt-space-md border-t border-sand/20">
+                <div className="mt-space-lg pt-space-md border-t border-white/20">
                   <LuxuryButton href="/plan" variant="secondary" size="md" className="w-full">
                     {isAr ? 'ابدأ التخطيط الآن' : 'Start Planning'}
                   </LuxuryButton>

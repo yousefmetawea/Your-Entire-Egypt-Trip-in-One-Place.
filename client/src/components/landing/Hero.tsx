@@ -42,25 +42,24 @@ export function Hero() {
 
   const marqueeText = isAr
     ? 'استكشف مصر — على طريقتك — رحلات استثنائية تفوق الخيال'
-    : 'DISCOVER EGYPT — YOUR WAY — EXPLORE BEYOND THE ORDINARY';
+    : 'DISCOVER EGYPT — YOUR WAY — TIMELESS SANCTUARIES — BESPOKE TRAVEL';
 
   const tickerItems = isAr ? EGYPT_DESTINATION_TICKER_AR : EGYPT_DESTINATION_TICKER_EN;
 
   return (
-    <section className="relative isolate -mt-24 flex min-h-[52rem] flex-col justify-between overflow-hidden bg-primary text-on-primary md:-mt-28 md:min-h-[58rem]">
-      {/* Atmosphere Background */}
+    <section className="relative isolate -mt-24 flex min-h-[52rem] flex-col justify-between overflow-hidden bg-surface-container-low text-on-surface md:-mt-28 md:min-h-[58rem]">
+      {/* Subtle OVO Ambient Lighting */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(214,169,107,0.18),transparent_50%),radial-gradient(circle_at_20%_80%,rgba(40,56,46,0.6),transparent_55%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary via-primary/80 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,40,43,0.03),transparent_70%)]" />
       </div>
 
       {/* Infinite Horizontal Typography Marquee Layer (OVO Legion Pattern) */}
-      <div className="pointer-events-none absolute inset-x-0 top-24 md:top-28 z-0 overflow-hidden opacity-15 select-none">
+      <div className="pointer-events-none absolute inset-x-0 top-24 md:top-28 z-0 overflow-hidden opacity-5 select-none">
         <Marquee
           items={[marqueeText, marqueeText]}
           speed={35}
-          className="py- space-xs"
-          itemClassName="font-serif text-[4.5rem] sm:text-[6.5rem] md:text-[8.5rem] lg:text-[10rem] font-bold uppercase tracking-tight text-surface leading-none"
+          className="py-space-xs"
+          itemClassName="font-serif text-[4.5rem] sm:text-[6.5rem] md:text-[8.5rem] lg:text-[10rem] font-black uppercase tracking-tight text-primary leading-none"
           separator="·"
         />
       </div>
@@ -71,16 +70,21 @@ export function Hero() {
           {/* Left Editorial Headline & Controls */}
           <div className="flex flex-col gap-space-md lg:col-span-7">
             <div>
-              <Badge tone="glass-dark" dot size="md">
+              <Badge
+                tone="outline"
+                dot
+                size="md"
+                className="bg-surface/80 border-hairline text-on-surface font-medium"
+              >
                 {t('home.hero.badge')}
               </Badge>
             </div>
 
-            <div className="type-display text-surface leading-[1.06] max-w-2xl">
+            <div className="type-display text-primary leading-[1.06] max-w-2xl font-serif">
               <SplitText as="h1" delay={0.1}>
                 {t('home.hero.title')}
               </SplitText>{' '}
-              <span className="italic text-secondary-fixed inline-block">
+              <span className="italic text-secondary inline-block">
                 <SplitText delay={0.28}>{t('home.hero.titleAccent')}</SplitText>
               </span>
             </div>
@@ -89,7 +93,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="type-body-lg max-w-xl text-surface-container-high/90 leading-relaxed font-sans"
+              className="type-body-lg max-w-xl text-on-surface-variant leading-relaxed font-sans"
             >
               {t('home.hero.description')}
             </motion.p>
@@ -120,15 +124,15 @@ export function Hero() {
             >
               <LuxuryButton
                 href={createPlanHref({ from, to, travelers })}
-                variant="secondary"
+                variant="primary"
                 size="md"
                 endIcon={<ArrowRightIcon className="rtl:rotate-180" />}
               >
                 {t('home.hero.search.plan')}
               </LuxuryButton>
 
-              <p className="type-small flex items-center gap-space-xs text-surface-container-high/75">
-                <span className="size-1.5 rounded-full bg-secondary-fixed" aria-hidden="true" />
+              <p className="type-small flex items-center gap-space-xs text-on-surface-variant">
+                <span className="size-1.5 rounded-full bg-secondary" aria-hidden="true" />
                 {t('home.hero.demo')}
               </p>
             </motion.div>
@@ -142,11 +146,11 @@ export function Hero() {
       </div>
 
       {/* Moving Regional Ticker Strip across bottom (OVO Legion Partners / Showcase pattern) */}
-      <div className="relative z-10 border-t border-sand/20 bg-primary/80 py-space-sm backdrop-blur-md">
+      <div className="relative z-10 border-t border-hairline bg-surface/90 py-space-sm backdrop-blur-md">
         <Marquee
           items={tickerItems}
           speed={40}
-          itemClassName="type-label-sm uppercase tracking-widest text-surface/80 font-medium"
+          itemClassName="type-label-sm uppercase tracking-widest text-on-surface-variant font-medium"
           separator="·"
         />
       </div>

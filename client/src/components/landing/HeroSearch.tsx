@@ -48,7 +48,7 @@ export function HeroSearch({
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full rounded-[20px] border border-hairline-strong/60 bg-surface-container-lowest/95 p-space-xs shadow-[0_20px_48px_-12px_rgba(6,6,7,0.35)] backdrop-blur-xl md:p-space-sm"
+      className="w-full rounded-[24px] border border-hairline bg-surface p-space-xs shadow-floating md:p-space-sm"
     >
       <div className="flex flex-col gap-space-xs lg:flex-row lg:items-center">
         <div className={`${segmentClasses} flex-1`}>
