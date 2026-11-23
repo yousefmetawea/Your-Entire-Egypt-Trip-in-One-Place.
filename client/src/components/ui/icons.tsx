@@ -422,3 +422,17 @@ export function CarIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function BookmarkIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M5 4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13.5a.5.5 0 0 1-.777.416L10 14.944l-4.223 2.972A.5.5 0 0 1 5 17.5V4Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

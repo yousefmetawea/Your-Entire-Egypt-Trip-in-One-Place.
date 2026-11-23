@@ -74,7 +74,11 @@ const routes: RouteObject[] = [
           {
             path: 'my-trip',
             element: <MyTripPage />,
-            handle: { title: 'My trip' },
+            handle: {
+              title: 'My trip',
+              description:
+                'Manage your Cairo expedition: upcoming countdown, schedule preview, selected stay, transfer requests, and travel budget.',
+            },
           },
           {
             path: 'login',

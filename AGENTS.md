@@ -8,10 +8,10 @@
 - `design/` is the visual source of truth. Never redesign existing screens or modify `design/` without permission, and preserve decisions/architecture already recorded in `docs/PLAN.md`.
 - Keep Git commits small, meaningful, and scoped to the current phase or change. Do not commit or push unless the user explicitly asks.
 
-## Repo state (Phase 8 implemented, pending review)
+## Repo state (Phase 9 implemented, pending review)
 
-- npm-workspaces monorepo with `client/` and `server/`. Phases 0–7 are implemented; Phase 8 adds the Stay & Transport comparison page (`/stay-transport`), fictional demo catalogs for accommodation and transport, airport transfer request flow with status audit tracking and demo confirmation simulation, interactive accommodation map, and Itinerary Builder stay integration.
-- Phase work lives on dedicated branches (current: `phase-8-stay-transport`); `main` is the base branch. Phase 8 changes are uncommitted.
+- npm-workspaces monorepo with `client/` and `server/`. Phases 0–8 are implemented; Phase 9 adds the My Trip Dashboard (`/my-trip`) with upcoming trip countdown, today's schedule / Day 1 preview, selected stay summary, airport transfer requests with status tracking and audit history, partial-aware custom SVG budget donut chart, and saved places grid.
+- Phase work lives on dedicated branches (current: `phase-9-my-trip-dashboard`); `main` is the base branch. Phase 9 changes are uncommitted.
 - Node requirement: `>=22.12.0` (verified locally with Node `v26.13.1`, npm `11.20.0`).
 - Vitest is installed for client-side service and pure-logic tests. No CI or deployment configuration exists yet. Hosting is undecided; Phases 0–6 are local-only.
 - Lighthouse is not runnable locally because Chrome/Chromium is unavailable. Firefox is used for manual visual and interaction checks; do not claim a Lighthouse score.
@@ -51,8 +51,8 @@ npm run format:check
 - Phase 4 implements the Destination Explorer at `/places/:slug`: gallery/lightbox, description/history, practical info, opening hours, estimated price, map placeholder, nearby places, tips, and Add to Trip. Data loading uses `client/src/hooks/usePlace.ts`, `useNearbyPlaces.ts`, and `useDraftTripPlace.ts`; UI lives in `client/src/components/places/`. The dev-only `/places/layout-fixture` fixture is synthetic, exists only in development, and is excluded from production builds.
 - Phase 5 implements `/plan` as a six-step planner (dates, travelers, budget, interests, stay, transport) with a persistent summary, confirmation/reset dialogs, and a generated draft. State lives in `client/src/hooks/useTripPlanner.ts`; pure validation/prefill/persistence/draft/generator logic lives in `client/src/lib/planner/`; UI lives in `client/src/components/planner/`. The generator is deterministic and uses no randomness, current time, network, or storage. The Hero “Plan My Trip” action prefills dates/travelers through `/plan?from=&to=&travelers=`.
 - Phase 6 replaces the read-only `/trip/:id` page with an editable builder: day tabs, catalog/custom activities, inline edit, pointer/keyboard DnD reorder and cross-day moves, add/remove days, undo/redo, title editing, live summaries, and local save status. Editor state lives in `client/src/hooks/useTripEditor.ts`; pure reducer/timing/summary logic lives in `client/src/lib/builder/`; UI lives in `client/src/components/trip-builder/`. The map remains an explicit Phase 7 order-preview placeholder.
-- Routes: `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, `/my-trip`, `/login`, `/register`, and a 404, all currently inside the shared site layout. `/`, `/discover`, `/places/:slug`, `/plan`, and `/trip/:id` are implemented; the remaining product routes are still placeholders. `/design-system` is registered only in development and is isolated from the product layout.
-- Phase 6 is implemented but not yet approved. Do not start Phase 7, add product screens beyond the current set, or commit Phase 6 without explicit approval.
+- Routes: `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, `/my-trip`, `/login`, `/register`, and a 404, all currently inside the shared site layout. `/`, `/discover`, `/places/:slug`, `/plan`, `/trip/:id`, `/stay-transport`, and `/my-trip` are implemented; the remaining product routes (`/login`, `/register`) are still placeholders. `/design-system` is registered only in development and is isolated from the product layout.
+- Phase 9 is implemented but not yet approved. Do not start Phase 10, add product screens beyond the current set, or commit Phase 9 without explicit approval.
 - `docs/decisions.md` records confirmed choices. Update it when a decision changes; do not contradict it silently.
 
 ## Localization

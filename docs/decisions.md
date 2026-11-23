@@ -1,7 +1,7 @@
 # Decisions
 
-**Status:** Phase 6 — Itinerary Builder implemented; pending review
-**Last updated:** 2026-11-22
+**Status:** Phase 9 — My Trip Dashboard implemented; pending review
+**Last updated:** 2026-11-23
 
 ## Product
 
@@ -142,6 +142,25 @@
 - English Phase 6 copy lives under `trip.builder` in `client/src/i18n/locales/en.json`. No Arabic product copy was invented.
 - Unit tests cover editor history and validation, activity factories, timing warnings, summaries, budget thresholds, itinerary saves, and store migration/validation. The suite passes 18 files and 124 tests. Component and permanent browser automation tests were not added.
 - Firefox manual/WebDriver checks covered the full edit loop, reload persistence, pointer reorder, cross-day drops, keyboard reorder, title/day flows, save status, and accessible button names. The mobile layout passed at Firefox's 500 CSS px minimum headless width; a true 390px viewport could not be set. Lighthouse remains blocked.
+
+## Stay and Transport (Phase 8)
+
+- `/stay-transport` implements Accommodation and Transportation tabs with URL persistence (`?tab=`).
+- Fictional catalogs provide 8 accommodations and 4 transport options with `isDemo: true` and explicit currency/estimates.
+- Airport transfer requests create internal `pending` booking requests with an immutable status audit history log. User can cancel while pending; demo confirmation simulation is gated behind `DEV` or `VITE_ENABLE_DEMO_ACTIONS`.
+- Leaflet map shows accommodation pins across Greater Cairo with price popups and "Set as my stay" actions.
+
+## My Trip Dashboard (Phase 9)
+
+- `/my-trip` implements the central management dashboard from `design/my_trip_dashboard_discover_cairo`:
+  - **Upcoming Trip Hero:** displays trip title, dates, travelers, status badge, and an accessible countdown matrix (Days, Hours, Minutes). Multiple trips are handled via an active/upcoming focus with a top `<select>` dropdown switcher.
+  - **Trip Status Lifecycle:** hybrid model where stored `draft` or `cancelled` are preserved, while active/upcoming trips derive calendar phase (`upcoming`, `active`, `completed`). A modal allows users to cancel trips cleanly.
+  - **Today's Itinerary:** displays the active day matching today's date during the trip, Day 1 preview before the trip starts, and completed summary after the trip. Activity cards link to place details and builder.
+  - **Accommodation & Fleet:** displays selected stay details (`trip.accommodationId`) or an empty state with CTA to `/stay-transport`; lists transfer booking requests with `RequestStatusChip`, cancellation, and audit timeline.
+  - **Budget Donut:** custom SVG donut chart calculating real totals from itinerary activities, selected stay, and transfers. Displays unpriced item counts, budget cap comparisons, and multi-currency disclosures. No external chart library was added.
+  - **Saved Places:** renders places bookmarked in `trip.savedPlaceIds` using `PlaceCard` with a quick removal action and link to `/discover`. A subtle bookmark toggle was added to `PlaceCard` to populate saved places from the UI.
+  - **Travel Passport:** deferred to Phase 12; no fake stamps or wax seals are fabricated.
+  - **Sync:** synchronizes across tabs via the `storage` event and custom `discover-cairo:store-updated` events.
 
 ## Localization
 
