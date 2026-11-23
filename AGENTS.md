@@ -8,10 +8,10 @@
 - `design/` is the visual source of truth. Never redesign existing screens or modify `design/` without permission, and preserve decisions/architecture already recorded in `docs/PLAN.md`.
 - Keep Git commits small, meaningful, and scoped to the current phase or change. Do not commit or push unless the user explicitly asks.
 
-## Repo state (Phase 7 implemented, pending review)
+## Repo state (Phase 8 implemented, pending review)
 
-- npm-workspaces monorepo with `client/` and `server/`. Phases 0–6 are implemented; Phase 7 adds the interactive Leaflet-powered maps on the Itinerary Builder (`/trip/:id`) and Destination Explorer (`/places/:slug`), verified geographic coordinates, straight-line distance calculations, and tile provider configuration.
-- Phase work lives on dedicated branches (current: `phase-7-interactive-map`); `main` is the base branch. Phase 7 changes are uncommitted.
+- npm-workspaces monorepo with `client/` and `server/`. Phases 0–7 are implemented; Phase 8 adds the Stay & Transport comparison page (`/stay-transport`), fictional demo catalogs for accommodation and transport, airport transfer request flow with status audit tracking and demo confirmation simulation, interactive accommodation map, and Itinerary Builder stay integration.
+- Phase work lives on dedicated branches (current: `phase-8-stay-transport`); `main` is the base branch. Phase 8 changes are uncommitted.
 - Node requirement: `>=22.12.0` (verified locally with Node `v26.13.1`, npm `11.20.0`).
 - Vitest is installed for client-side service and pure-logic tests. No CI or deployment configuration exists yet. Hosting is undecided; Phases 0–6 are local-only.
 - Lighthouse is not runnable locally because Chrome/Chromium is unavailable. Firefox is used for manual visual and interaction checks; do not claim a Lighthouse score.

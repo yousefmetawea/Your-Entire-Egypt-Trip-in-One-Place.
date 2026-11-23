@@ -1,12 +1,14 @@
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { Trip } from '../../types';
+import type { Accommodation, BookingRequest, Trip } from '../../types';
+import { services } from '../../services';
 import type { ItinerarySummary } from '../../lib/builder/summary';
-import { getBudgetStatus } from '../../lib/builder/summary';
+import { computeStaySummary, getBudgetStatus } from '../../lib/builder/summary';
 import { formatMoney } from '../../lib/placeDetails';
 import { getBudgetTierLabelKey, isBudgetTier } from '../../lib/planner/options';
 import { Badge } from '../ui/Badge';
 import { Card } from '../ui/Card';
-import { AlertTriangleIcon, InfoIcon } from '../ui/icons';
+import { AlertTriangleIcon, BedIcon, CarIcon, InfoIcon } from '../ui/icons';
 
 export interface BuilderSummaryProps {
   trip: Trip;
@@ -24,6 +26,53 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 export function BuilderSummary({ trip, summary }: BuilderSummaryProps) {
   const { t } = useTranslation();
+  const [accommodation, setAccommodation] = useState<Accommodation | null>(null);
+  const [requests, setRequests] = useState<BookingRequest[]>([]);
+
+  useEffect(() => {
+    let active = true;
+
+    if (trip.accommodationId) {
+      services.accommodation
+        .getById(trip.accommodationId)
+        .then((acc) => {
+          if (active) setAccommodation(acc);
+        })
+        .catch(() => {
+          if (active) setAccommodation(null);
+        });
+    }
+
+    services.bookingRequests
+      .listMine()
+      .then((all) => {
+        if (active) {
+          // Requests associated with this trip or unassociated airport transfers
+          setRequests(all.filter((r) => r.tripId === trip.id || !r.tripId));
+        }
+      })
+      .catch(() => {
+        if (active) setRequests([]);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [trip.accommodationId, trip.id]);
+
+  const activeAccommodation = trip.accommodationId ? accommodation : null;
+
+  const staySummary = computeStaySummary(
+    trip,
+    activeAccommodation ? activeAccommodation.name.en : null,
+    activeAccommodation?.priceRange
+      ? {
+          min: activeAccommodation.priceRange.min,
+          max: activeAccommodation.priceRange.max,
+          currency: activeAccommodation.priceRange.currency,
+        }
+      : null,
+  );
   const budgetTier = trip.budgetTier && isBudgetTier(trip.budgetTier) ? trip.budgetTier : null;
   const budgetStatus = getBudgetStatus(summary.costs, trip.budget);
   const budgetPercent = budgetStatus
@@ -199,9 +248,91 @@ export function BuilderSummary({ trip, summary }: BuilderSummaryProps) {
         </div>
       ) : null}
 
-      <p className="type-small text-on-surface-variant">
-        {t('trip.builder.summary.stayTransport')}
-      </p>
+      {/* Stay & Transport Real Integration Section */}
+      <div className="rounded-xl border border-hairline bg-surface-container-low p-space-md flex flex-col gap-space-sm">
+        <p className="type-label-sm text-primary">
+          {t('trip.builder.summary.stayTransportTitle', 'Stay & Transport')}
+        </p>
+
+        {/* Selected Stay */}
+        <div className="flex items-start gap-space-xs">
+          <BedIcon className="size-4 mt-0.5 text-secondary shrink-0" />
+          <div className="min-w-0">
+            {staySummary ? (
+              <>
+                <p className="type-title-sm font-semibold text-primary truncate">
+                  {staySummary.name}
+                </p>
+                <p className="type-small text-on-surface-variant">
+                  {staySummary.isUnpriced
+                    ? t('trip.builder.summary.stayUnpriced', 'Estimated nightly price not listed')
+                    : staySummary.estimatedTotalMin && staySummary.nights
+                      ? t(
+                          'trip.builder.summary.stayWithNights',
+                          'From {{nightly}} {{curr}}/night · Est. ~{{total}} {{curr}} ({{nights}} nights)',
+                          {
+                            nightly: staySummary.nightlyMin,
+                            curr: staySummary.currency,
+                            total: staySummary.estimatedTotalMin,
+                            nights: staySummary.nights,
+                          },
+                        )
+                      : t('trip.builder.summary.stayNightly', 'From {{nightly}} {{curr}}/night', {
+                          nightly: staySummary.nightlyMin,
+                          curr: staySummary.currency,
+                        })}
+                </p>
+              </>
+            ) : (
+              <p className="type-small text-on-surface-variant">
+                {t('trip.builder.summary.noStaySelected', 'No accommodation selected yet.')}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* Transport Requests */}
+        <div className="flex items-start gap-space-xs pt-space-xs border-t border-hairline">
+          <CarIcon className="size-4 mt-0.5 text-secondary shrink-0" />
+          <div className="min-w-0">
+            {requests.length > 0 ? (
+              <div className="flex flex-col gap-1">
+                <p className="type-small font-semibold text-primary">
+                  {t('trip.builder.summary.transferCount', '{{count}} transfer request', {
+                    count: requests.length,
+                  })}
+                </p>
+                <div className="flex flex-wrap gap-1">
+                  {requests.map((r) => (
+                    <Badge
+                      key={r.id}
+                      tone={
+                        r.status === 'confirmed'
+                          ? 'success'
+                          : r.status === 'cancelled'
+                            ? 'danger'
+                            : 'warning'
+                      }
+                      size="sm"
+                    >
+                      {r.status === 'confirmed'
+                        ? t('booking.status.confirmed', 'Confirmed')
+                        : r.status === 'cancelled'
+                          ? t('booking.status.cancelled', 'Cancelled')
+                          : t('booking.status.pending', 'Pending')}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <p className="type-small text-on-surface-variant">
+                {t('trip.builder.summary.noTransfers', 'No airport transfer requests.')}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+
       <p className="type-small text-on-surface-variant">{t('trip.builder.summary.demoNote')}</p>
     </Card>
   );

@@ -745,5 +745,48 @@
     "entranceLocation": "Verified visitor entrance",
     "nearbyRadiusNotice": "Showing places within ~1 km (straight-line) of this visitor entrance.",
     "straightLineFromStop": "{{dist}} straight-line"
+  },
+  "stayTransport": {
+    "meta": {
+      "title": "Stay & Transport"
+    },
+    "header": {
+      "eyebrow": "Sanctuaries & Transit",
+      "title": "Stay & Transport",
+      "subtitle": "Compare places to stay and seamless ways to get around Cairo, with estimated prices clearly labeled."
+    },
+    "tabs": {
+      "accommodation": "Accommodation",
+      "transportation": "Transportation"
+    },
+    "filters": {
+      "type": "Type:",
+      "amenity": "Amenity:"
+    },
+    "accommodation": {
+      "externalBadge": "External booking"
+    },
+    "transport": {
+      "managedBadge": "Managed Request",
+      "externalBadge": "External booking",
+      "requestCta": "Request Transfer",
+      "viewProviderCta": "View on provider ↗"
+    },
+    "requests": {
+      "heading": "Your Transfer Requests",
+      "cancel": "Cancel request",
+      "simulateConfirm": "Simulate Confirmation"
+    },
+    "requestModal": {
+      "title": "Request Airport Chauffeur Transfer",
+      "desc": "Enter your flight and transfer details. This creates a pending request."
+    }
+  },
+  "booking": {
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled"
+    }
   }
 }

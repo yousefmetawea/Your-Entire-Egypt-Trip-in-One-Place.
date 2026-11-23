@@ -429,7 +429,17 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
 
   const accommodation: AccommodationService = {
     list(query: AccommodationQuery = {}) {
-      return run(() => seedAccommodation.filter((item) => !query.type || item.type === query.type));
+      return run(() =>
+        seedAccommodation.filter((item) => {
+          if (query.type && item.type !== query.type) return false;
+          if (
+            query.amenity &&
+            !item.amenities.some((a) => a.toLowerCase().includes(query.amenity!.toLowerCase()))
+          )
+            return false;
+          return true;
+        }),
+      );
     },
     getById(id) {
       return run(() => {
@@ -903,6 +913,62 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
         }
 
         return request;
+      });
+    },
+    cancel(id) {
+      return run(() => {
+        const request = store.getState().bookingRequests.find((c) => c.id === id);
+        if (!request) {
+          throw new ServiceError('NOT_FOUND', `Booking request "${id}" was not found.`);
+        }
+        if (request.status !== 'pending') {
+          throw new ServiceError(
+            'VALIDATION',
+            `Cannot cancel request in "${request.status}" status.`,
+          );
+        }
+        const now = new Date().toISOString();
+        const updated: BookingRequest = {
+          ...request,
+          status: 'cancelled',
+          statusHistory: [
+            ...request.statusHistory,
+            { status: 'cancelled', changedAt: now, note: 'Cancelled by user request.' },
+          ],
+        };
+        store.update((state) => ({
+          ...state,
+          bookingRequests: state.bookingRequests.map((r) => (r.id === id ? updated : r)),
+        }));
+        return updated;
+      });
+    },
+    simulateConfirm(id) {
+      return run(() => {
+        const request = store.getState().bookingRequests.find((c) => c.id === id);
+        if (!request) {
+          throw new ServiceError('NOT_FOUND', `Booking request "${id}" was not found.`);
+        }
+        if (request.status !== 'pending') {
+          throw new ServiceError(
+            'VALIDATION',
+            `Cannot confirm request in "${request.status}" status.`,
+          );
+        }
+        const now = new Date().toISOString();
+        const updated: BookingRequest = {
+          ...request,
+          status: 'confirmed',
+          statusHistory: [
+            ...request.statusHistory,
+            { status: 'confirmed', changedAt: now, note: 'Simulated provider confirmation.' },
+          ],
+        };
+        store.update((state) => ({
+          ...state,
+          bookingRequests: state.bookingRequests.map((r) => (r.id === id ? updated : r)),
+        }));
+        return updated;
       });
     },
   };

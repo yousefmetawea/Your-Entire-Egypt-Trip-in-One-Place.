@@ -54,7 +54,8 @@
 - Component APIs are typed. Styling uses a small `cn` class joiner; no CVA, `tailwind-merge`, or icon library was added.
 - Framer Motion is limited to shared variants and coordinated entrances. CSS handles hover and focus transitions; `MotionConfig reducedMotion="user"` and global CSS honour reduced-motion preferences. There are no ambient loops.
 - The Phase 1 showcase reviews tokens, typography, components, motion, and a static English RTL preview. In Phase 2 it moved to the dev-only `/design-system` route, outside the product layout, and is excluded from production builds.
-- Phases 1 and 2 are committed. Phase 3 is committed. Phases 4–6 are implemented; Phase 6 is pending review.
+- Phases 1 and 2 are committed. Phase 3 is committed. Phases 4–7 are implemented. Phase 8 implements the `/stay-transport` comparison page with Accommodation and Transportation tabs, fictional demo catalogs, internal airport transfer request flow with audit history and simulated confirmation, accommodation map, and builder summary stay integration.
+- Phase work lives on dedicated branch `phase-8-stay-transport`. Changes are uncommitted pending review.
 
 ## App shell and mock data (Phase 2)
 
