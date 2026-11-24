@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import type { Place, Trip, TripActivity, TripDay } from '../../types';
 import type { TripPhaseInfo } from '../../lib/dashboard/tripPhase';
 import { formatIsoDate } from '../../lib/date';
@@ -13,6 +14,8 @@ export interface TodayItineraryProps {
 }
 
 export function TodayItinerary({ trip, tripPhaseInfo, places }: TodayItineraryProps) {
+  const { i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
   // Allow user to switch day view (defaults to the active day calculated by tripPhaseInfo)
   const defaultDayIndex = tripPhaseInfo.dayNumber ? tripPhaseInfo.dayNumber - 1 : 0;
   const [selectedDayIndex, setSelectedDayIndex] = useState(
@@ -124,7 +127,9 @@ export function TodayItinerary({ trip, tripPhaseInfo, places }: TodayItineraryPr
 
             const title =
               activity.source.type === 'place'
-                ? (place?.name.en ?? 'Place Activity')
+                ? isAr && place?.name.ar
+                  ? place.name.ar
+                  : (place?.name.en ?? 'Place Activity')
                 : activity.source.title;
 
             const timeLabel = activity.startTime ? activity.startTime : 'Time not set';

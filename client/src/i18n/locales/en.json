@@ -11,11 +11,11 @@
   },
   "home": {
     "hero": {
-      "badge": "Your Cairo journey starts here",
-      "title": "Discover Cairo.",
-      "titleAccent": "Your Way.",
-      "description": "Explore the stories, landmarks, and culture that make Cairo unforgettable.",
-      "demo": "Demo experience · No live prices or availability",
+      "badge": "Discover Egypt. Your Way.",
+      "title": "Egypt Is More Than",
+      "titleAccent": "You Imagine.",
+      "description": "Ancient wonders, vibrant cities, hidden gems, and unforgettable experiences. Your Egypt story starts here.",
+      "demo": "Estimated guidance · No live booking claims",
       "search": {
         "whereLabel": "Where to explore?",
         "wherePlaceholder": "Giza, Islamic Cairo, Zamalek",
@@ -692,7 +692,14 @@
       "islamic-cairo": "Islamic Cairo",
       "coptic-cairo": "Coptic Cairo",
       "zamalek": "Zamalek",
-      "old-cairo": "Old Cairo"
+      "old-cairo": "Old Cairo",
+      "luxor": "Luxor",
+      "aswan": "Aswan",
+      "alexandria": "Alexandria",
+      "red-sea": "Red Sea",
+      "sinai": "Sinai",
+      "western-desert": "Western Desert",
+      "siwa": "Siwa"
     },
     "durations": {
       "under-2h": "Under 2 hours",
@@ -708,7 +715,7 @@
   "footer": {
     "description": "Discover places, shape a thoughtful itinerary, and keep the details of your Egypt trip together.",
     "note": "Demo experience · No live bookings",
-    "legal": "© 2026 Discover Cairo. Demo experience; no live prices or availability.",
+    "legal": "© 2026 YourTrip. Transparent guidance; estimated prices.",
     "exploreHeading": "Explore",
     "planHeading": "Plan",
     "accountHeading": "Account",
@@ -787,6 +794,36 @@
       "pending": "Pending",
       "confirmed": "Confirmed",
       "cancelled": "Cancelled"
+    }
+  },
+  "auth": {
+    "login": {
+      "eyebrow": "Welcome Back",
+      "title": "Sign In to Your Journey",
+      "subtitle": "Access your personalized itineraries, bookings, and saved places across Egypt.",
+      "email": "Email Address",
+      "password": "Password",
+      "submit": "Sign In",
+      "submitting": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create one now",
+      "imageCaption": "Temple of Karnak, Luxor",
+      "imageAlt": "The grand hypostyle hall of Karnak Temple at twilight"
+    },
+    "register": {
+      "eyebrow": "Begin Your Voyage",
+      "title": "Create Your Account",
+      "subtitle": "Save your Egypt itineraries, curate bespoke stays, and manage private transport seamlessly.",
+      "name": "Full Name",
+      "email": "Email Address",
+      "password": "Password",
+      "passwordHint": "At least 8 characters",
+      "submit": "Create Account",
+      "submitting": "Creating account...",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in instead",
+      "imageCaption": "White Desert National Park",
+      "imageAlt": "Surreal chalk rock formations under a sunset sky in the White Desert"
     }
   }
 }

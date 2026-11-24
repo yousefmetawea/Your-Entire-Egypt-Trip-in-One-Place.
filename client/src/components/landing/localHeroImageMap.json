@@ -1,0 +1,27 @@
+{
+  "layer_01_giza": {
+    "local": "/images/hero/pyramids.jpg",
+    "fallback": "https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1600&q=80",
+    "alt": "The Great Pyramids of Giza"
+  },
+  "layer_02_karnak": {
+    "local": "/images/hero/karnak.jpg",
+    "fallback": "https://images.unsplash.com/photo-1781624617165-1058040d1906?auto=format&fit=crop&w=1600&q=80",
+    "alt": "Karnak Temple Columns in Luxor"
+  },
+  "layer_03_philae": {
+    "local": "/images/hero/philae.jpg",
+    "fallback": "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1600&q=80",
+    "alt": "Philae Island Temple in Aswan"
+  },
+  "layer_04_white_desert": {
+    "local": "/images/hero/white-desert.jpg",
+    "fallback": "https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=1600&q=80",
+    "alt": "Chalk rock formations of the White Desert"
+  },
+  "layer_last_siwa": {
+    "local": "/images/hero/siwa.jpg",
+    "fallback": "https://images.unsplash.com/photo-1771838877353-c1a58cfd399f?auto=format&fit=crop&w=1600&q=80",
+    "alt": "Salt Lakes and Palm Groves of Siwa Oasis"
+  }
+}

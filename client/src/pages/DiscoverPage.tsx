@@ -6,6 +6,7 @@ import type { DurationFilter } from '../lib/catalog';
 import {
   EMPTY_DISCOVER_FILTERS,
   filterPlaces,
+  hasActiveFilters,
   parseDiscoverState,
   serializeDiscoverState,
 } from '../lib/discover';
@@ -20,6 +21,7 @@ import { Button } from '../components/ui/Button';
 import { Container } from '../components/ui/Container';
 import { Section } from '../components/ui/Section';
 import { InfoIcon } from '../components/ui/icons';
+import { SplitText } from '../components/motion/SplitText';
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
@@ -120,9 +122,9 @@ export default function DiscoverPage() {
               {t('discover.eyebrow')}
             </p>
             <h1 id="discover-heading" className="type-headline mt-space-sm text-primary">
-              {t('discover.title')}
+              <SplitText>{t('discover.title')}</SplitText>
             </h1>
-            <p className="type-body-lg mt-space-sm max-w-2xl text-on-surface-variant">
+            <p className="type-body-lg mt-space-sm max-w-2xl text-on-surface-variant font-sans">
               {t('discover.description')}
             </p>
           </div>
@@ -201,9 +203,17 @@ export default function DiscoverPage() {
               }
             />
           ) : (
-            <div className="grid grid-cols-1 gap-gutter-lg md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-gutter-lg md:grid-cols-2 lg:grid-cols-3">
               {filteredPlaces.map((place, index) => (
-                <PlaceCard key={place.id} place={place} priority={index < 3} />
+                <PlaceCard
+                  key={place.id}
+                  place={place}
+                  variant={index === 0 && !hasActiveFilters(state.filters) ? 'feature' : 'compact'}
+                  className={
+                    index === 0 && !hasActiveFilters(state.filters) ? 'md:col-span-2' : undefined
+                  }
+                  priority={index < 3}
+                />
               ))}
             </div>
           )}

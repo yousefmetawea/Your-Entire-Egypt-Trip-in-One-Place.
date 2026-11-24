@@ -8,11 +8,26 @@ import {
   standardTransform,
 } from './common.js';
 
+export type PlaceArea =
+  | 'giza'
+  | 'downtown'
+  | 'islamic-cairo'
+  | 'coptic-cairo'
+  | 'zamalek'
+  | 'old-cairo'
+  | 'luxor'
+  | 'aswan'
+  | 'alexandria'
+  | 'red-sea'
+  | 'sinai'
+  | 'western-desert'
+  | 'siwa';
+
 export interface IPlace extends Document {
   id: string;
   slug: string;
   name: { en: string; ar?: string };
-  area: 'giza' | 'downtown' | 'islamic-cairo' | 'coptic-cairo' | 'zamalek' | 'old-cairo';
+  area: PlaceArea;
   category: 'history' | 'culture' | 'adventure' | 'food';
   description: { en: string; ar?: string } | null;
   history: { en: string; ar?: string } | null;
@@ -64,7 +79,21 @@ const placeSchema = new Schema<IPlace>(
     name: { type: localizedTextSchema, required: true },
     area: {
       type: String,
-      enum: ['giza', 'downtown', 'islamic-cairo', 'coptic-cairo', 'zamalek', 'old-cairo'],
+      enum: [
+        'giza',
+        'downtown',
+        'islamic-cairo',
+        'coptic-cairo',
+        'zamalek',
+        'old-cairo',
+        'luxor',
+        'aswan',
+        'alexandria',
+        'red-sea',
+        'sinai',
+        'western-desert',
+        'siwa',
+      ],
       required: true,
       index: true,
     },

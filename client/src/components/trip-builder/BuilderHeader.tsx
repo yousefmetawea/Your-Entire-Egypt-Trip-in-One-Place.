@@ -6,6 +6,7 @@ import { formatIsoDate } from '../../lib/date';
 import { getBudgetTierLabelKey, isBudgetTier } from '../../lib/planner/options';
 import { Badge } from '../ui/Badge';
 import { Button, ButtonLink } from '../ui/Button';
+import { SplitText } from '../motion/SplitText';
 import {
   AlertTriangleIcon,
   CalendarIcon,
@@ -115,7 +116,7 @@ export function BuilderHeader({
       <p className="type-label mt-space-md text-secondary">{t('trip.builder.eyebrow')}</p>
       <div className="mt-space-sm flex flex-wrap items-start gap-space-sm">
         <h1 id="trip-heading" className="type-display max-w-5xl text-balance text-primary">
-          {trip.title}
+          <SplitText as="span">{trip.title}</SplitText>
         </h1>
         <Button
           type="button"

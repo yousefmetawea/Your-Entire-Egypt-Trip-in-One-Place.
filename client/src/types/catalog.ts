@@ -10,7 +10,21 @@ import type {
 export type PlaceId = string;
 
 export type CairoArea =
-  'giza' | 'downtown' | 'islamic-cairo' | 'coptic-cairo' | 'zamalek' | 'old-cairo';
+  | 'giza'
+  | 'downtown'
+  | 'islamic-cairo'
+  | 'coptic-cairo'
+  | 'zamalek'
+  | 'old-cairo'
+  | 'luxor'
+  | 'aswan'
+  | 'alexandria'
+  | 'red-sea'
+  | 'sinai'
+  | 'western-desert'
+  | 'siwa';
+
+export type EgyptArea = CairoArea;
 
 export type PlaceCategory = 'history' | 'culture' | 'adventure' | 'food';
 
@@ -104,5 +118,6 @@ export interface ReadyMadeTrip {
   description: LocalizedText | null;
   durationDays: number;
   days: ReadyMadeTripDay[];
+  images?: ImageAsset[];
   isDemo: boolean;
 }

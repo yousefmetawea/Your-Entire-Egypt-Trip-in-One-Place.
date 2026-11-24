@@ -7,17 +7,17 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'bronze' | 'inve
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-space-xs whitespace-nowrap rounded-full border font-sans transition-[background-color,border-color,color,box-shadow] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 motion-safe:active:translate-y-px [&_svg]:size-4 [&_svg]:shrink-0';
+  'inline-flex items-center justify-center gap-space-xs whitespace-nowrap rounded-full border font-sans transition-[background-color,border-color,color,box-shadow] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 motion-safe:active:translate-y-px [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer';
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'border-primary-container bg-primary-container text-on-primary shadow-[0_4px_20px_-4px_rgba(31,31,31,0.18)] hover:border-secondary hover:bg-secondary hover:shadow-[0_8px_24px_-6px_rgba(119,89,40,0.28)] focus-visible:outline-secondary',
+    'border-primary bg-primary text-on-primary shadow-[0_4px_20px_-4px_rgba(23,40,32,0.22)] hover:border-secondary hover:shadow-[0_8px_24px_-6px_rgba(214,169,107,0.35)] focus-visible:outline-secondary',
   secondary:
-    'border-hairline-strong bg-surface-container-lowest text-primary shadow-resting hover:border-secondary hover:bg-secondary/10 focus-visible:outline-secondary',
+    'border-sand/60 bg-surface-container-lowest text-primary shadow-resting hover:border-secondary hover:bg-surface-container-low focus-visible:outline-secondary',
   ghost:
-    'border-transparent bg-transparent text-on-surface-variant hover:bg-surface-container hover:text-primary focus-visible:outline-secondary',
+    'border-transparent bg-transparent text-on-surface-variant hover:bg-surface-container-low hover:text-primary focus-visible:outline-secondary',
   bronze:
-    'border-secondary bg-secondary text-on-secondary shadow-resting hover:border-primary-container hover:bg-primary-container focus-visible:outline-secondary',
+    'border-secondary bg-secondary text-on-secondary shadow-resting hover:border-primary hover:bg-primary focus-visible:outline-secondary',
   inverse:
     'border-surface-container-lowest/20 bg-surface-container-lowest/10 text-on-primary backdrop-blur-md hover:border-surface-container-lowest hover:bg-surface-container-lowest hover:text-primary focus-visible:outline-secondary-fixed',
 };
@@ -65,19 +65,38 @@ export function Button({
   children,
   ...rest
 }: ButtonProps) {
+  const isExpandable = variant === 'primary' || variant === 'bronze';
+
   return (
-    <button type={type} className={classes(variant, size, fullWidth, className)} {...rest}>
-      {startIcon ? (
-        <span className="inline-flex shrink-0" aria-hidden="true">
-          {startIcon}
+    <button
+      type={type}
+      className={cn(
+        classes(variant, size, fullWidth, className),
+        isExpandable && 'group relative overflow-hidden',
+      )}
+      {...rest}
+    >
+      {isExpandable && (
+        <span
+          className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-full"
+          aria-hidden="true"
+        >
+          <span className="size-3 rounded-full bg-secondary opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[32] group-hover:opacity-100" />
         </span>
-      ) : null}
-      {children}
-      {endIcon ? (
-        <span className="inline-flex shrink-0" aria-hidden="true">
-          {endIcon}
-        </span>
-      ) : null}
+      )}
+      <span className="relative z-10 flex items-center justify-center gap-space-xs">
+        {startIcon ? (
+          <span className="inline-flex shrink-0" aria-hidden="true">
+            {startIcon}
+          </span>
+        ) : null}
+        {children}
+        {endIcon ? (
+          <span className="inline-flex shrink-0" aria-hidden="true">
+            {endIcon}
+          </span>
+        ) : null}
+      </span>
     </button>
   );
 }
@@ -103,19 +122,38 @@ export function ButtonLink({
   children,
   ...rest
 }: ButtonLinkProps) {
+  const isExpandable = variant === 'primary' || variant === 'bronze';
+
   return (
-    <Component href={href} className={classes(variant, size, fullWidth, className)} {...rest}>
-      {startIcon ? (
-        <span className="inline-flex shrink-0" aria-hidden="true">
-          {startIcon}
+    <Component
+      href={href}
+      className={cn(
+        classes(variant, size, fullWidth, className),
+        isExpandable && 'group relative overflow-hidden',
+      )}
+      {...rest}
+    >
+      {isExpandable && (
+        <span
+          className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-full"
+          aria-hidden="true"
+        >
+          <span className="size-3 rounded-full bg-secondary opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[32] group-hover:opacity-100" />
         </span>
-      ) : null}
-      {children}
-      {endIcon ? (
-        <span className="inline-flex shrink-0" aria-hidden="true">
-          {endIcon}
-        </span>
-      ) : null}
+      )}
+      <span className="relative z-10 flex items-center justify-center gap-space-xs">
+        {startIcon ? (
+          <span className="inline-flex shrink-0" aria-hidden="true">
+            {startIcon}
+          </span>
+        ) : null}
+        {children}
+        {endIcon ? (
+          <span className="inline-flex shrink-0" aria-hidden="true">
+            {endIcon}
+          </span>
+        ) : null}
+      </span>
     </Component>
   );
 }

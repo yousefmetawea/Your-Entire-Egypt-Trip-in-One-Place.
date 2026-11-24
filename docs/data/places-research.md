@@ -246,3 +246,145 @@ Conducted for Discover Cairo seed data update (Part 1 of Phase 7).
    - Talaat Harb, Khan el-Khalili, Hanging Church, Ben Ezra Synagogue, and Babylon Fortress are public spaces or active houses of worship without ticket admission fees. Consistent with strict rule #1 and #4, ticketPrice is left `null` and flagged in placeholders.
 4. **Cairo Opera House Pricing and Duration:**
    - No static general admission ticket exists (performances vary from 50 to 500+ EGP). Retained as `null` with `ticketPrice` and `avgVisitMinutes` in placeholders.
+
+---
+
+## 3. Nationwide Expansion Places (Milestone 2 Review)
+
+### 13. place_karnak_temple (`karnak-temple`)
+
+- **Coordinates:** `lat: 25.7188, lng: 32.6573` (Karnak Great Hypostyle Hall, Luxor).
+- **Opening Hours:** Daily 06:00 – 17:30.
+- **Ticket Price:** EGP 450 (foreign adult).
+- **Average Visit Duration:** 180 minutes.
+- **Confidence:** High (Ministry of Tourism and Antiquities).
+
+---
+
+### 14. place_valley_of_the_kings (`valley-of-the-kings`)
+
+- **Coordinates:** `lat: 25.7402, lng: 32.6014` (West Bank Necropolis, Luxor).
+- **Opening Hours:** Daily 06:00 – 17:00.
+- **Ticket Price:** EGP 600 (includes 3 tombs).
+- **Average Visit Duration:** 180 minutes.
+- **Confidence:** High (Ministry of Tourism and Antiquities).
+
+---
+
+### 15. place_luxor_temple (`luxor-temple`)
+
+- **Coordinates:** `lat: 25.6995, lng: 32.6394` (Luxor East Bank Corniche).
+- **Opening Hours:** Daily 06:00 – 22:00.
+- **Ticket Price:** EGP 400.
+- **Average Visit Duration:** 120 minutes.
+- **Confidence:** High (Ministry of Tourism and Antiquities).
+
+---
+
+### 16. place_philae_temple (`philae-temple`)
+
+- **Coordinates:** `lat: 24.0247, lng: 32.8844` (Agilkia Island, Aswan).
+- **Opening Hours:** Daily 07:00 – 17:00.
+- **Ticket Price:** EGP 450.
+- **Average Visit Duration:** 150 minutes.
+- **Confidence:** High (Ministry of Tourism and Antiquities).
+
+---
+
+### 17. place_abu_simbel (`abu-simbel`)
+
+- **Coordinates:** `lat: 22.3372, lng: 31.6258` (Lake Nasser, Nubia, Aswan).
+- **Opening Hours:** Daily 05:00 – 18:00.
+- **Ticket Price:** EGP 600.
+- **Average Visit Duration:** 180 minutes.
+- **Confidence:** High (Ministry of Tourism and Antiquities).
+
+---
+
+### 18. place_aswan_felucca_islands (`nile-felucca-sailing`)
+
+- **Coordinates:** `lat: 24.0934, lng: 32.8906` (Aswan First Cataract & Elephantine).
+- **Opening Hours:** Daily 08:00 – 18:00.
+- **Ticket Price:** EGP 350 (estimated standard private hour charter).
+- **Average Visit Duration:** 120 minutes.
+- **Confidence:** Medium (Estimated field rate).
+
+---
+
+### 19. place_citadel_of_qaitbay (`citadel-of-qaitbay`)
+
+- **Coordinates:** `lat: 31.2140, lng: 29.8856` (Eastern Harbour, Alexandria).
+- **Opening Hours:** Daily 09:00 – 17:00.
+- **Ticket Price:** EGP 200.
+- **Average Visit Duration:** 90 minutes.
+- **Confidence:** High (Ministry of Tourism and Antiquities).
+
+---
+
+### 20. place_bibliotheca_alexandrina (`bibliotheca-alexandrina`)
+
+- **Coordinates:** `lat: 31.2089, lng: 29.9092` (Shatby Corniche, Alexandria).
+- **Opening Hours:** Daily 09:00 – 19:00.
+- **Ticket Price:** EGP 150.
+- **Average Visit Duration:** 120 minutes.
+- **Confidence:** High (Bibliotheca Alexandrina official).
+
+---
+
+### 21. place_giftun_island (`giftun-island`)
+
+- **Coordinates:** `lat: 27.2345, lng: 33.9211` (Hurghada Marine Reserve, Red Sea).
+- **Opening Hours:** Daily 08:00 – 17:00.
+- **Ticket Price:** EGP 800 (estimated park fee + island transfer).
+- **Average Visit Duration:** 240 minutes.
+- **Confidence:** Medium (Red Sea Protectorate).
+
+---
+
+### 22. place_blue_hole_dahab (`blue-hole-dahab`)
+
+- **Coordinates:** `lat: 28.5724, lng: 34.5372` (Gulf of Aqaba, Dahab, Sinai).
+- **Opening Hours:** Daily 07:00 – 18:00.
+- **Ticket Price:** EGP 300 (estimated marine reserve fee).
+- **Average Visit Duration:** 180 minutes.
+- **Confidence:** Medium.
+
+---
+
+### 23. place_mount_sinai (`mount-sinai`)
+
+- **Coordinates:** `lat: 28.5393, lng: 33.9752` (Saint Catherine, South Sinai).
+- **Opening Hours:** Daily 00:00 – 23:59 (night trek access).
+- **Ticket Price:** EGP 350 (national park conservation fee).
+- **Average Visit Duration:** 300 minutes.
+- **Confidence:** Medium (Bedouin guide association standard).
+
+---
+
+### 24. place_white_desert_national_park (`white-desert-national-park`)
+
+- **Coordinates:** `lat: 27.2415, lng: 28.1882` (Farafra / Bahariya Depression, Western Desert).
+- **Opening Hours:** Daily 00:00 – 23:59.
+- **Ticket Price:** EGP 500 (conservation permit).
+- **Average Visit Duration:** 360 minutes.
+- **Confidence:** High (Egyptian Environmental Affairs Agency).
+
+---
+
+### 25. place_siwa_salt_lakes (`siwa-salt-lakes`)
+
+- **Coordinates:** `lat: 29.2032, lng: 25.5195` (Aghurmi / Zeitun, Siwa Oasis).
+- **Opening Hours:** Daily 08:00 – 18:00.
+- **Ticket Price:** EGP 100 (salt quarry community access).
+- **Average Visit Duration:** 120 minutes.
+- **Confidence:** High.
+
+---
+
+### 26. place_shali_fortress (`shali-fortress`)
+
+- **Coordinates:** `lat: 29.2038, lng: 25.5198` (Siwa Town Center).
+- **Opening Hours:** Daily 08:00 – 19:00.
+- **Ticket Price:** Free exterior heritage access (null).
+- **Average Visit Duration:** 75 minutes.
+- **Confidence:** High (Siwa Antiquities Inspectorate).

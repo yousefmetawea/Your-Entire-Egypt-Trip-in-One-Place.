@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import type { Accommodation } from '../../types';
 import { Badge } from '../ui/Badge';
 import { Card } from '../ui/Card';
@@ -8,6 +9,9 @@ export interface DashboardStayProps {
 }
 
 export function DashboardStay({ accommodation }: DashboardStayProps) {
+  const { i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
+  const name = isAr && accommodation?.name.ar ? accommodation.name.ar : accommodation?.name.en;
   return (
     <Card
       variant="surface"
@@ -48,9 +52,7 @@ export function DashboardStay({ accommodation }: DashboardStayProps) {
               <span className="type-label-sm uppercase tracking-wider text-secondary font-semibold text-[11px]">
                 {accommodation.type}
               </span>
-              <h4 className="font-serif text-lg text-primary font-medium mt-0.5">
-                {accommodation.name.en}
-              </h4>
+              <h4 className="font-serif text-lg text-primary font-medium mt-0.5">{name}</h4>
             </div>
 
             <Badge tone="glass-dark" size="sm">

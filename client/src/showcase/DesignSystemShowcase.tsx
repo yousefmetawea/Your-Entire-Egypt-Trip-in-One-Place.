@@ -60,7 +60,7 @@ export function DesignSystemShowcase() {
       </a>
 
       <Navbar
-        brandLabel="Discover Cairo"
+        brandLabel="YourTrip"
         brandHref="#top"
         links={navLinks}
         cta={{ label: 'Review status', href: '#status' }}
@@ -234,10 +234,10 @@ export function DesignSystemShowcase() {
       </main>
 
       <Footer
-        brandLabel="Discover Cairo"
+        brandLabel="YourTrip"
         brandHref="#top"
-        description="A temporary design-system review surface for the Discover Cairo working title. This page contains no product pages, bookings, prices, or live data."
-        note="Phase 1 · Not a product page"
+        description="A design-system review surface for the YourTrip platform. This page contains no product pages, bookings, prices, or live data."
+        note="Design System · Foundations & Primitives"
         columns={footerColumns}
         newsletter={{
           heading: 'Newsletter pattern',
@@ -246,11 +246,11 @@ export function DesignSystemShowcase() {
           emailPlaceholder: 'Your email address',
           submitLabel: 'Preview',
           onSubmit: () => {
-            setNewsletterStatus('This Phase 1 showcase form does not send or store data.');
+            setNewsletterStatus('This showcase form does not send or store data.');
           },
           status: newsletterStatus,
         }}
-        legal="© 2026 Discover Cairo working title. Design-system review build."
+        legal="© 2026 YourTrip. Design-system review build."
         metaLinks={[
           { label: 'Back to top', href: '#top' },
           { label: 'Review status', href: '#status' },

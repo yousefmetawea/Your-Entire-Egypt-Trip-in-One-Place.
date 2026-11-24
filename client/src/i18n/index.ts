@@ -6,7 +6,8 @@ import en from './locales/en.json';
 export const supportedLanguages = ['en', 'ar'] as const;
 export type SupportedLanguage = (typeof supportedLanguages)[number];
 
-const languageStorageKey = 'discover-cairo.language';
+const primaryLanguageStorageKey = 'yourtrip.language';
+const legacyLanguageStorageKey = 'discover-cairo.language';
 const defaultLanguage: SupportedLanguage = 'en';
 
 function isSupportedLanguage(value: string | null): value is SupportedLanguage {
@@ -14,8 +15,16 @@ function isSupportedLanguage(value: string | null): value is SupportedLanguage {
 }
 
 function readStoredLanguage(): SupportedLanguage {
-  const storedLanguage = window.localStorage.getItem(languageStorageKey);
-  return isSupportedLanguage(storedLanguage) ? storedLanguage : defaultLanguage;
+  const urlLang =
+    typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search).get('lang')
+      : null;
+  if (isSupportedLanguage(urlLang)) return urlLang;
+
+  const stored =
+    window.localStorage.getItem(primaryLanguageStorageKey) ??
+    window.localStorage.getItem(legacyLanguageStorageKey);
+  return isSupportedLanguage(stored) ? stored : defaultLanguage;
 }
 
 function updateDocumentLanguage(language: SupportedLanguage): void {
@@ -38,7 +47,8 @@ void i18n.use(initReactI18next).init({
 });
 
 export function setLanguage(language: SupportedLanguage): Promise<unknown> {
-  window.localStorage.setItem(languageStorageKey, language);
+  window.localStorage.setItem(primaryLanguageStorageKey, language);
+  window.localStorage.setItem(legacyLanguageStorageKey, language);
   updateDocumentLanguage(language);
   return i18n.changeLanguage(language);
 }

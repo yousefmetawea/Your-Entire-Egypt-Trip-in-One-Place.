@@ -75,7 +75,7 @@ export function Footer({
   return (
     <footer
       className={cn(
-        'w-full bg-surface pt-space-2xl pb-space-xl text-on-surface shadow-[0_-1px_12px_rgba(0,0,0,0.02)]',
+        'w-full border-t-[3px] border-secondary bg-surface-container-low pt-space-3xl pb-space-2xl text-on-surface transition-colors',
         className,
       )}
       {...rest}
@@ -85,21 +85,24 @@ export function Footer({
           <div className="flex flex-col gap-space-md lg:col-span-4">
             <Link
               href={brandHref}
-              className="w-fit font-display text-headline-md leading-none tracking-tight text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
+              className="group flex w-fit items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
             >
-              {brandLabel}
+              <span className="font-display text-[1.85rem] font-bold leading-none tracking-tight text-primary transition-colors group-hover:text-secondary">
+                {brandLabel}
+              </span>
+              <span className="size-2 rounded-full bg-secondary" aria-hidden="true" />
             </Link>
 
             {description ? (
-              <p className="max-w-sm font-sans text-body-md text-on-surface-variant">
+              <p className="max-w-sm font-sans text-body-md text-on-surface-variant leading-relaxed">
                 {description}
               </p>
             ) : null}
 
             {note ? (
-              <div className="flex items-center gap-space-sm pt-space-sm">
-                <span className="size-2 shrink-0 rounded-full bg-secondary" aria-hidden="true" />
-                <span className="font-sans text-label-md uppercase tracking-wider text-secondary">
+              <div className="flex items-center gap-space-sm pt-space-xs">
+                <span className="size-1.5 shrink-0 rounded-full bg-secondary" aria-hidden="true" />
+                <span className="font-sans text-xs uppercase tracking-widest text-secondary font-semibold">
                   {note}
                 </span>
               </div>
@@ -109,13 +112,13 @@ export function Footer({
           {columns.length > 0 ? (
             <div
               className={cn(
-                'grid grid-cols-2 gap-space-lg',
-                newsletter ? 'lg:col-span-4' : 'md:col-span-1 lg:col-span-8',
+                'grid grid-cols-2 gap-space-lg sm:grid-cols-3',
+                newsletter ? 'lg:col-span-5' : 'md:col-span-1 lg:col-span-8',
               )}
             >
               {columns.map((column) => (
                 <div key={column.heading} className="flex flex-col gap-space-sm">
-                  <h3 className="font-sans text-label-caps uppercase text-secondary">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-secondary">
                     {column.heading}
                   </h3>
                   <ul className="flex flex-col gap-space-xs">
@@ -123,7 +126,7 @@ export function Footer({
                       <li key={`${link.href}-${link.label}`}>
                         <Link
                           href={link.href}
-                          className="font-sans text-body-sm text-on-surface-variant transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                          className="font-sans text-sm text-on-surface-variant transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                         >
                           {link.label}
                         </Link>
@@ -136,20 +139,20 @@ export function Footer({
           ) : null}
 
           {newsletter ? (
-            <div className="flex flex-col gap-space-md md:col-span-2 lg:col-span-4">
-              <h3 className="font-sans text-label-caps uppercase text-secondary">
+            <div className="flex flex-col gap-space-md md:col-span-2 lg:col-span-3">
+              <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-secondary">
                 {newsletter.heading}
               </h3>
 
               {newsletter.description ? (
-                <p className="font-sans text-body-sm text-on-surface-variant">
+                <p className="font-sans text-sm text-on-surface-variant leading-relaxed">
                   {newsletter.description}
                 </p>
               ) : null}
 
               <form
                 onSubmit={handleNewsletterSubmit}
-                className="flex items-center gap-space-xs rounded-full bg-surface-container-low p-space-xs focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-secondary"
+                className="flex items-center gap-space-xs rounded-full border border-hairline bg-surface-container-low/70 p-1 focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/20"
               >
                 <Input
                   label={newsletter.emailLabel}
@@ -160,15 +163,15 @@ export function Footer({
                   required
                   autoComplete="email"
                   placeholder={newsletter.emailPlaceholder}
-                  containerClassName="min-w-0 flex-1"
+                  containerClassName="min-w-0 flex-1 px-3"
                 />
-                <Button type="submit" variant="bronze" size="sm">
+                <Button type="submit" variant="primary" size="sm" className="rounded-full shrink-0">
                   {newsletter.submitLabel}
                 </Button>
               </form>
 
               {newsletter.status ? (
-                <p role="status" className="font-sans text-body-sm text-on-surface-variant">
+                <p role="status" className="font-sans text-xs text-on-surface-variant">
                   {newsletter.status}
                 </p>
               ) : null}
@@ -177,11 +180,11 @@ export function Footer({
         </div>
 
         {hasBottomBar ? (
-          <div className="flex flex-col items-start justify-between gap-space-md pt-space-lg font-sans text-body-sm text-on-surface-variant md:flex-row md:items-center">
+          <div className="flex flex-col items-start justify-between gap-space-md border-t border-hairline/80 pt-space-lg font-sans text-xs text-on-surface-variant md:flex-row md:items-center">
             {legal ? <div>{legal}</div> : null}
 
             {metaLinks.length > 0 ? (
-              <div className="flex flex-wrap items-center gap-space-lg font-sans text-label-caps uppercase">
+              <div className="flex flex-wrap items-center gap-space-lg font-sans text-xs uppercase tracking-wider">
                 {metaLinks.map((link) => (
                   <Link
                     key={`${link.href}-${link.label}`}

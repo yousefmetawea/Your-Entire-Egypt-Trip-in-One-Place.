@@ -8,24 +8,26 @@ describe('featured places', () => {
 
     expect(FEATURED_PLACE_SLUGS).toEqual([
       'pyramids-of-giza',
+      'karnak-temple',
       'grand-egyptian-museum',
-      'khan-el-khalili',
-      'hanging-church',
-      'cairo-tower',
+      'philae-temple',
+      'siwa-salt-lakes',
+      'citadel-of-qaitbay',
     ]);
     expect(featured.map((place) => place.slug)).toEqual([...FEATURED_PLACE_SLUGS]);
   });
 
   it('skips missing slugs without failing', () => {
     const featured = selectFeaturedPlaces(
-      seedPlaces.filter((place) => place.slug !== 'hanging-church'),
+      seedPlaces.filter((place) => place.slug !== 'karnak-temple'),
     );
 
     expect(featured.map((place) => place.slug)).toEqual([
       'pyramids-of-giza',
       'grand-egyptian-museum',
-      'khan-el-khalili',
-      'cairo-tower',
+      'philae-temple',
+      'siwa-salt-lakes',
+      'citadel-of-qaitbay',
     ]);
   });
 

@@ -2,10 +2,11 @@ import type { Place } from '../types';
 
 export const FEATURED_PLACE_SLUGS = [
   'pyramids-of-giza',
+  'karnak-temple',
   'grand-egyptian-museum',
-  'khan-el-khalili',
-  'hanging-church',
-  'cairo-tower',
+  'philae-temple',
+  'siwa-salt-lakes',
+  'citadel-of-qaitbay',
 ] as const;
 
 export function selectFeaturedPlaces(places: readonly Place[]): Place[] {

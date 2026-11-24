@@ -1,10 +1,24 @@
 import { z } from 'zod';
 
+export const areaEnum = z.enum([
+  'giza',
+  'downtown',
+  'islamic-cairo',
+  'coptic-cairo',
+  'zamalek',
+  'old-cairo',
+  'luxor',
+  'aswan',
+  'alexandria',
+  'red-sea',
+  'sinai',
+  'western-desert',
+  'siwa',
+]);
+
 export const placeQuerySchema = z.object({
   search: z.string().optional(),
-  area: z
-    .enum(['giza', 'downtown', 'islamic-cairo', 'coptic-cairo', 'zamalek', 'old-cairo'])
-    .optional(),
+  area: areaEnum.optional(),
   category: z.enum(['history', 'culture', 'adventure', 'food']).optional(),
   page: z.coerce.number().int().positive().default(1),
   limit: z.coerce.number().int().positive().max(100).default(50),
@@ -12,9 +26,7 @@ export const placeQuerySchema = z.object({
 
 export const accommodationQuerySchema = z.object({
   type: z.enum(['hotel', 'hostel']).optional(),
-  area: z
-    .enum(['giza', 'downtown', 'islamic-cairo', 'coptic-cairo', 'zamalek', 'old-cairo'])
-    .optional(),
+  area: areaEnum.optional(),
   amenity: z.string().optional(),
   page: z.coerce.number().int().positive().default(1),
   limit: z.coerce.number().int().positive().max(100).default(50),

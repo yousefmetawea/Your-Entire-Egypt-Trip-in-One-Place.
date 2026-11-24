@@ -16,6 +16,17 @@ export const CAIRO_AREAS = [
   'old-cairo',
 ] as const satisfies readonly CairoArea[];
 
+export const EGYPT_AREAS = [
+  ...CAIRO_AREAS,
+  'luxor',
+  'aswan',
+  'alexandria',
+  'red-sea',
+  'sinai',
+  'western-desert',
+  'siwa',
+] as const satisfies readonly CairoArea[];
+
 export const DURATION_FILTERS = ['under-2h', '2-4h', 'over-4h'] as const;
 
 export type DurationFilter = (typeof DURATION_FILTERS)[number];
@@ -30,7 +41,7 @@ export function isPlaceCategory(value: string): value is PlaceCategory {
 }
 
 export function isCairoArea(value: string): value is CairoArea {
-  return (CAIRO_AREAS as readonly string[]).includes(value);
+  return (EGYPT_AREAS as readonly string[]).includes(value);
 }
 
 export function isDurationFilter(value: string): value is DurationFilter {
@@ -56,6 +67,13 @@ const areaSearchText: Record<CairoArea, string> = {
   'coptic-cairo': 'coptic cairo',
   zamalek: 'zamalek',
   'old-cairo': 'old cairo',
+  luxor: 'luxor',
+  aswan: 'aswan',
+  alexandria: 'alexandria',
+  'red-sea': 'red sea hurghada el gouna',
+  sinai: 'sinai dahab sharm el sheikh',
+  'western-desert': 'western desert bahariya',
+  siwa: 'siwa oasis',
 };
 
 export function getAreaSearchText(area: CairoArea): string {
