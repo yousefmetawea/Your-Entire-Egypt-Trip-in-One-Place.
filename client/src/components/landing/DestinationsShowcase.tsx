@@ -71,7 +71,7 @@ function ProjectCard({ place, config, index }: ProjectCardProps) {
               )}
             >
               <img
-                src={image}
+                src={image || '/images/placeholder.svg'}
                 alt={isAr && place.name.ar ? place.name.ar : place.name.en}
                 className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                 loading={index < 2 ? 'eager' : 'lazy'}
