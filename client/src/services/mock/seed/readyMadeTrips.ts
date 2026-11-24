@@ -79,7 +79,7 @@ export const seedReadyMadeTrips: readonly ReadyMadeTrip[] = [
     ],
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1771838877353-c1a58cfd399f?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Turquoise waters of Siwa salt lakes amidst golden sand dunes',
           ar: 'مياه بحيرات الملح الفيروزية وسط الكثبان الرملية الذهبية بسيوة',

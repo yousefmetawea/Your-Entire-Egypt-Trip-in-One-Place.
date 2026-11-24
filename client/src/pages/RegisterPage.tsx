@@ -48,7 +48,7 @@ export default function RegisterPage() {
             <div className="overflow-hidden rounded-2xl border border-hairline shadow-floating bg-surface">
               <div className="aspect-[4/5] w-full overflow-hidden bg-surface-container">
                 <img
-                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+                  src="https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=1200&q=80"
                   alt={t('auth.register.imageAlt')}
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                   loading="lazy"

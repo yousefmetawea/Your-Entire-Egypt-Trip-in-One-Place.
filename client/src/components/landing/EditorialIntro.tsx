@@ -13,7 +13,8 @@ export function EditorialIntro() {
   return (
     <Section tone="canvas" spacing="md" className="border-b border-hairline overflow-hidden">
       <Container>
-        <div className="grid grid-cols-1 items-start gap-space-xl lg:grid-cols-12">
+        {/* Top Header Block */}
+        <div className="grid grid-cols-1 items-start gap-space-xl lg:grid-cols-12 mb-space-2xl">
           {/* Eyebrow and Tag */}
           <div className="lg:col-span-3">
             <ScrollReveal>
@@ -78,6 +79,59 @@ export function EditorialIntro() {
                 </div>
               </ScrollReveal>
             </div>
+          </div>
+        </div>
+
+        {/* Asymmetrical Editorial Photography Diptych — STRICTLY NO text overlaid on images */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-end pt-space-md">
+          {/* Main Landscape Photo: Philae Temple Sanctuary, Aswan */}
+          <div className="md:col-span-7">
+            <ScrollReveal delay={0.2}>
+              <div className="group block">
+                <div className="aspect-[16/10] w-full overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-sm">
+                  <img
+                    src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80"
+                    alt={
+                      isAr
+                        ? 'معبد فيلة على ضفاف جزيرة النيل بأسوان وقت الغروب'
+                        : 'Temple of Isis on Philae island on the Nile, Aswan at sunset'
+                    }
+                    className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="mt-space-sm flex items-center justify-between text-xs text-on-surface-variant font-mono uppercase tracking-wider">
+                  <span>
+                    {isAr ? '(٠١ / معبد فيلة — أسوان)' : '( 01 / PHILAE SANCTUARY — ASWAN )'}
+                  </span>
+                  <span>{isAr ? 'نهر النيل الخالد' : 'THE NILE VALLEY'}</span>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Staggered Vertical Photo: Surreal Chalk Monoliths, White Desert */}
+          <div className="md:col-span-5">
+            <ScrollReveal delay={0.35}>
+              <div className="group block">
+                <div className="aspect-[4/3] md:aspect-[4/5] w-full overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-sm">
+                  <img
+                    src="https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=1000&q=80"
+                    alt={
+                      isAr
+                        ? 'تكوينات الصخور الطباشيرية الطبيعية المنحوتة بالرياح في الصحراء البيضاء'
+                        : 'Surreal wind-sculpted natural chalk rock monoliths in the White Desert'
+                    }
+                    className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="mt-space-sm flex items-center justify-between text-xs text-on-surface-variant font-mono uppercase tracking-wider">
+                  <span>{isAr ? '(٠٢ / الصحراء البيضاء)' : '( 02 / WHITE DESERT MONOLITHS )'}</span>
+                  <span>{isAr ? 'واحات مصر الغربية' : 'WESTERN DESERT'}</span>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </Container>

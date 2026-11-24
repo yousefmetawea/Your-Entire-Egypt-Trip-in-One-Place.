@@ -52,7 +52,7 @@ export function CuratedJourneysSection() {
             const daysCount = trip.durationDays || trip.days.length;
             const coverImage =
               trip.images?.[0]?.src ||
-              'https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80';
+              'https://images.unsplash.com/photo-1781624617165-1058040d1906?auto=format&fit=crop&w=1200&q=80';
 
             return (
               <ScrollReveal key={trip.id} delay={index * 0.12} className="h-full">

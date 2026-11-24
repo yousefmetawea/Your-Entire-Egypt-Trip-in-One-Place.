@@ -146,7 +146,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1579606032822-6b9409bb10be?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1560253653-8395b9b427b7?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Belle Époque architecture along Talaat Harb Street',
           ar: 'العمارة التراثية الكلاسيكية في شارع طلعت حرب',
@@ -179,7 +179,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1553913861-c0fddf2619ee?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Lanterns and brass lamps glowing inside Khan el-Khalili',
           ar: 'فوانيس وقناديل نحاسية مضاءة في أزقة خان الخليلي التاريخية',
@@ -212,7 +212,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Medieval stone minarets and carved facades on Al-Muizz Street',
           ar: 'المآذن الحجرية والواجهات المنقوشة في شارع المعز التاريخي',
@@ -278,7 +278,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1548625361-16a75f9226cb?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Historic sanctuary and detailed woodwork of Ben Ezra Synagogue',
           ar: 'النقوش الخشبية والتفاصيل المعمارية بمعبد بن عزرا',
@@ -383,7 +383,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Ancient Roman circular brick bastions of Babylon Fortress',
           ar: 'الأبراج الدائرية الرومانية لحصن بابليون في مصر القديمة',
@@ -416,7 +416,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1548625361-16a75f9226cb?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Subterranean pointed arch stone chamber of the Rhoda Nilometer',
           ar: 'العقود الحجرية والعمود المقوس بمقياس النيل في الروضة',
@@ -449,14 +449,14 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1781624617165-1058040d1906?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Towering columns of the Great Hypostyle Hall at Karnak Temple in Luxor',
           ar: 'صالة الأعمدة الكبرى المهيبة بمعبد الكرنك في الأقصر',
         },
         width: 1200,
         height: 800,
-        credit: 'Unsplash / Alex Azabache',
+        credit: 'Unsplash / Karnak Sunset',
       },
     ],
     location: { lat: 25.7188, lng: 32.6573 },
@@ -482,14 +482,14 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1782855409538-63e79ea4a1a9?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Entrance to royal rock tombs in the Valley of the Kings, West Bank Luxor',
           ar: 'مدخل المقابر الملكية المنحوتة في صخور وادي الملوك بالبر الغربي بالأقصر',
         },
         width: 1200,
         height: 800,
-        credit: 'Unsplash / Simon Berger',
+        credit: 'Unsplash / Thebes Cliffs',
       },
     ],
     location: { lat: 25.7402, lng: 32.6014 },
@@ -515,14 +515,14 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1761056920622-94346373099e?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Ramses colossi and illuminated pylon of Luxor Temple at twilight',
           ar: 'تماثيل رمسيس وصرح معبد الأقصر المضاء وقت الغسق',
         },
         width: 1200,
         height: 800,
-        credit: 'Unsplash / Jeremy Zero',
+        credit: 'Unsplash / Luxor Heritage',
       },
     ],
     location: { lat: 25.6995, lng: 32.6394 },
@@ -548,14 +548,14 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Philae Temple standing over the tranquil blue waters of Aswan',
           ar: 'معبد فيلة يشمخ فوق المياه الفيروزية الصافية في أسوان',
         },
         width: 1200,
         height: 800,
-        credit: 'Unsplash / Travel Scenery',
+        credit: 'Unsplash / Alex Azabache',
       },
     ],
     location: { lat: 24.0247, lng: 32.8844 },
@@ -581,14 +581,14 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1779366243925-7adf95b419ac?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Colossal seated statues of Ramesses II at the Great Temple of Abu Simbel',
           ar: 'التماثيل الأربعة العملاقة للملك رمسيس الثاني في واجهة معبد أبو سمبل',
         },
         width: 1200,
         height: 800,
-        credit: 'Unsplash / Egypt Wonders',
+        credit: 'Unsplash / Colossi of Thebes',
       },
     ],
     location: { lat: 22.3372, lng: 31.6258 },
@@ -617,7 +617,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Traditional white-sailed felucca navigating the Nile river at sunset in Aswan',
           ar: 'فلوكة شراعية بيضاء تبحر في نهر النيل عند المغيب بأسوان',
@@ -650,7 +650,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1682090500311-9e57a5a57390?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Stone ramparts of the Citadel of Qaitbay overlooking the Mediterranean in Alexandria',
           ar: 'أسوار قلعة قايتباي الحجرية المطلة على مياه البحر الأبيض المتوسط بالإسكندرية',
@@ -683,7 +683,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1548625361-16a75f9226cb?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1697546889969-27f7b5be8664?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Granite curved exterior of Bibliotheca Alexandrina carved with world scripts',
           ar: 'الواجهة الجرانيتية المنحنية لمكتبة الإسكندرية المنقوشة بحروف لغات العالم',
@@ -815,14 +815,14 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Wind-carved white chalk rock sculptures in the Egyptian White Desert',
           ar: 'تكوينات صخرية طباشيرية بيضاء نحتتها الطبيعة في الصحراء البيضاء',
         },
         width: 1200,
         height: 800,
-        credit: 'Unsplash / Sahara Wonders',
+        credit: 'Unsplash / Simon Berger',
       },
     ],
     location: { lat: 27.2415, lng: 28.1882 },
@@ -848,7 +848,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1771838877353-c1a58cfd399f?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Emerald turquoise mineral salt pools surrounded by crystalline white shores in Siwa',
           ar: 'بحيرات الملح الفيروزية الصافية المحاطة ببلورات الملح الأبيض في سيوة',
@@ -881,7 +881,7 @@ export const seedPlaces: readonly Place[] = [
     history: null,
     images: [
       {
-        src: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+        src: 'https://images.unsplash.com/photo-1771838877341-36157f26dd58?auto=format&fit=crop&w=1200&q=80',
         alt: {
           en: 'Ancient kershef mud-brick ruins of Shali Fortress glowing at dusk in Siwa',
           ar: 'أطلال قلعة شالي الأثرية المبنية من الطين والملح تتلألأ عند الغروب بسيوة',

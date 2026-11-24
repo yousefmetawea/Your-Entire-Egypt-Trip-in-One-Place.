@@ -47,7 +47,7 @@ export function Hero() {
   const tickerItems = isAr ? EGYPT_DESTINATION_TICKER_AR : EGYPT_DESTINATION_TICKER_EN;
 
   return (
-    <section className="relative isolate -mt-24 flex min-h-[52rem] flex-col justify-between overflow-hidden bg-surface-container-low text-on-surface md:-mt-28 md:min-h-[58rem]">
+    <section className="relative isolate -mt-24 flex min-h-[54rem] flex-col justify-between overflow-hidden bg-surface-container-low text-on-surface md:-mt-28 md:min-h-[60rem]">
       {/* Subtle OVO Ambient Lighting */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,40,43,0.03),transparent_70%)]" />
@@ -64,10 +64,11 @@ export function Hero() {
         />
       </div>
 
-      {/* Main Asymmetric Hero Composition */}
-      <div className="relative z-10 mx-auto flex w-full max-w-page flex-1 flex-col justify-center px-gutter-sm pb-space-xl pt-36 md:px-margin-md md:pt-44 lg:px-margin-lg">
+      {/* Main Hero Container */}
+      <div className="relative z-10 mx-auto flex w-full max-w-page flex-1 flex-col justify-center px-gutter-sm pb-space-lg pt-36 md:px-margin-md md:pt-40 lg:px-margin-lg">
+        {/* Top Hero Row: Editorial Left + Layered Photo Deck Right */}
         <div className="grid grid-cols-1 items-center gap-gutter-lg lg:grid-cols-12">
-          {/* Left Editorial Headline & Controls */}
+          {/* Left Editorial Headline & Narrative */}
           <div className="flex flex-col gap-space-md lg:col-span-7">
             <div>
               <Badge
@@ -98,29 +99,12 @@ export function Hero() {
               {t('home.hero.description')}
             </motion.p>
 
-            {/* Seamless Search Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="mt-space-sm w-full max-w-2xl"
-            >
-              <HeroSearch
-                from={from}
-                to={to}
-                travelers={travelers}
-                onFromChange={setFrom}
-                onToChange={setTo}
-                onTravelersChange={setTravelers}
-              />
-            </motion.div>
-
-            {/* CTA with expanding circle hover effect + Trust Disclosure */}
+            {/* Quick Action & Trust Disclosure */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-space-xs flex flex-wrap items-center gap-space-md"
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="flex flex-wrap items-center gap-space-md pt-space-xs"
             >
               <LuxuryButton
                 href={createPlanHref({ from, to, travelers })}
@@ -143,9 +127,26 @@ export function Hero() {
             <HeroImageDeck />
           </div>
         </div>
+
+        {/* Full-Width Spacious Floating Luxury Search Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.55 }}
+          className="mt-space-xl w-full"
+        >
+          <HeroSearch
+            from={from}
+            to={to}
+            travelers={travelers}
+            onFromChange={setFrom}
+            onToChange={setTo}
+            onTravelersChange={setTravelers}
+          />
+        </motion.div>
       </div>
 
-      {/* Moving Regional Ticker Strip across bottom (OVO Legion Partners / Showcase pattern) */}
+      {/* Moving Regional Ticker Strip across bottom */}
       <div className="relative z-10 border-t border-hairline bg-surface/90 py-space-sm backdrop-blur-md">
         <Marquee
           items={tickerItems}

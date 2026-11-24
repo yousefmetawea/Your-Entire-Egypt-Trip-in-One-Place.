@@ -45,7 +45,7 @@ export default function LoginPage() {
             <div className="overflow-hidden rounded-2xl border border-hairline shadow-floating bg-surface">
               <div className="aspect-[4/5] w-full overflow-hidden bg-surface-container">
                 <img
-                  src="https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80"
+                  src="https://images.unsplash.com/photo-1781624617165-1058040d1906?auto=format&fit=crop&w=1200&q=80"
                   alt={t('auth.login.imageAlt')}
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                   loading="lazy"

@@ -27,7 +27,7 @@ const DECK_IMAGES: DeckImage[] = [
   },
   {
     id: 'luxor-karnak',
-    src: 'https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1600&q=80',
+    src: 'https://images.unsplash.com/photo-1781624617165-1058040d1906?auto=format&fit=crop&w=1600&q=80',
     altEn: 'The towering hypostyle columns of Karnak Temple in Luxor',
     altAr: 'أعمدة بهو الكرنك الشامخة في الأقصر',
     titleEn: 'Karnak & The Valley of Kings',
@@ -47,7 +47,7 @@ const DECK_IMAGES: DeckImage[] = [
   },
   {
     id: 'siwa-oasis',
-    src: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1600&q=80',
+    src: 'https://images.unsplash.com/photo-1771838877353-c1a58cfd399f?auto=format&fit=crop&w=1600&q=80',
     altEn: 'The turquoise salt lakes and date palms of Siwa Oasis at sunset',
     altAr: 'بحيرات الملح الفيروزية ونخيل واحة سيوة عند الغروب',
     titleEn: 'Siwa Salt Lakes & Ancient Fortress',
@@ -57,7 +57,7 @@ const DECK_IMAGES: DeckImage[] = [
   },
   {
     id: 'white-desert',
-    src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80',
+    src: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=1600&q=80',
     altEn: 'Chalk rock sculptures under an immense starry sky in the White Desert',
     altAr: 'صخور الطباشير السريالية تحت سماء الصحراء البيضاء المرصعة بالنجوم',
     titleEn: 'White Desert National Park',

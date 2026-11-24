@@ -16,15 +16,17 @@ export function DestinationsShowcase() {
   const { data: places } = usePlaces();
   const featured = selectFeaturedPlaces(places);
 
-  // Take top 4 iconic places for the asymmetric showcase
-  const displayPlaces = featured.slice(0, 4);
+  // Take all 6 nationwide iconic destinations for the asymmetric showcase
+  const displayPlaces = featured.slice(0, 6);
 
-  // Asymmetric layout span patterns matching OVO Legion
+  // Asymmetric layout span patterns matching OVO Legion (8/4, 5/7, 7/5)
   const layoutConfigs = [
     { span: 'lg:col-span-8', aspect: 'aspect-[16/10]' },
     { span: 'lg:col-span-4', aspect: 'aspect-[4/5]' },
     { span: 'lg:col-span-5', aspect: 'aspect-[4/5]' },
     { span: 'lg:col-span-7', aspect: 'aspect-[16/10]' },
+    { span: 'lg:col-span-7', aspect: 'aspect-[16/10]' },
+    { span: 'lg:col-span-5', aspect: 'aspect-[4/5]' },
   ];
 
   return (
@@ -46,7 +48,7 @@ export function DestinationsShowcase() {
           <ScrollReveal delay={0.1}>
             <div className="flex items-center gap-space-md">
               <span className="type-label-sm uppercase tracking-wider text-on-surface-variant hidden sm:inline">
-                2026 — BESPOKE
+                2026 — NATIONWIDE
               </span>
               <LuxuryButton
                 href="/discover"
@@ -54,7 +56,7 @@ export function DestinationsShowcase() {
                 size="sm"
                 endIcon={<ArrowRightIcon className="rtl:rotate-180" />}
               >
-                {isAr ? 'استكشف كافة الوجهات' : 'View All Places'}
+                {isAr ? 'استكشف كافة الوجهات الـ 26' : 'View All 26 Places'}
               </LuxuryButton>
             </div>
           </ScrollReveal>
@@ -104,7 +106,7 @@ export function DestinationsShowcase() {
                         </h3>
                       </div>
 
-                      <div className="type-label text-on-surface-variant">
+                      <div className="type-label text-on-surface-variant font-mono text-xs uppercase tracking-wider">
                         ( {region} · {category} )
                       </div>
                     </div>
