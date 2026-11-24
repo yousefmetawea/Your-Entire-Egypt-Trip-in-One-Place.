@@ -15,6 +15,12 @@ function isSupportedLanguage(value: string | null): value is SupportedLanguage {
 }
 
 function readStoredLanguage(): SupportedLanguage {
+  const urlLang =
+    typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search).get('lang')
+      : null;
+  if (isSupportedLanguage(urlLang)) return urlLang;
+
   const stored =
     window.localStorage.getItem(primaryLanguageStorageKey) ??
     window.localStorage.getItem(legacyLanguageStorageKey);

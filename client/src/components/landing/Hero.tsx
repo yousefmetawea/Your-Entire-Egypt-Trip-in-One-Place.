@@ -53,7 +53,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,40,43,0.03),transparent_70%)]" />
       </div>
 
-      {/* Infinite Horizontal Typography Marquee Layer (OVO Legion Pattern) */}
+      {/* Infinite Horizontal Typography Marquee Layer (OVO Legion Pattern t-05348158) */}
       <div className="pointer-events-none absolute inset-x-0 top-24 md:top-28 z-0 overflow-hidden opacity-5 select-none">
         <Marquee
           items={[marqueeText, marqueeText]}
@@ -70,7 +70,11 @@ export function Hero() {
         <div className="grid grid-cols-1 items-center gap-gutter-lg lg:grid-cols-12">
           {/* Left Editorial Headline & Narrative */}
           <div className="flex flex-col gap-space-md lg:col-span-7">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.6 }}
+            >
               <Badge
                 tone="outline"
                 dot
@@ -79,21 +83,21 @@ export function Hero() {
               >
                 {t('home.hero.badge')}
               </Badge>
-            </div>
+            </motion.div>
 
             <div className="type-display text-primary leading-[1.06] max-w-2xl font-serif">
-              <SplitText as="h1" delay={0.1}>
+              <SplitText as="h1" delay={1.75}>
                 {t('home.hero.title')}
               </SplitText>{' '}
               <span className="italic text-secondary inline-block">
-                <SplitText delay={0.28}>{t('home.hero.titleAccent')}</SplitText>
+                <SplitText delay={1.95}>{t('home.hero.titleAccent')}</SplitText>
               </span>
             </div>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
+              transition={{ duration: 0.6, delay: 2.15 }}
               className="type-body-lg max-w-xl text-on-surface-variant leading-relaxed font-sans"
             >
               {t('home.hero.description')}
@@ -103,7 +107,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
+              transition={{ duration: 0.5, delay: 2.3 }}
               className="flex flex-wrap items-center gap-space-md pt-space-xs"
             >
               <LuxuryButton
@@ -132,7 +136,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.55 }}
+          transition={{ duration: 0.7, delay: 2.45 }}
           className="mt-space-xl w-full"
         >
           <HeroSearch
