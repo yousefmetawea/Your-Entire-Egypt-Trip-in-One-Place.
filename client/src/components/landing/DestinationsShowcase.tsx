@@ -11,6 +11,7 @@ import { Section } from '../ui/Section';
 import { LuxuryButton } from '../ui/LuxuryButton';
 import { ArrowRightIcon } from '../ui/icons';
 import { cn } from '../../lib/cn';
+import { getPlaceImageSources } from '../../lib/placeImages';
 import type { Place } from '../../types';
 
 interface ProjectCardProps {
@@ -45,7 +46,7 @@ function ProjectCard({ place, config, index }: ProjectCardProps) {
   const title = isAr && place.name.ar ? place.name.ar : place.name.en;
   const region = isAr && place.area ? t(`catalog.areas.${place.area}`, place.area) : place.area;
   const category = t(`catalog.categories.${place.category}`, place.category);
-  const image = place.images[0]?.src || '';
+  const { primary: image } = getPlaceImageSources({ slug: place.slug }, place.images[0]?.src);
 
   return (
     <div ref={cardRef} className={cn('col-span-12', config.span)}>
