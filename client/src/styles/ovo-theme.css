@@ -1,0 +1,30 @@
+@layer base {
+  :root {
+    /* OVO Legion palette */
+    --color-ovo-bg-base: #f2f2f2;
+    --color-ovo-bg-alt: #ececec;
+    --color-ovo-surface: #ffffff;
+    --color-ovo-surface-alt: #000000;
+    --color-ovo-text-primary: #000000;
+    --color-ovo-text-secondary: #141414;
+    --color-ovo-text-tertiary: #333333;
+    --color-ovo-border: #c6c5c1;
+    --color-ovo-border-strong: #acacac;
+    --color-ovo-red: #ff282b;
+    --color-ovo-red-hover: #ee1f22;
+  }
+}
+
+@layer utilities {
+  .bg-ovo-bg-base { background-color: var(--color-ovo-bg-base); }
+  .bg-ovo-bg-alt { background-color: var(--color-ovo-bg-alt); }
+  .bg-ovo-surface { background-color: var(--color-ovo-surface); }
+  .bg-ovo-surface-alt { background-color: var(--color-ovo-surface-alt); }
+  .text-ovo-primary { color: var(--color-ovo-text-primary); }
+  .text-ovo-secondary { color: var(--color-ovo-text-secondary); }
+  .text-ovo-tertiary { color: var(--color-ovo-text-tertiary); }
+  .border-ovo { border-color: var(--color-ovo-border); }
+  .border-ovo-strong { border-color: var(--color-ovo-border-strong); }
+  .text-ovo-red { color: var(--color-ovo-red); }
+  .hover\:text-ovo-red:hover { color: var(--color-ovo-red-hover); }
+}
