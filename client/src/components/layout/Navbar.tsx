@@ -1,7 +1,42 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { Link } from 'react-router';
+import { cn } from '../../lib/cn';
+import { useState, useId, useRef, useEffect } from 'react';
+
+export interface SimpleNavbarProps {
+  brandLabel?: string;
+  brandHref?: string;
+  links?: { label: string; to: string }[];
+  className?: string;
+}
+
+export const SimpleNavbar = ({
+  brandLabel = 'YourTrip',
+  brandHref = '/',
+  links = [
+    { label: 'Discover', to: '/discover' },
+    { label: 'My Trip', to: '/my-trip' },
+    { label: 'Login', to: '/login' },
+  ],
+  className,
+}: SimpleNavbarProps) => {
+  return (
+    <nav className={cn('bg-ovo-bg-base text-ovo-primary py-4 px-6 flex items-center justify-between', className)}>
+      <Link to={brandHref} className="text-2xl font-bold">
+        {brandLabel}
+      </Link>
+      <div className="space-x-4">
+        {links.map((l) => (
+          <Link key={l.to} to={l.to} className="hover:text-ovo-accent transition-colors">
+            {l.label}
+          </Link>
+        ))}
+      </div>
+    </nav>
+  );
+};
+
 import type { ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '../../lib/cn';
 import type { LayoutLinkComponent } from '../../lib/link';
 import { Button, ButtonLink } from '../ui/Button';
 import { CloseIcon, MenuIcon } from '../ui/icons';

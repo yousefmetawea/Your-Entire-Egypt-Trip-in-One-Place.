@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import ResponsiveImage from '../../components/ui/ResponsiveImage';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { cn } from '../../lib/cn';
@@ -85,6 +86,7 @@ export function HeroImageDeck({ className }: { className?: string }) {
   const shouldReduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
 
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
@@ -130,11 +132,11 @@ export function HeroImageDeck({ className }: { className?: string }) {
           transition={{ duration: 0.8, delay: 2.2, ease: [0.16, 1, 0.3, 1] }}
           className="hero-images-container _04 absolute inset-0 m-auto h-[75%] w-[82%] overflow-hidden rounded-2xl border border-hairline/80 bg-surface-container-low shadow-md"
         >
-          <img
-            src={layer4.src}
+          <ResponsiveImage
+            placeId={layer4.id}
             alt={isAr ? layer4.altAr : layer4.altEn}
             className="h-full w-full object-cover filter brightness-[0.88]"
-            loading="eager"
+            srcOverride={layer4.src}
           />
         </motion.div>
 
@@ -149,11 +151,11 @@ export function HeroImageDeck({ className }: { className?: string }) {
           transition={{ duration: 0.8, delay: 2.05, ease: [0.16, 1, 0.3, 1] }}
           className="hero-images-container _03 absolute inset-0 m-auto h-[80%] w-[85%] overflow-hidden rounded-2xl border border-hairline/80 bg-surface-container-low shadow-lg"
         >
-          <img
-            src={layer3.src}
+          <ResponsiveImage
+            placeId={layer3.id}
             alt={isAr ? layer3.altAr : layer3.altEn}
             className="h-full w-full object-cover filter brightness-[0.92]"
-            loading="eager"
+            srcOverride={layer3.src}
           />
         </motion.div>
 
@@ -168,11 +170,11 @@ export function HeroImageDeck({ className }: { className?: string }) {
           transition={{ duration: 0.8, delay: 1.9, ease: [0.16, 1, 0.3, 1] }}
           className="hero-images-container _02 absolute inset-0 m-auto h-[85%] w-[88%] overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-xl"
         >
-          <img
-            src={layer2.src}
+          <ResponsiveImage
+            placeId={layer2.id}
             alt={isAr ? layer2.altAr : layer2.altEn}
             className="h-full w-full object-cover filter brightness-[0.96]"
-            loading="eager"
+            srcOverride={layer2.src}
           />
         </motion.div>
 
@@ -186,11 +188,11 @@ export function HeroImageDeck({ className }: { className?: string }) {
           transition={{ duration: 0.8, delay: 1.75, ease: [0.16, 1, 0.3, 1] }}
           className="hero-images-container _01 absolute inset-0 m-auto h-[90%] w-[92%] overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-xl"
         >
-          <img
-            src={layer1.src}
+          <ResponsiveImage
+            placeId={layer1.id}
             alt={isAr ? layer1.altAr : layer1.altEn}
             className="h-full w-full object-cover"
-            loading="eager"
+            srcOverride={layer1.src}
           />
         </motion.div>
 
@@ -205,11 +207,11 @@ export function HeroImageDeck({ className }: { className?: string }) {
           transition={{ duration: 0.85, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
           className="hero-images-container-last relative z-10 h-full w-full overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-2xl"
         >
-          <img
-            src={primaryImage.src}
+          <ResponsiveImage
+            placeId={primaryImage.id}
             alt={isAr ? primaryImage.altAr : primaryImage.altEn}
             className="h-full w-full object-cover"
-            loading="eager"
+            srcOverride={primaryImage.src}
           />
         </motion.div>
       </div>

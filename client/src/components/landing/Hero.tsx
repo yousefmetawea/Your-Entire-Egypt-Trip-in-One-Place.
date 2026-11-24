@@ -6,31 +6,10 @@ import { Badge } from '../ui/Badge';
 import { LuxuryButton } from '../ui/LuxuryButton';
 import { ArrowRightIcon } from '../ui/icons';
 import { HeroSearch } from './HeroSearch';
-import { SplitText } from '../motion/SplitText';
+import AnimatedTitle from '../../components/motion/AnimatedTitle';
+import HeroTextLoop from '../../components/motion/HeroTextLoop';
 import { Marquee } from '../motion/Marquee';
 import { HeroImageDeck } from './HeroImageDeck';
-
-const EGYPT_DESTINATION_TICKER_EN = [
-  'Giza & Ancient Cairo',
-  'Luxor & The Valley of Kings',
-  'Aswan & Philae Island',
-  'Siwa Oasis Salt Sanctuaries',
-  'White Desert Sculptures',
-  'Alexandria Mediterranean Port',
-  'Red Sea Coral Reefs',
-  'Mount Sinai & Saint Catherine',
-];
-
-const EGYPT_DESTINATION_TICKER_AR = [
-  'الجيزة والقاهرة التاريخية',
-  'الأقصر ووادي الملوك',
-  'أسوان ومعبد فيلة',
-  'ملاذات سيوة الملحية',
-  'منحوتات الصحراء البيضاء',
-  'الإسكندرية عروس المتوسط',
-  'شعاب البحر الأحمر المرجانية',
-  'جبل موسى ودير سانت كاترين',
-];
 
 export function Hero() {
   const { t, i18n } = useTranslation();
@@ -75,25 +54,20 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1.6 }}
             >
-              <Badge
-                tone="outline"
-                dot
-                size="md"
-                className="bg-surface/80 border-hairline text-on-surface font-medium"
-              >
+              <Badge tone="outline" dot size="md" className="bg-surface/80 border-hairline text-on-surface font-medium">
                 {t('home.hero.badge')}
               </Badge>
             </motion.div>
-
-            <div className="type-display text-primary leading-[1.06] max-w-2xl font-serif">
-              <SplitText as="h1" delay={1.75}>
-                {t('home.hero.title')}
-              </SplitText>{' '}
-              <span className="italic text-secondary inline-block">
-                <SplitText delay={1.95}>{t('home.hero.titleAccent')}</SplitText>
-              </span>
-            </div>
-
+            {/* Hero Text Loop */}
+            <HeroTextLoop />
+            {/* Animated Title */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 2.0 }}
+            >
+              <AnimatedTitle title="We team up with visionary brands to create work that leaves a lasting mark." />
+            </motion.div>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -103,7 +77,6 @@ export function Hero() {
               {t('home.hero.description')}
             </motion.p>
 
-            {/* Quick Action & Trust Disclosure */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -126,7 +99,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Layered Animated Image Deck (Highest Priority Reference Pattern) */}
+          {/* Right Layered Animated Image Deck */}
           <div className="flex items-center justify-center lg:col-span-5 mt-space-lg lg:mt-0">
             <HeroImageDeck />
           </div>
@@ -162,3 +135,25 @@ export function Hero() {
     </section>
   );
 }
+
+const EGYPT_DESTINATION_TICKER_EN = [
+  'Giza & Ancient Cairo',
+  'Luxor & The Valley of Kings',
+  'Aswan & Philae Island',
+  'Siwa Oasis Salt Sanctuaries',
+  'White Desert Sculptures',
+  'Alexandria Mediterranean Port',
+  'Red Sea Coral Reefs',
+  'Mount Sinai & Saint Catherine',
+];
+
+const EGYPT_DESTINATION_TICKER_AR = [
+  'الجيزة والقاهرة التاريخية',
+  'الأقصر ووادي الملوك',
+  'أسوان ومعبد فيلة',
+  'ملاذات سيوة الملحية',
+  'منحوتات الصحراء البيضاء',
+  'الإسكندرية عروس المتوسط',
+  'شعاب البحر الأحمر المرجانية',
+  'جبل موسى ودير سانت كاترين',
+];
