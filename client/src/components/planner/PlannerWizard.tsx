@@ -1,24 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { PLANNER_STEPS } from '../../types';
 import { useTripPlanner } from '../../hooks/useTripPlanner';
-import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
-import { Card } from '../ui/Card';
-import { Container } from '../ui/Container';
 import { Modal } from '../ui/Modal';
-import { Section } from '../ui/Section';
 import { ArrowLeftIcon, ArrowRightIcon } from '../ui/icons';
 import { PlannerProgress } from './PlannerProgress';
 import { PlannerStepContent } from './PlannerStepContent';
-import { PlannerSummary } from './PlannerSummary';
+import { BoardingPass } from './BoardingPass';
+import { StageBackdrop } from './stage/StageBackdrop';
+import { RoutePanel } from './stage/RoutePanel';
+import './stage/stage.css';
 
 export function PlannerWizard() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const planner = useTripPlanner();
+  const reduce = useReducedMotion();
   const headingRef = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
   const [resetOpen, setResetOpen] = useState(false);
@@ -26,6 +26,14 @@ export function PlannerWizard() {
 
   const stepIndex = PLANNER_STEPS.indexOf(planner.step);
   const isLastStep = stepIndex === PLANNER_STEPS.length - 1;
+  const [track, setTrack] = useState<{ index: number; direction: 1 | -1 }>({
+    index: stepIndex,
+    direction: 1,
+  });
+  if (track.index !== stepIndex) {
+    setTrack({ index: stepIndex, direction: stepIndex > track.index ? 1 : -1 });
+  }
+  const direction = track.direction;
 
   useEffect(() => {
     if (firstRender.current) {
@@ -33,8 +41,8 @@ export function PlannerWizard() {
       return;
     }
 
-    headingRef.current?.focus();
-  }, [planner.step]);
+    headingRef.current?.focus({ preventScroll: true });
+  }, [stepIndex]);
 
   async function runGenerate(): Promise<void> {
     const result = await planner.generate();
@@ -83,77 +91,55 @@ export function PlannerWizard() {
       : t('planner.summary.error');
 
   return (
-    <Section tone="canvas" spacing="md" className="min-h-screen" aria-labelledby="planner-heading">
-      <Container>
-        <Card variant="surface" padding="lg" className="mb-space-xl">
-          <div className="flex flex-col gap-space-md md:flex-row md:items-start md:justify-between">
-            <div className="max-w-3xl">
-              <div className="flex flex-wrap items-center gap-space-sm">
-                <Badge tone="bronze" size="sm">
-                  {t('planner.eyebrow')}
-                </Badge>
-                <span className="type-label text-on-surface-variant">
-                  {t('planner.stepLabel', {
-                    current: stepIndex + 1,
-                    total: PLANNER_STEPS.length,
-                  })}
-                </span>
-              </div>
+    <section
+      aria-labelledby="planner-heading"
+      className="planner-stage relative -mt-24 min-h-[100svh] overflow-clip bg-[#07120d] text-[#eef3e8] md:-mt-28"
+    >
+      <StageBackdrop stepIndex={stepIndex} direction={direction} />
 
-              <h1 id="planner-heading" className="type-headline mt-space-sm text-primary">
-                {t('planner.title')}
-              </h1>
-              <p className="type-body-lg mt-space-sm max-w-2xl text-on-surface-variant">
-                {t('planner.description')}
-              </p>
-              <p className="type-small mt-space-sm text-on-surface-variant">
-                {t('planner.demoNote')}
-              </p>
-            </div>
+      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1320px] flex-col px-5 pt-28 md:px-10 md:pt-32">
+        <h1 id="planner-heading" className="sr-only">
+          {t('planner.title')}
+        </h1>
 
-            <div className="flex flex-wrap items-center gap-space-sm">
-              <Badge tone="outline" size="sm">
-                {t('planner.demoBadge')}
-              </Badge>
-              <Button type="button" variant="ghost" size="sm" onClick={() => setResetOpen(true)}>
-                {t('planner.reset')}
-              </Button>
-            </div>
-          </div>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="type-label tracking-[0.22em] text-[#bde85c]">
+            {t('planner.eyebrow')}
+            <span className="mx-3 text-white/30" aria-hidden="true">
+              /
+            </span>
+            <span className="text-[#9db0a2]">
+              {t('planner.stepLabel', { current: stepIndex + 1, total: PLANNER_STEPS.length })}
+            </span>
+          </p>
+          <button
+            type="button"
+            onClick={() => setResetOpen(true)}
+            className="cursor-pointer type-label-sm tracking-[0.12em] text-[#9db0a2] underline-offset-4 transition-colors hover:text-[#bde85c] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c]"
+          >
+            {t('planner.reset')}
+          </button>
+        </div>
 
-          <div className="mt-space-lg border-t border-hairline pt-space-md">
-            <PlannerProgress
-              currentStep={planner.step}
-              values={planner.values}
-              onStepSelect={planner.goToStep}
-            />
-          </div>
-        </Card>
-
-        <div className="grid grid-cols-1 items-start gap-gutter-lg lg:grid-cols-12">
+        <div className="grid flex-1 grid-cols-1 items-center gap-8 py-6 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
             {planner.generateError ? (
               <p
                 role="alert"
-                className="mb-space-md rounded-xl bg-error-container p-space-md type-small text-on-error-container"
+                className="mb-space-md rounded-sm border border-[#f29b8b]/50 p-space-md type-small text-[#f29b8b]"
               >
                 {generateErrorText}
               </p>
             ) : null}
 
-            <Card
-              variant="surface"
-              padding="lg"
-              aria-busy={planner.isSubmitting}
-              className="overflow-hidden"
-            >
-              <AnimatePresence mode="wait">
+            <div aria-busy={planner.isSubmitting} className="min-h-[18rem]">
+              <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={planner.step}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, x: direction * 36 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, x: direction * -36 }}
+                  transition={{ duration: reduce ? 0.15 : 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <PlannerStepContent
                     step={planner.step}
@@ -165,50 +151,22 @@ export function PlannerWizard() {
                   />
                 </motion.div>
               </AnimatePresence>
-            </Card>
-
-            <div className="mt-space-lg flex flex-col-reverse items-stretch justify-between gap-space-sm sm:flex-row sm:items-center">
-              <Button
-                type="button"
-                variant="secondary"
-                size="md"
-                onClick={planner.goBack}
-                disabled={stepIndex === 0}
-                startIcon={<ArrowLeftIcon className="rtl:rotate-180" />}
-                className="sm:w-auto"
-              >
-                {t('planner.navigation.back')}
-              </Button>
-
-              <div className="flex flex-col items-stretch gap-space-xs sm:flex-row sm:items-center">
-                <span className="type-small text-center text-on-surface-variant sm:text-end">
-                  {t('planner.navigation.stepStatus', {
-                    current: stepIndex + 1,
-                    total: PLANNER_STEPS.length,
-                  })}
-                </span>
-                <Button
-                  type="button"
-                  variant="primary"
-                  size="md"
-                  onClick={handleNext}
-                  disabled={planner.isSubmitting}
-                  endIcon={isLastStep ? undefined : <ArrowRightIcon className="rtl:rotate-180" />}
-                >
-                  {isLastStep
-                    ? planner.isSubmitting
-                      ? t('planner.navigation.generating')
-                      : planner.isRegenerating
-                        ? t('planner.navigation.regenerate')
-                        : t('planner.navigation.generate')
-                    : t('planner.navigation.continue')}
-                </Button>
-              </div>
             </div>
           </div>
 
-          <div className="lg:sticky lg:top-24 lg:col-span-5">
-            <PlannerSummary
+          <div className="lg:sticky lg:top-28 lg:col-span-5">
+            <RoutePanel values={planner.values} stepIndex={stepIndex} />
+          </div>
+        </div>
+
+        {isLastStep ? (
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="pb-10"
+          >
+            <BoardingPass
               values={planner.values}
               savedPlaceIds={planner.savedPlaceIds}
               draftStatus={planner.draftStatus}
@@ -220,9 +178,49 @@ export function PlannerWizard() {
               onIncludeSavedPlacesChange={planner.setIncludeSavedPlaces}
               onGenerate={handleGenerate}
             />
+          </motion.div>
+        ) : null}
+
+        <div className="sticky bottom-0 z-20 -mx-5 mt-auto bg-gradient-to-t from-[#07120d] via-[#07120d] via-70% to-[#07120d]/0 px-5 pb-5 pt-10 lg:via-[#07120d]/90 lg:via-100% lg:to-transparent lg:pt-8 md:-mx-10 md:px-10">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-4 lg:flex-nowrap lg:gap-x-8">
+            <button
+              type="button"
+              onClick={planner.goBack}
+              disabled={stepIndex === 0}
+              className="group order-2 inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full border border-white/25 px-6 type-button text-[#eef3e8] transition-colors hover:border-[#bde85c] hover:text-[#bde85c] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c] disabled:pointer-events-none disabled:opacity-30 sm:px-7 lg:order-1"
+            >
+              <ArrowLeftIcon className="size-4 transition-transform group-hover:-translate-x-1 rtl:rotate-180 rtl:group-hover:translate-x-1" />
+              {t('planner.navigation.back')}
+            </button>
+
+            <div className="order-1 w-full min-w-0 lg:order-2 lg:flex-1">
+              <PlannerProgress
+                currentStep={planner.step}
+                values={planner.values}
+                onStepSelect={planner.goToStep}
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={planner.isSubmitting}
+              className="group order-3 ms-auto inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full bg-[#bde85c] px-8 type-button font-semibold text-[#07120d] transition-[background-color,box-shadow] hover:bg-[#d2f27d] hover:shadow-[0_10px_34px_-10px_rgba(189,232,92,0.7)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c] disabled:cursor-progress disabled:opacity-60 sm:px-10 lg:ms-0"
+            >
+              {isLastStep
+                ? planner.isSubmitting
+                  ? t('planner.navigation.generating')
+                  : planner.isRegenerating
+                    ? t('planner.navigation.regenerate')
+                    : t('planner.navigation.generate')
+                : t('planner.navigation.continue')}
+              {isLastStep ? null : (
+                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+              )}
+            </button>
           </div>
         </div>
-      </Container>
+      </div>
 
       <Modal
         open={resetOpen}
@@ -276,6 +274,6 @@ export function PlannerWizard() {
           </>
         }
       />
-    </Section>
+    </section>
   );
 }

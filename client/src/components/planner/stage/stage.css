@@ -1,0 +1,90 @@
+/* Planner stage: palette is the dark green version of the navbar identity. */
+.planner-stage {
+  --stage-bg: #07120d;
+  --stage-card: #0f2318;
+  --stage-deep: #10281c;
+  --stage-green: #1f6b3f;
+  --stage-lime: #bde85c;
+  --stage-text: #eef3e8;
+  --stage-muted: #9db0a2;
+  --stage-sand: #d9c48a;
+}
+
+.route-dot {
+  fill: #9db0a2;
+  transition:
+    opacity 0.9s ease,
+    fill 0.9s ease;
+}
+.route-dot[data-lit] {
+  fill: #bde85c;
+}
+.route-nile {
+  stroke: rgba(157, 176, 162, 0.38);
+}
+.route-lines {
+  filter: drop-shadow(0 0 5px rgba(189, 232, 92, 0.55));
+}
+.route-line {
+  stroke: #bde85c;
+}
+.route-node {
+  fill: #07120d;
+  stroke: rgba(157, 176, 162, 0.7);
+  stroke-width: 1.5;
+}
+.route-node-on {
+  fill: #bde85c;
+  stroke: #07120d;
+  stroke-width: 2.5;
+}
+.route-ping {
+  fill: none;
+  stroke: #bde85c;
+  stroke-width: 1.5;
+}
+.route-label {
+  fill: #eef3e8;
+  font-size: 22px;
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: #07120d;
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+@keyframes stage-ken-burns {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.17) translate3d(-1.6%, -1.1%, 0);
+  }
+}
+@keyframes stage-ken-burns-alt {
+  from {
+    transform: scale(1.16) translate3d(-1.4%, 0.8%, 0);
+  }
+  to {
+    transform: scale(1.04) translate3d(0.4%, 0, 0);
+  }
+}
+.stage-photo {
+  animation: stage-ken-burns 26s ease-out both;
+  will-change: transform;
+}
+.stage-photo[data-alt] {
+  animation-name: stage-ken-burns-alt;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage-photo {
+    animation: none;
+    transform: scale(1.04);
+  }
+}
+
+.stage-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}

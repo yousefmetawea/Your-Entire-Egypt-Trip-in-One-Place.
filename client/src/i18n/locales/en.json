@@ -471,6 +471,44 @@
       "regenerate": "Regenerate itinerary",
       "generating": "Generating itinerary…",
       "stepStatus": "Step {{current}} of {{total}}"
+    },
+    "cine": {
+      "fewer": "Fewer travelers",
+      "more": "More travelers"
+    },
+    "pass": {
+      "label": "Your trip ticket",
+      "brand": "YourTrip",
+      "title": "Boarding pass",
+      "from": "Home",
+      "to": "Egypt",
+      "print": "Print",
+      "download": "Download PDF",
+      "fileName": "boarding-pass",
+      "demoTicket": "Demo ticket. Not a booking.",
+      "routeFrom": "From",
+      "routeTo": "To",
+      "depart": "Departure",
+      "return": "Return",
+      "ref": "Demo reference",
+      "issued": "Issued"
+    },
+    "stage": {
+      "title": "Route preview",
+      "mapLabel": "Map of Egypt. Route: {{route}}",
+      "routeLabel": "Route",
+      "hint": "Cities with places that match your interests in the demo catalog. A preview, not the final itinerary.",
+      "hintEmpty": "Choose your interests and the route will grow from Cairo.",
+      "cities": {
+        "cairo": "Cairo & Giza",
+        "alexandria": "Alexandria",
+        "luxor": "Luxor",
+        "aswan": "Aswan",
+        "siwa": "Siwa",
+        "red-sea": "Red Sea",
+        "sinai": "Sinai",
+        "western-desert": "Western Desert"
+      }
     }
   },
   "trip": {
