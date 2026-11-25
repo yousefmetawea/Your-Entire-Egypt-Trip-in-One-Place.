@@ -64,3 +64,28 @@
   .stay-pin-pulse { animation: none; opacity: 0.25; }
   .stay-flash { animation: none; }
 }
+
+/* Route map */
+.route-pin { position: relative; width: 20px; height: 20px; }
+.route-pin .stay-pin-pulse { inset: 0; }
+.route-pin-core {
+  position: absolute; inset: 5px; border-radius: 9999px;
+  background: #fff; box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.route-pin.is-stay .route-pin-core { background: #ffb25a; box-shadow: 0 0 20px rgba(255, 178, 90, 0.9); transform: scale(1.35); }
+.route-pin.is-active .route-pin-core { transform: scale(1.5); }
+.route-city-label {
+  position: absolute; top: 24px; left: 50%; transform: translateX(-50%);
+  white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: #fff;
+  padding: 2px 9px; border-radius: 9999px;
+  background: rgba(7, 10, 18, 0.72); border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px); pointer-events: none;
+}
+.route-city-label.is-stay { border-color: rgba(255, 178, 90, 0.7); color: #ffd7a0; }
+.route-vehicle {
+  width: 30px; height: 30px; border-radius: 9999px; display: flex; align-items: center; justify-content: center;
+  color: #070a12; pointer-events: none;
+}
+.route-vehicle svg { width: 16px; height: 16px; fill: currentColor; }
+.route-hit { cursor: pointer; }
