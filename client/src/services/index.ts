@@ -11,6 +11,7 @@ export type {
   AccommodationQuery,
   AccommodationService,
   AddPlaceToDraftResult,
+  AdminBookingService,
   BookingRequestService,
   CreateBookingRequestInput,
   CreatePlannedTripInput,

@@ -40,5 +40,5 @@ All records have `isDemo: true`. External URLs point to the reserved `https://ex
    - Replace the `example.com` URLs with verified direct affiliate or booking partner deep links.
    - Verify entrance coordinates and room tier price breakdowns.
 2. **Transportation**:
-   - For internal transfer requests, integrate a real driver dispatch webhook or operations dashboard instead of the simulated confirmation control.
+   - For internal transfer requests, add email or WhatsApp notification to the operator. For now new requests show in the in-app `/admin` page.
    - For external transport, integrate actual bus schedules, ticket booking APIs, or official Cairo Metro route maps.

@@ -1,6 +1,6 @@
 # Phase 8: Stay & Transport Implementation Record
 
-> Phase 8 implements the comparison page at `/stay-transport` with Accommodation and Transportation tabs, filterable demo catalogs, external booking notifications, internal airport transfer request flow with status tracking and simulated confirmation, accommodation map, and Itinerary Builder summary integration.
+> Phase 8 implements the comparison page at `/stay-transport` with Accommodation and Transportation tabs, filterable demo catalogs, external booking notifications, internal airport transfer request flow with status tracking and operator confirmation, accommodation map, and Itinerary Builder summary integration.
 
 ---
 
@@ -17,7 +17,7 @@
 
 - Managed request starting in `pending` status with initial audit history log.
 - Accessible submission form: direction, date, time, passengers, optional flight number, pickup/drop-off, and notes.
-- Status management: user cancellation while pending; demo simulation control (`simulateConfirm`) gated by `import.meta.env.DEV || import.meta.env.VITE_ENABLE_DEMO_ACTIONS === 'true'`.
+- Status management: user cancellation while pending. Confirmation is done by an operator on `/admin` (the earlier simulated control was removed).
 - Status history timeline tracking all timestamped transitions.
 
 ### C. Itinerary Builder Integration

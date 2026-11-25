@@ -307,12 +307,30 @@
     "completed": "Completed",
     "upcoming": "Upcoming",
     "steps": {
-      "dates": { "label": "Dates", "short": "Step {{number}}" },
-      "travelers": { "label": "Travelers", "short": "Step {{number}}" },
-      "budget": { "label": "Budget", "short": "Step {{number}}" },
-      "interests": { "label": "Interests", "short": "Step {{number}}" },
-      "stay": { "label": "Stay", "short": "Step {{number}}" },
-      "transport": { "label": "Transport", "short": "Step {{number}}" }
+      "dates": {
+        "label": "Dates",
+        "short": "Step {{number}}"
+      },
+      "travelers": {
+        "label": "Travelers",
+        "short": "Step {{number}}"
+      },
+      "budget": {
+        "label": "Budget",
+        "short": "Step {{number}}"
+      },
+      "interests": {
+        "label": "Interests",
+        "short": "Step {{number}}"
+      },
+      "stay": {
+        "label": "Stay",
+        "short": "Step {{number}}"
+      },
+      "transport": {
+        "label": "Transport",
+        "short": "Step {{number}}"
+      }
     },
     "errors": {
       "required": "This field is required.",
@@ -781,12 +799,79 @@
     },
     "requests": {
       "heading": "Your Transfer Requests",
-      "cancel": "Cancel request",
-      "simulateConfirm": "Simulate Confirmation"
+      "cancel": "Cancel request"
     },
     "requestModal": {
       "title": "Request Airport Chauffeur Transfer",
-      "desc": "Enter your flight and transfer details. This creates a pending request."
+      "desc": "Enter your flight and transfer details. We review each request and contact you to confirm."
+    },
+    "booking": {
+      "received": "Request received",
+      "receivedBody": "We will contact you on {{phone}} to confirm the details.",
+      "reference": "Reference",
+      "keepCode": "Keep this code. You can quote it when we get in touch.",
+      "done": "Done",
+      "contactTitle": "Your contact details",
+      "name": "Full name",
+      "namePlaceholder": "Your name",
+      "phone": "Phone / WhatsApp",
+      "phonePlaceholder": "+20 100 000 0000",
+      "email": "Email (optional)",
+      "notice": "This is a request, not an instant booking. We review it and contact you to confirm before anything is final.",
+      "errName": "Please enter your name.",
+      "errPhone": "Please enter a valid phone number.",
+      "status": {
+        "pending": "Awaiting confirmation",
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled"
+      }
+    },
+    "requestsList": {
+      "heading": "Your requests",
+      "countOne": "1 request",
+      "countMany": "{{count}} requests",
+      "transfer": "Airport Chauffeur Transfer",
+      "tour": "Guided Tour",
+      "pickup": "Pickup",
+      "dropoff": "Drop-off",
+      "passengers": "Passengers",
+      "flight": "Flight",
+      "notes": "Notes",
+      "timeline": "Status history",
+      "expand": "Show status history",
+      "collapse": "Hide status history",
+      "pendingHint": "We will contact you to confirm.",
+      "contact": "Contact"
+    },
+    "admin": {
+      "eyebrow": "Operator",
+      "title": "Booking requests",
+      "subtitle": "New requests appear here. Confirm or decline each one and add a note for the customer.",
+      "all": "All",
+      "pending": "New",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled",
+      "empty": "No requests here yet.",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "notePlaceholder": "Note for the customer (optional)",
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "refresh": "Refresh",
+      "refreshing": "Refreshing…",
+      "guest": "Guest",
+      "account": "Account",
+      "notAdmin": "This page is for the site operator only.",
+      "signIn": "Sign in with the operator account to continue.",
+      "signInCta": "Sign in",
+      "loadError": "Could not load requests.",
+      "updated": "Updated {{time}}",
+      "transfer": "Airport transfer",
+      "tour": "Guided tour",
+      "requestedAt": "Received",
+      "when": "When",
+      "route": "Route",
+      "people": "People"
     }
   },
   "booking": {

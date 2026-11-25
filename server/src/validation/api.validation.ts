@@ -131,15 +131,26 @@ const guidedTourDetailsSchema = z.object({
   notes: z.string().trim().optional(),
 });
 
+export const bookingContactSchema = z.object({
+  name: z.string().trim().min(2, 'Name is required').max(80),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^\+?[0-9 ()-]{7,20}$/, 'Enter a valid phone number'),
+  email: z.string().trim().email().max(120).optional().or(z.literal('').transform(() => undefined)),
+});
+
 export const createBookingRequestSchema = z.discriminatedUnion('kind', [
   z.object({
     kind: z.literal('airport-transfer'),
     tripId: z.string().nullable().optional(),
+    contact: bookingContactSchema,
     details: airportTransferDetailsSchema,
   }),
   z.object({
     kind: z.literal('guided-tour'),
     tripId: z.string().nullable().optional(),
+    contact: bookingContactSchema,
     details: guidedTourDetailsSchema,
   }),
 ]);
@@ -155,4 +166,18 @@ export const createTripActivityInputSchema = z.object({
 
 export const reorderActivitiesSchema = z.object({
   activityIds: z.array(z.string()).min(1),
+});
+
+export const trackBookingSchema = z.object({
+  referenceCode: z.string().trim().toUpperCase().min(4).max(20),
+  phone: z.string().trim().min(5).max(30),
+});
+
+export const adminBookingQuerySchema = z.object({
+  status: z.enum(['pending', 'confirmed', 'cancelled']).optional(),
+});
+
+export const adminSetStatusSchema = z.object({
+  status: z.enum(['confirmed', 'cancelled']),
+  note: z.string().trim().max(500).optional(),
 });

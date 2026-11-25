@@ -33,14 +33,25 @@ export interface GuidedTourDetails {
   notes?: string;
 }
 
+export interface BookingContact {
+  name: string;
+  phone: string;
+  email?: string;
+}
+
 interface BookingRequestBase {
   id: BookingRequestId;
-  userId: UserId;
+  /** Short code the customer quotes, e.g. EG-7K2M9Q. */
+  /** Missing on requests created before reference codes existed. */
+  referenceCode?: string;
+  /** null for guest requests (no account). */
+  userId: UserId | null;
+  /** Missing on requests created before contact details existed. */
+  contact?: BookingContact;
   tripId: TripId | null;
   status: BookingStatus;
   createdAt: IsoDateTime;
   statusHistory: BookingStatusChange[];
-  isDemo: boolean;
 }
 
 export interface AirportTransferBookingRequest extends BookingRequestBase {

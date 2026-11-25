@@ -200,9 +200,10 @@ export class BookingsController {
     }
   }
 
+  // Guests are allowed: req.user is set only when a valid session cookie is present.
   static async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const booking = await BookingsService.createBooking(req.user!.userId, req.body);
+      const booking = await BookingsService.createBooking(req.user?.userId ?? null, req.body);
       res.status(201).json({ booking });
     } catch (error) {
       next(error);
@@ -221,11 +222,46 @@ export class BookingsController {
     }
   }
 
-  static async simulateConfirm(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static async track(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const booking = await BookingsService.simulateConfirm(
+      const booking = await BookingsService.trackBooking(req.body.referenceCode, req.body.phone);
+      res.status(200).json({ booking });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async cancelTracked(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const booking = await BookingsService.cancelTrackedBooking(
+        req.body.referenceCode,
+        req.body.phone,
+      );
+      res.status(200).json({ booking });
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+// Operator (admin) bookings
+export class AdminBookingsController {
+  static async list(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const status = req.query.status as 'pending' | 'confirmed' | 'cancelled' | undefined;
+      const bookings = await BookingsService.listAllBookings(status);
+      res.status(200).json({ bookings });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async setStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const booking = await BookingsService.setStatusByOperator(
         req.params.id as string,
-        req.user!.userId,
+        req.body.status,
+        req.body.note,
       );
       res.status(200).json({ booking });
     } catch (error) {

@@ -23,3 +23,15 @@ export const authRateLimiter = rateLimit({
   },
   skip: () => env.nodeEnv === 'test',
 });
+
+// Public booking endpoints (guest requests and tracking) get a tighter limit.
+export const bookingRateLimiter = rateLimit({
+  windowMs: env.rateLimitWindowMs,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (_req, _res, next) => {
+    next(ApiError.rateLimited('Too many booking requests. Please try again later.'));
+  },
+  skip: () => env.nodeEnv === 'test',
+});

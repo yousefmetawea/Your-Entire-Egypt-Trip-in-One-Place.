@@ -54,7 +54,7 @@
 - Component APIs are typed. Styling uses a small `cn` class joiner; no CVA, `tailwind-merge`, or icon library was added.
 - Framer Motion is limited to shared variants and coordinated entrances. CSS handles hover and focus transitions; `MotionConfig reducedMotion="user"` and global CSS honour reduced-motion preferences. There are no ambient loops.
 - The Phase 1 showcase reviews tokens, typography, components, motion, and a static English RTL preview. In Phase 2 it moved to the dev-only `/design-system` route, outside the product layout, and is excluded from production builds.
-- Phases 1 and 2 are committed. Phase 3 is committed. Phases 4–7 are implemented. Phase 8 implements the `/stay-transport` comparison page with Accommodation and Transportation tabs, fictional demo catalogs, internal airport transfer request flow with audit history and simulated confirmation, accommodation map, and builder summary stay integration.
+- Phases 1 and 2 are committed. Phase 3 is committed. Phases 4–7 are implemented. Phase 8 implements the `/stay-transport` comparison page with Accommodation and Transportation tabs, fictional demo catalogs, internal airport transfer request flow with audit history and operator confirmation, accommodation map, and builder summary stay integration.
 - Phase work lives on dedicated branch `phase-8-stay-transport`. Changes are uncommitted pending review.
 
 ## App shell and mock data (Phase 2)
@@ -147,7 +147,7 @@
 
 - `/stay-transport` implements Accommodation and Transportation tabs with URL persistence (`?tab=`).
 - Fictional catalogs provide 8 accommodations and 4 transport options with `isDemo: true` and explicit currency/estimates.
-- Airport transfer requests create internal `pending` booking requests with an immutable status audit history log. User can cancel while pending; demo confirmation simulation is gated behind `DEV` or `VITE_ENABLE_DEMO_ACTIONS`.
+- Airport transfer requests create `pending` booking requests (guests allowed, with name and phone) and a reference code like `EG-XXXXXX`, with an immutable status history. The customer can cancel while pending. An operator confirms or declines from the in-app `/admin` page, with a note.
 - Leaflet map shows accommodation pins across Greater Cairo with price popups and "Set as my stay" actions.
 
 ## My Trip Dashboard (Phase 9)
@@ -173,7 +173,7 @@
   - Places catalog with full-text search, area/category filtering, slug lookup, and nearby suggestions.
   - Accommodations, transport options, and ready-made trips catalogs.
   - User trips with ownership scoping, add-to-draft endpoint, and optimistic locking (`version` check).
-  - User booking requests (hybrid model) with status lifecycle and audit log; simulation confirmation endpoint is strictly gated behind `ENABLE_DEMO_ACTIONS`.
+  - Booking requests (guest or signed in) with reference codes, status lifecycle, audit log and an operator `/admin` queue. No simulated confirmation.
 - **Client Service Layer Integration:** `client/src/services/index.ts` defaults to `createApiServices()`, connecting the frontend to real backend endpoints with `credentials: 'include'`. The mock services layer is preserved for offline testing via `VITE_DATA_SOURCE=mock`.
 - **Client Auth UI:** `AuthContext` restores sessions from `GET /api/auth/me`. `/login` and `/register` pages connect to backend auth endpoints. `ProtectedRoute` redirects unauthenticated users attempting to access `/my-trip` to `/login`.
 - **Security Audit:** Zero vulnerabilities verified via `npm audit`.

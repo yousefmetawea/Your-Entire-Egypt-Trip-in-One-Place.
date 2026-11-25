@@ -78,7 +78,8 @@ describe('budgetAnalytics', () => {
     status: 'pending',
     createdAt: '2026-11-20T10:00:00Z',
     statusHistory: [],
-    isDemo: true,
+    referenceCode: 'EG-TEST01',
+    contact: { name: 'Test', phone: '+20 100 000 0000' },
     details: {
       pickupLocation: 'CAI Airport',
       dropoffLocation: 'Citadel Hotel',

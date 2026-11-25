@@ -2,6 +2,8 @@ import type { Server } from 'http';
 import { app } from './app.js';
 import { env } from './config/env.js';
 import { connectDatabase, disconnectDatabase } from './config/database.js';
+import { BookingRequestModel } from './models/BookingRequest.js';
+import { BookingsService } from './services/bookings.service.js';
 
 let server: Server | null = null;
 
@@ -9,6 +11,16 @@ async function startServer(): Promise<void> {
   try {
     // 1. Establish database connection before accepting traffic
     await connectDatabase();
+
+    // 1b. Old booking records (before reference codes) get a code, then indexes are ensured.
+    try {
+      const fixed = await BookingsService.backfillLegacyReferenceCodes();
+      if (fixed > 0)
+        console.log(`[Server] Added reference codes to ${fixed} older booking request(s)`);
+      await BookingRequestModel.syncIndexes();
+    } catch (error) {
+      console.error('[Server] Booking data check failed (continuing):', error);
+    }
 
     // 2. Start HTTP listener
     server = app.listen(env.port, () => {

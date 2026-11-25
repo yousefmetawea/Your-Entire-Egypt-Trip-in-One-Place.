@@ -44,7 +44,7 @@
 - **Places**: Search by keyword, area, and category filters; slug lookup; nearby places.
 - **Catalog**: Accommodations, transport options, and ready-made trips.
 - **Trips**: CRUD operations scoped by authenticated `userId`, add-place-to-draft flow, and `saveItinerary` with optimistic locking (`version` check).
-- **Booking Requests**: Hybrid booking model for airport transfers and guided tours, pending cancellation, and developer simulated confirmation strictly gated behind `ENABLE_DEMO_ACTIONS`.
+- **Booking Requests**: Booking request model for airport transfers and guided tours, pending cancellation, and operator confirm/decline on `/admin`.
 - Verified in `server/src/routes/api.test.ts`.
 
 ### Milestone 5: Client Integration & Authentication UI

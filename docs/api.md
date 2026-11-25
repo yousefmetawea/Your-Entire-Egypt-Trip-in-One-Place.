@@ -487,10 +487,33 @@ Cancel a pending request. Confirmed or completed requests cannot be cancelled.
 - **Auth:** Protected (Enforces ownership)
 - **Response `200 OK`:** `{ "booking": { "status": "cancelled", ... } }`
 
-#### `POST /api/bookings/:id/simulate-confirm`
+#### `POST /api/bookings` (guests allowed)
 
-Developer / Demo control to transition a pending request to `confirmed`.
+Creates a pending request. Body includes `contact: { name, phone, email? }`. Works with or without a session. Returns the booking with `referenceCode`.
 
-- **Auth:** Protected (Enforces ownership)
-- **Security Guard:** Strictly rejected with `403 Forbidden` unless `ENABLE_DEMO_ACTIONS=true` in server environment.
-- **Response `200 OK`:** `{ "booking": { "status": "confirmed", ... } }`
+#### `POST /api/bookings/track`
+
+Public. Body `{ referenceCode, phone }`. Returns the matching booking (phone matched by digits).
+
+#### `POST /api/bookings/track/cancel`
+
+Public. Same body. Cancels a pending request.
+
+#### `GET /api/admin/bookings?status=pending|confirmed|cancelled`
+
+Admin only. Lists all requests, newest first.
+
+#### `PATCH /api/admin/bookings/:id/status`
+
+Admin only. Body `{ status: "confirmed" | "cancelled", note? }`. Allowed: pending to either, confirmed to cancelled. The note is saved in the status history.
+
+#### Running locally and operating
+
+1. `server/.env`: `MONGODB_URI`, `JWT_SECRET` (32+ chars), `CLIENT_ORIGIN=http://localhost:5173`.
+2. `npm run seed --workspace server` once.
+3. `npm run dev` from the repo root.
+4. Register on `/register`, then `npm run make-admin --workspace server -- you@example.com`, sign in again and open `/admin`.
+
+#### Older booking records
+
+Requests created before reference codes existed have no `referenceCode` or `contact`. The server adds a reference code to them at startup (safe to repeat) and the UI shows them without contact details. No manual migration is needed.

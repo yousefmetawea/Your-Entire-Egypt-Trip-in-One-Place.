@@ -35,6 +35,22 @@ export function requireAuth(req: Request, _res: Response, next: NextFunction): v
   }
 }
 
+/** Sets req.user when a valid session exists, otherwise continues as a guest. */
+export function optionalAuth(req: Request, _res: Response, next: NextFunction): void {
+  let token = req.cookies?.[AUTH_COOKIE_NAME];
+  if (!token && req.headers.authorization?.startsWith('Bearer ')) {
+    token = req.headers.authorization.slice(7);
+  }
+  if (token) {
+    try {
+      req.user = verifyToken(token);
+    } catch {
+      // Invalid or expired session: treat as a guest.
+    }
+  }
+  next();
+}
+
 export function requireRole(allowedRoles: Array<'traveler' | 'admin'>) {
   return (req: Request, _res: Response, next: NextFunction): void => {
     if (!req.user) {

@@ -26,6 +26,7 @@ import type {
   AccommodationQuery,
   AccommodationService,
   AddPlaceToDraftResult,
+  AdminBookingService,
   BookingRequestService,
   CreateBookingRequestInput,
   CreatePlannedTripInput,
@@ -860,12 +861,19 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
         const now = new Date().toISOString();
         const base = {
           id: crypto.randomUUID(),
+          referenceCode: `EG-${crypto.randomUUID().replace(/-/g, '').slice(0, 6).toUpperCase()}`,
           userId: currentUserId,
+          contact: input.contact,
           tripId: input.tripId ?? null,
           status: 'pending' as const,
           createdAt: now,
-          statusHistory: [{ status: 'pending' as const, changedAt: now }],
-          isDemo: true,
+          statusHistory: [
+            {
+              status: 'pending' as const,
+              changedAt: now,
+              note: 'Request received. We will contact you to confirm.',
+            },
+          ],
         };
 
         let request: BookingRequest;
@@ -933,7 +941,7 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
           status: 'cancelled',
           statusHistory: [
             ...request.statusHistory,
-            { status: 'cancelled', changedAt: now, note: 'Cancelled by user request.' },
+            { status: 'cancelled', changedAt: now, note: 'Cancelled by customer' },
           ],
         };
         store.update((state) => ({
@@ -943,25 +951,41 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
         return updated;
       });
     },
-    simulateConfirm(id) {
+  };
+
+  const adminBookings: AdminBookingService = {
+    list(status) {
+      return run(() =>
+        store
+          .getState()
+          .bookingRequests.filter((request) => !status || request.status === status)
+          .slice()
+          .sort((x, y) => y.createdAt.localeCompare(x.createdAt)),
+      );
+    },
+    setStatus(id, status, note) {
       return run(() => {
         const request = store.getState().bookingRequests.find((c) => c.id === id);
         if (!request) {
           throw new ServiceError('NOT_FOUND', `Booking request "${id}" was not found.`);
         }
-        if (request.status !== 'pending') {
-          throw new ServiceError(
-            'VALIDATION',
-            `Cannot confirm request in "${request.status}" status.`,
-          );
+        const allowed =
+          request.status === 'pending' ||
+          (request.status === 'confirmed' && status === 'cancelled');
+        if (!allowed || request.status === status) {
+          throw new ServiceError('VALIDATION', `Cannot change a "${request.status}" request.`);
         }
-        const now = new Date().toISOString();
+        const label = status === 'confirmed' ? 'Confirmed' : 'Declined';
         const updated: BookingRequest = {
           ...request,
-          status: 'confirmed',
+          status,
           statusHistory: [
             ...request.statusHistory,
-            { status: 'confirmed', changedAt: now, note: 'Simulated provider confirmation.' },
+            {
+              status,
+              changedAt: new Date().toISOString(),
+              note: note ? `${label}: ${note}` : label,
+            },
           ],
         };
         store.update((state) => ({
@@ -980,6 +1004,7 @@ export function createMockServices(options: MockServiceOptions = {}): Services {
     readyMadeTrips,
     trips,
     bookingRequests,
+    adminBookings,
     async resetLocalData() {
       await wait();
       store.reset();

@@ -9,16 +9,12 @@ import { StatusTimeline } from '../stay-transport/StatusTimeline';
 export interface DashboardRequestsProps {
   requests: BookingRequest[];
   onCancelRequest: (requestId: string) => void;
-  onSimulateConfirmRequest?: (requestId: string) => void;
   actionLoading?: boolean;
 }
-
-const showDemoActions = import.meta.env.DEV || import.meta.env.VITE_ENABLE_DEMO_ACTIONS === 'true';
 
 export function DashboardRequests({
   requests,
   onCancelRequest,
-  onSimulateConfirmRequest,
   actionLoading = false,
 }: DashboardRequestsProps) {
   const [expandedTimelineId, setExpandedTimelineId] = useState<string | null>(null);
@@ -120,18 +116,6 @@ export function DashboardRequests({
                         className="px-2.5 py-1 rounded-full bg-danger/10 text-danger hover:bg-danger/20 type-label-sm text-xs transition-colors"
                       >
                         Cancel Request
-                      </button>
-                    )}
-
-                    {/* Simulation action behind dev flag */}
-                    {showDemoActions && isPending && onSimulateConfirmRequest && (
-                      <button
-                        type="button"
-                        onClick={() => onSimulateConfirmRequest(request.id)}
-                        disabled={actionLoading}
-                        className="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-primary type-label-sm text-[11px] transition-colors border border-hairline"
-                      >
-                        Simulate Confirmation
                       </button>
                     )}
                   </div>

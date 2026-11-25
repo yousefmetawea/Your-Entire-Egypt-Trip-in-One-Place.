@@ -28,16 +28,26 @@ export interface IGuidedTourDetails {
   notes?: string;
 }
 
+export interface IBookingContact {
+  name: string;
+  phone: string;
+  email?: string;
+}
+
 export interface IBookingRequest extends Document {
   id: string;
-  userId: string;
+  /** Missing only on records created before reference codes existed. Backfilled at startup. */
+  referenceCode?: string;
+  /** null for guest requests (no account). */
+  userId: string | null;
+  /** Missing on records created before contact details existed. */
+  contact?: IBookingContact;
   tripId: string | null;
   kind: BookingRequestKind;
   details: IAirportTransferDetails | IGuidedTourDetails;
   status: BookingStatus;
   createdAt: string;
   statusHistory: IBookingStatusChange[];
-  isDemo: boolean;
 }
 
 const bookingStatusChangeSchema = new Schema(
@@ -56,7 +66,19 @@ const bookingStatusChangeSchema = new Schema(
 const bookingRequestSchema = new Schema<IBookingRequest>(
   {
     id: { type: String, required: true, unique: true, index: true },
-    userId: { type: String, required: true, index: true },
+    referenceCode: { type: String },
+    userId: { type: String, default: null, index: true },
+    contact: {
+      type: new Schema(
+        {
+          name: { type: String, required: true, trim: true },
+          phone: { type: String, required: true, trim: true },
+          email: { type: String, trim: true, lowercase: true },
+        },
+        { _id: false },
+      ),
+      required: false,
+    },
     tripId: { type: String, default: null, index: true },
     kind: {
       type: String,
@@ -71,7 +93,6 @@ const bookingRequestSchema = new Schema<IBookingRequest>(
       required: true,
     },
     statusHistory: { type: [bookingStatusChangeSchema], default: [] },
-    isDemo: { type: Boolean, default: false },
   },
   {
     timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
@@ -82,6 +103,12 @@ const bookingRequestSchema = new Schema<IBookingRequest>(
   },
 );
 
+// Partial so records created before reference codes existed (no code) never collide.
+bookingRequestSchema.index(
+  { referenceCode: 1 },
+  { unique: true, partialFilterExpression: { referenceCode: { $type: 'string' } } },
+);
 bookingRequestSchema.index({ userId: 1, createdAt: -1 });
+bookingRequestSchema.index({ status: 1, createdAt: -1 });
 
 export const BookingRequestModel = model<IBookingRequest>('BookingRequest', bookingRequestSchema);
