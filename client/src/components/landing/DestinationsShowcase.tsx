@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { AppLink } from '../../app/AppLink';
 import { usePlaces } from '../../hooks/useCatalog';
 import { selectFeaturedPlaces } from '../../lib/featured';
+import { TiltCard } from '../motion/TiltCard';
 import { ScrollReveal } from '../motion/ScrollReveal';
 import { SplitText } from '../motion/SplitText';
 import { Container } from '../ui/Container';
@@ -65,19 +66,21 @@ function ProjectCard({ place, config, index }: ProjectCardProps) {
             className="group block overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
           >
             {/* Clean Image Container — ABSOLUTELY NO text over image */}
-            <div
-              className={cn(
-                'w-full overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-sm transition-all duration-700 group-hover:shadow-floating group-hover:border-secondary',
-                config.aspect,
-              )}
-            >
-              <img
-                src={image || '/images/placeholder.svg'}
-                alt={isAr && place.name.ar ? place.name.ar : place.name.en}
-                className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                loading={index < 2 ? 'eager' : 'lazy'}
-              />
-            </div>
+            <TiltCard className="relative">
+              <div
+                className={cn(
+                  'w-full overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-sm transition-all duration-700 group-hover:shadow-floating group-hover:border-secondary',
+                  config.aspect,
+                )}
+              >
+                <img
+                  src={image || '/images/placeholder.svg'}
+                  alt={isAr && place.name.ar ? place.name.ar : place.name.en}
+                  className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                  loading={index < 2 ? 'eager' : 'lazy'}
+                />
+              </div>
+            </TiltCard>
 
             {/* External Details Bar — strictly OUTSIDE image container */}
             <div className="mt-space-md flex flex-wrap items-center justify-between gap-space-xs px-space-xs">

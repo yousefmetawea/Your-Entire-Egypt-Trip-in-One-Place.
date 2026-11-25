@@ -1,224 +1,183 @@
-/* Hero.module.css – Exact OVO Legion Layout & Typography Architecture */
+/* Hero.module.css - OVO Legion hero, measured from the reference's own CSS and IX3 timelines.
+   Defaults below are the INTRO START state so nothing flashes before JS runs. */
 
-/* Section wrapper: establishes document scroll height for the sticky sequence */
-.heroWrapper {
-  position: relative;
-  width: 100%;
-  height: 350vh;
+.curtains {
+  position: fixed;
+  inset: 0;
+  z-index: 24;
+  display: flex;
+  pointer-events: none;
 }
 
-/* Sticky stage: pins to top of viewport while scrolling */
+.curtainStrip {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-sand-50, #f3f3f1);
+}
+
+.loadingHolder {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.loadingTrack {
+  width: 170px;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.loadingBar {
+  width: 0%;
+  height: 100%;
+  background-color: var(--color-accent-600, #e63b2e);
+}
+
+/* 500vh scroll runway; the stage below is pinned while it plays. */
+.heroWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500vh;
+}
+
 .heroSticky {
   position: sticky;
   top: 0;
-  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-/* Background marquee text track: sits strictly behind images */
+/* Looping headline sits behind the photos and keeps moving the whole time. */
 .heroTextTrack {
   position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  transform: translateY(-50%);
   display: flex;
-  overflow: hidden;
   user-select: none;
   pointer-events: none;
-  z-index: 1;
-}
-
-/* Continuous infinite permanent scrolling loop */
-.heroTextRow {
-  display: flex;
-  white-space: nowrap;
-  gap: 3.5rem;
-  will-change: transform;
-  animation: heroMarquee 22s linear infinite;
-}
-
-@keyframes heroMarquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 .heroTextItem {
-  font-family: var(--font-heading, "Playfair Display", serif);
-  font-size: clamp(4.5rem, 18vh, 15rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  color: var(--color-primary-900, #1a1a1a);
-  opacity: 0.12;
+  font-family: var(--font-sans, 'Inter', 'Plus Jakarta Sans', sans-serif);
+  font-size: 20vh;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  color: var(--color-primary-900, #111);
+  padding-right: 0.3em;
 }
 
-/* Central composition holder: perspective 1500px matches OVO reference */
+.heroContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 2em;
+}
+
 .heroImagesHolder {
   position: absolute;
   inset: 0;
+  z-index: 4;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  perspective: 1500px;
   width: 100%;
   height: 100%;
-  z-index: 5;
+  perspective: 1500px;
   pointer-events: none;
 }
 
-/* Base image container for all 5 layers */
 .heroImageContainer {
   position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 45%;
-  height: 55%;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
   overflow: hidden;
   border-radius: var(--_spacings---radius--radius-m, 1rem);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
   pointer-events: auto;
-  will-change: transform, opacity, filter;
+  will-change: transform, width, height;
 }
 
-/* Responsive adjustments for mobile/tablet */
-@media (max-width: 768px) {
-  .heroImageContainer {
-    width: 82%;
-    height: 52%;
-  }
-
-  .heroTextItem {
-    font-size: 18vw;
-    opacity: 0.16;
-  }
-}
-
-/* Stacking and rotations matching OVO Legion */
-.layer01 {
-  z-index: 6;
-}
-
-.layer02 {
-  z-index: 5;
-  transform: rotate(4deg);
-}
-
-.layer03 {
-  z-index: 4;
-  transform: rotate(-4deg);
-}
-
-.layer04 {
-  z-index: 3;
-  transform: rotate(-2deg);
-}
+.layer01 { z-index: 5; }
+.layer02 { z-index: 4; }
+.layer03 { z-index: 3; }
+.layer04 { z-index: 2; }
 
 .layerLast {
-  z-index: 2;
-  transform: rotate(0deg);
+  position: absolute;
+  width: 104%;
+  height: 104%;
+  overflow: hidden;
+  border-radius: var(--_spacings---radius--radius-m, 1rem);
+  will-change: width, height;
 }
 
-/* Inner image styling */
 .heroImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Floating editorial caption badge */
-.heroCaptionHolder {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.heroCaption {
-  font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-sand-700, #786c5e);
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(8px);
-  padding: 0.35rem 1rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* =========================================================================
-   OVO Legion Signature 5-Strip Curtain Opening Overlay
-   ========================================================================= */
-.curtains {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  pointer-events: none;
-  width: 100vw;
-  height: 100vh;
-}
-
-.curtainStrip {
-  flex: 1;
-  height: 100%;
-  background-color: var(--color-sand-50, #fcfbf7);
-  transform-origin: top center;
-  will-change: transform;
-}
-
-.loadingHolder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.25rem;
-  pointer-events: none;
-  z-index: 10000;
-}
-
-.loadingTrack {
-  width: 180px;
-  height: 3px;
-  background-color: rgba(0, 0, 0, 0.08);
-  border-radius: 9999px;
-  overflow: hidden;
+.heroParagraphHolder {
   position: relative;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
-.loadingBar {
-  height: 100%;
-  background-color: var(--color-primary-900, #1a1a1a);
+.titleParagraph {
+  margin: 0;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-primary-900, #111);
+}
+
+.heroButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
   border-radius: 9999px;
-  transform-origin: left center;
+  background: #111;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
 
-.loadingText {
-  font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--color-sand-800, #403b35);
-  opacity: 0.8;
+.heroButton:hover {
+  transform: translateY(-2px);
+}
+
+.redCircle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent-600, #e63b2e);
+}
+
+@media (max-width: 991px) {
+  .heroSticky { padding-top: 8px; padding-bottom: 30px; }
+  .heroImageContainer, .layerLast { min-width: 80%; min-height: 50%; }
+  .heroTextItem { font-size: 8vh; letter-spacing: -0.04em; }
 }
