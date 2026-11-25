@@ -1,10 +1,10 @@
+import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import type { PlannerFormValues, PlannerStep } from '../../types';
 import { PLANNER_STEPS } from '../../types';
 import { cn } from '../../lib/cn';
 import { getPlannerStepLabelKey, getPlannerStepShortLabelKey } from '../../lib/planner/options';
 import { hasPlannerErrors, validatePlannerStep } from '../../lib/planner/validation';
-import { CheckIcon } from '../ui/icons';
 
 export interface PlannerProgressProps {
   currentStep: PlannerStep;
@@ -12,13 +12,14 @@ export interface PlannerProgressProps {
   onStepSelect: (step: PlannerStep) => void;
 }
 
+/** Minimal progress: six thin lime segments. Labels show from sm and up. */
 export function PlannerProgress({ currentStep, values, onStepSelect }: PlannerProgressProps) {
   const { t } = useTranslation();
   const currentIndex = PLANNER_STEPS.indexOf(currentStep);
 
   return (
     <nav aria-label={t('planner.progressLabel')}>
-      <ol className="grid grid-cols-2 gap-space-sm sm:grid-cols-3 lg:grid-cols-6">
+      <ol className="grid grid-cols-6 gap-2 md:gap-3">
         {PLANNER_STEPS.map((step, index) => {
           const isCurrent = step === currentStep;
           const isComplete =
@@ -38,41 +39,28 @@ export function PlannerProgress({ currentStep, values, onStepSelect }: PlannerPr
                 aria-label={`${t(getPlannerStepShortLabelKey(step), {
                   number: String(index + 1).padStart(2, '0'),
                 })}: ${t(getPlannerStepLabelKey(step))} (${status})`}
-                className={cn(
-                  'flex w-full items-center gap-space-xs rounded-xl p-space-sm text-start transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary',
-                  isCurrent
-                    ? 'border border-secondary/30 bg-secondary-container/40 shadow-resting'
-                    : isComplete
-                      ? 'bg-surface-container-low/70 hover:bg-surface-container-low'
-                      : 'bg-surface-container/50 opacity-60 hover:opacity-80',
-                )}
+                className="group block w-full cursor-pointer text-start focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c]"
               >
+                <span className="relative block h-[2px] w-full overflow-hidden bg-white/15">
+                  <motion.span
+                    className="absolute inset-y-0 start-0 bg-[#bde85c]"
+                    initial={false}
+                    animate={{
+                      width: isCurrent || isComplete || index < currentIndex ? '100%' : '0%',
+                    }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                </span>
                 <span
                   className={cn(
-                    'flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-bold',
-                    isCurrent
-                      ? 'bg-secondary text-on-secondary'
-                      : isComplete
-                        ? 'bg-primary-container text-on-primary'
-                        : 'bg-surface-container-high text-on-surface-variant',
+                    'mt-2 hidden truncate type-label-sm tracking-[0.12em] transition-colors sm:block',
+                    isCurrent ? 'text-[#bde85c]' : 'text-[#9db0a2] group-hover:text-[#eef3e8]',
                   )}
-                  aria-hidden="true"
                 >
-                  {isComplete ? <CheckIcon className="size-4" /> : index + 1}
-                </span>
-
-                <span className="min-w-0">
-                  <span
-                    className={cn(
-                      'type-label hidden truncate sm:block',
-                      isCurrent ? 'text-secondary' : 'text-on-surface-variant',
-                    )}
-                  >
-                    {status}
+                  <span className="me-2 tabular-nums opacity-60">
+                    {String(index + 1).padStart(2, '0')}
                   </span>
-                  <span className="type-title-sm block truncate text-primary">
-                    {t(getPlannerStepLabelKey(step))}
-                  </span>
+                  {t(getPlannerStepLabelKey(step))}
                 </span>
               </button>
             </li>

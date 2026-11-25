@@ -1,0 +1,244 @@
+/* Print-only boarding pass. A4, light paper, premium ticket. Hidden on screen. */
+#print-ticket {
+  display: none;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #root,
+  .skip-link,
+  [data-chrome] {
+    display: none !important;
+  }
+  #print-ticket {
+    display: block;
+    width: 210mm;
+    height: 296mm;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color: #07120d;
+    font-family: var(--font-sans, 'Inter', sans-serif);
+  }
+  html[lang='ar'] #print-ticket {
+    font-family: 'Alexandria', var(--font-sans, 'Inter', sans-serif);
+  }
+  .pt-sheet {
+    box-sizing: border-box;
+    width: 210mm;
+    height: 296mm;
+    padding: 28mm 18mm 18mm;
+    background: #f5f8f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pt-ticket {
+    width: 100%;
+    border: 0.4mm solid #07120d;
+    border-radius: 3mm;
+    background: #fcfdfa;
+    overflow: hidden;
+    position: relative;
+  }
+  .pt-band {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9mm 10mm;
+    background: #07120d;
+    color: #eef3e8;
+    border-bottom: 1.2mm solid #bde85c;
+  }
+  .pt-brand {
+    font-family: var(--font-display, serif);
+    font-size: 8.5mm;
+    line-height: 1;
+    color: #bde85c;
+  }
+  .pt-doc {
+    margin-top: 2mm;
+    font-size: 3mm;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #9db0a2;
+  }
+  html[lang='ar'] .pt-doc {
+    letter-spacing: 0;
+    font-size: 3.6mm;
+  }
+  .pt-demo {
+    border: 0.3mm solid #bde85c;
+    color: #bde85c;
+    border-radius: 10mm;
+    padding: 1.2mm 4mm;
+    font-size: 2.8mm;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  html[lang='ar'] .pt-demo {
+    letter-spacing: 0;
+  }
+  .pt-route {
+    display: flex;
+    align-items: center;
+    gap: 6mm;
+    padding: 12mm 10mm 8mm;
+  }
+  .pt-city {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5mm;
+  }
+  .pt-city span,
+  .pt-dates span,
+  .pt-field dt,
+  .pt-meta span {
+    font-size: 2.6mm;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #3f5a49;
+  }
+  html[lang='ar'] .pt-city span,
+  html[lang='ar'] .pt-dates span,
+  html[lang='ar'] .pt-field dt,
+  html[lang='ar'] .pt-meta span {
+    letter-spacing: 0;
+    font-size: 3.2mm;
+  }
+  .pt-city strong {
+    font-family: var(--font-display, serif);
+    font-size: 13mm;
+    line-height: 1.05;
+    font-weight: 600;
+  }
+  .pt-city-end {
+    text-align: end;
+    align-items: flex-end;
+  }
+  .pt-path {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    color: #1f6b3f;
+  }
+  .pt-dash {
+    flex: 1;
+    border-top: 0.4mm dashed #1f6b3f;
+  }
+  .pt-plane {
+    font-size: 6mm;
+  }
+  html[dir='rtl'] .pt-plane {
+    display: inline-block;
+    transform: scaleX(-1);
+  }
+  .pt-dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 6mm;
+    margin: 0 10mm;
+    padding: 6mm 0;
+    border-top: 0.25mm solid #d4e0d3;
+    border-bottom: 0.25mm solid #d4e0d3;
+  }
+  .pt-dates div {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5mm;
+  }
+  .pt-dates strong {
+    font-family: var(--font-display, serif);
+    font-size: 5.2mm;
+    font-weight: 600;
+  }
+  .pt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6mm 8mm;
+    margin: 0;
+    padding: 8mm 10mm 10mm;
+  }
+  .pt-field {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5mm;
+  }
+  .pt-field dd {
+    margin: 0;
+    font-size: 4.2mm;
+    font-weight: 600;
+  }
+  .pt-wide {
+    grid-column: 1 / -1;
+  }
+  .pt-tear {
+    position: relative;
+    border-top: 0.4mm dashed #6d8575;
+  }
+  .pt-notch {
+    position: absolute;
+    top: -3.2mm;
+    width: 6.4mm;
+    height: 6.4mm;
+    border-radius: 50%;
+    background: #f5f8f1;
+    border: 0.4mm solid #07120d;
+  }
+  .pt-notch-start {
+    inset-inline-start: -3.4mm;
+  }
+  .pt-notch-end {
+    inset-inline-end: -3.4mm;
+  }
+  .pt-stub {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8mm;
+    padding: 8mm 10mm 9mm;
+    background: #e8f0e4;
+  }
+  .pt-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3mm;
+  }
+  .pt-meta p {
+    display: flex;
+    flex-direction: column;
+    gap: 1mm;
+    margin: 0;
+  }
+  .pt-meta strong {
+    font-size: 3.8mm;
+    font-weight: 600;
+  }
+  .pt-bars {
+    display: flex;
+    gap: 0.35mm;
+    height: 16mm;
+    direction: ltr;
+  }
+  .pt-bars span {
+    display: block;
+    background: #07120d;
+  }
+  .pt-legal {
+    margin-top: 8mm;
+    font-size: 3mm;
+    color: #3f5a49;
+    text-align: center;
+  }
+}
