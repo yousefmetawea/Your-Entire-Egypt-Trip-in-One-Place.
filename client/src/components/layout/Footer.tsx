@@ -1,5 +1,6 @@
 import type { FormEvent, HTMLAttributes, ReactNode } from 'react';
 import { cn } from '../../lib/cn';
+import { Logo } from '../brand';
 import type { LayoutLinkComponent } from '../../lib/link';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
@@ -87,10 +88,11 @@ export function Footer({
               href={brandHref}
               className="group flex w-fit items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
             >
-              <span className="font-display text-[1.85rem] font-bold leading-none tracking-tight text-primary transition-colors group-hover:text-secondary">
-                {brandLabel}
-              </span>
-              <span className="size-2 rounded-full bg-secondary" aria-hidden="true" />
+              <Logo
+                height={44}
+                label={brandLabel}
+                className="transition-opacity group-hover:opacity-80"
+              />
             </Link>
 
             {description ? (
@@ -101,8 +103,11 @@ export function Footer({
 
             {note ? (
               <div className="flex items-center gap-space-sm pt-space-xs">
-                <span className="size-1.5 shrink-0 rounded-full bg-secondary" aria-hidden="true" />
-                <span className="font-sans text-xs uppercase tracking-widest text-secondary font-semibold">
+                <span
+                  className="size-1.5 shrink-0 rounded-full bg-[#b5e35a] ring-1 ring-[#12301f]/50"
+                  aria-hidden="true"
+                />
+                <span className="font-sans text-xs uppercase tracking-widest text-[#12301f] font-semibold">
                   {note}
                 </span>
               </div>
@@ -118,7 +123,7 @@ export function Footer({
             >
               {columns.map((column) => (
                 <div key={column.heading} className="flex flex-col gap-space-sm">
-                  <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-secondary">
+                  <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-[#12301f]">
                     {column.heading}
                   </h3>
                   <ul className="flex flex-col gap-space-xs">
@@ -140,7 +145,7 @@ export function Footer({
 
           {newsletter ? (
             <div className="flex flex-col gap-space-md md:col-span-2 lg:col-span-3">
-              <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-secondary">
+              <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-[#12301f]">
                 {newsletter.heading}
               </h3>
 
