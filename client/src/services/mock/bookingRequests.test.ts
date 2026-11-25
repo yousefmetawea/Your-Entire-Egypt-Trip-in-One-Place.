@@ -29,7 +29,7 @@ describe('BookingRequestService status transitions', () => {
 
     expect(req.status).toBe('pending');
     expect(req.referenceCode).toMatch(/^EG-[A-Z0-9]{6}$/);
-    expect(req.contact.phone).toBe(contact.phone);
+    expect(req.contact?.phone).toBe(contact.phone);
     expect(req.statusHistory).toHaveLength(1);
     expect(req.statusHistory[0].status).toBe('pending');
   });
