@@ -1,3 +1,5 @@
+import { Suspense, lazy, useRef } from 'react';
+import { useInView, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ScrollReveal } from '../motion/ScrollReveal';
 import { SplitText } from '../motion/SplitText';
@@ -6,7 +8,12 @@ import { Section } from '../ui/Section';
 import { LuxuryButton } from '../ui/LuxuryButton';
 import { ArrowRightIcon } from '../ui/icons';
 
+const GizaScene = lazy(() => import('../three/GizaScene'));
+
 export function FinalCtaSection() {
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const sceneVisible = useInView(sceneRef, { margin: '200px' });
+  const reduceMotion = useReducedMotion();
   const { i18n } = useTranslation();
   const isAr = i18n.language === 'ar';
 
@@ -14,6 +21,18 @@ export function FinalCtaSection() {
     <Section tone="canvas" spacing="md" className="overflow-hidden">
       <Container>
         <div className="relative overflow-hidden rounded-[24px] sm:rounded-[36px] bg-primary text-on-primary p-space-xl sm:p-space-2xl lg:p-space-3xl border border-hairline shadow-2xl">
+          {/* three.js golden-hour backdrop (mounted only while on screen) */}
+          <div ref={sceneRef} className="absolute inset-0 opacity-60" aria-hidden="true">
+            {sceneVisible && !reduceMotion ? (
+              <Suspense fallback={null}>
+                <GizaScene mode="ambient" lowPower />
+              </Suspense>
+            ) : null}
+          </div>
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20"
+            aria-hidden="true"
+          />
           {/* Ambient decorative glow */}
           <div
             className="absolute -top-32 -right-32 size-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none"

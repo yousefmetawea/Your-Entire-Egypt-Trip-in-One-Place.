@@ -3,6 +3,9 @@ import { Outlet, ScrollRestoration } from 'react-router';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { RouteLoading } from './RouteLoading';
 import { AuthProvider } from '../context/AuthContext';
+import { SmoothScroll } from '../components/motion/SmoothScroll';
+import { ScrollProgress } from '../components/motion/ScrollProgress';
+import { CursorGlow } from '../components/motion/CursorGlow';
 import { CurtainTransition } from '../components/motion/CurtainTransition';
 
 export function RootLayout() {
@@ -11,6 +14,9 @@ export function RootLayout() {
   return (
     <AuthProvider>
       <div className="min-h-screen bg-surface-container-low">
+        <SmoothScroll />
+        <ScrollProgress />
+        <CursorGlow />
         <CurtainTransition />
         <a
           href="#main"

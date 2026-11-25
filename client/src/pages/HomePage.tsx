@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Hero } from '../components/landing/Hero';
+import { RouteMapSection } from '../components/three/RouteMapSection';
 import { EditorialIntro } from '../components/landing/EditorialIntro';
 import { DestinationsShowcase } from '../components/landing/DestinationsShowcase';
 import { TravelTicker } from '../components/landing/TravelTicker';
@@ -44,6 +45,9 @@ export default function HomePage() {
 
       {/* 4. Asymmetrical Destinations Showcase (OVO Legion Selected Work Pattern) */}
       <DestinationsShowcase />
+
+      {/* 4b. Interactive 3D route map */}
+      <RouteMapSection />
 
       {/* 5. Travel Dimensions Moving Ticker */}
       <TravelTicker />
