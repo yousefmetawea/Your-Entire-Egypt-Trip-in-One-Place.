@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { Logo } from '../brand';
 import { cn } from '../../lib/cn';
 import { useState, useId, useRef, useEffect } from 'react';
 
@@ -20,7 +21,12 @@ export const SimpleNavbar = ({
   className,
 }: SimpleNavbarProps) => {
   return (
-    <nav className={cn('bg-ovo-bg-base text-ovo-primary py-4 px-6 flex items-center justify-between', className)}>
+    <nav
+      className={cn(
+        'bg-ovo-bg-base text-ovo-primary py-4 px-6 flex items-center justify-between',
+        className,
+      )}
+    >
       <Link to={brandHref} className="text-2xl font-bold">
         {brandLabel}
       </Link>
@@ -154,10 +160,17 @@ export function Navbar({
           onClick={() => setMenuOpen(false)}
           className="group inline-flex min-w-0 shrink items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
         >
-          <span className="truncate font-display text-[1.45rem] font-bold leading-none tracking-tight text-primary transition-colors group-hover:text-secondary">
-            {brandLabel}
-          </span>
-          <span className="size-1.5 rounded-full bg-secondary" aria-hidden="true" />
+          <Logo
+            height={34}
+            markOnly
+            label={brandLabel}
+            className="transition-opacity group-hover:opacity-80 sm:hidden"
+          />
+          <Logo
+            height={34}
+            label={brandLabel}
+            className="hidden transition-opacity group-hover:opacity-80 sm:block"
+          />
         </Link>
 
         <nav
@@ -186,7 +199,10 @@ export function Navbar({
               <span className="relative z-10 flex items-center gap-1.5">
                 {link.label}
                 {link.active && (
-                  <span className="size-1 rounded-full bg-secondary" aria-hidden="true" />
+                  <span
+                    className="size-1 rounded-full bg-[#b5e35a] ring-1 ring-[#12301f]/50"
+                    aria-hidden="true"
+                  />
                 )}
               </span>
             </Link>
@@ -246,7 +262,10 @@ export function Navbar({
                 >
                   <span>{link.label}</span>
                   {link.active && (
-                    <span className="size-1.5 rounded-full bg-secondary" aria-hidden="true" />
+                    <span
+                      className="size-1.5 rounded-full bg-[#b5e35a] ring-1 ring-[#12301f]/50"
+                      aria-hidden="true"
+                    />
                   )}
                 </Link>
               ))}
