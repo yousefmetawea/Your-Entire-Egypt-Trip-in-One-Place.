@@ -129,7 +129,7 @@ export function SiteLayout() {
         {isHome ? null : (
           <>
             <PageGlow />
-            {pathname === '/discover' || pathname === '/stay-transport' ? <PageRelic /> : null}
+            {pathname === '/discover' ? <PageRelic /> : null}
           </>
         )}
         <motion.div

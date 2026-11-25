@@ -1,9 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import type { TransportOption } from '../../types';
-import { Card } from '../ui/Card';
-import { Badge } from '../ui/Badge';
-import { Button } from '../ui/Button';
-import { CarIcon } from '../ui/icons';
+import { COPY, TYPE_IMAGE } from './copy';
 
 export interface TransportCardProps {
   option: TransportOption;
@@ -23,77 +20,81 @@ export function TransportCard({
     isAr && option.description?.ar ? option.description.ar : option.description?.en;
   const isInternal = option.bookable === 'internal';
 
+  const typeLabel = option.type.replace('-', ' ');
+  const cta = isInternal
+    ? t('stayTransport.transport.requestCta', 'Request Transfer')
+    : t('stayTransport.transport.viewProviderCta', 'View on provider ↗');
+  const act = isInternal ? onRequestTransfer : () => onOpenExternalModal?.(option.externalUrl!);
+  const hasAction = isInternal || !!option.externalUrl;
+
   return (
-    <Card variant="surface" padding="lg" className="flex flex-col justify-between h-full">
-      <div className="flex flex-col gap-space-sm">
-        <div className="flex items-start justify-between gap-space-xs">
-          <div className="flex items-center gap-space-xs">
-            <span className="p-2 rounded-xl bg-surface-container-high text-secondary">
-              <CarIcon className="size-5" />
-            </span>
-            <div>
-              <p className="type-label-sm uppercase text-secondary font-semibold">
-                {option.type.replace('-', ' ')}
-              </p>
-              <h3 className="type-title-md font-bold text-primary">{name}</h3>
-            </div>
-          </div>
+    <article className="group relative isolate flex h-full min-h-[27rem] flex-col justify-between overflow-hidden rounded-[1.75rem] bg-[#0a0e17] text-white shadow-[0_30px_60px_-30px_rgba(5,8,16,0.7)] ring-1 ring-white/10">
+      <img
+        src={TYPE_IMAGE[option.type] ?? TYPE_IMAGE.transfer}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 -z-20 size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+      />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#070a12] via-[#070a12]/70 to-[#070a12]/5" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
 
-          <Badge tone={isInternal ? 'bronze' : 'outline'} size="sm">
-            {isInternal
-              ? t('stayTransport.transport.managedBadge', 'Managed Request')
-              : t('stayTransport.transport.externalBadge', 'External booking')}
-          </Badge>
-        </div>
-
-        {description ? (
-          <p className="type-small text-on-surface-variant leading-relaxed">{description}</p>
-        ) : null}
-
-        {option.notes ? (
-          <p className="type-small text-on-surface-variant italic">{option.notes.en}</p>
-        ) : null}
+      <div className="flex items-start justify-between gap-3 p-5">
+        <span className="rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.22em] backdrop-blur-md">
+          {typeLabel}
+        </span>
+        <span className="flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-3 py-1.5 text-[0.68rem] font-medium tracking-wide text-white/85 backdrop-blur-md">
+          <span
+            className={`size-1.5 rounded-full ${isInternal ? 'bg-[#ffb25a]' : 'bg-white/60'}`}
+            aria-hidden
+          />
+          {isInternal
+            ? t('stayTransport.transport.managedBadge', 'Managed Request')
+            : t('stayTransport.transport.externalBadge', 'External booking')}
+        </span>
       </div>
 
-      <div className="mt-space-lg pt-space-md border-t border-hairline flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
-        <div>
-          {option.estimatedPrice ? (
-            <div>
-              <div className="flex items-center gap-space-xs">
-                <span className="type-title-md font-bold text-primary">
-                  {option.estimatedPrice.amount} {option.estimatedPrice.currency}
-                </span>
-                <Badge tone="warning" size="sm">
-                  Estimated price
-                </Badge>
-              </div>
-              <span className="type-small text-on-surface-variant text-[11px]">
-                Updated {option.estimatedPrice.priceUpdatedAt}
-              </span>
-            </div>
-          ) : (
-            <Badge tone="outline" size="sm">
-              Price variable / at gate
-            </Badge>
-          )}
+      <div className="flex flex-col gap-4 p-6 pt-0">
+        <div className="flex flex-col gap-2">
+          <h3 className="font-serif text-[1.65rem] font-semibold leading-tight">{name}</h3>
+          {description ? (
+            <p className="line-clamp-3 text-sm leading-relaxed text-white/70">{description}</p>
+          ) : null}
         </div>
 
-        <div>
-          {isInternal ? (
-            <Button variant="primary" size="sm" onClick={onRequestTransfer}>
-              {t('stayTransport.transport.requestCta', 'Request Transfer')}
-            </Button>
-          ) : option.externalUrl ? (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => onOpenExternalModal?.(option.externalUrl!)}
+        <div className="flex items-end justify-between gap-3 border-t border-white/15 pt-4">
+          <div className="flex flex-col">
+            {option.estimatedPrice ? (
+              <>
+                <span className="text-[0.65rem] uppercase tracking-[0.22em] text-white/50">
+                  {COPY[isAr ? 'ar' : 'en'].est}
+                </span>
+                <span className="text-xl font-semibold tabular-nums">
+                  {option.estimatedPrice.amount}{' '}
+                  <span className="text-sm font-medium text-white/70">
+                    {option.estimatedPrice.currency}
+                  </span>
+                </span>
+              </>
+            ) : (
+              <span className="text-sm text-white/70">{isAr ? 'السعر متغير' : 'Price varies'}</span>
+            )}
+          </div>
+          {hasAction ? (
+            <button
+              type="button"
+              onClick={act}
+              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+                isInternal
+                  ? 'bg-white text-[#0a0e17] hover:bg-[#ffb25a]'
+                  : 'border border-white/40 bg-white/5 text-white backdrop-blur-md hover:bg-white/15'
+              }`}
             >
-              {t('stayTransport.transport.viewProviderCta', 'View on provider ↗')}
-            </Button>
+              {cta}
+            </button>
           ) : null}
         </div>
       </div>
-    </Card>
+    </article>
   );
 }
