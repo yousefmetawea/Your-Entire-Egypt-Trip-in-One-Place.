@@ -145,7 +145,7 @@ export function FaqSection() {
           <div className="lg:col-span-4">
             <ScrollReveal delay={0.25}>
               <div className="rounded-2xl border border-hairline bg-primary p-space-xl text-on-primary shadow-floating">
-                <span className="type-label-sm uppercase tracking-widest text-secondary font-semibold block mb-space-xs">
+                <span className="type-label-sm uppercase tracking-widest text-[#b5e35a] font-semibold block mb-space-xs">
                   {isAr ? 'هل لديك استفسار آخر؟' : 'Still have questions?'}
                 </span>
                 <h3 className="font-serif text-2xl text-surface font-medium leading-snug">

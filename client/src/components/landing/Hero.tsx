@@ -6,6 +6,7 @@
 // Marquee: each headline copy moves 0 -> -100% in 15s, linear, forever.
 import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ResponsiveImage from '../ui/ResponsiveImage';
@@ -50,10 +51,11 @@ const LAST_LAYER = {
   alt: 'Cairo skyline with historic mosques',
 };
 
-const HEADLINE = 'YourTrip Egypt Travel';
 const COPIES = [0, 1, 2, 3, 4, 5];
 
 export function Hero() {
+  const { t } = useTranslation();
+  const headline = t('home.landingHero.headline');
   const rootRef = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
@@ -72,8 +74,8 @@ export function Hero() {
       const copies = q('[data-hero-copy]');
       const finalSize = () =>
         window.matchMedia('(max-width: 991px)').matches
-          ? { width: '82%', height: '55%' }
-          : { width: '45%', height: '55%' };
+          ? { width: '64%', height: '38%' }
+          : { width: '30%', height: '56%' };
 
       gsap.set(layers, { rotation: (i: number) => LAYERS[i].rotation });
 
@@ -158,7 +160,11 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={rootRef} className={styles.heroWrapper} aria-label="YourTrip hero">
+    <section
+      ref={rootRef}
+      className={styles.heroWrapper}
+      aria-label={t('home.landingHero.ariaLabel')}
+    >
       <div data-hero-overlay className={styles.curtains} aria-hidden="true">
         {[0, 1, 2, 3, 4].map((i) => (
           <div key={i} data-hero-strip className={styles.curtainStrip} />
@@ -174,7 +180,7 @@ export function Hero() {
         <div className={styles.heroTextTrack} aria-hidden="true">
           {COPIES.map((n) => (
             <div key={n} data-hero-copy className={styles.heroTextItem}>
-              {HEADLINE}
+              {headline}
             </div>
           ))}
         </div>
@@ -204,12 +210,10 @@ export function Hero() {
           </div>
 
           <div className={styles.heroParagraphHolder}>
-            <p className={styles.titleParagraph}>
-              YourTrip: your whole Egypt trip, planned in one place
-            </p>
+            <p className={styles.titleParagraph}>{t('home.landingHero.tagline')}</p>
             <Link to="/plan" className={styles.heroButton}>
               <span className={styles.redCircle} />
-              Plan my trip
+              {t('home.landingHero.cta')}
             </Link>
           </div>
         </div>

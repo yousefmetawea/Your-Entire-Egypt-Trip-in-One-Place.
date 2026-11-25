@@ -7,7 +7,9 @@
     "myTrip": "My Trip",
     "planCta": "Plan My Trip",
     "openMenu": "Open navigation menu",
-    "closeMenu": "Close navigation menu"
+    "closeMenu": "Close navigation menu",
+    "signIn": "Sign in",
+    "signOut": "Sign out"
   },
   "home": {
     "hero": {
@@ -117,6 +119,12 @@
           "body": "Discovery is available now; planning and booking tools are not part of this demo."
         }
       }
+    },
+    "landingHero": {
+      "ariaLabel": "YourTrip hero",
+      "headline": "YourTrip Egypt Travel",
+      "tagline": "YourTrip: your whole Egypt trip, planned in one place",
+      "cta": "Plan my trip"
     }
   },
   "discover": {

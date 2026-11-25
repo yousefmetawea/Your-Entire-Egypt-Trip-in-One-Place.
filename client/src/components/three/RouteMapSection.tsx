@@ -30,7 +30,7 @@ export function RouteMapSection() {
       <div className="relative mx-auto grid max-w-[80rem] items-center gap-10 px-6 sm:px-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <ScrollReveal>
-            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-secondary">
+            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#b5e35a]">
               {isAr ? '(خريطة الرحلة)' : '(The Route)'}
             </span>
           </ScrollReveal>

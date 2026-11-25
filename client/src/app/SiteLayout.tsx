@@ -91,7 +91,7 @@ export function SiteLayout() {
         onClick={() => void logout()}
         className="text-xs text-neutral-600 hover:text-neutral-900 transition-colors uppercase tracking-wider font-medium"
       >
-        Sign Out
+        {t('nav.signOut')}
       </button>
     </div>
   ) : (
@@ -99,7 +99,7 @@ export function SiteLayout() {
       href="/login"
       className="text-xs text-neutral-700 hover:text-neutral-900 transition-colors uppercase tracking-wider font-semibold"
     >
-      Sign In
+      {t('nav.signIn')}
     </AppLink>
   );
 
@@ -125,7 +125,7 @@ export function SiteLayout() {
         ctaLinkComponent={AppLink}
       />
 
-      <main id="main" className="relative pt-24 md:pt-28">
+      <main id="main" className={isHome ? 'relative' : 'relative pt-24 md:pt-28'}>
         {isHome ? null : (
           <>
             <PageGlow />

@@ -35,7 +35,7 @@
 .loadingBar {
   width: 0%;
   height: 100%;
-  background-color: var(--color-accent-600, #e63b2e);
+  background-color: #226b3d;
 }
 
 /* 500vh scroll runway; the stage below is pinned while it plays. */
@@ -62,6 +62,9 @@
 /* Looping headline sits behind the photos and keeps moving the whole time. */
 .heroTextTrack {
   position: absolute;
+  left: 0;
+  /* Keep the marquee flowing left in RTL too; the text inside still renders RTL. */
+  direction: ltr;
   display: flex;
   user-select: none;
   pointer-events: none;
@@ -75,7 +78,13 @@
   letter-spacing: -0.045em;
   white-space: nowrap;
   color: var(--color-primary-900, #111);
-  padding-right: 0.3em;
+  padding-inline-end: 0.3em;
+}
+
+:global(html[lang='ar']) .heroTextItem {
+  font-family: 'Alexandria', var(--font-sans, 'Inter', sans-serif);
+  letter-spacing: 0;
+  font-size: 17vh;
 }
 
 .heroContent {
@@ -114,10 +123,18 @@
   will-change: transform, width, height;
 }
 
-.layer01 { z-index: 5; }
-.layer02 { z-index: 4; }
-.layer03 { z-index: 3; }
-.layer04 { z-index: 2; }
+.layer01 {
+  z-index: 5;
+}
+.layer02 {
+  z-index: 4;
+}
+.layer03 {
+  z-index: 3;
+}
+.layer04 {
+  z-index: 2;
+}
 
 .layerLast {
   position: absolute;
@@ -173,11 +190,28 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-accent-600, #e63b2e);
+  background: #b5e35a;
 }
 
 @media (max-width: 991px) {
-  .heroSticky { padding-top: 8px; padding-bottom: 30px; }
-  .heroImageContainer, .layerLast { min-width: 80%; min-height: 50%; }
-  .heroTextItem { font-size: 8vh; letter-spacing: -0.04em; }
+  .heroSticky {
+    padding-top: 8px;
+    padding-bottom: 30px;
+  }
+  .heroImageContainer,
+  .layerLast {
+    min-width: 60%;
+    min-height: 36%;
+  }
+  .heroTextTrack {
+    top: 13vh;
+  }
+  .heroTextItem {
+    font-size: 9vh;
+    letter-spacing: -0.04em;
+  }
+  :global(html[lang='ar']) .heroTextItem {
+    font-size: 8vh;
+    letter-spacing: 0;
+  }
 }

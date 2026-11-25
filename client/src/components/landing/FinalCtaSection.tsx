@@ -43,7 +43,7 @@ export function FinalCtaSection() {
             {/* Text & Action (col-span-7) */}
             <div className="flex flex-col gap-space-md lg:col-span-7">
               <ScrollReveal>
-                <span className="type-label-sm uppercase tracking-widest text-secondary font-semibold">
+                <span className="type-label-sm uppercase tracking-widest text-[#b5e35a] font-semibold">
                   {isAr ? '(رحلتك تبدأ هنا)' : '(Your Journey Begins)'}
                 </span>
               </ScrollReveal>

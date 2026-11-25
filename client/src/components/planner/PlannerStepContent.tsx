@@ -63,7 +63,7 @@ function StepHeading({ step, titleKey, descriptionKey, headingRef }: StepHeading
         id={`planner-${step}-heading`}
         ref={headingRef}
         tabIndex={-1}
-        className="type-card-title mt-space-xs text-primary"
+        className="type-card-title mt-space-xs text-primary outline-none focus:outline-none focus-visible:outline-none"
       >
         {t(titleKey)}
       </h2>

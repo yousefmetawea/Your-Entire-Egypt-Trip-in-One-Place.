@@ -22,7 +22,7 @@
   --color-inverse-on-surface: #ffffff;
   --color-outline: #acacac;
   --color-outline-variant: #c6c5c1;
-  --color-surface-tint: #ff282b;
+  --color-surface-tint: #226b3d;
 
   --color-primary: #000000;
   --color-on-primary: #ffffff;
@@ -34,14 +34,14 @@
   --color-on-primary-fixed: #000000;
   --color-on-primary-fixed-variant: #141414;
 
-  --color-secondary: #ff282b;
+  --color-secondary: #226b3d;
   --color-on-secondary: #ffffff;
-  --color-secondary-container: #ffe2e2;
-  --color-on-secondary-container: #ff282b;
-  --color-secondary-fixed: #ff282b;
-  --color-secondary-fixed-dim: #ea384c;
+  --color-secondary-container: #e4f2cf;
+  --color-on-secondary-container: #12301f;
+  --color-secondary-fixed: #226b3d;
+  --color-secondary-fixed-dim: #3b8a52;
   --color-on-secondary-fixed: #ffffff;
-  --color-on-secondary-fixed-variant: #ee1f22;
+  --color-on-secondary-fixed-variant: #1a5530;
 
   --color-tertiary: #141414;
   --color-on-tertiary: #ffffff;
@@ -60,7 +60,7 @@
   --color-background: #f2f2f2;
   --color-on-background: #000000;
 
-  --color-bronze: #ff282b;
+  --color-bronze: #226b3d;
   --color-sand: #e2e2e2;
   --color-hairline: #c6c5c1;
   --color-hairline-strong: #acacac;
