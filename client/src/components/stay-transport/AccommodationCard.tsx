@@ -72,20 +72,16 @@ export function AccommodationCard({
 
           {/* Amenities */}
           <div className="flex flex-wrap gap-1 mt-space-xs">
-            {accommodation.amenities.length > 0 ? (
-              accommodation.amenities.map((amenity, i) => (
-                <span
-                  key={i}
-                  className="type-small text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded-md"
-                >
-                  {amenity}
-                </span>
-              ))
-            ) : (
-              <span className="type-small text-on-surface-variant italic">
-                No specific amenities listed
-              </span>
-            )}
+            {accommodation.amenities.length > 0
+              ? accommodation.amenities.map((amenity, i) => (
+                  <span
+                    key={i}
+                    className="type-small text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded-md"
+                  >
+                    {amenity}
+                  </span>
+                ))
+              : null}
           </div>
         </div>
 
@@ -98,18 +94,15 @@ export function AccommodationCard({
                     {accommodation.priceRange.min} – {accommodation.priceRange.max}{' '}
                     {accommodation.priceRange.currency}
                   </span>
-                  <Badge tone="warning" size="sm">
-                    Estimated price
-                  </Badge>
+                  <span className="type-small text-on-surface-variant">
+                    {isAr ? 'تقريبًا' : 'est.'} / {isAr ? 'ليلة' : 'night'}
+                  </span>
                 </div>
-                <span className="type-small text-on-surface-variant text-[11px]">
-                  Per night · Updated {accommodation.priceRange.priceUpdatedAt}
-                </span>
               </div>
             ) : (
-              <Badge tone="outline" size="sm">
-                Price not listed
-              </Badge>
+              <span className="type-small text-on-surface-variant">
+                {isAr ? 'السعر غير متاح' : 'Price on request'}
+              </span>
             )}
           </div>
 

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useStayTransport } from '../hooks/useStayTransport';
@@ -8,17 +9,35 @@ import { Section } from '../components/ui/Section';
 import { Button } from '../components/ui/Button';
 import { Modal } from '../components/ui/Modal';
 import { EmptyState } from '../components/common/EmptyState';
-import { SplitText } from '../components/motion/SplitText';
+import { Reveal } from '../components/motion/Reveal';
+import { TiltCard } from '../components/motion/TiltCard';
+import { StayHero } from '../components/stay-transport/StayHero';
+import { TabSwitch } from '../components/stay-transport/TabSwitch';
+import { WaysToMove } from '../components/stay-transport/WaysToMove';
+import { COPY } from '../components/stay-transport/copy';
 import { AccommodationCard } from '../components/stay-transport/AccommodationCard';
 import { AccommodationFilters } from '../components/stay-transport/AccommodationFilters';
 import { AccommodationMap } from '../components/stay-transport/AccommodationMap';
 import { TransportCard } from '../components/stay-transport/TransportCard';
 import { TransferRequestModal } from '../components/stay-transport/TransferRequestModal';
 import { MyRequestsList } from '../components/stay-transport/MyRequestsList';
-import { BedIcon, CarIcon, InfoIcon } from '../components/ui/icons';
+
+function SectionHead({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <Reveal className="mb-space-sm flex flex-col gap-2">
+      <span className="flex items-center gap-3 type-label font-semibold uppercase tracking-[0.25em] text-secondary">
+        <span className="h-px w-10 bg-secondary" />
+        {eyebrow}
+      </span>
+      <h2 className="type-display text-primary">{title}</h2>
+    </Reveal>
+  );
+}
 
 export default function StayTransportPage() {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
+  const reduce = useReducedMotion();
   usePageTitle();
   const navigate = useNavigate();
 
@@ -64,136 +83,121 @@ export default function StayTransportPage() {
     }
   };
 
+  const copy = COPY[isAr ? 'ar' : 'en'];
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const pick = (next: 'accommodation' | 'transportation') => {
+    setTab(next);
+    window.setTimeout(
+      () =>
+        contentRef.current?.scrollIntoView({
+          behavior: reduce ? 'auto' : 'smooth',
+          block: 'start',
+        }),
+      60,
+    );
+  };
+
   return (
     <div className="flex flex-col w-full min-h-screen">
-      {/* Top Header Section */}
-      <Section tone="canvas" spacing="sm" className="border-b border-hairline">
-        <Container>
-          <div className="flex flex-col gap-space-sm max-w-3xl">
-            <span className="type-label text-secondary uppercase font-semibold">
-              {t('stayTransport.header.eyebrow', 'Sanctuaries & Transit')}
-            </span>
-            <h1 className="type-display text-primary">
-              <SplitText as="span">{t('stayTransport.header.title', 'Stay & Transport')}</SplitText>
-            </h1>
-            <p className="type-body-lg text-on-surface-variant">
-              {t(
-                'stayTransport.header.subtitle',
-                'Compare places to stay and seamless ways to get around Cairo, with estimated prices clearly labeled.',
-              )}
-            </p>
+      <StayHero
+        copy={copy}
+        isAr={isAr}
+        stays={accommodations.length}
+        ways={transports.length}
+        onPick={pick}
+      />
 
-            {/* Persistent Honesty Notice */}
-            <div className="rounded-xl border border-hairline bg-surface-container-low p-space-sm mt-space-xs flex items-start gap-space-xs">
-              <InfoIcon className="size-5 text-secondary shrink-0 mt-0.5" />
-              <p className="type-small text-on-surface-variant">
-                Rates and prices shown are estimates with last-updated dates. Availability is not
-                checked in real-time. Transfers start as pending requests and external stays link
-                out to providers.
-              </p>
-            </div>
-          </div>
-
-          {/* Tab Navigation */}
-          <div
-            className="flex items-center gap-space-xs mt-space-lg"
-            role="tablist"
-            aria-label="Stay and transport categories"
+      {/* Tab switch + ticker */}
+      <div ref={contentRef} className="relative scroll-mt-4 bg-[#070a12] pb-10">
+        <div className="flex justify-center">
+          <TabSwitch
+            tab={tab as 'accommodation' | 'transportation'}
+            onChange={setTab}
+            labels={{ stay: copy.tabStay, transport: copy.tabTransport }}
+          />
+        </div>
+        <div
+          className="mt-10 overflow-hidden border-y border-white/10 py-4"
+          dir="ltr"
+          aria-hidden="true"
+        >
+          <motion.div
+            className="flex w-max gap-12 whitespace-nowrap text-sm font-semibold uppercase tracking-[0.3em] text-white/45"
+            animate={reduce ? undefined : { x: ['0%', '-50%'] }}
+            transition={{ duration: 36, ease: 'linear', repeat: Infinity }}
           >
-            <button
-              role="tab"
-              aria-selected={tab === 'accommodation'}
-              aria-controls="panel-accommodation"
-              id="tab-accommodation"
-              tabIndex={tab === 'accommodation' ? 0 : -1}
-              onClick={() => setTab('accommodation')}
-              className={`flex items-center gap-space-xs px-space-lg py-space-sm rounded-full type-button transition-all duration-200 ${
-                tab === 'accommodation'
-                  ? 'bg-primary text-on-primary shadow-resting'
-                  : 'bg-surface-container text-on-surface-variant hover:text-primary'
-              }`}
-            >
-              <BedIcon className="size-4" />
-              <span>{t('stayTransport.tabs.accommodation', 'Accommodation')}</span>
-            </button>
+            {[...copy.ticker, ...copy.ticker, ...copy.ticker, ...copy.ticker].map((w, i) => (
+              <span key={i} className="flex items-center gap-12">
+                {w}
+                <span className="text-[#ffb25a]">✦</span>
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </div>
 
-            <button
-              role="tab"
-              aria-selected={tab === 'transportation'}
-              aria-controls="panel-transportation"
-              id="tab-transportation"
-              tabIndex={tab === 'transportation' ? 0 : -1}
-              onClick={() => setTab('transportation')}
-              className={`flex items-center gap-space-xs px-space-lg py-space-sm rounded-full type-button transition-all duration-200 ${
-                tab === 'transportation'
-                  ? 'bg-primary text-on-primary shadow-resting'
-                  : 'bg-surface-container text-on-surface-variant hover:text-primary'
-              }`}
-            >
-              <CarIcon className="size-4" />
-              <span>{t('stayTransport.tabs.transportation', 'Transportation')}</span>
-            </button>
-          </div>
-        </Container>
-      </Section>
+      {tab === 'transportation' && !loading && !error ? <WaysToMove copy={copy} /> : null}
 
       {/* Main Content Panels */}
       <Section tone="canvas" spacing="md">
         <Container>
           {loading ? (
             <div className="py-space-2xl text-center">
-              <p className="type-body text-on-surface-variant">Loading catalog…</p>
+              <p className="type-body text-on-surface-variant">
+                {isAr ? 'جارٍ التحميل…' : 'Loading…'}
+              </p>
             </div>
           ) : error ? (
             <EmptyState
-              title="Failed to load options"
+              title={isAr ? 'تعذر التحميل' : 'Could not load options'}
               description={error}
               actions={
                 <Button variant="secondary" size="md" onClick={reload}>
-                  Retry
+                  {isAr ? 'إعادة المحاولة' : 'Retry'}
                 </Button>
               }
             />
           ) : tab === 'accommodation' ? (
-            /* Accommodation Tab Panel */
             <div
               role="tabpanel"
               id="panel-accommodation"
               aria-labelledby="tab-accommodation"
               className="flex flex-col gap-space-md"
             >
-              {/* Accommodation Map */}
+              <SectionHead eyebrow={copy.stayEyebrow} title={copy.stayTitle} />
               <AccommodationMap
                 accommodations={accommodations}
                 selectedId={selectedAccommodationId}
                 onSetAsStay={handleSetStay}
               />
-
-              {/* Filters */}
               <AccommodationFilters
                 type={typeFilter}
                 amenity={amenityFilter}
                 onTypeChange={setTypeFilter}
                 onAmenityChange={setAmenityFilter}
               />
-
-              {/* Accommodation Grid */}
               {accommodations.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-lg mt-space-sm">
-                  {accommodations.map((acc) => (
-                    <AccommodationCard
-                      key={acc.id}
-                      accommodation={acc}
-                      isSelected={selectedAccommodationId === acc.id}
-                      onSetAsStay={() => handleSetStay(acc.id)}
-                      onOpenExternalModal={(url) => setExternalUrlNotice(url)}
-                    />
+                  {accommodations.map((acc, i) => (
+                    <Reveal key={acc.id} delay={(i % 3) * 0.08}>
+                      <TiltCard intensity={4} className="h-full">
+                        <AccommodationCard
+                          accommodation={acc}
+                          isSelected={selectedAccommodationId === acc.id}
+                          onSetAsStay={() => handleSetStay(acc.id)}
+                          onOpenExternalModal={(url) => setExternalUrlNotice(url)}
+                        />
+                      </TiltCard>
+                    </Reveal>
                   ))}
                 </div>
               ) : (
                 <EmptyState
-                  title="No places match your filters"
-                  description="Try adjusting your type or amenity filters to see more accommodation options."
+                  title={isAr ? 'لا توجد نتائج' : 'No places match your filters'}
+                  description={
+                    isAr ? 'جرّب تغيير الفلاتر.' : 'Try changing the type or amenity filters.'
+                  }
                   actions={
                     <Button
                       variant="secondary"
@@ -203,32 +207,33 @@ export default function StayTransportPage() {
                         setAmenityFilter('all');
                       }}
                     >
-                      Reset filters
+                      {isAr ? 'إعادة ضبط' : 'Reset filters'}
                     </Button>
                   }
                 />
               )}
             </div>
           ) : (
-            /* Transportation Tab Panel */
             <div
               role="tabpanel"
               id="panel-transportation"
               aria-labelledby="tab-transportation"
               className="flex flex-col gap-space-md"
             >
+              <SectionHead eyebrow={copy.moveEyebrow} title={copy.moveTitle} />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter-lg">
-                {transports.map((opt) => (
-                  <TransportCard
-                    key={opt.id}
-                    option={opt}
-                    onRequestTransfer={() => setTransferModalOpen(true)}
-                    onOpenExternalModal={(url) => setExternalUrlNotice(url)}
-                  />
+                {transports.map((opt, i) => (
+                  <Reveal key={opt.id} delay={(i % 2) * 0.1}>
+                    <TiltCard intensity={4} className="h-full">
+                      <TransportCard
+                        option={opt}
+                        onRequestTransfer={() => setTransferModalOpen(true)}
+                        onOpenExternalModal={(url) => setExternalUrlNotice(url)}
+                      />
+                    </TiltCard>
+                  </Reveal>
                 ))}
               </div>
-
-              {/* Transfer Requests List */}
               <MyRequestsList
                 requests={requests}
                 onCancelRequest={cancelRequest}
@@ -238,6 +243,26 @@ export default function StayTransportPage() {
           )}
         </Container>
       </Section>
+
+      {/* Closing brand band */}
+      <section className="relative overflow-hidden bg-[#070a12] py-28 text-center text-white">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_300px_at_50%_100%,rgba(255,170,80,0.22),transparent_70%)]" />
+        <Container>
+          <Reveal className="relative z-10 mx-auto flex max-w-3xl flex-col items-center gap-6">
+            <h2 className="text-4xl font-semibold leading-tight md:text-6xl">
+              {copy.closingTitle}
+            </h2>
+            <p className="text-lg text-white/65">{copy.closingLine}</p>
+            <button
+              type="button"
+              onClick={() => navigate('/plan')}
+              className="rounded-full bg-gradient-to-r from-[#ffd7a0] to-[#ffb25a] px-8 py-3.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
+            >
+              {copy.closingCta}
+            </button>
+          </Reveal>
+        </Container>
+      </section>
 
       {/* Airport Transfer Request Modal */}
       <TransferRequestModal
