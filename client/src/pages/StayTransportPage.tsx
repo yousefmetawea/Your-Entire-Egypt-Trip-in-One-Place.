@@ -20,6 +20,7 @@ import { AccommodationFilters } from '../components/stay-transport/Accommodation
 import { AccommodationMap } from '../components/stay-transport/AccommodationMap';
 import { TransportCard } from '../components/stay-transport/TransportCard';
 import { TransferRequestModal } from '../components/stay-transport/TransferRequestModal';
+import { RouteMap } from '../components/stay-transport/RouteMap';
 import { MyRequestsList } from '../components/stay-transport/MyRequestsList';
 
 function SectionHead({
@@ -78,6 +79,8 @@ export default function StayTransportPage() {
   const [noTripStayId, setNoTripStayId] = useState<string | null>(null);
 
   const selectedAccommodationId = currentTrip?.accommodationId || null;
+  const stayLocation =
+    accommodations.find((a) => a.id === selectedAccommodationId)?.location ?? null;
 
   const handleSetStay = async (accId: string) => {
     const res = await setAsMyStay(accId);
@@ -282,6 +285,7 @@ export default function StayTransportPage() {
                   </Reveal>
                 ))}
               </div>
+              <RouteMap stayLocation={stayLocation} />
               <MyRequestsList
                 requests={requests}
                 onCancelRequest={cancelRequest}
