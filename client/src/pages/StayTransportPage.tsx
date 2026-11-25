@@ -22,14 +22,24 @@ import { TransportCard } from '../components/stay-transport/TransportCard';
 import { TransferRequestModal } from '../components/stay-transport/TransferRequestModal';
 import { MyRequestsList } from '../components/stay-transport/MyRequestsList';
 
-function SectionHead({ eyebrow, title }: { eyebrow: string; title: string }) {
+function SectionHead({
+  eyebrow,
+  title,
+  dark = false,
+}: {
+  eyebrow: string;
+  title: string;
+  dark?: boolean;
+}) {
   return (
     <Reveal className="mb-space-sm flex flex-col gap-2">
-      <span className="flex items-center gap-3 type-label font-semibold uppercase tracking-[0.25em] text-secondary">
-        <span className="h-px w-10 bg-secondary" />
+      <span
+        className={`flex items-center gap-3 type-label font-semibold uppercase tracking-[0.25em] ${dark ? 'text-[#ffb25a]' : 'text-secondary'}`}
+      >
+        <span className={`h-px w-10 ${dark ? 'bg-[#ffb25a]' : 'bg-secondary'}`} />
         {eyebrow}
       </span>
-      <h2 className="type-display text-primary">{title}</h2>
+      <h2 className={`type-display ${dark ? 'text-white' : 'text-primary'}`}>{title}</h2>
     </Reveal>
   );
 }
@@ -85,6 +95,26 @@ export default function StayTransportPage() {
 
   const copy = COPY[isAr ? 'ar' : 'en'];
   const contentRef = useRef<HTMLDivElement>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [focus, setFocus] = useState<{ id: string; n: number } | null>(null);
+  const [flashId, setFlashId] = useState<string | null>(null);
+  const flashTimer = useRef<number | undefined>(undefined);
+
+  const flashCard = (id: string) => {
+    setFlashId(id);
+    window.clearTimeout(flashTimer.current);
+    flashTimer.current = window.setTimeout(() => setFlashId(null), 2400);
+  };
+  // Map pin clicked: bring its card into view and highlight it.
+  const handlePinSelect = (id: string) => {
+    setFocus((f) => ({ id, n: (f?.n ?? 0) + 1 }));
+    document
+      .getElementById(`stay-card-${id}`)
+      ?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    flashCard(id);
+  };
+  // Card clicked: fly the map to its pin.
+  const handleCardFocus = (id: string) => setFocus((f) => ({ id, n: (f?.n ?? 0) + 1 }));
 
   const pick = (next: 'accommodation' | 'transportation') => {
     setTab(next);
@@ -140,7 +170,11 @@ export default function StayTransportPage() {
       {tab === 'transportation' && !loading && !error ? <WaysToMove copy={copy} /> : null}
 
       {/* Main Content Panels */}
-      <Section tone="canvas" spacing="md">
+      <Section
+        tone="canvas"
+        spacing="md"
+        className={tab === 'accommodation' && !loading && !error ? '!bg-[#070a12] !text-white' : undefined}
+      >
         <Container>
           {loading ? (
             <div className="py-space-2xl text-center">
@@ -165,10 +199,14 @@ export default function StayTransportPage() {
               aria-labelledby="tab-accommodation"
               className="flex flex-col gap-space-md"
             >
-              <SectionHead eyebrow={copy.stayEyebrow} title={copy.stayTitle} />
+              <SectionHead eyebrow={copy.stayEyebrow} title={copy.stayTitle} dark />
               <AccommodationMap
                 accommodations={accommodations}
                 selectedId={selectedAccommodationId}
+                hoveredId={hoveredId}
+                focus={focus}
+                onSelectAccommodation={handlePinSelect}
+                onHoverAccommodation={setHoveredId}
                 onSetAsStay={handleSetStay}
               />
               <AccommodationFilters
@@ -178,19 +216,29 @@ export default function StayTransportPage() {
                 onAmenityChange={setAmenityFilter}
               />
               {accommodations.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-lg mt-space-sm">
-                  {accommodations.map((acc, i) => (
-                    <Reveal key={acc.id} delay={(i % 3) * 0.08}>
-                      <TiltCard intensity={4} className="h-full">
+                <div className="mt-space-sm grid grid-flow-dense grid-cols-1 gap-5 md:grid-cols-2 lg:auto-rows-[22rem] lg:grid-cols-3">
+                  {accommodations.map((acc, i) => {
+                    const featured = i % 6 === 0;
+                    return (
+                      <Reveal
+                        key={acc.id}
+                        delay={(i % 3) * 0.08}
+                        className={featured ? 'h-full md:col-span-2 lg:row-span-2' : 'h-full'}
+                      >
                         <AccommodationCard
                           accommodation={acc}
+                          index={i}
+                          featured={featured}
                           isSelected={selectedAccommodationId === acc.id}
+                          isFlashing={flashId === acc.id}
                           onSetAsStay={() => handleSetStay(acc.id)}
                           onOpenExternalModal={(url) => setExternalUrlNotice(url)}
+                          onHover={setHoveredId}
+                          onFocusCard={handleCardFocus}
                         />
-                      </TiltCard>
-                    </Reveal>
-                  ))}
+                      </Reveal>
+                    );
+                  })}
                 </div>
               ) : (
                 <EmptyState
