@@ -167,7 +167,9 @@ describe('Database Models & Idempotent Seed Runner', () => {
   it('correctly saves BookingRequest with embedded statusHistory', async () => {
     const booking = await BookingRequestModel.create({
       id: 'booking_req_001',
+      referenceCode: 'EG-TEST01',
       userId: 'user_alex_default',
+      contact: { name: 'Alex', phone: '+20 100 000 0000' },
       tripId: 'trip_test_001',
       kind: 'airport-transfer',
       details: {

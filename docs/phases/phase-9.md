@@ -30,7 +30,7 @@
    - Lists user transfer requests with pickup/drop-off, date, time, passenger count, flight details, and status badges (`RequestStatusChip`).
    - Audit trail inspection: expandable status history timeline (`StatusTimeline`).
    - Cancellation support: users can cancel pending requests via `services.bookingRequests.cancel`.
-   - Simulated confirmation control: gated behind `DEV` or `VITE_ENABLE_DEMO_ACTIONS`.
+   - Operator confirmation happens on `/admin` (see `docs/api.md`). The old simulated control was removed.
 
 5. **Budget Overview & Donut Chart (`BudgetDonut.tsx`, `budgetAnalytics.ts`)**:
    - Custom SVG donut chart (~2KB, zero extra dependencies).

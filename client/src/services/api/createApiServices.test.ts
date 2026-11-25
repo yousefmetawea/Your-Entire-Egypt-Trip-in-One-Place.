@@ -95,6 +95,8 @@ describe('createApiServices', () => {
   it('bookingRequests.create posts booking payload', async () => {
     const mockBooking = {
       id: 'book_123',
+      referenceCode: 'EG-ABC234',
+      contact: { name: 'Sara Ali', phone: '+20 100 123 4567' },
       userId: 'user_1',
       kind: 'airport-transfer',
       tripId: 'trip_123',
@@ -123,6 +125,7 @@ describe('createApiServices', () => {
     const result = await services.bookingRequests.create({
       kind: 'airport-transfer',
       tripId: 'trip_123',
+      contact: { name: 'Sara Ali', phone: '+20 100 123 4567' },
       details: {
         pickupLocation: 'Cairo International Airport (CAI)',
         dropoffLocation: 'Downtown Cairo Hotel',

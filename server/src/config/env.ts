@@ -19,10 +19,6 @@ const envSchema = z.object({
     .string()
     .url('CLIENT_ORIGIN must be a valid URL')
     .default('http://localhost:5173'),
-  enableDemoActions: z
-    .string()
-    .optional()
-    .transform((val) => val === 'true'),
   rateLimitWindowMs: z.coerce.number().int().positive().default(900000), // 15 mins
   rateLimitMax: z.coerce.number().int().positive().default(100),
   authRateLimitMax: z.coerce.number().int().positive().default(5),
@@ -45,7 +41,6 @@ export function loadEnv(source: NodeJS.ProcessEnv = process.env): Env {
         : undefined),
     jwtExpiresIn: source.JWT_EXPIRES_IN,
     clientOrigin: source.CLIENT_ORIGIN,
-    enableDemoActions: source.ENABLE_DEMO_ACTIONS,
     rateLimitWindowMs: source.RATE_LIMIT_WINDOW_MS,
     rateLimitMax: source.RATE_LIMIT_MAX,
     authRateLimitMax: source.AUTH_RATE_LIMIT_MAX,
@@ -61,11 +56,6 @@ export function loadEnv(source: NodeJS.ProcessEnv = process.env): Env {
       `\n❌ Configuration Error: Invalid server environment variables:\n${errorDetails}\n`,
     );
     throw new Error('Invalid environment configuration');
-  }
-
-  // Safety constraint: enableDemoActions must never be active in production
-  if (parsed.data.nodeEnv === 'production' && parsed.data.enableDemoActions) {
-    throw new Error('Fatal Security Constraint: ENABLE_DEMO_ACTIONS cannot be true in production');
   }
 
   return parsed.data;

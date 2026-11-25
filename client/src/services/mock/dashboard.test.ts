@@ -66,6 +66,7 @@ describe('Dashboard Service Layer Integration', () => {
   it('cancels pending booking requests with an audit entry in statusHistory', async () => {
     const req = await services.bookingRequests.create({
       kind: 'airport-transfer',
+      contact: { name: 'Sara Ali', phone: '+20 100 123 4567' },
       details: {
         pickupLocation: 'Cairo International Airport',
         dropoffLocation: 'Marriott Mena House',

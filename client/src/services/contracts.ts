@@ -4,7 +4,9 @@ import type {
   AccommodationType,
   AirportTransferDetails,
   BookingRequest,
+  BookingContact,
   BookingRequestId,
+  BookingStatus,
   BudgetTier,
   CairoArea,
   CreatePlannedTripInput,
@@ -100,11 +102,13 @@ export type CreateBookingRequestInput =
   | {
       kind: 'airport-transfer';
       tripId?: TripId | null;
+      contact: BookingContact;
       details: AirportTransferDetails;
     }
   | {
       kind: 'guided-tour';
       tripId?: TripId | null;
+      contact: BookingContact;
       details: GuidedTourDetails;
     };
 
@@ -148,7 +152,16 @@ export interface BookingRequestService {
   listMine(): Promise<BookingRequest[]>;
   getById(id: BookingRequestId): Promise<BookingRequest>;
   cancel(id: BookingRequestId): Promise<BookingRequest>;
-  simulateConfirm(id: BookingRequestId): Promise<BookingRequest>;
+}
+
+/** Operator-only: review every request and confirm or decline it. */
+export interface AdminBookingService {
+  list(status?: BookingStatus): Promise<BookingRequest[]>;
+  setStatus(
+    id: BookingRequestId,
+    status: 'confirmed' | 'cancelled',
+    note?: string,
+  ): Promise<BookingRequest>;
 }
 
 export interface Services {
@@ -158,5 +171,6 @@ export interface Services {
   readyMadeTrips: ReadyMadeTripService;
   trips: TripService;
   bookingRequests: BookingRequestService;
+  adminBookings: AdminBookingService;
   resetLocalData(): Promise<void>;
 }

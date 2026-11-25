@@ -2,6 +2,7 @@ import type {
   AccommodationQuery,
   AccommodationService,
   AddPlaceToDraftResult,
+  AdminBookingService,
   BookingRequestService,
   CreateBookingRequestInput,
   CreatePlannedTripInput,
@@ -302,18 +303,72 @@ export function createApiServices(): Services {
     },
   };
 
+  // Guests have no account, so their requests are remembered in this browser by
+  // reference code and phone number, and looked up on the server when listed.
+  const GUEST_KEY = 'egypt-trip.guest-requests';
+  interface GuestEntry {
+    id: string;
+    referenceCode: string;
+    phone: string;
+  }
+  const readGuests = (): GuestEntry[] => {
+    try {
+      const raw = window.localStorage.getItem(GUEST_KEY);
+      const parsed: unknown = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? (parsed as GuestEntry[]) : [];
+    } catch {
+      return [];
+    }
+  };
+  const writeGuests = (entries: GuestEntry[]) => {
+    try {
+      window.localStorage.setItem(GUEST_KEY, JSON.stringify(entries.slice(-20)));
+    } catch {
+      // Storage can be unavailable (private mode); the reference code is still shown.
+    }
+  };
+
   const bookingRequests: BookingRequestService = {
     async create(input: CreateBookingRequestInput): Promise<BookingRequest> {
       const res = await apiClient<{ booking: BookingRequest }>('/bookings', {
         method: 'POST',
         body: JSON.stringify(input),
       });
+      if (!res.booking.userId) {
+        writeGuests([
+          ...readGuests(),
+          {
+            id: res.booking.id,
+            referenceCode: res.booking.referenceCode ?? '',
+            phone: res.booking.contact?.phone ?? '',
+          },
+        ]);
+      }
       return res.booking;
     },
 
     async listMine(): Promise<BookingRequest[]> {
-      const res = await apiClient<{ bookings: BookingRequest[] }>('/bookings');
-      return res.bookings;
+      const own = await apiClient<{ bookings: BookingRequest[] }>('/bookings')
+        .then((res) => res.bookings)
+        .catch(() => [] as BookingRequest[]);
+
+      const guests = await Promise.all(
+        readGuests().map((entry) =>
+          apiClient<{ booking: BookingRequest }>('/bookings/track', {
+            method: 'POST',
+            body: JSON.stringify({ referenceCode: entry.referenceCode, phone: entry.phone }),
+          })
+            .then((res) => res.booking)
+            .catch(() => null),
+        ),
+      );
+
+      const seen = new Set(own.map((b) => b.id));
+      const merged = [...own];
+      for (const booking of guests) {
+        if (booking && !seen.has(booking.id)) merged.push(booking);
+      }
+      return merged.sort((x, y) => y.createdAt.localeCompare(x.createdAt));
     },
 
     async getById(id: BookingRequestId): Promise<BookingRequest> {
@@ -322,17 +377,33 @@ export function createApiServices(): Services {
     },
 
     async cancel(id: BookingRequestId): Promise<BookingRequest> {
+      const guest = readGuests().find((entry) => entry.id === id);
+      if (guest) {
+        const res = await apiClient<{ booking: BookingRequest }>('/bookings/track/cancel', {
+          method: 'POST',
+          body: JSON.stringify({ referenceCode: guest.referenceCode, phone: guest.phone }),
+        });
+        return res.booking;
+      }
       const res = await apiClient<{ booking: BookingRequest }>(`/bookings/${id}/cancel`, {
         method: 'POST',
         body: JSON.stringify({}),
       });
       return res.booking;
     },
+  };
 
-    async simulateConfirm(id: BookingRequestId): Promise<BookingRequest> {
-      const res = await apiClient<{ booking: BookingRequest }>(`/bookings/${id}/simulate-confirm`, {
-        method: 'POST',
-        body: JSON.stringify({}),
+  const adminBookings: AdminBookingService = {
+    async list(status) {
+      const res = await apiClient<{ bookings: BookingRequest[] }>('/admin/bookings', {
+        params: { status },
+      });
+      return res.bookings;
+    },
+    async setStatus(id, status, note) {
+      const res = await apiClient<{ booking: BookingRequest }>(`/admin/bookings/${id}/status`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status, ...(note ? { note } : {}) }),
       });
       return res.booking;
     },
@@ -345,6 +416,7 @@ export function createApiServices(): Services {
     readyMadeTrips,
     trips,
     bookingRequests,
+    adminBookings,
     async resetLocalData(): Promise<void> {
       // No-op for remote API
     },

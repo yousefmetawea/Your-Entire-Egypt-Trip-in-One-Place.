@@ -70,7 +70,6 @@ export default function StayTransportPage() {
     createDraftWithStay,
     requestTransfer,
     cancelRequest,
-    simulateConfirmRequest,
   } = useStayTransport();
 
   // Modals state
@@ -289,7 +288,6 @@ export default function StayTransportPage() {
               <MyRequestsList
                 requests={requests}
                 onCancelRequest={cancelRequest}
-                onSimulateConfirm={simulateConfirmRequest}
               />
             </div>
           )}

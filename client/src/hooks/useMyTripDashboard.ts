@@ -207,20 +207,6 @@ export function useMyTripDashboard() {
     }
   }, []);
 
-  const simulateConfirmRequest = useCallback(async (requestId: string) => {
-    setActionLoading(true);
-    try {
-      const confirmed = await services.bookingRequests.simulateConfirm(requestId);
-      setBookingRequests((prev) => prev.map((r) => (r.id === requestId ? confirmed : r)));
-      setActionNotice('Transfer confirmed (simulated).');
-      notifyStoreUpdated();
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to confirm request.');
-    } finally {
-      setActionLoading(false);
-    }
-  }, []);
-
   const removeSavedPlace = useCallback(
     async (placeId: string) => {
       if (!activeTrip) return;
@@ -291,7 +277,6 @@ export function useMyTripDashboard() {
     selectTrip,
     cancelTrip,
     cancelBookingRequest,
-    simulateConfirmRequest,
     removeSavedPlace,
     savePlace,
     reload: () => {

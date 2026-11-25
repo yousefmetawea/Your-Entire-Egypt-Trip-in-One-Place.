@@ -12,6 +12,7 @@ const PlaceDetailsPage = lazy(() => import('../pages/PlaceDetailsPage'));
 const TripCreatorPage = lazy(() => import('../pages/TripCreatorPage'));
 const TripPage = lazy(() => import('../pages/TripPage'));
 const StayTransportPage = lazy(() => import('../pages/StayTransportPage'));
+const AdminBookingsPage = lazy(() => import('../pages/AdminBookingsPage'));
 const MyTripPage = lazy(() => import('../pages/MyTripPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
@@ -84,6 +85,15 @@ const routes: RouteObject[] = [
               description:
                 'Manage your Cairo expedition: upcoming countdown, schedule preview, selected stay, transfer requests, and travel budget.',
             },
+          },
+          {
+            path: 'admin',
+            element: (
+              <ProtectedRoute>
+                <AdminBookingsPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Booking requests' },
           },
           {
             path: 'login',

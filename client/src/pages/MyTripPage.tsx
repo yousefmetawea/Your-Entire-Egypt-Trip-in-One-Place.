@@ -29,7 +29,6 @@ export default function MyTripPage() {
     selectTrip,
     cancelTrip,
     cancelBookingRequest,
-    simulateConfirmRequest,
     removeSavedPlace,
     reload,
     resetLocalData,
@@ -107,7 +106,6 @@ export default function MyTripPage() {
           <DashboardRequests
             requests={bookingRequests}
             onCancelRequest={cancelBookingRequest}
-            onSimulateConfirmRequest={simulateConfirmRequest}
             actionLoading={actionLoading}
           />
         </div>

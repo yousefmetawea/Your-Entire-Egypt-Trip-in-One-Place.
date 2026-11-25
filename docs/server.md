@@ -35,7 +35,6 @@ Configuration files:
 | `RATE_LIMIT_WINDOW_MS` | number  | `900000`                | Rate limiter window in ms (15 minutes)                                     |
 | `RATE_LIMIT_MAX`       | number  | `200`                   | Max requests per IP in the window                                          |
 | `AUTH_RATE_LIMIT_MAX`  | number  | `10`                    | Max auth requests (login/register) per IP in the window                    |
-| `ENABLE_DEMO_ACTIONS`  | boolean | `true` (dev)            | Enables `/simulate-confirm` for demo workflows                             |
 
 > [!CAUTION]
 > Never print, echo, commit, or log `MONGODB_URI` or `JWT_SECRET`. Logs are sanitized to prevent credential exposure.

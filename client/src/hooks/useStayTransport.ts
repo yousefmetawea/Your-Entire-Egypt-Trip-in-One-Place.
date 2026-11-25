@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router';
 import type {
   Accommodation,
   AirportTransferDetails,
+  BookingContact,
   BookingRequest,
   TransportOption,
   Trip,
@@ -34,7 +35,8 @@ export function useStayTransport() {
       }),
       services.transport.list(),
       services.bookingRequests.listMine(),
-      services.trips.listMine(),
+      // Guests have no saved trips; that must not block the page.
+      services.trips.listMine().catch(() => [] as Trip[]),
     ])
       .then(([accs, trans, reqs, trips]) => {
         if (active) {
@@ -107,22 +109,19 @@ export function useStayTransport() {
     setCurrentTrip(created);
   };
 
-  const requestTransfer = async (details: AirportTransferDetails) => {
+  const requestTransfer = async (details: AirportTransferDetails, contact: BookingContact) => {
     const req = await services.bookingRequests.create({
       kind: 'airport-transfer',
       tripId: currentTrip?.id,
+      contact,
       details,
     });
     setRequests((prev) => [...prev, req]);
+    return req;
   };
 
   const cancelRequest = async (id: string) => {
     const updated = await services.bookingRequests.cancel(id);
-    setRequests((prev) => prev.map((r) => (r.id === id ? updated : r)));
-  };
-
-  const simulateConfirmRequest = async (id: string) => {
-    const updated = await services.bookingRequests.simulateConfirm(id);
     setRequests((prev) => prev.map((r) => (r.id === id ? updated : r)));
   };
 
@@ -144,6 +143,5 @@ export function useStayTransport() {
     createDraftWithStay,
     requestTransfer,
     cancelRequest,
-    simulateConfirmRequest,
   };
 }
