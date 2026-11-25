@@ -12,7 +12,9 @@ export function StatusTimeline({ history, dark = false }: StatusTimelineProps) {
   }
 
   return (
-    <div className={`relative border-s ${dark ? 'border-white/15' : 'border-hairline-strong'} ps-space-md ms-space-xs my-space-sm space-y-space-sm`}>
+    <div
+      className={`relative border-s ${dark ? 'border-white/15' : 'border-hairline-strong'} ps-space-md ms-space-xs my-space-sm space-y-space-sm`}
+    >
       {history.map((entry, index) => {
         const dateStr = entry.changedAt.includes('T')
           ? entry.changedAt.split('T')[0]
@@ -28,7 +30,9 @@ export function StatusTimeline({ history, dark = false }: StatusTimelineProps) {
               aria-hidden="true"
             />
             <div className="flex items-center gap-space-xs">
-              <span className={`type-label-sm uppercase font-semibold ${dark ? 'text-white' : 'text-primary'}`}>
+              <span
+                className={`type-label-sm uppercase font-semibold ${dark ? 'text-white' : 'text-primary'}`}
+              >
                 {entry.status}
               </span>
               <span className={`type-small ${dark ? 'text-white/55' : 'text-on-surface-variant'}`}>
@@ -36,7 +40,11 @@ export function StatusTimeline({ history, dark = false }: StatusTimelineProps) {
               </span>
             </div>
             {entry.note ? (
-              <p className={`type-small italic ${dark ? 'text-white/60' : 'text-on-surface-variant'}`}>{entry.note}</p>
+              <p
+                className={`type-small italic ${dark ? 'text-white/60' : 'text-on-surface-variant'}`}
+              >
+                {entry.note}
+              </p>
             ) : null}
           </div>
         );

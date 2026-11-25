@@ -29,16 +29,16 @@ export function WaysToMove({ copy }: { copy: Copy }) {
           track,
           { x: () => (isAr ? -dist() : 0) },
           {
-          x: () => (isAr ? 0 : -dist()),
-          ease: 'none',
-          scrollTrigger: {
-            trigger: root,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.8,
-            invalidateOnRefresh: true,
-            onRefreshInit: size,
-          },
+            x: () => (isAr ? 0 : -dist()),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: root,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 0.8,
+              invalidateOnRefresh: true,
+              onRefreshInit: size,
+            },
           },
         );
         gsap.utils.toArray<HTMLElement>('[data-way-img]', track).forEach((img) => {
@@ -71,7 +71,10 @@ export function WaysToMove({ copy }: { copy: Copy }) {
 
   return (
     <section ref={rootRef} className="relative bg-[#070a12] text-white">
-      <div  dir="ltr" className="py-20 min-[900px]:sticky min-[900px]:top-0 min-[900px]:flex min-[900px]:h-screen min-[900px]:items-center min-[900px]:overflow-hidden min-[900px]:py-0 motion-reduce:min-[900px]:static motion-reduce:min-[900px]:block motion-reduce:min-[900px]:h-auto motion-reduce:min-[900px]:overflow-visible motion-reduce:min-[900px]:py-20 ">
+      <div
+        dir="ltr"
+        className="py-20 min-[900px]:sticky min-[900px]:top-0 min-[900px]:flex min-[900px]:h-screen min-[900px]:items-center min-[900px]:overflow-hidden min-[900px]:py-0 motion-reduce:min-[900px]:static motion-reduce:min-[900px]:block motion-reduce:min-[900px]:h-auto motion-reduce:min-[900px]:overflow-visible motion-reduce:min-[900px]:py-20 "
+      >
         <div
           dir="ltr"
           ref={trackRef}

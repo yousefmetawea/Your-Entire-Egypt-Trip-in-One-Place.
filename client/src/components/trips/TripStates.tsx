@@ -4,6 +4,7 @@ import { EmptyState } from '../common/EmptyState';
 import { Button, ButtonLink } from '../ui/Button';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
+import '../trip-builder/tripStage.css';
 import { CompassIcon, InfoIcon } from '../ui/icons';
 
 export type TripStateStatus = 'not-found' | 'error';
@@ -19,9 +20,9 @@ export function TripStates({ status, onRetry }: TripStatesProps) {
 
   return (
     <Section
-      tone="canvas"
+      tone="transparent"
       spacing="none"
-      className="flex min-h-[60vh] items-center py-space-2xl"
+      className="trip-stage flex min-h-[70vh] items-center -mt-24 pb-space-2xl pt-28 md:-mt-28 md:pt-32"
       aria-label={isNotFound ? t('trip.states.notFoundTitle') : t('trip.states.errorTitle')}
     >
       <Container>

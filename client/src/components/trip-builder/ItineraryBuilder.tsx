@@ -27,6 +27,7 @@ import { BuilderMap } from './BuilderMap';
 import { BuilderSummary } from './BuilderSummary';
 import { BuilderTitleDialog } from './BuilderTitleDialog';
 import { DayTabs } from './DayTabs';
+import { TripBackdrop } from './TripBackdrop';
 import { DAY_DROP_PREFIX } from './dndIds';
 
 export interface ItineraryBuilderProps {
@@ -226,11 +227,12 @@ export function ItineraryBuilder({ trip: initialTrip, places }: ItineraryBuilder
 
   return (
     <Section
-      tone="canvas"
+      tone="transparent"
       spacing="none"
-      className="min-h-screen py-space-2xl"
+      className="trip-stage min-h-screen overflow-x-clip -mt-24 pb-space-2xl pt-28 md:-mt-28 md:pt-32"
       aria-labelledby="trip-heading"
     >
+      <TripBackdrop />
       <Container>
         <BuilderHeader
           trip={trip}
@@ -264,7 +266,7 @@ export function ItineraryBuilder({ trip: initialTrip, places }: ItineraryBuilder
 
           {selectedDay ? (
             <div className="mt-space-lg grid grid-cols-1 items-start gap-gutter-lg lg:grid-cols-12">
-              <div className="lg:col-span-7 xl:col-span-6">
+              <div className="lg:col-span-7 xl:col-span-7">
                 <BuilderDayPanel
                   day={selectedDay}
                   dayNumber={selectedDayNumber}
@@ -277,19 +279,13 @@ export function ItineraryBuilder({ trip: initialTrip, places }: ItineraryBuilder
                 />
               </div>
 
-              <div className="lg:col-span-5 xl:col-span-6">
-                <div className="grid grid-cols-1 items-start gap-gutter-lg xl:grid-cols-2">
-                  <div className="xl:sticky xl:top-24">
-                    <BuilderMap
-                      day={selectedDay}
-                      dayNumber={selectedDayNumber}
-                      placesById={placesById}
-                    />
-                  </div>
-                  <div className="xl:sticky xl:top-24">
-                    <BuilderSummary trip={trip} summary={summary} />
-                  </div>
-                </div>
+              <div className="flex flex-col gap-gutter-lg lg:col-span-5 xl:col-span-5">
+                <BuilderMap
+                  day={selectedDay}
+                  dayNumber={selectedDayNumber}
+                  placesById={placesById}
+                />
+                <BuilderSummary trip={trip} summary={summary} />
               </div>
             </div>
           ) : null}
@@ -324,6 +320,7 @@ export function ItineraryBuilder({ trip: initialTrip, places }: ItineraryBuilder
         description={removalDescription}
         closeLabel={t('common.close')}
         size="sm"
+        className="trip-stage"
         footer={
           <>
             <Button

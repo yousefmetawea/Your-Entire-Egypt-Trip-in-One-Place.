@@ -1,0 +1,119 @@
+/*
+ * Dark green scope for the trip page. The design tokens are re-pointed here, so every
+ * shared component (buttons, badges, cards, modals) follows without separate dark variants.
+ */
+.trip-stage {
+  --color-background: #0f2a1e;
+  --color-surface: #183a2a;
+  --color-surface-dim: #12291d;
+  --color-surface-bright: #1f4433;
+  --color-surface-container-lowest: #142f22;
+  --color-surface-container-low: #183a2a;
+  --color-surface-container: #1c3b2c;
+  --color-surface-container-high: #244636;
+  --color-surface-container-highest: #2c5242;
+  --color-surface-variant: #244636;
+  --color-on-surface: #eef3e8;
+  --color-on-surface-variant: #9db0a2;
+  --color-on-background: #eef3e8;
+  --color-inverse-surface: #eef3e8;
+  --color-inverse-on-surface: #0f2a1e;
+  --color-outline: #4a6656;
+  --color-outline-variant: #3a5a48;
+  --color-hairline: rgb(238 243 232 / 0.13);
+  --color-hairline-strong: rgb(238 243 232 / 0.28);
+
+  --color-primary: #eef3e8;
+  --color-on-primary: #0f2a1e;
+  --color-primary-container: #1b3a29;
+  --color-on-primary-container: #eef3e8;
+  --color-secondary: #bde85c;
+  --color-on-secondary: #0f2a1e;
+  --color-secondary-container: #1f6b3f;
+  --color-on-secondary-container: #e6f6c4;
+  --color-secondary-fixed: #bde85c;
+  --color-secondary-fixed-dim: #9bc944;
+  --color-on-secondary-fixed: #0f2a1e;
+  --color-bronze: #bde85c;
+  --color-sand: #d9c48a;
+  --color-error: #ff8f8f;
+  --color-error-container: #3a1b1b;
+  --color-on-error-container: #ffc2c2;
+  --color-success: #bde85c;
+  --color-success-container: #12301f;
+
+  position: relative;
+  isolation: isolate;
+  background: #0f2a1e;
+  color: #eef3e8;
+  color-scheme: dark;
+}
+
+/* Map tiles: invert the light OSM tiles into a dark, green-tinted base. */
+.trip-stage .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(150deg) brightness(0.78) saturate(0.55) contrast(0.95);
+}
+.trip-stage .leaflet-container {
+  background: #12291d;
+}
+.trip-stage .leaflet-control-attribution {
+  background: rgb(15 42 30 / 0.75);
+  color: #9db0a2;
+}
+.trip-stage .leaflet-control-attribution a {
+  color: #bde85c;
+}
+.trip-stage .leaflet-bar a {
+  background: #183a2a;
+  color: #eef3e8;
+  border-color: rgb(238 243 232 / 0.2);
+}
+
+.trip-stage .trip-photo {
+  animation: trip-drift 38s ease-in-out infinite alternate;
+  transform-origin: 60% 40%;
+}
+@keyframes trip-drift {
+  from {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.16) translate3d(-1.5%, -1%, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trip-stage .trip-photo {
+    animation: none;
+  }
+}
+
+.trip-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+dialog.trip-stage::backdrop {
+  background: rgb(3 10 6 / 0.78) !important;
+  backdrop-filter: blur(6px);
+}
+dialog.trip-stage {
+  background: #183a2a;
+  box-shadow: 0 30px 80px rgb(0 0 0 / 0.6);
+}
+
+.trip-stage .luxury-marker-order {
+  color: #eef3e8;
+}
+.trip-stage .luxury-marker-container.is-selected .luxury-marker-order {
+  color: #0f2a1e;
+}
+.trip-stage .luxury-marker-label {
+  background-color: rgb(15 42 30 / 0.88);
+  color: #eef3e8;
+  border-color: rgb(238 243 232 / 0.18);
+}
+.trip-stage .leaflet-container .leaflet-control-attribution {
+  background: rgb(15 42 30 / 0.78) !important;
+  color: #9db0a2 !important;
+}

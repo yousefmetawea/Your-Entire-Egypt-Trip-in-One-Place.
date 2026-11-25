@@ -101,7 +101,7 @@ export function ActivityCard({
                 <div className="flex flex-wrap items-center gap-space-xs">
                   <span className="type-label-sm inline-flex items-center gap-space-xs text-secondary">
                     <ClockIcon className="size-4" />
-                    {time}
+                    <bdi>{time}</bdi>
                   </span>
                   {duration ? (
                     <span className="type-small text-on-surface-variant">

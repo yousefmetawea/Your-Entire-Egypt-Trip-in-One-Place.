@@ -86,7 +86,6 @@ export function HeroImageDeck({ className }: { className?: string }) {
   const shouldReduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
 
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],

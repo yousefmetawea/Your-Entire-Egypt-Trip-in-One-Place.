@@ -1,8 +1,8 @@
 /* Planner stage: palette is the dark green version of the navbar identity. */
 .planner-stage {
-  --stage-bg: #07120d;
-  --stage-card: #0f2318;
-  --stage-deep: #10281c;
+  --stage-bg: #0f2a1e;
+  --stage-card: #183a2a;
+  --stage-deep: #1b402f;
   --stage-green: #1f6b3f;
   --stage-lime: #bde85c;
   --stage-text: #eef3e8;
@@ -29,13 +29,13 @@
   stroke: #bde85c;
 }
 .route-node {
-  fill: #07120d;
+  fill: #0f2a1e;
   stroke: rgba(157, 176, 162, 0.7);
   stroke-width: 1.5;
 }
 .route-node-on {
   fill: #bde85c;
-  stroke: #07120d;
+  stroke: #0f2a1e;
   stroke-width: 2.5;
 }
 .route-ping {
@@ -48,7 +48,7 @@
   font-size: 22px;
   font-weight: 600;
   paint-order: stroke;
-  stroke: #07120d;
+  stroke: #0f2a1e;
   stroke-width: 5px;
   stroke-linejoin: round;
 }

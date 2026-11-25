@@ -100,7 +100,13 @@ function RouteLayer(props: LayerProps) {
     const group = L.layerGroup().addTo(map);
     const lines = legs.map((leg) => {
       const color = COLOR[leg.mode];
-      const glow = L.polyline([], { color, weight: 10, opacity: 0.16, lineCap: 'round', interactive: false });
+      const glow = L.polyline([], {
+        color,
+        weight: 10,
+        opacity: 0.16,
+        lineCap: 'round',
+        interactive: false,
+      });
       const line = L.polyline([], {
         color,
         weight: 3,
@@ -246,11 +252,7 @@ function RouteLayer(props: LayerProps) {
   return null;
 }
 
-export function RouteMap({
-  stayLocation,
-}: {
-  stayLocation: { lat: number; lng: number } | null;
-}) {
+export function RouteMap({ stayLocation }: { stayLocation: { lat: number; lng: number } | null }) {
   const { i18n } = useTranslation();
   const isAr = i18n.language === 'ar';
   const copy = COPY[isAr ? 'ar' : 'en'];
@@ -314,7 +316,11 @@ export function RouteMap({
             }}
             className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0e17] transition-colors hover:bg-[#ffb25a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            <svg viewBox="0 0 24 24" className="size-4 fill-current rtl:-scale-x-100" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              className="size-4 fill-current rtl:-scale-x-100"
+              aria-hidden="true"
+            >
               {playing ? <path d="M6 5h4v14H6zM14 5h4v14h-4z" /> : <path d="M8 5v14l11-7z" />}
             </svg>
             {playing ? copy.stop : copy.play}
@@ -322,7 +328,10 @@ export function RouteMap({
         ) : null}
       </div>
 
-      <div className="stay-map relative isolate h-[26rem] overflow-hidden rounded-3xl bg-[#0a0e17] ring-1 ring-white/10 md:h-[30rem]" dir="ltr">
+      <div
+        className="stay-map relative isolate h-[26rem] overflow-hidden rounded-3xl bg-[#0a0e17] ring-1 ring-white/10 md:h-[30rem]"
+        dir="ltr"
+      >
         <MapContainer
           center={[27.5, 31.5]}
           zoom={6}
@@ -363,7 +372,9 @@ export function RouteMap({
             </span>
             <div className="min-w-0 flex-1">
               <p className="truncate font-serif text-lg font-semibold">
-                {dirName(leg.from)} <span className="font-sans font-normal text-white/60">{isAr ? '←' : '→'}</span> {dirName(leg.to)}
+                {dirName(leg.from)}{' '}
+                <span className="font-sans font-normal text-white/60">{isAr ? '←' : '→'}</span>{' '}
+                {dirName(leg.to)}
               </p>
               <p className="text-xs text-white/65">{copy.notes[leg.mode]}</p>
               <p className="mt-1 text-sm tabular-nums text-white/90">
@@ -406,7 +417,9 @@ export function RouteMap({
                   setActive((a) => (a === l.index ? null : l.index));
                 }}
                 className={`group relative flex h-full w-full flex-col gap-2 rounded-2xl border p-4 text-start transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white ${
-                  on ? 'border-white/40 bg-white/10' : 'border-white/10 bg-white/[0.04] hover:bg-white/[0.08]'
+                  on
+                    ? 'border-white/40 bg-white/10'
+                    : 'border-white/10 bg-white/[0.04] hover:bg-white/[0.08]'
                 }`}
               >
                 <span
@@ -421,7 +434,9 @@ export function RouteMap({
                   </span>
                 </span>
                 <span className="font-serif text-lg font-semibold leading-tight">
-                  {dirName(l.from)} <span className="font-sans font-normal text-white/60">{isAr ? '←' : '→'}</span> {dirName(l.to)}
+                  {dirName(l.from)}{' '}
+                  <span className="font-sans font-normal text-white/60">{isAr ? '←' : '→'}</span>{' '}
+                  {dirName(l.to)}
                 </span>
                 <span className="text-sm tabular-nums text-white/65">
                   {l.km} {copy.km} · ≈ {fmtTime(l.minutes, isAr)}

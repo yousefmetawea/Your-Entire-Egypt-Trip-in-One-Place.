@@ -162,7 +162,7 @@ function ChoiceList({ name, labelledBy, describedBy, options, value, onChange }:
             key={option.value}
             className={cn(
               'group relative flex cursor-pointer items-center gap-5 border-b border-white/10 py-3.5 ps-1 pe-2 transition-[padding,background-color] duration-500 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[#bde85c] md:py-4',
-              selected ? 'bg-[#10281c]/70 ps-5' : 'hover:bg-[#10281c]/40 hover:ps-4',
+              selected ? 'bg-[#1b402f]/70 ps-5' : 'hover:bg-[#1b402f]/40 hover:ps-4',
             )}
           >
             <input
@@ -220,7 +220,7 @@ function ChoiceList({ name, labelledBy, describedBy, options, value, onChange }:
               className={cn(
                 'flex size-7 shrink-0 items-center justify-center rounded-full border transition-all duration-300',
                 selected
-                  ? 'scale-100 border-[#bde85c] bg-[#bde85c] text-[#07120d]'
+                  ? 'scale-100 border-[#bde85c] bg-[#bde85c] text-[#0f2a1e]'
                   : 'scale-90 border-white/25 text-transparent',
               )}
             >
@@ -548,12 +548,12 @@ function InterestsStep({
                   selected ? 'scale-105 opacity-100' : 'opacity-55 saturate-50',
                 )}
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#07120d] via-[#07120d]/40 to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#0f2a1e] via-[#0f2a1e]/40 to-transparent" />
               <span
                 className={cn(
                   'absolute end-2 top-2 flex size-6 items-center justify-center rounded-full border transition-all duration-300 sm:end-4 sm:top-4 sm:size-7',
                   selected
-                    ? 'scale-100 border-[#bde85c] bg-[#bde85c] text-[#07120d]'
+                    ? 'scale-100 border-[#bde85c] bg-[#bde85c] text-[#0f2a1e]'
                     : 'scale-90 border-white/40 text-transparent',
                 )}
                 aria-hidden="true"

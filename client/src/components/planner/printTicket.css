@@ -27,7 +27,7 @@
     overflow: hidden;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    color: #07120d;
+    color: #0f2a1e;
     font-family: var(--font-sans, 'Inter', sans-serif);
   }
   html[lang='ar'] #print-ticket {
@@ -45,7 +45,7 @@
   }
   .pt-ticket {
     width: 100%;
-    border: 0.4mm solid #07120d;
+    border: 0.4mm solid #0f2a1e;
     border-radius: 3mm;
     background: #fcfdfa;
     overflow: hidden;
@@ -56,7 +56,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 9mm 10mm;
-    background: #07120d;
+    background: #0f2a1e;
     color: #eef3e8;
     border-bottom: 1.2mm solid #bde85c;
   }
@@ -194,7 +194,7 @@
     height: 6.4mm;
     border-radius: 50%;
     background: #f5f8f1;
-    border: 0.4mm solid #07120d;
+    border: 0.4mm solid #0f2a1e;
   }
   .pt-notch-start {
     inset-inline-start: -3.4mm;
@@ -233,7 +233,7 @@
   }
   .pt-bars span {
     display: block;
-    background: #07120d;
+    background: #0f2a1e;
   }
   .pt-legal {
     margin-top: 8mm;

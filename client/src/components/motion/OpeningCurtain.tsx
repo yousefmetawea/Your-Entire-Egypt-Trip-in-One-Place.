@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useLocation } from 'react-router';
 
-
 /**
  * OpeningCurtain replicates the exact OVO Legion opening sequence.
  * It consists of a full-screen overlay with five white columns that collapse

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
+import '../trip-builder/tripStage.css';
 import { Skeleton } from '../ui/Skeleton';
 
 export function TripSkeleton() {
@@ -8,9 +9,9 @@ export function TripSkeleton() {
 
   return (
     <Section
-      tone="canvas"
+      tone="transparent"
       spacing="none"
-      className="min-h-screen py-space-2xl"
+      className="trip-stage min-h-screen -mt-24 pb-space-2xl pt-28 md:-mt-28 md:pt-32"
       aria-busy="true"
       aria-labelledby="trip-loading-heading"
     >

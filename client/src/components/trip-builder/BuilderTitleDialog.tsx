@@ -45,6 +45,7 @@ export function BuilderTitleDialog({ title, onClose, onSave }: BuilderTitleDialo
       description={t('trip.builder.titleDialog.description')}
       closeLabel={t('common.close')}
       size="sm"
+      className="trip-stage"
       footer={
         <>
           <Button type="button" variant="secondary" size="sm" onClick={onClose}>

@@ -38,7 +38,6 @@ export function TripCard({ trip }: TripCardProps) {
       <div className="flex flex-1 flex-col gap-space-lg p-space-lg">
         <div className="flex flex-wrap items-center justify-between gap-space-sm">
           <Badge tone="bronze">{t('home.trips.duration', { count: trip.durationDays })}</Badge>
-          <Badge tone="outline">{t('home.trips.demo')}</Badge>
         </div>
 
         <div className="flex-1">

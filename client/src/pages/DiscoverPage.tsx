@@ -128,7 +128,6 @@ export default function DiscoverPage() {
               {t('discover.description')}
             </p>
           </div>
-          <Badge tone="outline">{t('discover.demoBadge')}</Badge>
         </div>
 
         <p className="type-small mt-space-md text-on-surface-variant">{t('discover.demoNote')}</p>
