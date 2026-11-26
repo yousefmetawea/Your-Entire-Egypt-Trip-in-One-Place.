@@ -12,16 +12,18 @@ import {
 } from '../lib/discover';
 import type { DiscoverState } from '../lib/discover';
 import { usePlaces } from '../hooks/useCatalog';
-import { DiscoverFilters } from '../components/discover/DiscoverFilters';
+import { DiscoverHero } from '../components/discover/DiscoverHero';
+import { DiscoverToolbar } from '../components/discover/DiscoverToolbar';
+import { DiscoverCard } from '../components/discover/DiscoverCard';
+import { buildEditorialLayout } from '../components/discover/editorialLayout';
+import '../components/discover/discover.css';
 import type { CategoryChipValue } from '../components/places/CategoryChips';
-import { PlaceCard, PlaceCardSkeleton } from '../components/places/PlaceCard';
 import { EmptyState } from '../components/common/EmptyState';
-import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { Container } from '../components/ui/Container';
-import { Section } from '../components/ui/Section';
 import { InfoIcon } from '../components/ui/icons';
-import { SplitText } from '../components/motion/SplitText';
+import { Reveal } from '../components/motion/Reveal';
+import { selectFeaturedPlaces } from '../lib/featured';
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
@@ -70,6 +72,16 @@ export default function DiscoverPage() {
 
   const contextSummary = contextParts.join(' · ');
 
+  const featuredPlaces = useMemo(() => {
+    const picked = selectFeaturedPlaces(places);
+    return picked.length > 0 ? picked : places.slice(0, 6);
+  }, [places]);
+  const filtersActive = hasActiveFilters(state.filters);
+  const layout = useMemo(
+    () => buildEditorialLayout(filteredPlaces.length, filtersActive),
+    [filteredPlaces.length, filtersActive],
+  );
+
   function updateState(next: DiscoverState): void {
     setSearchParams(serializeDiscoverState(next));
   }
@@ -106,118 +118,110 @@ export default function DiscoverPage() {
     );
   }
 
+  const gridClass =
+    'grid grid-cols-1 auto-rows-[22rem] gap-4 md:grid-cols-2 md:auto-rows-[20rem] md:gap-5 lg:grid-cols-12 lg:auto-rows-[17rem]';
+
   return (
-    <Section
-      tone="canvas"
-      spacing="md"
-      className="min-h-screen"
-      aria-labelledby="discover-heading"
-      aria-busy={status === 'loading'}
-    >
-      <Container>
-        <div className="flex flex-wrap items-start justify-between gap-space-md">
-          <div className="max-w-3xl">
-            <p className="type-label flex items-center gap-space-xs text-secondary">
-              <span className="size-2 rounded-full bg-secondary" aria-hidden="true" />
-              {t('discover.eyebrow')}
-            </p>
-            <h1 id="discover-heading" className="type-headline mt-space-sm text-primary">
-              <SplitText>{t('discover.title')}</SplitText>
-            </h1>
-            <p className="type-body-lg mt-space-sm max-w-2xl text-on-surface-variant font-sans">
-              {t('discover.description')}
-            </p>
-          </div>
-        </div>
+    <div className="yt-discover min-h-screen" aria-busy={status === 'loading'}>
+      <DiscoverHero
+        totalCount={places.length}
+        featured={status === 'ready' ? featuredPlaces : []}
+      />
 
-        <p className="type-small mt-space-md text-on-surface-variant">{t('discover.demoNote')}</p>
-
-        {contextSummary ? (
-          <div className="mt-space-md flex flex-wrap items-start gap-space-sm rounded-card border border-hairline bg-surface-container-lowest p-space-md">
-            <Badge tone="bronze" size="sm">
-              {t('discover.context.label')}
-            </Badge>
-            <p className="type-small text-on-surface-variant">
-              {t('discover.context.note', { summary: contextSummary })}
-            </p>
-          </div>
-        ) : null}
-
-        <DiscoverFilters
-          state={state}
-          defaultQuery={state.filters.q}
-          resultCount={status === 'ready' ? filteredPlaces.length : null}
-          totalCount={places.length}
-          onSearch={handleSearch}
-          onCategoryChange={handleCategoryChange}
-          onAreaChange={handleAreaChange}
-          onDurationChange={handleDurationChange}
-          onClear={handleClear}
-        />
-
-        <div className="mt-space-xl">
-          {status === 'loading' ? (
-            <>
-              <p className="sr-only" role="status" aria-live="polite">
-                {t('discover.states.loading')}
+      <section
+        aria-label={t('discover.filters.title')}
+        className="yt-ivory relative -mt-10 rounded-t-[2.5rem] bg-(--yt-ivory) pt-12 pb-24 text-(--yt-green) md:-mt-12 md:rounded-t-[3.5rem] md:pt-16"
+      >
+        <Container>
+          {contextSummary ? (
+            <div className="mb-8 flex flex-wrap items-start gap-3 rounded-2xl bg-(--yt-sage) p-4">
+              <span className="rounded-full bg-(--yt-green) px-3 py-1 text-xs font-semibold text-(--yt-on-dark)">
+                {t('discover.context.label')}
+              </span>
+              <p className="text-sm text-(--yt-ink-2)">
+                {t('discover.context.note', { summary: contextSummary })}
               </p>
-              <div className="grid grid-cols-1 gap-gutter-lg md:grid-cols-2 xl:grid-cols-3">
-                {Array.from({ length: 6 }, (_, index) => (
-                  <PlaceCardSkeleton key={index} />
-                ))}
-              </div>
-            </>
-          ) : status === 'error' ? (
-            <EmptyState
-              title={t('discover.states.errorTitle')}
-              description={t('discover.states.errorDescription')}
-              role="alert"
-              icon={<InfoIcon />}
-              actions={
-                <Button variant="secondary" size="sm" onClick={retry}>
-                  {t('discover.states.retry')}
-                </Button>
-              }
-            />
-          ) : places.length === 0 ? (
-            <EmptyState
-              title={t('discover.states.catalogEmptyTitle')}
-              description={t('discover.states.catalogEmptyDescription')}
-              icon={<InfoIcon />}
-              actions={
-                <Button variant="secondary" size="sm" onClick={retry}>
-                  {t('discover.states.retry')}
-                </Button>
-              }
-            />
-          ) : filteredPlaces.length === 0 ? (
-            <EmptyState
-              title={t('discover.states.emptyTitle')}
-              description={t('discover.states.emptyDescription')}
-              icon={<InfoIcon />}
-              actions={
-                <Button variant="secondary" size="sm" onClick={handleClear}>
-                  {t('discover.states.clear')}
-                </Button>
-              }
-            />
-          ) : (
-            <div className="grid grid-cols-1 gap-gutter-lg md:grid-cols-2 lg:grid-cols-3">
-              {filteredPlaces.map((place, index) => (
-                <PlaceCard
-                  key={place.id}
-                  place={place}
-                  variant={index === 0 && !hasActiveFilters(state.filters) ? 'feature' : 'compact'}
-                  className={
-                    index === 0 && !hasActiveFilters(state.filters) ? 'md:col-span-2' : undefined
-                  }
-                  priority={index < 3}
-                />
-              ))}
             </div>
-          )}
-        </div>
-      </Container>
-    </Section>
+          ) : null}
+
+          <DiscoverToolbar
+            state={state}
+            defaultQuery={state.filters.q}
+            resultCount={status === 'ready' ? filteredPlaces.length : null}
+            totalCount={places.length}
+            onSearch={handleSearch}
+            onCategoryChange={handleCategoryChange}
+            onAreaChange={handleAreaChange}
+            onDurationChange={handleDurationChange}
+            onClear={handleClear}
+          />
+
+          <div className="mt-10">
+            {status === 'loading' ? (
+              <>
+                <p className="sr-only" role="status" aria-live="polite">
+                  {t('discover.states.loading')}
+                </p>
+                <div className={gridClass} aria-hidden="true">
+                  {Array.from({ length: 6 }, (_, index) => (
+                    <div
+                      key={index}
+                      className="animate-pulse rounded-3xl bg-(--yt-sage) lg:col-span-4"
+                    />
+                  ))}
+                </div>
+              </>
+            ) : status === 'error' ? (
+              <EmptyState
+                title={t('discover.states.errorTitle')}
+                description={t('discover.states.errorDescription')}
+                role="alert"
+                icon={<InfoIcon />}
+                actions={
+                  <Button variant="secondary" size="sm" onClick={retry}>
+                    {t('discover.states.retry')}
+                  </Button>
+                }
+              />
+            ) : places.length === 0 ? (
+              <EmptyState
+                title={t('discover.states.catalogEmptyTitle')}
+                description={t('discover.states.catalogEmptyDescription')}
+                icon={<InfoIcon />}
+                actions={
+                  <Button variant="secondary" size="sm" onClick={retry}>
+                    {t('discover.states.retry')}
+                  </Button>
+                }
+              />
+            ) : filteredPlaces.length === 0 ? (
+              <EmptyState
+                title={t('discover.states.emptyTitle')}
+                description={t('discover.states.emptyDescription')}
+                icon={<InfoIcon />}
+                actions={
+                  <Button variant="secondary" size="sm" onClick={handleClear}>
+                    {t('discover.states.clear')}
+                  </Button>
+                }
+              />
+            ) : (
+              <ul className={gridClass}>
+                {filteredPlaces.map((place, index) => {
+                  const slot = layout[index];
+                  return (
+                    <li key={place.id} className={slot.cell}>
+                      <Reveal className="h-full" delay={(index % 3) * 0.06}>
+                        <DiscoverCard place={place} variant={slot.variant} priority={index < 3} />
+                      </Reveal>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        </Container>
+      </section>
+    </div>
   );
 }

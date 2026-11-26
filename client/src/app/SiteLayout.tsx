@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation } from 'react-router';
 import { motion, useReducedMotion } from 'framer-motion';
 import { PageGlow } from '../components/motion/PageGlow';
-import { PageRelic } from '../components/three/PageRelic';
 import { Footer } from '../components/layout/Footer';
 import { Navbar } from '../components/layout/Navbar';
 import { LanguageSwitcher } from '../components/layout/LanguageSwitcher';
@@ -29,6 +28,7 @@ export function SiteLayout() {
   const { pathname } = useLocation();
   const reduceMotion = useReducedMotion();
   const isHome = pathname === '/';
+  const isDiscover = pathname === '/discover';
   const { user, logout } = useAuth();
 
   const links = [
@@ -125,13 +125,8 @@ export function SiteLayout() {
         ctaLinkComponent={AppLink}
       />
 
-      <main id="main" className={isHome ? 'relative' : 'relative pt-24 md:pt-28'}>
-        {isHome ? null : (
-          <>
-            <PageGlow />
-            {pathname === '/discover' ? <PageRelic /> : null}
-          </>
-        )}
+      <main id="main" className={isHome || isDiscover ? 'relative' : 'relative pt-24 md:pt-28'}>
+        {isHome || isDiscover ? null : <PageGlow />}
         <motion.div
           key={pathname}
           className="relative z-10"

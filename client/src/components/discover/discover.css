@@ -1,0 +1,65 @@
+/* Scoped to the Places / Discover page only. */
+.yt-discover {
+  --yt-forest: #101c15;
+  --yt-ivory: #eae9df;
+  --yt-sage: #d1d8c5;
+  --yt-lime: #b6ce67;
+  --yt-green: #193426;
+  --yt-ink-2: #536255;
+  --yt-on-dark: #f4f2e9;
+  --yt-on-dark-2: #c0c9be;
+  background: var(--yt-forest);
+  color: var(--yt-on-dark);
+  overflow-x: clip;
+}
+
+.yt-discover :focus-visible {
+  outline: 2px solid var(--yt-lime);
+  outline-offset: 3px;
+}
+.yt-ivory :focus-visible {
+  outline-color: var(--yt-green);
+}
+
+/* Hero image mask reveal: clip-path plays once on load. */
+@keyframes yt-clip-in {
+  from {
+    clip-path: inset(0 0 100% 0 round 1.5rem);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 1.5rem);
+  }
+}
+.yt-clip-in {
+  animation: yt-clip-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+@keyframes yt-scroll-hint {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+.yt-scroll-hint {
+  animation: yt-scroll-hint 2.2s ease-in-out infinite;
+}
+
+/* Hide the horizontal scrollbar on strips. */
+.yt-noscroll {
+  scrollbar-width: none;
+}
+.yt-noscroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yt-clip-in,
+  .yt-scroll-hint {
+    animation: none;
+  }
+}
