@@ -41,7 +41,7 @@ export interface PlannerStepContentProps {
 }
 
 const FOCUS =
-  'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c]';
+  'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B6CE67]';
 
 /** Card photos. File names in this repo are unreliable, these were checked by eye. */
 const INTEREST_IMAGES: Record<string, string> = {
@@ -85,15 +85,15 @@ function StepHeading({ step, titleKey, descriptionKey, headingRef }: StepHeading
 
   return (
     <div className="max-w-2xl">
-      <p className="flex items-center gap-4 type-label tracking-[0.2em] text-[#bde85c]">
+      <p className="flex items-center gap-4 type-label tracking-[0.2em] text-[#B6CE67]">
         <span
           className="font-display text-5xl leading-none tabular-nums text-transparent md:text-6xl"
-          style={{ WebkitTextStroke: '1px #bde85c' }}
+          style={{ WebkitTextStroke: '1px #B6CE67' }}
           aria-hidden="true"
         >
           {String(index + 1).padStart(2, '0')}
         </span>
-        <span className="h-px w-10 bg-[#bde85c]/50" aria-hidden="true" />
+        <span className="h-px w-10 bg-[#B6CE67]/50" aria-hidden="true" />
         <span>{t(getPlannerStepLabelKey(step))}</span>
       </p>
       <h2
@@ -162,7 +162,7 @@ function ChoiceList({ name, labelledBy, describedBy, options, value, onChange }:
           <label
             key={option.value}
             className={cn(
-              'group relative flex cursor-pointer items-center gap-5 border-b border-white/10 py-3.5 ps-1 pe-2 transition-[padding,background-color] duration-500 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[#bde85c] md:py-4',
+              'group relative flex cursor-pointer items-center gap-5 border-b border-white/10 py-3.5 ps-1 pe-2 transition-[padding,background-color] duration-500 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[#B6CE67] md:py-4',
               selected ? 'bg-[#1b402f]/70 ps-5' : 'hover:bg-[#1b402f]/40 hover:ps-4',
             )}
           >
@@ -177,7 +177,7 @@ function ChoiceList({ name, labelledBy, describedBy, options, value, onChange }:
             <span
               aria-hidden="true"
               className={cn(
-                'absolute inset-y-0 start-0 w-[3px] origin-top bg-[#bde85c] transition-transform duration-500',
+                'absolute inset-y-0 start-0 w-[3px] origin-top bg-[#B6CE67] transition-transform duration-500',
                 selected ? 'scale-y-100' : 'scale-y-0',
               )}
             />
@@ -185,7 +185,7 @@ function ChoiceList({ name, labelledBy, describedBy, options, value, onChange }:
               aria-hidden="true"
               className={cn(
                 'w-8 shrink-0 font-display text-lg tabular-nums transition-colors',
-                selected ? 'text-[#bde85c]' : 'text-[#9db0a2]/60',
+                selected ? 'text-[#B6CE67]' : 'text-[#9db0a2]/60',
               )}
             >
               {String(index + 1).padStart(2, '0')}
@@ -221,7 +221,7 @@ function ChoiceList({ name, labelledBy, describedBy, options, value, onChange }:
               className={cn(
                 'flex size-7 shrink-0 items-center justify-center rounded-full border transition-all duration-300',
                 selected
-                  ? 'scale-100 border-[#bde85c] bg-[#bde85c] text-[#0f2a1e]'
+                  ? 'scale-100 border-[#B6CE67] bg-[#B6CE67] text-[#101C15]'
                   : 'scale-90 border-white/25 text-transparent',
               )}
             >
@@ -261,7 +261,7 @@ function DarkField({ id, label, hint, error, preview, children }: DarkFieldProps
   const describedBy = error ? `${id}-error` : hint ? `${id}-hint` : undefined;
   return (
     <div>
-      <label htmlFor={id} className="block type-label tracking-[0.18em] text-[#bde85c]">
+      <label htmlFor={id} className="block type-label tracking-[0.18em] text-[#B6CE67]">
         {label}
       </label>
       {children({ id, describedBy })}
@@ -282,7 +282,7 @@ function DarkField({ id, label, hint, error, preview, children }: DarkFieldProps
 }
 
 const INPUT_CLASS = cn(
-  'mt-2 block w-full border-0 border-b border-white/25 bg-transparent px-0 py-3 font-display text-3xl text-[#eef3e8] [color-scheme:dark] transition-colors hover:border-[#bde85c]/60 focus:border-[#bde85c]',
+  'mt-2 block w-full border-0 border-b border-white/25 bg-transparent px-0 py-3 font-display text-3xl text-[#eef3e8] [color-scheme:dark] transition-colors hover:border-[#B6CE67]/60 focus:border-[#B6CE67]',
   FOCUS,
 );
 
@@ -358,7 +358,7 @@ function DatesStep({
       <div className="mt-space-lg max-w-2xl" aria-live="polite">
         <div className="relative h-px w-full bg-white/10">
           <motion.span
-            className="absolute inset-y-0 start-0 w-full origin-left bg-[#bde85c] rtl:origin-right"
+            className="absolute inset-y-0 start-0 w-full origin-left bg-[#B6CE67] rtl:origin-right"
             initial={false}
             animate={{ scaleX: length ? 1 : 0 }}
             transition={{ duration: reduce ? 0 : 1, ease: [0.16, 1, 0.3, 1] }}
@@ -366,7 +366,7 @@ function DatesStep({
         </div>
         {length ? (
           <div className="mt-space-md flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <span className="type-label tracking-[0.18em] text-[#bde85c]">
+            <span className="type-label tracking-[0.18em] text-[#B6CE67]">
               {t('planner.dates.durationLabel')}
             </span>
             <span className="font-display text-3xl text-[#eef3e8]">
@@ -402,7 +402,7 @@ function TravelersStep({
     onChange({ travelers: String(Math.min(MAX_TRAVELERS, Math.max(1, base + delta))) });
   };
   const roundBtn = cn(
-    'flex size-14 items-center justify-center rounded-full border border-white/25 font-display text-3xl text-[#eef3e8] transition-colors hover:border-[#bde85c] hover:text-[#bde85c] disabled:opacity-30',
+    'flex size-14 items-center justify-center rounded-full border border-white/25 font-display text-3xl text-[#eef3e8] transition-colors hover:border-[#B6CE67] hover:text-[#B6CE67] disabled:opacity-30',
     FOCUS,
   );
 
@@ -438,7 +438,7 @@ function TravelersStep({
           aria-invalid={Boolean(error) || undefined}
           aria-describedby={error ? 'planner-travelers-error' : 'planner-travelers-hint'}
           className={cn(
-            'w-32 border-0 border-b border-white/25 bg-transparent text-center font-display text-8xl text-[#bde85c] [appearance:textfield] focus:border-[#bde85c] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none',
+            'w-32 border-0 border-b border-white/25 bg-transparent text-center font-display text-8xl text-[#B6CE67] [appearance:textfield] focus:border-[#B6CE67] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none',
             FOCUS,
           )}
         />
@@ -460,7 +460,7 @@ function TravelersStep({
             className={cn(
               'size-3 rounded-full border transition-all duration-500',
               valid && i < current
-                ? 'scale-100 border-[#bde85c] bg-[#bde85c]'
+                ? 'scale-100 border-[#B6CE67] bg-[#B6CE67]'
                 : 'scale-75 border-white/25',
             )}
           />
@@ -551,8 +551,8 @@ function InterestsStep({
                 'group relative flex aspect-[3/5] w-full cursor-pointer flex-col justify-end overflow-hidden rounded-[3px] border p-3 text-start transition-[border-color,box-shadow] duration-500 sm:aspect-[4/5] sm:p-5',
                 FOCUS,
                 selected
-                  ? 'border-[#bde85c] shadow-[0_0_46px_-14px_rgba(189,232,92,0.7)]'
-                  : 'border-white/10 hover:border-[#bde85c]/50',
+                  ? 'border-[#B6CE67] shadow-[0_0_46px_-14px_rgba(182,206,103,0.7)]'
+                  : 'border-white/10 hover:border-[#B6CE67]/50',
               )}
             >
               <img
@@ -564,12 +564,12 @@ function InterestsStep({
                   selected ? 'scale-105 opacity-100' : 'opacity-55 saturate-50',
                 )}
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#0f2a1e] via-[#0f2a1e]/40 to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#101C15] via-[#101C15]/40 to-transparent" />
               <span
                 className={cn(
                   'absolute end-2 top-2 flex size-6 items-center justify-center rounded-full border transition-all duration-300 sm:end-4 sm:top-4 sm:size-7',
                   selected
-                    ? 'scale-100 border-[#bde85c] bg-[#bde85c] text-[#0f2a1e]'
+                    ? 'scale-100 border-[#B6CE67] bg-[#B6CE67] text-[#101C15]'
                     : 'scale-90 border-white/40 text-transparent',
                 )}
                 aria-hidden="true"
@@ -585,7 +585,7 @@ function InterestsStep({
       </div>
 
       <div className="mt-space-lg flex flex-wrap items-center gap-x-6 gap-y-2">
-        <p className="type-label tracking-[0.15em] text-[#bde85c]">
+        <p className="type-label tracking-[0.15em] text-[#B6CE67]">
           {t('planner.interests.selectedCount', { count: values.interests.length })}
         </p>
         <p className="type-small text-[#9db0a2]">

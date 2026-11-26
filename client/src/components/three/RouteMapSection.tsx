@@ -16,21 +16,21 @@ export function RouteMapSection() {
 
   return (
     <section
-      className="relative overflow-hidden bg-[#05060f] py-20 text-white"
+      className="relative overflow-hidden bg-[#101C15] py-20 text-white"
       aria-label={isAr ? 'خريطة مسارات مصر' : 'Egypt route map'}
     >
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(70% 60% at 65% 50%, rgba(255,140,50,0.16), transparent 70%), radial-gradient(40% 40% at 10% 0%, rgba(80,70,200,0.18), transparent 70%)',
+            'radial-gradient(70% 60% at 65% 50%, rgba(182,206,103,0.16), transparent 70%), radial-gradient(40% 40% at 10% 0%, rgba(156,197,170,0.14), transparent 70%)',
         }}
         aria-hidden="true"
       />
       <div className="relative mx-auto grid max-w-[80rem] items-center gap-10 px-6 sm:px-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <ScrollReveal>
-            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#b5e35a]">
+            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#B6CE67]">
               {isAr ? '(خريطة الرحلة)' : '(The Route)'}
             </span>
           </ScrollReveal>

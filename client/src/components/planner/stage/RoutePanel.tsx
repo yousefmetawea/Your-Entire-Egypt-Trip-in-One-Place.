@@ -35,9 +35,9 @@ export function RoutePanel({
       initial={reduce ? false : { opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden rounded-[4px] border border-[#bde85c]/15 bg-[#183a2a]/60 p-4 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.9)] backdrop-blur-md sm:p-5"
+      className="relative overflow-hidden rounded-[4px] border border-[#B6CE67]/15 bg-[#183a2a]/60 p-4 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.9)] backdrop-blur-md sm:p-5"
     >
-      <p className="type-label-sm tracking-[0.2em] text-[#bde85c]">{t('planner.stage.title')}</p>
+      <p className="type-label-sm tracking-[0.2em] text-[#B6CE67]">{t('planner.stage.title')}</p>
 
       <div className="relative mt-3">
         <EgyptRouteMap interests={values.interests} className="block w-full" />

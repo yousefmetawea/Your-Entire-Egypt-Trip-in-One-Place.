@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/useAuth';
+import '../components/ui/ivory-theme.css';
 import { Container } from '../components/ui/Container';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
@@ -40,7 +41,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-16rem)] py-space-xl md:py-space-2xl">
+    <div className="yt-ivory -mt-24 min-h-screen pt-24 pb-space-xl md:-mt-28 md:pt-28 md:pb-space-2xl">
       <Container className="max-w-5xl">
         <div className="grid grid-cols-1 items-center gap-gutter-lg lg:grid-cols-12">
           {/* Visual Showcase Side (Editorial Clean Photography) */}
@@ -48,7 +49,7 @@ export default function RegisterPage() {
             <div className="overflow-hidden rounded-2xl border border-hairline shadow-floating bg-surface">
               <div className="aspect-[4/5] w-full overflow-hidden bg-surface-container">
                 <img
-                  src="https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=1200&q=80"
+                  src="/images/places/karnak-temple.jpg"
                   alt={t('auth.register.imageAlt')}
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                   loading="lazy"

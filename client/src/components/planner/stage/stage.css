@@ -1,10 +1,10 @@
 /* Planner stage: palette is the dark green version of the navbar identity. */
 .planner-stage {
-  --stage-bg: #0f2a1e;
+  --stage-bg: #101c15;
   --stage-card: #183a2a;
   --stage-deep: #1b402f;
   --stage-green: #1f6b3f;
-  --stage-lime: #bde85c;
+  --stage-lime: #b6ce67;
   --stage-text: #eef3e8;
   --stage-muted: #9db0a2;
   --stage-sand: #d9c48a;
@@ -17,30 +17,30 @@
     fill 0.9s ease;
 }
 .route-dot[data-lit] {
-  fill: #bde85c;
+  fill: #b6ce67;
 }
 .route-nile {
   stroke: rgba(157, 176, 162, 0.38);
 }
 .route-lines {
-  filter: drop-shadow(0 0 5px rgba(189, 232, 92, 0.55));
+  filter: drop-shadow(0 0 5px rgba(182, 206, 103, 0.55));
 }
 .route-line {
-  stroke: #bde85c;
+  stroke: #b6ce67;
 }
 .route-node {
-  fill: #0f2a1e;
+  fill: #101c15;
   stroke: rgba(157, 176, 162, 0.7);
   stroke-width: 1.5;
 }
 .route-node-on {
-  fill: #bde85c;
-  stroke: #0f2a1e;
+  fill: #b6ce67;
+  stroke: #101c15;
   stroke-width: 2.5;
 }
 .route-ping {
   fill: none;
-  stroke: #bde85c;
+  stroke: #b6ce67;
   stroke-width: 1.5;
 }
 .route-label {
@@ -48,7 +48,7 @@
   font-size: 22px;
   font-weight: 600;
   paint-order: stroke;
-  stroke: #0f2a1e;
+  stroke: #101c15;
   stroke-width: 5px;
   stroke-linejoin: round;
 }

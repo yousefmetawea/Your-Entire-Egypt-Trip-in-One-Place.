@@ -712,6 +712,11 @@
         "descriptionWithActivities_one": "Day {{day}} has {{count}} activity. Removing the day will remove it too. You can undo this change.",
         "descriptionWithActivities_other": "Day {{day}} has {{count}} activities. Removing the day will remove them too. You can undo this change.",
         "action": "Remove last day"
+      },
+      "routePanel": {
+        "title": "Your route",
+        "count_one": "{{count}} city",
+        "count_other": "{{count}} cities"
       }
     },
     "summary": {

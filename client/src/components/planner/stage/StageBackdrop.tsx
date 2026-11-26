@@ -51,7 +51,7 @@ export function StageBackdrop({ stepIndex, direction }: { stepIndex: number; dir
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[#0f2a1e]"
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[#101C15]"
       aria-hidden="true"
     >
       <div
@@ -82,10 +82,10 @@ export function StageBackdrop({ stepIndex, direction }: { stepIndex: number; dir
         </AnimatePresence>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0f2a1e] via-[#0f2a1e]/80 to-[#0f2a1e]/30 rtl:bg-gradient-to-l" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#101C15] via-[#101C15]/80 to-[#101C15]/30 rtl:bg-gradient-to-l" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_30%,rgba(31,107,63,0.28),transparent_60%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0f2a1e] to-transparent" />
-      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0f2a1e]/80 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#101C15] to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#101C15]/80 to-transparent" />
       <div className="stage-grain absolute inset-0" />
     </div>
   );

@@ -13,6 +13,7 @@ import { TrustStrip } from '../components/landing/TrustStrip';
 import { CategoryChips } from '../components/places/CategoryChips';
 import type { CategoryChipValue } from '../components/places/CategoryChips';
 import { Container } from '../components/ui/Container';
+import '../components/ui/ivory-theme.css';
 import { Section } from '../components/ui/Section';
 import { createDiscoverHref } from '../lib/discover';
 
@@ -33,39 +34,41 @@ export default function HomePage() {
       {/* 1. Cinematic Hero with Layered Egypt Photography Deck & Infinite Marquee */}
       <Hero />
 
-      {/* 2. Category Quick Filters */}
-      <Section tone="surface" spacing="sm" aria-label={t('discover.filters.categoryLabel')}>
-        <Container>
-          <CategoryChips value="all" onChange={handleCategoryChange} />
-        </Container>
-      </Section>
+      <div className="yt-ivory">
+        {/* 2. Category Quick Filters */}
+        <Section tone="surface" spacing="sm" aria-label={t('discover.filters.categoryLabel')}>
+          <Container>
+            <CategoryChips value="all" onChange={handleCategoryChange} />
+          </Container>
+        </Section>
 
-      {/* 3. Editorial Philosophy & Brand Narrative */}
-      <EditorialIntro />
+        {/* 3. Editorial Philosophy & Brand Narrative */}
+        <EditorialIntro />
 
-      {/* 4. Asymmetrical Destinations Showcase (OVO Legion Selected Work Pattern) */}
-      <DestinationsShowcase />
+        {/* 4. Asymmetrical Destinations Showcase (OVO Legion Selected Work Pattern) */}
+        <DestinationsShowcase />
 
-      {/* 4b. Interactive 3D route map */}
-      <RouteMapSection />
+        {/* 4b. Interactive 3D route map */}
+        <RouteMapSection />
 
-      {/* 5. Travel Dimensions Moving Ticker */}
-      <TravelTicker />
+        {/* 5. Travel Dimensions Moving Ticker */}
+        <TravelTicker />
 
-      {/* 6. Signature Curated Journeys Showcase */}
-      <CuratedJourneysSection />
+        {/* 6. Signature Curated Journeys Showcase */}
+        <CuratedJourneysSection />
 
-      {/* 7. How It Works (Bespoke Planning Process) */}
-      <HowItWorks />
+        {/* 7. How It Works (Bespoke Planning Process) */}
+        <HowItWorks />
 
-      {/* 8. Interactive FAQ with Animated Accordions */}
-      <FaqSection />
+        {/* 8. Interactive FAQ with Animated Accordions */}
+        <FaqSection />
 
-      {/* 9. Final Cinematic Call-to-Action */}
-      <FinalCtaSection />
+        {/* 9. Final Cinematic Call-to-Action */}
+        <FinalCtaSection />
 
-      {/* 10. Honesty & Transparency Strip */}
-      <TrustStrip />
+        {/* 10. Honesty & Transparency Strip */}
+        <TrustStrip />
+      </div>
     </>
   );
 }

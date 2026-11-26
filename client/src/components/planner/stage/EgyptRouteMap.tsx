@@ -12,10 +12,13 @@ import {
   project,
   ROUTE_CITIES,
   type RouteCity,
+  type RouteCityId,
 } from '../../../lib/planner/routeMap';
 
 interface EgyptRouteMapProps {
-  interests: readonly PlaceCategory[];
+  interests?: readonly PlaceCategory[];
+  /** Light up exactly these cities instead of deriving them from interests. */
+  cityIds?: readonly RouteCityId[];
   className?: string;
 }
 
@@ -36,10 +39,18 @@ const NILE_PATH = NILE.map(([lat, lon], i) => {
 }).join(' ');
 
 /** Lightweight dot-matrix map of Egypt. Cities light up and the route draws as choices are made. */
-export function EgyptRouteMap({ interests, className }: EgyptRouteMapProps) {
+export function EgyptRouteMap({ interests, cityIds, className }: EgyptRouteMapProps) {
   const { t } = useTranslation();
   const reduce = useReducedMotion();
-  const lit = useMemo(() => orderRoute(getRouteCities(interests)), [interests]);
+  const lit = useMemo(
+    () =>
+      orderRoute(
+        cityIds
+          ? ROUTE_CITIES.filter((city) => cityIds.includes(city.id))
+          : getRouteCities(interests ?? []),
+      ),
+    [interests, cityIds],
+  );
   const litIds = useMemo(() => new Set(lit.map((city) => city.id)), [lit]);
   const names = lit.map((city) => t(`planner.stage.cities.${city.id}`));
 

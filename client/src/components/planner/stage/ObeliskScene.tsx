@@ -2,7 +2,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
-const LIME = '#bde85c';
+const LIME = '#B6CE67';
 
 /** Faint carved columns on the shaft. Abstract marks only, not real hieroglyphs. */
 function carvingTexture(): THREE.CanvasTexture {
@@ -72,9 +72,9 @@ function glowTexture(): THREE.CanvasTexture {
   const g = canvas.getContext('2d');
   if (g) {
     const grad = g.createRadialGradient(64, 64, 0, 64, 64, 64);
-    grad.addColorStop(0, 'rgba(189,232,92,0.55)');
-    grad.addColorStop(0.45, 'rgba(189,232,92,0.14)');
-    grad.addColorStop(1, 'rgba(189,232,92,0)');
+    grad.addColorStop(0, 'rgba(182,206,103,0.55)');
+    grad.addColorStop(0.45, 'rgba(182,206,103,0.14)');
+    grad.addColorStop(1, 'rgba(182,206,103,0)');
     g.fillStyle = grad;
     g.fillRect(0, 0, 128, 128);
   }

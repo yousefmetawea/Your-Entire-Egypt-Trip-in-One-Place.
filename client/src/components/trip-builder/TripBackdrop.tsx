@@ -14,8 +14,8 @@ export function TripBackdrop() {
         style={{ objectPosition: '50% 40%' }}
         decoding="async"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0f2a1e] via-[#0f2a1e]/75 to-[#0f2a1e]/30 rtl:bg-gradient-to-l" />
-      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[#0f2a1e] via-[#0f2a1e]/90 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#101C15] via-[#101C15]/75 to-[#101C15]/30 rtl:bg-gradient-to-l" />
+      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[#101C15] via-[#101C15]/90 to-transparent" />
       <div className="trip-grain absolute inset-0" />
     </div>
   );

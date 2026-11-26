@@ -1,5 +1,5 @@
-/* Scoped to the place details page. Re-maps the shared tokens to the forest / ivory / lime system. */
-.yt-place {
+/* Scoped light theme (forest / ivory / lime) for pages that opt in with the yt-ivory class. Re-maps the shared tokens to the forest / ivory / lime system. */
+.yt-ivory {
   --color-surface: #f4f2e9;
   --color-surface-container-lowest: #f4f2e9;
   --color-surface-container-low: #e4e4d6;
@@ -20,9 +20,9 @@
   color: #101c15;
   overflow-x: clip;
 }
-.yt-place :focus-visible {
+.yt-ivory :focus-visible {
   outline-color: #2f5a3a;
 }
-.yt-place .yt-dark :focus-visible {
+.yt-ivory .yt-dark :focus-visible {
   outline-color: #b6ce67;
 }

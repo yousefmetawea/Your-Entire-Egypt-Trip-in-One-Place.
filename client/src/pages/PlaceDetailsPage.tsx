@@ -19,7 +19,7 @@ import { PlaceInfoCard } from '../components/places/PlaceInfoCard';
 import { PlaceLocation } from '../components/places/PlaceLocation';
 import { PlaceNarrative } from '../components/places/PlaceNarrative';
 import { PlaceTips } from '../components/places/PlaceTips';
-import '../components/places/place.css';
+import '../components/ui/ivory-theme.css';
 
 interface PlaceDetailsContentProps {
   place: Place;
@@ -33,7 +33,7 @@ function PlaceDetailsContent({ place, isFixture }: PlaceDetailsContentProps) {
   const gallery = { ...place, images: getPlaceGalleryImages(place, place.images).slice(1) };
 
   return (
-    <div className="yt-place">
+    <div className="yt-ivory">
       <PlaceHero place={place} isFixture={isFixture} />
       <Section tone="canvas" spacing="none" className="!bg-transparent pb-28 md:pb-space-2xl">
         <Container className="pt-space-xl">

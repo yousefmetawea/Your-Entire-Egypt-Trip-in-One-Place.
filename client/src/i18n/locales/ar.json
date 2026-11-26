@@ -712,6 +712,15 @@
         "descriptionWithActivities_one": "اليوم {{day}} يحتوي على {{count}} نشاط سيتم حذفه أيضاً. يمكنك التراجع.",
         "descriptionWithActivities_other": "اليوم {{day}} يحتوي على {{count}} أنشطة سيتم حذفها أيضاً. يمكنك التراجع.",
         "action": "حذف اليوم الأخير"
+      },
+      "routePanel": {
+        "title": "مسارك",
+        "count_zero": "{{count}} مدن",
+        "count_one": "مدينة واحدة",
+        "count_two": "مدينتان",
+        "count_few": "{{count}} مدن",
+        "count_many": "{{count}} مدينة",
+        "count_other": "{{count}} مدينة"
       }
     },
     "summary": {

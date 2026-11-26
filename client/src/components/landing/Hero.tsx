@@ -177,6 +177,7 @@ export function Hero() {
       </div>
 
       <div className={styles.heroSticky}>
+        <h1 className="sr-only">{headline}</h1>
         <div className={styles.heroTextTrack} aria-hidden="true">
           {COPIES.map((n) => (
             <div key={n} data-hero-copy className={styles.heroTextItem}>

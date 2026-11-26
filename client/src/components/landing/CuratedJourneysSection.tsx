@@ -98,7 +98,7 @@ export function CuratedJourneysSection() {
                       </span>
                       <AppLink
                         href={`/trip/${trip.id}`}
-                        className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-secondary transition-colors group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
+                        className="inline-flex min-h-8 items-center gap-1 text-sm font-semibold text-primary hover:text-secondary transition-colors group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
                       >
                         <span>{isAr ? 'استكشف المسار' : 'View Journey'}</span>
                         <ArrowRightIcon className="size-4 rtl:rotate-180" />

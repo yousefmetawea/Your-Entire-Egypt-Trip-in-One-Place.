@@ -93,7 +93,7 @@ export function PlannerWizard() {
   return (
     <section
       aria-labelledby="planner-heading"
-      className="planner-stage relative -mt-24 min-h-[100svh] overflow-clip bg-[#0f2a1e] text-[#eef3e8] md:-mt-28"
+      className="planner-stage relative -mt-24 min-h-[100svh] overflow-clip bg-[#101C15] text-[#eef3e8] md:-mt-28"
     >
       <StageBackdrop stepIndex={stepIndex} direction={direction} />
 
@@ -103,7 +103,7 @@ export function PlannerWizard() {
         </h1>
 
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="type-label tracking-[0.22em] text-[#bde85c]">
+          <p className="type-label tracking-[0.22em] text-[#B6CE67]">
             {t('planner.eyebrow')}
             <span className="mx-3 text-white/30" aria-hidden="true">
               /
@@ -115,7 +115,7 @@ export function PlannerWizard() {
           <button
             type="button"
             onClick={() => setResetOpen(true)}
-            className="cursor-pointer type-label-sm tracking-[0.12em] text-[#9db0a2] underline-offset-4 transition-colors hover:text-[#bde85c] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c]"
+            className="cursor-pointer type-label-sm tracking-[0.12em] text-[#9db0a2] underline-offset-4 transition-colors hover:text-[#B6CE67] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B6CE67]"
           >
             {t('planner.reset')}
           </button>
@@ -181,13 +181,13 @@ export function PlannerWizard() {
           </motion.div>
         ) : null}
 
-        <div className="sticky bottom-0 z-20 -mx-5 mt-auto bg-gradient-to-t from-[#0f2a1e] via-[#0f2a1e] via-70% to-[#0f2a1e]/0 px-5 pb-5 pt-10 lg:via-[#0f2a1e]/90 lg:via-100% lg:to-transparent lg:pt-8 md:-mx-10 md:px-10">
+        <div className="sticky bottom-0 z-20 -mx-5 mt-auto bg-gradient-to-t from-[#101C15] via-[#101C15] via-70% to-[#101C15]/0 px-5 pb-5 pt-10 lg:via-[#101C15]/90 lg:via-100% lg:to-transparent lg:pt-8 md:-mx-10 md:px-10">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-4 lg:flex-nowrap lg:gap-x-8">
             <button
               type="button"
               onClick={planner.goBack}
               disabled={stepIndex === 0}
-              className="group order-2 inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full border border-white/25 px-6 type-button text-[#eef3e8] transition-colors hover:border-[#bde85c] hover:text-[#bde85c] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c] disabled:pointer-events-none disabled:opacity-30 sm:px-7 lg:order-1"
+              className="group order-2 inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full border border-white/25 px-6 type-button text-[#eef3e8] transition-colors hover:border-[#B6CE67] hover:text-[#B6CE67] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B6CE67] disabled:pointer-events-none disabled:opacity-30 sm:px-7 lg:order-1"
             >
               <ArrowLeftIcon className="size-4 transition-transform group-hover:-translate-x-1 rtl:rotate-180 rtl:group-hover:translate-x-1" />
               {t('planner.navigation.back')}
@@ -205,7 +205,7 @@ export function PlannerWizard() {
               type="button"
               onClick={handleNext}
               disabled={planner.isSubmitting}
-              className="group order-3 ms-auto inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full bg-[#bde85c] px-8 type-button font-semibold text-[#0f2a1e] transition-[background-color,box-shadow] hover:bg-[#d2f27d] hover:shadow-[0_10px_34px_-10px_rgba(189,232,92,0.7)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c] disabled:cursor-progress disabled:opacity-60 sm:px-10 lg:ms-0"
+              className="group order-3 ms-auto inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full bg-[#B6CE67] px-8 type-button font-semibold text-[#101C15] transition-[background-color,box-shadow] hover:bg-[#c8dd7e] hover:shadow-[0_10px_34px_-10px_rgba(182,206,103,0.7)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B6CE67] disabled:cursor-progress disabled:opacity-60 sm:px-10 lg:ms-0"
             >
               {isLastStep
                 ? planner.isSubmitting

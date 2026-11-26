@@ -153,7 +153,7 @@ function Route({ a, b, index }: { a: City; b: City; index: number }) {
   return (
     <group>
       <mesh geometry={geo}>
-        <meshBasicMaterial color="#ffb25a" transparent opacity={0.55} toneMapped={false} />
+        <meshBasicMaterial color="#B6CE67" transparent opacity={0.55} toneMapped={false} />
       </mesh>
       <mesh ref={pulse}>
         <sphereGeometry args={[0.09, 12, 12]} />
@@ -193,11 +193,11 @@ function CityNode({
         onPointerOut={() => onHover(null)}
       >
         <sphereGeometry args={[active ? 0.26 : 0.19, 20, 20]} />
-        <meshBasicMaterial color={active ? '#ffffff' : '#ffb25a'} toneMapped={false} />
+        <meshBasicMaterial color={active ? '#ffffff' : '#B6CE67'} toneMapped={false} />
       </mesh>
       <mesh ref={ring} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.2, 0.26, 40]} />
-        <meshBasicMaterial color="#ffb25a" transparent toneMapped={false} depthWrite={false} />
+        <meshBasicMaterial color="#B6CE67" transparent toneMapped={false} depthWrite={false} />
       </mesh>
       <LabelAnchor id={city.id} store={store} offset={[0, 0.7, 0]} />
     </group>
