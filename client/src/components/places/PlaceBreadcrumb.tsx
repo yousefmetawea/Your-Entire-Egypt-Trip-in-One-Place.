@@ -6,9 +6,11 @@ import { createDiscoverHref } from '../../lib/discover';
 
 export interface PlaceBreadcrumbProps {
   place: Place;
+  tone?: 'light' | 'dark';
 }
 
-export function PlaceBreadcrumb({ place }: PlaceBreadcrumbProps) {
+export function PlaceBreadcrumb({ place, tone = 'light' }: PlaceBreadcrumbProps) {
+  const dark = tone === 'dark';
   const { t, i18n } = useTranslation();
   const isAr = i18n.language?.startsWith('ar');
   const name = isAr && place.name.ar ? place.name.ar : place.name.en;
@@ -17,13 +19,19 @@ export function PlaceBreadcrumb({ place }: PlaceBreadcrumbProps) {
   return (
     <nav
       aria-label={t('placeDetails.breadcrumb.label')}
-      className="w-fit max-w-full rounded-full border border-hairline bg-surface-container-lowest/85 px-space-lg py-space-xs shadow-resting backdrop-blur-md"
+      className={
+        dark
+          ? 'w-fit max-w-full rounded-full border border-white/20 bg-[#101C15]/45 px-space-lg py-space-xs backdrop-blur-md'
+          : 'w-fit max-w-full rounded-full border border-hairline bg-surface-container-lowest/85 px-space-lg py-space-xs shadow-resting backdrop-blur-md'
+      }
     >
-      <ol className="flex flex-wrap items-center gap-space-xs type-label text-on-surface-variant">
+      <ol
+        className={`flex flex-wrap items-center gap-space-xs type-label ${dark ? 'text-[#C0C9BE]' : 'text-on-surface-variant'}`}
+      >
         <li>
           <Link
             to="/discover"
-            className="rounded-sm transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
+            className={`rounded-sm transition-colors ${dark ? 'hover:text-white' : 'hover:text-primary'} focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary`}
           >
             {t('placeDetails.breadcrumb.discover')}
           </Link>
@@ -34,7 +42,7 @@ export function PlaceBreadcrumb({ place }: PlaceBreadcrumbProps) {
         <li>
           <Link
             to={areaHref}
-            className="rounded-sm transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
+            className={`rounded-sm transition-colors ${dark ? 'hover:text-white' : 'hover:text-primary'} focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary`}
           >
             {t(getAreaLabelKey(place.area))}
           </Link>
@@ -43,7 +51,10 @@ export function PlaceBreadcrumb({ place }: PlaceBreadcrumbProps) {
           /
         </li>
         <li>
-          <span aria-current="page" className="text-secondary font-medium">
+          <span
+            aria-current="page"
+            className={dark ? 'font-medium text-[#B6CE67]' : 'text-secondary font-medium'}
+          >
             {name}
           </span>
         </li>

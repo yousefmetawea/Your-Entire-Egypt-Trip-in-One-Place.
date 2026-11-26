@@ -7,6 +7,8 @@ export type NearbyPlacesStatus = 'idle' | 'loading' | 'ready' | 'error';
 
 export interface NearbyPlacesResult {
   placesWithDistance: NearbyPlaceDistance[];
+  /** Other places in the same area, used when nothing is within the radius. */
+  areaPlaces: Place[];
   status: NearbyPlacesStatus;
   retry: () => void;
 }
@@ -14,6 +16,7 @@ export interface NearbyPlacesResult {
 interface NearbyPlacesState {
   placeId: string | null;
   placesWithDistance: NearbyPlaceDistance[];
+  areaPlaces: Place[];
   status: NearbyPlacesStatus;
 }
 
@@ -21,6 +24,7 @@ export function useNearbyPlaces(place: Place | null, limit = 6): NearbyPlacesRes
   const [state, setState] = useState<NearbyPlacesState>({
     placeId: null,
     placesWithDistance: [],
+    areaPlaces: [],
     status: 'idle',
   });
   const [attempt, setAttempt] = useState(0);
@@ -42,6 +46,9 @@ export function useNearbyPlaces(place: Place | null, limit = 6): NearbyPlacesRes
         setState({
           placeId: place.id,
           placesWithDistance: matches,
+          areaPlaces: allPlaces
+            .filter((p) => p.id !== place.id && p.area === place.area)
+            .slice(0, 3),
           status: 'ready',
         });
       })
@@ -50,6 +57,7 @@ export function useNearbyPlaces(place: Place | null, limit = 6): NearbyPlacesRes
         setState({
           placeId: place.id,
           placesWithDistance: [],
+          areaPlaces: [],
           status: 'error',
         });
       });
@@ -67,6 +75,7 @@ export function useNearbyPlaces(place: Place | null, limit = 6): NearbyPlacesRes
 
   return {
     placesWithDistance: state.placeId === placeId ? state.placesWithDistance : [],
+    areaPlaces: state.placeId === placeId ? state.areaPlaces : [],
     status: state.placeId === placeId ? state.status : 'loading',
     retry,
   };

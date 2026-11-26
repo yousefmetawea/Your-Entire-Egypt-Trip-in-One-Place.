@@ -6,20 +6,20 @@ import { getAreaLabelKey } from '../lib/catalog';
 import { useDraftTripPlace } from '../hooks/useDraftTripPlace';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { usePlace } from '../hooks/usePlace';
+import { getPlaceGalleryImages } from '../lib/placeImages';
 import { Container } from '../components/ui/Container';
 import { Section } from '../components/ui/Section';
 import { MobileActionBar } from '../components/places/MobileActionBar';
 import { NearbyPlaces } from '../components/places/NearbyPlaces';
-import { PlaceBreadcrumb } from '../components/places/PlaceBreadcrumb';
 import { PlaceDetailsSkeleton } from '../components/places/PlaceDetailsSkeleton';
 import { PlaceDetailsStates } from '../components/places/PlaceDetailsStates';
 import { PlaceGallery } from '../components/places/PlaceGallery';
-import { PlaceHeader } from '../components/places/PlaceHeader';
+import { PlaceHero } from '../components/places/PlaceHero';
 import { PlaceInfoCard } from '../components/places/PlaceInfoCard';
 import { PlaceLocation } from '../components/places/PlaceLocation';
 import { PlaceNarrative } from '../components/places/PlaceNarrative';
-import { PlaceQuickFacts } from '../components/places/PlaceQuickFacts';
 import { PlaceTips } from '../components/places/PlaceTips';
+import '../components/places/place.css';
 
 interface PlaceDetailsContentProps {
   place: Place;
@@ -30,21 +30,16 @@ function PlaceDetailsContent({ place, isFixture }: PlaceDetailsContentProps) {
   const draft = useDraftTripPlace(place);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  return (
-    <>
-      <Section
-        tone="canvas"
-        spacing="none"
-        className="pb-28 md:pb-space-2xl"
-        aria-labelledby="place-title"
-      >
-        <Container className="pt-space-lg">
-          <PlaceBreadcrumb place={place} />
-          <PlaceHeader place={place} isFixture={isFixture} />
-          <PlaceQuickFacts place={place} />
-          <PlaceGallery place={place} />
+  const gallery = { ...place, images: getPlaceGalleryImages(place, place.images).slice(1) };
 
-          <div className="mt-space-2xl grid grid-cols-1 gap-gutter-lg lg:grid-cols-12">
+  return (
+    <div className="yt-place">
+      <PlaceHero place={place} isFixture={isFixture} />
+      <Section tone="canvas" spacing="none" className="!bg-transparent pb-28 md:pb-space-2xl">
+        <Container className="pt-space-xl">
+          {gallery.images.length > 0 ? <PlaceGallery place={gallery} /> : null}
+
+          <div className="mt-space-xl grid grid-cols-1 gap-gutter-lg lg:grid-cols-12">
             <div className="space-y-gutter-lg lg:order-2 lg:col-span-4">
               <div className="lg:sticky lg:top-24">
                 <PlaceInfoCard place={place} draft={draft} />
@@ -66,7 +61,7 @@ function PlaceDetailsContent({ place, isFixture }: PlaceDetailsContentProps) {
 
       <div ref={sentinelRef} aria-hidden="true" className="h-px" />
       <MobileActionBar draft={draft} sentinelRef={sentinelRef} />
-    </>
+    </div>
   );
 }
 

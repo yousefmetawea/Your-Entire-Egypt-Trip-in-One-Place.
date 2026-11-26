@@ -291,7 +291,8 @@
       "errorDescription": "Please try again. No place data has been changed.",
       "retry": "Retry",
       "emptyTitle": "No nearby places to show yet.",
-      "emptyDescription": "Related places have not been added to the catalog yet."
+      "emptyDescription": "Related places have not been added to the catalog yet.",
+      "moreInArea": "More in {{area}}: nothing is within walking distance of this visit, so here are other places in the same area."
     },
     "tips": {
       "eyebrow": "Good to know",
