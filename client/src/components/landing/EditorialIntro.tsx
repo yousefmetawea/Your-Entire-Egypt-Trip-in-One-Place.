@@ -90,11 +90,11 @@ export function EditorialIntro() {
               <div className="group block">
                 <div className="aspect-[16/10] w-full overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-sm">
                   <img
-                    src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80"
+                    src="/images/places/philae-temple.jpg"
                     alt={
                       isAr
-                        ? 'معبد فيلة على ضفاف جزيرة النيل بأسوان وقت الغروب'
-                        : 'Temple of Isis on Philae island on the Nile, Aswan at sunset'
+                        ? 'معبد فيلة على جزيرته في النيل بأسوان'
+                        : 'Temple of Philae on its island on the Nile, Aswan'
                     }
                     className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                     loading="lazy"
@@ -116,11 +116,11 @@ export function EditorialIntro() {
               <div className="group block">
                 <div className="aspect-[4/3] md:aspect-[4/5] w-full overflow-hidden rounded-2xl border border-hairline bg-surface-container-low shadow-sm">
                   <img
-                    src="https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=1000&q=80"
+                    src="/images/places/white-desert-national-park.jpg"
                     alt={
                       isAr
                         ? 'تكوينات الصخور الطباشيرية الطبيعية المنحوتة بالرياح في الصحراء البيضاء'
-                        : 'Surreal wind-sculpted natural chalk rock monoliths in the White Desert'
+                        : 'Wind-sculpted chalk rock formations in the White Desert'
                     }
                     className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                     loading="lazy"

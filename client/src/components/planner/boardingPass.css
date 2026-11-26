@@ -6,9 +6,9 @@
   border-radius: 6px;
   padding: 1.5rem;
   background:
-    radial-gradient(120% 80% at 100% 0%, rgba(189, 232, 92, 0.14), transparent 55%),
-    linear-gradient(160deg, #183a2a, #0f2a1e 70%);
-  border: 1px solid rgba(189, 232, 92, 0.45);
+    radial-gradient(120% 80% at 100% 0%, rgba(182, 206, 103, 0.14), transparent 55%),
+    linear-gradient(160deg, #183a2a, #101c15 70%);
+  border: 1px solid rgba(182, 206, 103, 0.45);
   box-shadow:
     0 30px 60px -24px rgba(0, 0, 0, 0.8),
     inset 0 0 0 1px rgba(255, 255, 255, 0.03);
@@ -23,7 +23,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #bde85c;
+  color: #b6ce67;
 }
 .pass-title {
   margin-top: 0.35rem;
@@ -32,8 +32,8 @@
   line-height: 1.1;
 }
 .pass-badge {
-  border: 1px solid rgba(189, 232, 92, 0.5);
-  color: #bde85c;
+  border: 1px solid rgba(182, 206, 103, 0.5);
+  color: #b6ce67;
   border-radius: 999px;
   padding: 0.2rem 0.65rem;
   font-size: 0.65rem;
@@ -48,12 +48,12 @@
   margin: 1.2rem 0;
   font-family: var(--font-display);
   font-size: 1.1rem;
-  color: #bde85c;
+  color: #b6ce67;
   direction: ltr;
 }
 .pass-line {
   flex: 1;
-  border-top: 1px dashed rgba(189, 232, 92, 0.5);
+  border-top: 1px dashed rgba(182, 206, 103, 0.5);
 }
 .pass-plane {
   font-size: 0.95rem;
@@ -84,7 +84,7 @@
 }
 .pass-tear {
   margin: 1.1rem -1.5rem;
-  border-top: 2px dashed rgba(189, 232, 92, 0.35);
+  border-top: 2px dashed rgba(182, 206, 103, 0.35);
 }
 .pass-foot {
   display: flex;
@@ -124,7 +124,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #bde85c;
+  color: #b6ce67;
 }
 .pass-check {
   display: flex;
@@ -138,7 +138,7 @@
   color: #9db0a2;
 }
 .pass-check input {
-  accent-color: #bde85c;
+  accent-color: #b6ce67;
   margin-top: 0.2rem;
 }
 .pass-error {
@@ -154,8 +154,8 @@
   gap: 0.6rem;
   min-height: 3rem;
   border-radius: 999px;
-  background: #bde85c;
-  color: #0f2a1e;
+  background: #b6ce67;
+  color: #101c15;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
@@ -165,8 +165,8 @@
     background-color 0.25s;
 }
 .pass-generate:hover:not(:disabled) {
-  background: #d2f27d;
-  box-shadow: 0 10px 30px -10px rgba(189, 232, 92, 0.7);
+  background: #c8dd7e;
+  box-shadow: 0 10px 30px -10px rgba(182, 206, 103, 0.7);
 }
 .pass-generate:disabled {
   opacity: 0.6;
@@ -184,19 +184,19 @@
 .pass-secondary button {
   min-height: 2.6rem;
   border-radius: 999px;
-  border: 1px solid rgba(189, 232, 92, 0.45);
-  color: #bde85c;
+  border: 1px solid rgba(182, 206, 103, 0.45);
+  color: #b6ce67;
   font-size: 0.85rem;
   cursor: pointer;
   transition: background-color 0.25s;
 }
 .pass-secondary button:hover {
-  background: rgba(189, 232, 92, 0.12);
+  background: rgba(182, 206, 103, 0.12);
 }
 .pass-generate:focus-visible,
 .pass-secondary button:focus-visible,
 .pass-check input:focus-visible {
-  outline: 2px solid #bde85c;
+  outline: 2px solid #b6ce67;
   outline-offset: 3px;
 }
 
@@ -235,7 +235,7 @@
   .pass-tear {
     margin: 0;
     border-top: 0;
-    border-inline-start: 2px dashed rgba(189, 232, 92, 0.35);
+    border-inline-start: 2px dashed rgba(182, 206, 103, 0.35);
   }
   .pass-foot {
     padding: 1.6rem 1.2rem;

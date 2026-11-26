@@ -69,7 +69,7 @@ export function LanguageSwitcher({ className, variant = 'pill' }: LanguageSwitch
         type="button"
         onClick={() => handleToggle('en')}
         className={cn(
-          'relative z-10 rounded-full px-2.5 py-1 text-xs font-semibold tracking-wider transition-all duration-200 cursor-pointer',
+          'relative z-10 rounded-full px-3 py-2 text-xs font-semibold tracking-wider transition-all duration-200 cursor-pointer',
           currentLang === 'en'
             ? 'bg-primary text-on-primary shadow-xs'
             : 'text-on-surface-variant hover:text-primary',
@@ -82,7 +82,7 @@ export function LanguageSwitcher({ className, variant = 'pill' }: LanguageSwitch
         type="button"
         onClick={() => handleToggle('ar')}
         className={cn(
-          'relative z-10 rounded-full px-2.5 py-1 text-xs font-semibold transition-all duration-200 cursor-pointer font-sans',
+          'relative z-10 rounded-full px-3 py-2 text-xs font-semibold transition-all duration-200 cursor-pointer font-sans',
           currentLang === 'ar'
             ? 'bg-primary text-on-primary shadow-xs'
             : 'text-on-surface-variant hover:text-primary',

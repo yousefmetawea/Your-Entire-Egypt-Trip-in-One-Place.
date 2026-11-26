@@ -34,7 +34,7 @@ export function RequestStatusChip({
         ? 'bg-emerald-400/15 text-emerald-300 ring-emerald-400/30'
         : status === 'cancelled'
           ? 'bg-rose-400/15 text-rose-300 ring-rose-400/30'
-          : 'bg-[#ffb25a]/15 text-[#ffb25a] ring-[#ffb25a]/30';
+          : 'bg-[#B6CE67]/15 text-[#B6CE67] ring-[#B6CE67]/30';
     return (
       <span
         role="status"

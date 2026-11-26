@@ -75,9 +75,9 @@ export function StayHero({
   return (
     <section
       ref={ref}
-      className="relative -mt-24 flex min-h-[92vh] items-center overflow-hidden bg-[#070a12] text-white md:-mt-28"
+      className="relative -mt-24 flex min-h-[92vh] items-center overflow-hidden bg-[#101C15] text-white md:-mt-28"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_500px_at_75%_30%,rgba(255,170,80,0.16),transparent_60%),radial-gradient(700px_500px_at_10%_90%,rgba(56,195,230,0.1),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_500px_at_75%_30%,rgba(182,206,103,0.16),transparent_60%),radial-gradient(700px_500px_at_10%_90%,rgba(156,197,170,0.1),transparent_60%)]" />
       {webgl && inView ? (
         <motion.div className="absolute inset-0" style={{ y: sceneY }}>
           <Suspense fallback={null}>
@@ -85,8 +85,8 @@ export function StayHero({
           </Suspense>
         </motion.div>
       ) : null}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,10,18,0.92)_0%,rgba(7,10,18,0.55)_45%,rgba(7,10,18,0)_75%)] rtl:bg-[linear-gradient(270deg,rgba(7,10,18,0.92)_0%,rgba(7,10,18,0.55)_45%,rgba(7,10,18,0)_75%)] max-md:bg-[#070a12]/55" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#070a12]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(16,28,21,0.92)_0%,rgba(16,28,21,0.55)_45%,rgba(16,28,21,0)_75%)] rtl:bg-[linear-gradient(270deg,rgba(16,28,21,0.92)_0%,rgba(16,28,21,0.55)_45%,rgba(16,28,21,0)_75%)] max-md:bg-[#101C15]/55" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#101C15]" />
 
       <Container>
         <motion.div
@@ -97,9 +97,9 @@ export function StayHero({
             initial={reduce ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#ffb25a]"
+            className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#B6CE67]"
           >
-            <span className="h-px w-10 bg-[#ffb25a]" />
+            <span className="h-px w-10 bg-[#B6CE67]" />
             {copy.eyebrow}
           </motion.span>
 
@@ -109,7 +109,7 @@ export function StayHero({
                 {copy.headA}
               </SplitText>
             </span>
-            <span className="block bg-gradient-to-r from-[#ffd7a0] via-[#ffb25a] to-[#f08a3c] bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-[#D9E6A0] via-[#B6CE67] to-[#9DB54E] bg-clip-text text-transparent">
               <SplitText as="span" delay={0.55}>
                 {copy.headB}
               </SplitText>
@@ -134,7 +134,7 @@ export function StayHero({
             <button
               type="button"
               onClick={() => onPick('transportation')}
-              className="rounded-full bg-white px-7 py-3 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
+              className="rounded-full bg-white px-7 py-3 text-sm font-semibold text-[#101C15] transition-transform hover:-translate-y-0.5"
             >
               {copy.ctaTransport}
             </button>

@@ -50,9 +50,7 @@ export function CuratedJourneysSection() {
             const description =
               isAr && trip.description?.ar ? trip.description.ar : trip.description?.en;
             const daysCount = trip.durationDays || trip.days.length;
-            const coverImage =
-              trip.images?.[0]?.src ||
-              'https://images.unsplash.com/photo-1781624617165-1058040d1906?auto=format&fit=crop&w=1200&q=80';
+            const coverImage = trip.images?.[0]?.src || '/images/places/grand-egyptian-museum.jpg';
 
             return (
               <ScrollReveal key={trip.id} delay={index * 0.12} className="h-full">
@@ -100,7 +98,7 @@ export function CuratedJourneysSection() {
                       </span>
                       <AppLink
                         href={`/trip/${trip.id}`}
-                        className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-secondary transition-colors group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
+                        className="inline-flex min-h-8 items-center gap-1 text-sm font-semibold text-primary hover:text-secondary transition-colors group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
                       >
                         <span>{isAr ? 'استكشف المسار' : 'View Journey'}</span>
                         <ArrowRightIcon className="size-4 rtl:rotate-180" />

@@ -70,7 +70,7 @@ export function WaysToMove({ copy }: { copy: Copy }) {
   }, [isAr]);
 
   return (
-    <section ref={rootRef} className="relative bg-[#070a12] text-white">
+    <section ref={rootRef} className="relative bg-[#101C15] text-white">
       <div
         dir="ltr"
         className="py-20 min-[900px]:sticky min-[900px]:top-0 min-[900px]:flex min-[900px]:h-screen min-[900px]:items-center min-[900px]:overflow-hidden min-[900px]:py-0 motion-reduce:min-[900px]:static motion-reduce:min-[900px]:block motion-reduce:min-[900px]:h-auto motion-reduce:min-[900px]:overflow-visible motion-reduce:min-[900px]:py-20 "
@@ -84,8 +84,8 @@ export function WaysToMove({ copy }: { copy: Copy }) {
             className="flex shrink-0 flex-col justify-center gap-5 min-[900px]:w-[30vw] motion-reduce:min-[900px]:w-auto"
             dir={copy.waysTitle.match(/[\u0600-\u06FF]/) ? 'rtl' : 'ltr'}
           >
-            <span className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#ffb25a]">
-              <span className="h-px w-10 bg-[#ffb25a]" />
+            <span className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#B6CE67]">
+              <span className="h-px w-10 bg-[#B6CE67]" />
               {copy.waysEyebrow}
             </span>
             <h2 className="text-4xl font-semibold leading-tight md:text-6xl">{copy.waysTitle}</h2>

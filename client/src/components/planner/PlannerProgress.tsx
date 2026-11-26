@@ -39,11 +39,11 @@ export function PlannerProgress({ currentStep, values, onStepSelect }: PlannerPr
                 aria-label={`${t(getPlannerStepShortLabelKey(step), {
                   number: String(index + 1).padStart(2, '0'),
                 })}: ${t(getPlannerStepLabelKey(step))} (${status})`}
-                className="group block w-full cursor-pointer text-start focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c]"
+                className="group block w-full cursor-pointer text-start focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B6CE67]"
               >
                 <span className="relative block h-[2px] w-full overflow-hidden bg-white/15">
                   <motion.span
-                    className="absolute inset-y-0 start-0 bg-[#bde85c]"
+                    className="absolute inset-y-0 start-0 bg-[#B6CE67]"
                     initial={false}
                     animate={{
                       width: isCurrent || isComplete || index < currentIndex ? '100%' : '0%',
@@ -54,7 +54,7 @@ export function PlannerProgress({ currentStep, values, onStepSelect }: PlannerPr
                 <span
                   className={cn(
                     'mt-2 hidden truncate type-label-sm tracking-[0.12em] transition-colors sm:block',
-                    isCurrent ? 'text-[#bde85c]' : 'text-[#9db0a2] group-hover:text-[#eef3e8]',
+                    isCurrent ? 'text-[#B6CE67]' : 'text-[#9db0a2] group-hover:text-[#eef3e8]',
                   )}
                 >
                   <span className="me-2 tabular-nums opacity-60">

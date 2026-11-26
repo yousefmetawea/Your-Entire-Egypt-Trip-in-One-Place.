@@ -291,7 +291,8 @@
       "errorDescription": "يرجى إعادة المحاولة.",
       "retry": "إعادة المحاولة",
       "emptyTitle": "لا توجد معالم قريبة مسجلة حالياً.",
-      "emptyDescription": "سيتم إضافة المزيد من المعالم المرتبطة قريباً."
+      "emptyDescription": "سيتم إضافة المزيد من المعالم المرتبطة قريباً.",
+      "moreInArea": "المزيد في {{area}}: لا توجد معالم قريبة سيرًا على الأقدام من هذه الزيارة، فإليك معالم أخرى في نفس المنطقة."
     },
     "tips": {
       "eyebrow": "نصائح وإرشادات",
@@ -711,6 +712,15 @@
         "descriptionWithActivities_one": "اليوم {{day}} يحتوي على {{count}} نشاط سيتم حذفه أيضاً. يمكنك التراجع.",
         "descriptionWithActivities_other": "اليوم {{day}} يحتوي على {{count}} أنشطة سيتم حذفها أيضاً. يمكنك التراجع.",
         "action": "حذف اليوم الأخير"
+      },
+      "routePanel": {
+        "title": "مسارك",
+        "count_zero": "{{count}} مدن",
+        "count_one": "مدينة واحدة",
+        "count_two": "مدينتان",
+        "count_few": "{{count}} مدن",
+        "count_many": "{{count}} مدينة",
+        "count_other": "{{count}} مدينة"
       }
     },
     "summary": {

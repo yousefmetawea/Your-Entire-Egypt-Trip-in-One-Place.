@@ -3,7 +3,7 @@
  * shared component (buttons, badges, cards, modals) follows without separate dark variants.
  */
 .trip-stage {
-  --color-background: #0f2a1e;
+  --color-background: #101c15;
   --color-surface: #183a2a;
   --color-surface-dim: #12291d;
   --color-surface-bright: #1f4433;
@@ -14,37 +14,37 @@
   --color-surface-container-highest: #2c5242;
   --color-surface-variant: #244636;
   --color-on-surface: #eef3e8;
-  --color-on-surface-variant: #9db0a2;
+  --color-on-surface-variant: #b6c8bb;
   --color-on-background: #eef3e8;
   --color-inverse-surface: #eef3e8;
-  --color-inverse-on-surface: #0f2a1e;
+  --color-inverse-on-surface: #101c15;
   --color-outline: #4a6656;
   --color-outline-variant: #3a5a48;
-  --color-hairline: rgb(238 243 232 / 0.13);
+  --color-hairline: rgb(238 243 232 / 0.2);
   --color-hairline-strong: rgb(238 243 232 / 0.28);
 
   --color-primary: #eef3e8;
-  --color-on-primary: #0f2a1e;
+  --color-on-primary: #101c15;
   --color-primary-container: #1b3a29;
   --color-on-primary-container: #eef3e8;
-  --color-secondary: #bde85c;
-  --color-on-secondary: #0f2a1e;
+  --color-secondary: #b6ce67;
+  --color-on-secondary: #101c15;
   --color-secondary-container: #1f6b3f;
   --color-on-secondary-container: #e6f6c4;
-  --color-secondary-fixed: #bde85c;
+  --color-secondary-fixed: #b6ce67;
   --color-secondary-fixed-dim: #9bc944;
-  --color-on-secondary-fixed: #0f2a1e;
-  --color-bronze: #bde85c;
+  --color-on-secondary-fixed: #101c15;
+  --color-bronze: #b6ce67;
   --color-sand: #d9c48a;
   --color-error: #ff8f8f;
   --color-error-container: #3a1b1b;
   --color-on-error-container: #ffc2c2;
-  --color-success: #bde85c;
+  --color-success: #b6ce67;
   --color-success-container: #12301f;
 
   position: relative;
   isolation: isolate;
-  background: #0f2a1e;
+  background: #101c15;
   color: #eef3e8;
   color-scheme: dark;
 }
@@ -61,7 +61,7 @@
   color: #9db0a2;
 }
 .trip-stage .leaflet-control-attribution a {
-  color: #bde85c;
+  color: #b6ce67;
 }
 .trip-stage .leaflet-bar a {
   background: #183a2a;
@@ -106,7 +106,7 @@ dialog.trip-stage {
   color: #eef3e8;
 }
 .trip-stage .luxury-marker-container.is-selected .luxury-marker-order {
-  color: #0f2a1e;
+  color: #101c15;
 }
 .trip-stage .luxury-marker-label {
   background-color: rgb(15 42 30 / 0.88);

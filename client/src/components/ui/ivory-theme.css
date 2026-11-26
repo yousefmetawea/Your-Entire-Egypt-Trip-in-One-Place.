@@ -1,0 +1,28 @@
+/* Scoped light theme (forest / ivory / lime) for pages that opt in with the yt-ivory class. Re-maps the shared tokens to the forest / ivory / lime system. */
+.yt-ivory {
+  --color-surface: #f4f2e9;
+  --color-surface-container-lowest: #f4f2e9;
+  --color-surface-container-low: #e4e4d6;
+  --color-surface-container: #dde1d0;
+  --color-surface-container-high: #d1d8c5;
+  --color-on-surface: #101c15;
+  --color-on-surface-variant: #3b4a3f;
+  --color-primary: #101c15;
+  --color-primary-container: #193426;
+  --color-secondary: #2f5a3a;
+  --color-secondary-fixed: #b6ce67;
+  --color-bronze: #2f5a3a;
+  --color-hairline: #cdd3c0;
+  --color-hairline-strong: #b4bca6;
+  --color-sand: #b4bca6;
+  --color-background: #eae9df;
+  background: #eae9df;
+  color: #101c15;
+  overflow-x: clip;
+}
+.yt-ivory :focus-visible {
+  outline-color: #2f5a3a;
+}
+.yt-ivory .yt-dark :focus-visible {
+  outline-color: #b6ce67;
+}

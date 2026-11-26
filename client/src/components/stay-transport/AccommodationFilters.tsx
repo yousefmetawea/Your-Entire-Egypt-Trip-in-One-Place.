@@ -38,7 +38,7 @@ function PillGroup({
                 aria-pressed={on}
                 onClick={() => onChange(item.id)}
                 className={`relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white ${
-                  on ? 'text-[#0a0e17]' : 'text-white/70 hover:text-white'
+                  on ? 'text-[#101C15]' : 'text-white/70 hover:text-white'
                 }`}
               >
                 {on ? (

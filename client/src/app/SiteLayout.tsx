@@ -97,7 +97,7 @@ export function SiteLayout() {
   ) : (
     <AppLink
       href="/login"
-      className="text-xs text-neutral-700 hover:text-neutral-900 transition-colors uppercase tracking-wider font-semibold"
+      className="inline-flex min-h-8 items-center text-xs text-neutral-700 hover:text-neutral-900 transition-colors uppercase tracking-wider font-semibold"
     >
       {t('nav.signIn')}
     </AppLink>

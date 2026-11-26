@@ -15,15 +15,6 @@ export interface BuilderSummaryProps {
   summary: ItinerarySummary;
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl bg-surface-container-low p-space-sm">
-      <dt className="type-small text-on-surface-variant">{label}</dt>
-      <dd className="type-title-md mt-space-xs text-primary">{value}</dd>
-    </div>
-  );
-}
-
 export function BuilderSummary({ trip, summary }: BuilderSummaryProps) {
   const { t } = useTranslation();
   const [accommodation, setAccommodation] = useState<Accommodation | null>(null);
@@ -84,8 +75,12 @@ export function BuilderSummary({ trip, summary }: BuilderSummaryProps) {
     summary.missingStartCount > 0;
 
   return (
-    <Card variant="elevated" padding="lg" className="flex flex-col gap-space-md">
-      <div className="flex items-start justify-between gap-space-sm">
+    <Card
+      variant="elevated"
+      padding="lg"
+      className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] items-start gap-space-md"
+    >
+      <div className="col-span-full flex items-start justify-between gap-space-sm">
         <div>
           <p className="type-label text-secondary">{t('trip.builder.summary.eyebrow')}</p>
           <h2 className="type-card-title mt-space-xs text-primary">
@@ -93,25 +88,6 @@ export function BuilderSummary({ trip, summary }: BuilderSummaryProps) {
           </h2>
         </div>
       </div>
-
-      <dl className="grid grid-cols-2 gap-space-sm">
-        <Stat
-          label={t('trip.summary.daysLabel')}
-          value={t('trip.summary.dayCount', { count: trip.days.length })}
-        />
-        <Stat
-          label={t('trip.summary.activitiesLabel')}
-          value={t('trip.summary.activityCount', { count: summary.activityCount })}
-        />
-        <Stat
-          label={t('trip.summary.placesLabel')}
-          value={t('trip.summary.placeCount', { count: summary.placeCount })}
-        />
-        <Stat
-          label={t('trip.builder.summary.customLabel')}
-          value={t('trip.builder.summary.customCount', { count: summary.customActivityCount })}
-        />
-      </dl>
 
       <div className="rounded-xl border border-hairline p-space-md">
         <p className="type-label-sm text-primary">{t('trip.builder.summary.costTitle')}</p>

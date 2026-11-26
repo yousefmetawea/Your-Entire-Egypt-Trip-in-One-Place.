@@ -18,7 +18,7 @@ export interface DeckImage {
 const DECK_IMAGES: DeckImage[] = [
   {
     id: 'giza-pyramids',
-    src: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1600&q=80',
+    src: '/images/places/pyramids-of-giza.jpg',
     altEn: 'The Great Pyramids of Giza rising against golden afternoon light',
     altAr: 'أهرامات الجيزة الخالدة تحت أشعة الشمس الذهبية',
     titleEn: 'Grand Egyptian Museum & Pyramids',
@@ -28,7 +28,7 @@ const DECK_IMAGES: DeckImage[] = [
   },
   {
     id: 'luxor-karnak',
-    src: 'https://images.unsplash.com/photo-1781624617165-1058040d1906?auto=format&fit=crop&w=1600&q=80',
+    src: '/images/places/karnak-temple.jpg',
     altEn: 'The towering hypostyle columns of Karnak Temple in Luxor',
     altAr: 'أعمدة بهو الكرنك الشامخة في الأقصر',
     titleEn: 'Karnak & The Valley of Kings',
@@ -38,7 +38,7 @@ const DECK_IMAGES: DeckImage[] = [
   },
   {
     id: 'aswan-philae',
-    src: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1600&q=80',
+    src: '/images/places/philae-temple.jpg',
     altEn: 'Philae Temple illuminated on its island on the Nile River in Aswan',
     altAr: 'معبد فيلة المتلألئ على جزيرته النيلية في أسوان',
     titleEn: 'Island Sanctuary of Philae',
@@ -48,7 +48,7 @@ const DECK_IMAGES: DeckImage[] = [
   },
   {
     id: 'white-desert',
-    src: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=1600&q=80',
+    src: '/images/places/white-desert-national-park.jpg',
     altEn: 'Chalk rock sculptures under an immense starry sky in the White Desert',
     altAr: 'صخور الطباشير السريالية تحت سماء الصحراء البيضاء المرصعة بالنجوم',
     titleEn: 'White Desert National Park',
@@ -58,7 +58,7 @@ const DECK_IMAGES: DeckImage[] = [
   },
   {
     id: 'siwa-salt-lakes',
-    src: 'https://images.unsplash.com/photo-1771838877353-c1a58cfd399f?auto=format&fit=crop&w=1600&q=80',
+    src: '/images/places/siwa-salt-lakes.jpg',
     altEn: 'The turquoise salt lakes and date palms of Siwa Oasis at sunset',
     altAr: 'بحيرات الملح الفيروزية ونخيل واحة سيوة عند الغروب',
     titleEn: 'Siwa Salt Lakes & Ancient Fortress',

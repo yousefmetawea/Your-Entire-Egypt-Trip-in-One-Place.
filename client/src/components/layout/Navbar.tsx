@@ -157,6 +157,7 @@ export function Navbar({
       <div className="pointer-events-auto mx-auto flex h-16 max-w-page items-center justify-between gap-space-md rounded-full border border-hairline bg-surface/90 px-space-md shadow-floating backdrop-blur-2xl transition-all duration-300 sm:px-space-lg">
         <Link
           href={brandHref}
+          aria-label={brandLabel}
           onClick={() => setMenuOpen(false)}
           className="group inline-flex min-w-0 shrink items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
         >

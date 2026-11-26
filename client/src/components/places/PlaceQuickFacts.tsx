@@ -3,7 +3,6 @@ import type { Place } from '../../types';
 import { cn } from '../../lib/cn';
 import { getAreaLabelKey, getCategoryLabelKey, getDurationLabel } from '../../lib/catalog';
 import { formatTime, getOpeningHoursRows, summarizeOpeningHours } from '../../lib/placeDetails';
-import { Card } from '../ui/Card';
 import { CalendarIcon, ClockIcon, CompassIcon, MapPinIcon } from '../ui/icons';
 
 export interface PlaceQuickFactsProps {
@@ -57,32 +56,37 @@ export function PlaceQuickFacts({ place, className }: PlaceQuickFactsProps) {
   ];
 
   return (
-    <Card
-      variant="surface"
-      padding="md"
-      className={cn('mt-space-lg', className)}
+    <div
       aria-label={t('placeDetails.practical.quickFactsLabel')}
+      role="group"
+      className={cn(
+        'rounded-2xl border border-white/15 bg-[#101C15]/55 px-space-lg py-space-md backdrop-blur-xl',
+        className,
+      )}
     >
-      <dl className="grid grid-cols-1 gap-space-md sm:grid-cols-2 lg:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-x-space-md gap-y-space-md lg:grid-cols-4 lg:divide-x lg:divide-white/15 rtl:lg:divide-x-reverse">
         {facts.map((fact) => {
           const Icon = fact.icon;
 
           return (
-            <div key={fact.label} className="flex items-start gap-space-sm">
+            <div
+              key={fact.label}
+              className="flex items-start gap-space-sm lg:px-space-md lg:first:ps-0"
+            >
               <span
-                className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-secondary-fixed/40 text-secondary"
+                className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-[#B6CE67]/20 text-[#B6CE67]"
                 aria-hidden="true"
               >
                 <Icon className="size-4" />
               </span>
               <div className="min-w-0">
-                <dt className="type-label text-on-surface-variant">{fact.label}</dt>
-                <dd className="type-title-sm mt-space-xs text-primary">{fact.value}</dd>
+                <dt className="type-label text-[#C0C9BE]">{fact.label}</dt>
+                <dd className="type-title-sm mt-space-xs text-[#F4F2E9]">{fact.value}</dd>
               </div>
             </div>
           );
         })}
       </dl>
-    </Card>
+    </div>
   );
 }

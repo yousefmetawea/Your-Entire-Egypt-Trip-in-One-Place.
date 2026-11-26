@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import {
   closestCenter,
@@ -28,6 +29,8 @@ import { BuilderSummary } from './BuilderSummary';
 import { BuilderTitleDialog } from './BuilderTitleDialog';
 import { DayTabs } from './DayTabs';
 import { TripBackdrop } from './TripBackdrop';
+import { TripRoutePanel } from './TripRoutePanel';
+import { TripStatsStrip } from './TripStatsStrip';
 import { DAY_DROP_PREFIX } from './dndIds';
 
 export interface ItineraryBuilderProps {
@@ -59,6 +62,7 @@ type PendingRemoval =
 
 export function ItineraryBuilder({ trip: initialTrip, places }: ItineraryBuilderProps) {
   const { t } = useTranslation();
+  const reduceMotion = useReducedMotion();
   const editor = useTripEditor(initialTrip);
   const trip = editor.trip;
   const [selectedDayId, setSelectedDayId] = useState(initialTrip.days[0]?.id ?? '');
@@ -234,16 +238,31 @@ export function ItineraryBuilder({ trip: initialTrip, places }: ItineraryBuilder
     >
       <TripBackdrop />
       <Container>
-        <BuilderHeader
-          trip={trip}
-          canUndo={editor.canUndo}
-          canRedo={editor.canRedo}
-          saveStatus={editor.saveStatus}
-          onRetrySave={editor.retrySave}
-          onUndo={editor.undo}
-          onRedo={editor.redo}
-          onEditTitle={() => setTitleOpen(true)}
-        />
+        <div className="grid grid-cols-1 items-end gap-space-xl lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <BuilderHeader
+              trip={trip}
+              canUndo={editor.canUndo}
+              canRedo={editor.canRedo}
+              saveStatus={editor.saveStatus}
+              onRetrySave={editor.retrySave}
+              onUndo={editor.undo}
+              onRedo={editor.redo}
+              onEditTitle={() => setTitleOpen(true)}
+            />
+          </div>
+          <div className="lg:col-span-5">
+            <TripRoutePanel
+              trip={trip}
+              placesById={placesById}
+              dayIndex={Math.max(0, selectedDayNumber - 1)}
+            />
+          </div>
+        </div>
+
+        <div className="mt-space-xl">
+          <TripStatsStrip summary={summary} dayCount={trip.days.length} />
+        </div>
 
         <DndContext
           sensors={sensors}
@@ -266,7 +285,13 @@ export function ItineraryBuilder({ trip: initialTrip, places }: ItineraryBuilder
 
           {selectedDay ? (
             <div className="mt-space-lg grid grid-cols-1 items-start gap-gutter-lg lg:grid-cols-12">
-              <div className="lg:col-span-7 xl:col-span-7">
+              <motion.div
+                key={selectedDay.id}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="lg:col-span-7"
+              >
                 <BuilderDayPanel
                   day={selectedDay}
                   dayNumber={selectedDayNumber}
@@ -277,18 +302,21 @@ export function ItineraryBuilder({ trip: initialTrip, places }: ItineraryBuilder
                   onMoveActivity={editor.moveActivity}
                   onRequestRemoveActivity={handleRequestRemoveActivity}
                 />
-              </div>
+              </motion.div>
 
-              <div className="flex flex-col gap-gutter-lg lg:col-span-5 xl:col-span-5">
+              <div className="lg:sticky lg:top-28 lg:col-span-5">
                 <BuilderMap
                   day={selectedDay}
                   dayNumber={selectedDayNumber}
                   placesById={placesById}
                 />
-                <BuilderSummary trip={trip} summary={summary} />
               </div>
             </div>
           ) : null}
+
+          <div className="mt-space-xl">
+            <BuilderSummary trip={trip} summary={summary} />
+          </div>
         </DndContext>
       </Container>
 

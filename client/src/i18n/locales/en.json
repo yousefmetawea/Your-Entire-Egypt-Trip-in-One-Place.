@@ -291,7 +291,8 @@
       "errorDescription": "Please try again. No place data has been changed.",
       "retry": "Retry",
       "emptyTitle": "No nearby places to show yet.",
-      "emptyDescription": "Related places have not been added to the catalog yet."
+      "emptyDescription": "Related places have not been added to the catalog yet.",
+      "moreInArea": "More in {{area}}: nothing is within walking distance of this visit, so here are other places in the same area."
     },
     "tips": {
       "eyebrow": "Good to know",
@@ -711,6 +712,11 @@
         "descriptionWithActivities_one": "Day {{day}} has {{count}} activity. Removing the day will remove it too. You can undo this change.",
         "descriptionWithActivities_other": "Day {{day}} has {{count}} activities. Removing the day will remove them too. You can undo this change.",
         "action": "Remove last day"
+      },
+      "routePanel": {
+        "title": "Your route",
+        "count_one": "{{count}} city",
+        "count_other": "{{count}} cities"
       }
     },
     "summary": {

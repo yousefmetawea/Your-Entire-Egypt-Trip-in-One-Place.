@@ -1,3 +1,4 @@
+import { getAreaLabelKey } from '../../lib/catalog';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Place } from '../../types';
@@ -16,7 +17,7 @@ export interface NearbyPlacesProps {
 export function NearbyPlaces({ place }: NearbyPlacesProps) {
   const { t } = useTranslation();
   const headingId = useId();
-  const { placesWithDistance, status, retry } = useNearbyPlaces(place);
+  const { placesWithDistance, areaPlaces, status, retry } = useNearbyPlaces(place);
 
   return (
     <section aria-labelledby={headingId}>
@@ -51,6 +52,19 @@ export function NearbyPlaces({ place }: NearbyPlacesProps) {
               </Button>
             }
           />
+        ) : placesWithDistance.length === 0 && areaPlaces.length > 0 ? (
+          <div className="flex flex-col gap-space-md">
+            <p className="type-small text-on-surface-variant">
+              {t('placeDetails.nearby.moreInArea', {
+                area: t(getAreaLabelKey(place.area)),
+              })}
+            </p>
+            <div className="grid grid-cols-1 gap-gutter-lg sm:grid-cols-2 xl:grid-cols-3">
+              {areaPlaces.map((other) => (
+                <PlaceCard key={other.id} place={other} />
+              ))}
+            </div>
+          </div>
         ) : placesWithDistance.length === 0 ? (
           <EmptyState
             title={t('placeDetails.nearby.emptyTitle')}

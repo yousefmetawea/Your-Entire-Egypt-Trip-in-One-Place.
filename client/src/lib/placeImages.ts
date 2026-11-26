@@ -50,7 +50,7 @@ export const PLACE_LOCAL_IMAGES: Record<string, string> = {
   'cairo-opera-house': '/images/places/cairo-opera-house.jpg',
   'cairo-tower': '/images/places/cairo-tower.jpg',
   'babylon-fortress': '/images/places/babylon-fortress.jpg',
-  'nilometer': '/images/places/nilometer.jpg',
+  nilometer: '/images/places/nilometer.jpg',
   'karnak-temple': '/images/places/karnak-temple.jpg',
   'valley-of-the-kings': '/images/places/valley-of-the-kings.jpg',
   'luxor-temple': '/images/places/luxor-temple.jpg',
@@ -107,4 +107,21 @@ export function getPlaceImageSources(
     primary: remoteSrc || '/images/placeholder.svg',
     fallback: '/images/placeholder.svg',
   };
+}
+
+/**
+ * Images for the details page. The seeded remote photo is replaced by the
+ * bundled local photo for the same place when we have one (several seeded
+ * remote URLs show the wrong landmark). The remote credit is dropped with it.
+ */
+export function getPlaceGalleryImages<
+  T extends { src: string; credit?: string; license?: string; sourceUrl?: string },
+>(place: PlaceImageSourceInput, images: readonly T[]): T[] {
+  const { primary } = getPlaceImageSources(place, images[0]?.src);
+  if (!images[0] || primary === images[0].src) return [...images];
+  const [first, ...rest] = images;
+  return [
+    { ...first, src: primary, credit: undefined, license: undefined, sourceUrl: undefined },
+    ...rest,
+  ];
 }
