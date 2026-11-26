@@ -777,6 +777,9 @@
     "hoursMinutes": "{{hours}} hr {{minutes}} min"
   },
   "footer": {
+    "headline": "Egypt, your way.",
+    "cta": "Plan my trip",
+    "ghost": "Egypt",
     "description": "Discover places, shape a thoughtful itinerary, and keep the details of your Egypt trip together.",
     "note": "No live bookings",
     "legal": "© 2026 YourTrip. Transparent guidance; estimated prices.",
