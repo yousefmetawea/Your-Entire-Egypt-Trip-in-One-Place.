@@ -21,6 +21,7 @@ export interface ItineraryMapProps {
   hoveredStopId?: string | null;
   onSelectStop?: (stopId: string) => void;
   onHoverStop?: (stopId: string | null) => void;
+  routeColor?: string;
 }
 
 export function ItineraryMap({
@@ -31,6 +32,7 @@ export function ItineraryMap({
   hoveredStopId: externalHoveredId,
   onSelectStop: externalOnSelect,
   onHoverStop: externalOnHover,
+  routeColor,
 }: ItineraryMapProps) {
   const { t } = useTranslation();
   const [internalSelectedId, setInternalSelectedId] = useState<string | null>(null);
@@ -126,7 +128,7 @@ export function ItineraryMap({
             >
               <LuxuryTileLayer />
               <MapBoundsFitter stops={mappedStops} />
-              <RoutePolyline stops={mappedStops} />
+              <RoutePolyline stops={mappedStops} color={routeColor} />
               <StopMarkers
                 stops={mappedStops}
                 selectedStopId={selectedStopId}

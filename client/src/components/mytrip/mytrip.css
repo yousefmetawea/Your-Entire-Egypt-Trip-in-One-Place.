@@ -1,0 +1,63 @@
+/* Scoped to the My Trip page only. */
+.yt-trip {
+  --yt-forest: #101c15;
+  --yt-ivory: #eae9df;
+  --yt-sage: #d1d8c5;
+  --yt-lime: #b6ce67;
+  --yt-green: #193426;
+  --yt-ink-2: #536255;
+  --yt-on-dark: #f4f2e9;
+  --yt-on-dark-2: #c0c9be;
+  background: var(--yt-ivory);
+  color: var(--yt-green);
+  overflow-x: clip;
+}
+.yt-trip :focus-visible {
+  outline: 2px solid var(--yt-green);
+  outline-offset: 3px;
+}
+.yt-trip .yt-dark :focus-visible {
+  outline-color: var(--yt-lime);
+}
+.yt-noscroll {
+  scrollbar-width: none;
+}
+.yt-noscroll::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes yt-trip-clip {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+.yt-trip-clip {
+  animation: yt-trip-clip 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .yt-trip-clip {
+    animation: none;
+  }
+}
+
+/* Journey map: restyle existing luxury markers to the page palette (scoped). */
+.yt-trip .luxury-marker-pin {
+  background: var(--yt-green) !important;
+  border-color: var(--yt-ivory) !important;
+  color: var(--yt-on-dark) !important;
+}
+.yt-trip .luxury-marker-container.is-selected .luxury-marker-pin {
+  background: var(--yt-lime) !important;
+  color: var(--yt-green) !important;
+  border-color: var(--yt-green) !important;
+}
+.yt-trip .luxury-marker-container.is-selected .luxury-marker-order,
+.yt-trip .luxury-marker-container.is-selected .luxury-marker-category {
+  color: var(--yt-green) !important;
+}
+.yt-trip .luxury-marker-order {
+  color: var(--yt-on-dark) !important;
+}
