@@ -1,17 +1,24 @@
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useMyTripDashboard } from '../hooks/useMyTripDashboard';
-import { TripHero } from '../components/dashboard/TripHero';
-import { TodayItinerary } from '../components/dashboard/TodayItinerary';
-import { DashboardStay } from '../components/dashboard/DashboardStay';
-import { DashboardRequests } from '../components/dashboard/DashboardRequests';
-import { BudgetDonut } from '../components/dashboard/BudgetDonut';
-import { SavedPlacesGrid } from '../components/dashboard/SavedPlacesGrid';
 import { DashboardEmptyState } from '../components/dashboard/DashboardEmptyState';
 import { DashboardSkeleton } from '../components/dashboard/DashboardSkeleton';
 import { Button } from '../components/ui/Button';
+import { TripHero } from '../components/mytrip/TripHero';
+import { TripOverview } from '../components/mytrip/TripOverview';
+import { ItinerarySection } from '../components/mytrip/ItinerarySection';
+import { BudgetOverview } from '../components/mytrip/BudgetOverview';
+import { StaySection } from '../components/mytrip/StaySection';
+import { TransportSection } from '../components/mytrip/TransportSection';
+import { SavedPlaces } from '../components/mytrip/SavedPlaces';
+import { JourneyStory } from '../components/mytrip/JourneyStory';
+import '../components/mytrip/mytrip.css';
+import { computeTripStats, countTransfers, pickHeroPlace } from '../lib/mytrip/summary';
 
 export default function MyTripPage() {
   usePageTitle();
+  const { t } = useTranslation();
 
   const {
     trips,
@@ -35,13 +42,24 @@ export default function MyTripPage() {
     dismissNotice,
   } = useMyTripDashboard();
 
+  const placesById = useMemo(() => new Map(places.map((p) => [p.id, p] as const)), [places]);
+  const stats = useMemo(() => (activeTrip ? computeTripStats(activeTrip) : null), [activeTrip]);
+  const heroPlace = useMemo(
+    () => (activeTrip ? pickHeroPlace(activeTrip, placesById) : null),
+    [activeTrip, placesById],
+  );
+
   if (loading) {
-    return <DashboardSkeleton />;
+    return (
+      <div className="pt-24 md:pt-28">
+        <DashboardSkeleton />
+      </div>
+    );
   }
 
   if (error) {
     return (
-      <div className="w-full max-w-[1440px] mx-auto px-gutter-sm md:px-margin-md lg:px-margin-lg py-space-2xl">
+      <div className="w-full max-w-[1440px] mx-auto px-gutter-sm md:px-margin-md lg:px-margin-lg py-space-2xl pt-32">
         <div className="max-w-xl mx-auto p-space-xl rounded-[24px] bg-surface-container-lowest border border-danger/30 text-center flex flex-col items-center justify-center gap-space-md shadow-sm">
           <span className="type-label-sm uppercase tracking-widest text-danger font-semibold">
             Unable to Load Dashboard
@@ -62,65 +80,79 @@ export default function MyTripPage() {
   }
 
   if (!activeTrip || !tripPhaseInfo) {
-    return <DashboardEmptyState />;
+    return (
+      <div className="pt-24 md:pt-28">
+        <DashboardEmptyState />
+      </div>
+    );
   }
 
-  return (
-    <div className="w-full max-w-[1440px] mx-auto px-gutter-sm md:px-margin-md lg:px-margin-lg py-space-lg flex flex-col gap-space-lg min-h-screen">
-      {/* Action Notification Toast / Notice */}
-      {actionNotice && (
-        <aside
-          role="status"
-          aria-live="polite"
-          className="flex items-center justify-between p-space-sm px-space-md rounded-xl bg-secondary-container/40 border border-secondary/30 text-on-surface text-xs"
-        >
-          <span>{actionNotice}</span>
-          <button
-            type="button"
-            onClick={dismissNotice}
-            className="text-secondary hover:text-primary type-label-sm uppercase tracking-wider ms-4"
-          >
-            Dismiss
-          </button>
-        </aside>
-      )}
+  if (!stats) return null;
 
-      {/* Top Dossier Header & Countdown Hero */}
+  return (
+    <div className="yt-trip min-h-screen">
       <TripHero
         trip={activeTrip}
         trips={trips}
         tripPhaseInfo={tripPhaseInfo}
+        heroPlace={heroPlace}
+        placesById={placesById}
+        accommodation={selectedAccommodation}
+        destinations={stats.destinations}
+        activities={stats.activities}
         onSelectTrip={selectTrip}
         onCancelTrip={cancelTrip}
         actionLoading={actionLoading}
       />
 
-      {/* Main Asymmetric Bento Workspace */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg pb-space-2xl items-start">
-        {/* Left Column: Itinerary, Accommodation, Transport (7 Cols) */}
-        <div className="lg:col-span-7 flex flex-col gap-space-lg">
-          <TodayItinerary trip={activeTrip} tripPhaseInfo={tripPhaseInfo} places={places} />
-
-          <DashboardStay accommodation={selectedAccommodation} />
-
-          <DashboardRequests
-            requests={bookingRequests}
-            onCancelRequest={cancelBookingRequest}
-            actionLoading={actionLoading}
+      <div className="relative -mt-10 rounded-t-[2.5rem] bg-(--yt-ivory) pt-14 pb-20 md:-mt-12 md:rounded-t-[3.5rem] md:pt-20 md:pb-28">
+        <div className="mx-auto flex w-full max-w-page flex-col gap-20 px-gutter-sm md:gap-28 md:px-margin-md lg:px-margin-lg">
+          {actionNotice && (
+            <aside
+              role="status"
+              aria-live="polite"
+              className="flex items-center justify-between rounded-2xl bg-(--yt-sage) px-5 py-3 text-sm"
+            >
+              <span>{actionNotice}</span>
+              <button
+                type="button"
+                onClick={dismissNotice}
+                className="ms-4 cursor-pointer text-xs font-semibold tracking-wider uppercase underline underline-offset-4"
+              >
+                {t('myTrip.dismiss')}
+              </button>
+            </aside>
+          )}
+          <TripOverview
+            stats={stats}
+            budget={budgetAnalytics}
+            accommodation={selectedAccommodation}
+            transfers={countTransfers(bookingRequests)}
           />
-        </div>
-
-        {/* Right Column: Financial Analytics & Saved Places (5 Cols) */}
-        <div className="lg:col-span-5 flex flex-col gap-space-lg">
-          <BudgetDonut analytics={budgetAnalytics} />
-
-          <SavedPlacesGrid
-            places={savedPlaces}
-            onRemoveSavedPlace={removeSavedPlace}
-            actionLoading={actionLoading}
+          <ItinerarySection
+            key={activeTrip.id}
+            trip={activeTrip}
+            tripPhaseInfo={tripPhaseInfo}
+            placesById={placesById}
           />
         </div>
       </div>
+
+      <BudgetOverview analytics={budgetAnalytics} />
+      <StaySection trip={activeTrip} accommodation={selectedAccommodation} />
+      <TransportSection
+        requests={bookingRequests}
+        onCancelRequest={cancelBookingRequest}
+        actionLoading={actionLoading}
+      />
+      <SavedPlaces places={savedPlaces} onRemove={removeSavedPlace} actionLoading={actionLoading} />
+      <JourneyStory
+        trip={activeTrip}
+        tripPhaseInfo={tripPhaseInfo}
+        placesById={placesById}
+        stats={stats}
+        budget={budgetAnalytics}
+      />
     </div>
   );
 }

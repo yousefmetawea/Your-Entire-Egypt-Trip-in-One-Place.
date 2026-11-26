@@ -28,7 +28,7 @@ export function SiteLayout() {
   const { pathname } = useLocation();
   const reduceMotion = useReducedMotion();
   const isHome = pathname === '/';
-  const isDiscover = pathname === '/discover';
+  const isDiscover = pathname === '/discover' || pathname === '/my-trip';
   const { user, logout } = useAuth();
 
   const links = [
