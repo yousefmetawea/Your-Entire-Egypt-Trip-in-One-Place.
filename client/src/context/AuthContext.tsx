@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import type { User } from '../types';
 import { apiClient } from '../services/api/apiClient';
+import { dataSource } from '../services';
+import { createMockAuth } from '../services/mock/auth';
 import { AuthContext } from './useAuth';
+
+// With the mock data source there is no backend: sign-in is handled in the browser (demo only).
+const mockAuth = dataSource === 'mock' ? createMockAuth() : null;
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -11,8 +16,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     let mounted = true;
     void (async () => {
       try {
-        const res = await apiClient<{ user: User }>('/auth/me');
-        if (mounted) setUser(res.user);
+        const next = mockAuth
+          ? await mockAuth.me()
+          : (await apiClient<{ user: User }>('/auth/me')).user;
+        if (mounted) setUser(next);
       } catch {
         if (mounted) setUser(null);
       } finally {
@@ -26,6 +33,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = async (email: string, password: string): Promise<void> => {
+    if (mockAuth) {
+      setUser(await mockAuth.login(email, password));
+      return;
+    }
     const res = await apiClient<{ user: User }>('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
@@ -34,6 +45,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const register = async (name: string, email: string, password: string): Promise<void> => {
+    if (mockAuth) {
+      setUser(await mockAuth.register(name, email, password));
+      return;
+    }
     const res = await apiClient<{ user: User }>('/auth/register', {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
@@ -43,7 +58,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async (): Promise<void> => {
     try {
-      await apiClient('/auth/logout', { method: 'POST' });
+      if (mockAuth) await mockAuth.logout();
+      else await apiClient('/auth/logout', { method: 'POST' });
     } finally {
       setUser(null);
     }
