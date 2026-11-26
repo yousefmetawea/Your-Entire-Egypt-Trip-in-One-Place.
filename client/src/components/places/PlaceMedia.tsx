@@ -9,6 +9,7 @@ export interface PlaceMediaProps {
   priority?: boolean;
   sizes?: string;
   className?: string;
+  imgClassName?: string;
 }
 
 const categoryTones: Record<PlaceCategory, string> = {
@@ -18,7 +19,13 @@ const categoryTones: Record<PlaceCategory, string> = {
   food: 'from-primary-container via-tertiary-container to-secondary-fixed',
 };
 
-export function PlaceMedia({ place, priority = false, sizes, className }: PlaceMediaProps) {
+export function PlaceMedia({
+  place,
+  priority = false,
+  sizes,
+  className,
+  imgClassName,
+}: PlaceMediaProps) {
   const image = place.images[0];
   const { primary, fallback } = getPlaceImageSources(place, image?.src);
   const [currentSrc, setCurrentSrc] = useState(primary || fallback);
@@ -56,7 +63,10 @@ export function PlaceMedia({ place, priority = false, sizes, className }: PlaceM
           fetchPriority={priority ? 'high' : 'auto'}
           decoding="async"
           onError={handleError}
-          className="size-full object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
+          className={cn(
+            'size-full object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]',
+            imgClassName,
+          )}
         />
       ) : (
         <div className="absolute inset-0" aria-hidden="true">

@@ -168,6 +168,16 @@
       "clear": "Clear filters",
       "catalogEmptyTitle": "The catalog is empty.",
       "catalogEmptyDescription": "No places are available right now."
+    },
+    "hero": {
+      "location": "Egypt",
+      "countLabel": "{{count}} places",
+      "featuredLabel": "Featured destinations",
+      "scroll": "Scroll to explore"
+    },
+    "toolbar": {
+      "active": "Active filters: {{count}}",
+      "none": "No filters applied"
     }
   },
   "place": {

@@ -168,6 +168,16 @@
       "clear": "مسح الفلاتر",
       "catalogEmptyTitle": "الدليل فارغ حالياً.",
       "catalogEmptyDescription": "لا توجد معالم متاحة للعرض في الوقت الراهن."
+    },
+    "hero": {
+      "location": "مصر",
+      "countLabel": "{{count}} مكان",
+      "featuredLabel": "وجهات مميزة",
+      "scroll": "مرر للاستكشاف"
+    },
+    "toolbar": {
+      "active": "فلاتر نشطة: {{count}}",
+      "none": "بدون فلاتر"
     }
   },
   "place": {
