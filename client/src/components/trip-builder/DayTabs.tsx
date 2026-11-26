@@ -69,7 +69,7 @@ function DayTab({ day, index, selected, onSelect, onKeyDown, buttonRef, isDraggi
             selected ? 'text-on-secondary/80' : 'text-on-surface-variant',
           )}
         >
-          {date}
+          <bdi>{date}</bdi>
         </span>
       </span>
       <span

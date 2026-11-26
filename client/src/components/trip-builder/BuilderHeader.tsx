@@ -108,15 +108,19 @@ export function BuilderHeader({
         <SaveStatus status={saveStatus} onRetry={onRetrySave} />
       </div>
 
-      <div className="mt-space-lg flex flex-wrap items-center gap-space-sm">
+      <div className="mt-space-xl flex items-center gap-space-md">
+        <p className="type-label text-secondary">{t('trip.builder.eyebrow')}</p>
+        <span className="h-px w-12 bg-secondary/50" aria-hidden="true" />
         <Badge tone="outline">{t('trip.draftBadge')}</Badge>
-        <Badge tone="bronze">{t('trip.demoBadge')}</Badge>
       </div>
-
-      <p className="type-label mt-space-md text-secondary">{t('trip.builder.eyebrow')}</p>
       <div className="mt-space-sm flex flex-wrap items-start gap-space-sm">
-        <h1 id="trip-heading" className="type-display max-w-5xl text-balance text-primary">
-          <SplitText as="span">{trip.title}</SplitText>
+        <h1
+          id="trip-heading"
+          className="type-display max-w-5xl text-balance text-primary drop-shadow-[0_2px_30px_rgba(0,0,0,0.5)]"
+        >
+          <bdi>
+            <SplitText as="span">{trip.title}</SplitText>
+          </bdi>
         </h1>
         <Button
           type="button"
@@ -130,10 +134,10 @@ export function BuilderHeader({
         </Button>
       </div>
 
-      <div className="mt-space-md flex flex-wrap items-center gap-x-space-lg gap-y-space-sm type-small text-on-surface-variant">
+      <div className="mt-space-lg flex flex-wrap items-center gap-x-space-lg gap-y-space-sm type-small text-on-surface-variant">
         <span className="inline-flex items-center gap-space-xs">
           <CalendarIcon className="size-4 text-secondary" />
-          {dateText}
+          <bdi>{dateText}</bdi>
         </span>
         <span className="inline-flex items-center gap-space-xs">
           <UsersIcon className="size-4 text-secondary" />
@@ -146,10 +150,6 @@ export function BuilderHeader({
           </span>
         ) : null}
       </div>
-
-      <p className="type-small mt-space-md max-w-3xl text-on-surface-variant">
-        {t('trip.builder.demoNote')}
-      </p>
 
       <div className="mt-space-lg flex flex-wrap items-center gap-space-sm">
         <Button

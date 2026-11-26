@@ -126,7 +126,6 @@ export function BoardingPass(props: BoardingPassProps) {
               <p className="pass-kicker">{t('planner.pass.brand')}</p>
               <h2 className="pass-title">{t('planner.pass.title')}</h2>
             </div>
-            <span className="pass-badge">{t('planner.demoBadge')}</span>
           </header>
 
           <div className="pass-route" aria-hidden="true">

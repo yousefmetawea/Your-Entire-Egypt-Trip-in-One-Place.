@@ -175,7 +175,9 @@ export default function StayTransportPage() {
       <Section
         tone="canvas"
         spacing="md"
-        className={tab === 'accommodation' && !loading && !error ? '!bg-[#070a12] !text-white' : undefined}
+        className={
+          tab === 'accommodation' && !loading && !error ? '!bg-[#070a12] !text-white' : undefined
+        }
       >
         <Container>
           {loading ? (
@@ -285,10 +287,7 @@ export default function StayTransportPage() {
                 ))}
               </div>
               <RouteMap stayLocation={stayLocation} />
-              <MyRequestsList
-                requests={requests}
-                onCancelRequest={cancelRequest}
-              />
+              <MyRequestsList requests={requests} onCancelRequest={cancelRequest} />
             </div>
           )}
         </Container>
@@ -327,7 +326,7 @@ export default function StayTransportPage() {
         open={externalUrlNotice !== null}
         onClose={() => setExternalUrlNotice(null)}
         title="External Provider Booking"
-        description="You are following an external link. In this demo experience, the link leads to an example URL."
+        description="You are following an external link. This link leads to an example URL."
         closeLabel="Cancel"
         size="sm"
         footer={

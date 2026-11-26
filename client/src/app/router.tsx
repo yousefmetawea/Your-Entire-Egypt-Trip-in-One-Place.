@@ -33,7 +33,7 @@ const routes: RouteObject[] = [
             handle: {
               title: 'Cairo & Giza travel companion',
               description:
-                'Explore the stories, landmarks, and culture that make Cairo unforgettable, with a clearly labeled demo catalog for Cairo and Giza.',
+                'Explore the stories, landmarks, and culture that make Cairo unforgettable, with a catalog of places across Cairo and Giza.',
             },
           },
           {
@@ -42,7 +42,7 @@ const routes: RouteObject[] = [
             handle: {
               title: 'Discover places',
               description:
-                'Search and filter demo places across Cairo and Giza by name, area, category, and visit length. Sample data is clearly labeled.',
+                'Search and filter places across Cairo and Giza by name, area, category, and visit length.',
             },
           },
           {
@@ -56,7 +56,7 @@ const routes: RouteObject[] = [
             handle: {
               title: 'Plan a trip',
               description:
-                'Shape a demo Cairo itinerary in six short steps, from dates and travelers to interests and preferences.',
+                'Shape a Cairo itinerary in six short steps, from dates and travelers to interests and preferences.',
             },
           },
           {
@@ -65,7 +65,7 @@ const routes: RouteObject[] = [
             handle: {
               title: 'Your trip',
               description:
-                'Edit a local demo itinerary generated from the Cairo and Giza demo catalog. Changes save in this browser; no live prices or bookings.',
+                'Edit your itinerary built from the Cairo and Giza catalog. Changes save in this browser; no live prices or bookings.',
             },
           },
           {

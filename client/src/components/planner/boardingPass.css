@@ -7,7 +7,7 @@
   padding: 1.5rem;
   background:
     radial-gradient(120% 80% at 100% 0%, rgba(189, 232, 92, 0.14), transparent 55%),
-    linear-gradient(160deg, #0f2318, #07120d 70%);
+    linear-gradient(160deg, #183a2a, #0f2a1e 70%);
   border: 1px solid rgba(189, 232, 92, 0.45);
   box-shadow:
     0 30px 60px -24px rgba(0, 0, 0, 0.8),
@@ -155,7 +155,7 @@
   min-height: 3rem;
   border-radius: 999px;
   background: #bde85c;
-  color: #07120d;
+  color: #0f2a1e;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;

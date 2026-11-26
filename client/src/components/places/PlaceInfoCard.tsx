@@ -6,7 +6,6 @@ import { getDurationLabel } from '../../lib/catalog';
 import { AddToTripButton, AddToTripFeedback } from './AddToTripButton';
 import { OpeningHours } from './OpeningHours';
 import { PriceDisplay } from './PriceDisplay';
-import { Badge } from '../ui/Badge';
 import { Card } from '../ui/Card';
 
 export interface PlaceInfoCardProps {
@@ -34,9 +33,6 @@ export function PlaceInfoCard({ place, draft }: PlaceInfoCardProps) {
             {t('placeDetails.practical.title')}
           </h2>
         </div>
-        <Badge tone="outline" size="sm">
-          {t('placeDetails.demo.badge')}
-        </Badge>
       </div>
 
       <div className="mt-space-lg space-y-space-lg">

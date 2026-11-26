@@ -19,7 +19,6 @@ export function PlaceHeader({ place, isFixture = false }: PlaceHeaderProps) {
       <div className="flex flex-wrap items-center gap-space-xs">
         <Badge tone="outline">{t(getAreaLabelKey(place.area))}</Badge>
         <Badge tone="bronze">{t(getCategoryLabelKey(place.category))}</Badge>
-        <Badge tone="dark">{t('placeDetails.demo.badge')}</Badge>
         {isFixture ? <Badge tone="danger">{t('placeDetails.demo.fixtureBadge')}</Badge> : null}
       </div>
 

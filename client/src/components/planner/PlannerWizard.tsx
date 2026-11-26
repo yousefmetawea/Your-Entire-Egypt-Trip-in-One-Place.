@@ -93,7 +93,7 @@ export function PlannerWizard() {
   return (
     <section
       aria-labelledby="planner-heading"
-      className="planner-stage relative -mt-24 min-h-[100svh] overflow-clip bg-[#07120d] text-[#eef3e8] md:-mt-28"
+      className="planner-stage relative -mt-24 min-h-[100svh] overflow-clip bg-[#0f2a1e] text-[#eef3e8] md:-mt-28"
     >
       <StageBackdrop stepIndex={stepIndex} direction={direction} />
 
@@ -181,7 +181,7 @@ export function PlannerWizard() {
           </motion.div>
         ) : null}
 
-        <div className="sticky bottom-0 z-20 -mx-5 mt-auto bg-gradient-to-t from-[#07120d] via-[#07120d] via-70% to-[#07120d]/0 px-5 pb-5 pt-10 lg:via-[#07120d]/90 lg:via-100% lg:to-transparent lg:pt-8 md:-mx-10 md:px-10">
+        <div className="sticky bottom-0 z-20 -mx-5 mt-auto bg-gradient-to-t from-[#0f2a1e] via-[#0f2a1e] via-70% to-[#0f2a1e]/0 px-5 pb-5 pt-10 lg:via-[#0f2a1e]/90 lg:via-100% lg:to-transparent lg:pt-8 md:-mx-10 md:px-10">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-4 lg:flex-nowrap lg:gap-x-8">
             <button
               type="button"
@@ -205,7 +205,7 @@ export function PlannerWizard() {
               type="button"
               onClick={handleNext}
               disabled={planner.isSubmitting}
-              className="group order-3 ms-auto inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full bg-[#bde85c] px-8 type-button font-semibold text-[#07120d] transition-[background-color,box-shadow] hover:bg-[#d2f27d] hover:shadow-[0_10px_34px_-10px_rgba(189,232,92,0.7)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c] disabled:cursor-progress disabled:opacity-60 sm:px-10 lg:ms-0"
+              className="group order-3 ms-auto inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full bg-[#bde85c] px-8 type-button font-semibold text-[#0f2a1e] transition-[background-color,box-shadow] hover:bg-[#d2f27d] hover:shadow-[0_10px_34px_-10px_rgba(189,232,92,0.7)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bde85c] disabled:cursor-progress disabled:opacity-60 sm:px-10 lg:ms-0"
             >
               {isLastStep
                 ? planner.isSubmitting

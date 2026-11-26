@@ -76,7 +76,6 @@ export function PrintTicket({ values }: { values: PlannerFormValues }) {
               <p className="pt-brand">{t('planner.pass.brand')}</p>
               <p className="pt-doc">{t('planner.pass.title')}</p>
             </div>
-            <p className="pt-demo">{t('planner.demoBadge')}</p>
           </header>
 
           <div className="pt-route">

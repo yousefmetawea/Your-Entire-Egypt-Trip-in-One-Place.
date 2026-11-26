@@ -31,9 +31,9 @@
       },
       "stats": {
         "areas": "Six areas across Cairo & Giza",
-        "places": "12 demo places",
+        "places": "12 places",
         "categories": "History, culture & adventure",
-        "labels": "Details labeled as demo"
+        "labels": "Estimated prices, clearly labeled"
       }
     },
     "chips": {
@@ -42,20 +42,20 @@
     "featured": {
       "eyebrow": "Featured places",
       "title": "Curated places to begin with",
-      "description": "A small selection of demo places across Cairo and Giza, chosen to show the range of the catalog.",
+      "description": "A small selection of places across Cairo and Giza, chosen to show the range of the catalog.",
       "action": "Explore all places",
-      "demoNote": "Sample places only. Descriptions, imagery, and visit details are being prepared.",
+      "demoNote": "Descriptions, imagery, and visit details are being prepared.",
       "loading": "Loading featured places",
       "errorTitle": "We couldn’t load the featured places.",
       "errorDescription": "Please try again. No place data has been changed.",
       "retry": "Retry",
       "emptyTitle": "Featured places are not available yet.",
-      "emptyDescription": "Explore the full demo catalog instead."
+      "emptyDescription": "Explore the full catalog instead."
     },
     "trips": {
       "eyebrow": "Ready-made journeys",
       "title": "No ready-made journeys yet.",
-      "description": "The curated trip catalog is empty in this demo. No fictional trips are shown. Explore the places catalog while verified journeys are prepared.",
+      "description": "The curated trip catalog is empty for now. No fictional trips are shown. Explore the places catalog while verified journeys are prepared.",
       "readyTitle": "Curated journeys, ready to explore.",
       "readyDescription": "Thoughtful itineraries built around the places in the catalog.",
       "explore": "Explore places",
@@ -66,7 +66,7 @@
       "retry": "Retry",
       "previous": "Previous journeys",
       "next": "Next journeys",
-      "demo": "Demo journey",
+      "demo": "Itinerary",
       "duration_one": "{{count}} day",
       "duration_other": "{{count}} days",
       "planSimilar": "Plan a similar trip"
@@ -75,13 +75,13 @@
       "eyebrow": "How it works",
       "title": "A simple way to begin.",
       "description": "Discovery is available now. Planning and booking tools are in development.",
-      "note": "Planning and booking tools are not part of this demo yet.",
+      "note": "Booking tools are not available yet.",
       "available": "Available now",
       "inDevelopment": "In development",
       "steps": {
         "explore": {
           "title": "Explore the catalog",
-          "body": "Browse demo places across Cairo and Giza, organized by area and interest."
+          "body": "Browse places across Cairo and Giza, organized by area and interest."
         },
         "refine": {
           "title": "Refine your shortlist",
@@ -100,23 +100,23 @@
     "trust": {
       "eyebrow": "Honest by design",
       "title": "Clear labels, no live-price claims.",
-      "description": "A Greater Cairo focus, with demo data labeled and future prices handled honestly.",
+      "description": "A Greater Cairo focus, with estimated prices clearly labeled.",
       "items": {
         "focus": {
           "title": "Cairo & Giza focus",
           "body": "Places are organized across six areas in Cairo and Giza."
         },
         "demo": {
-          "title": "Demo data, labeled",
-          "body": "Sample records are marked as demo; factual details are not yet supplied."
+          "title": "Honest details",
+          "body": "Details that are not yet supplied are left out rather than invented."
         },
         "prices": {
           "title": "No live-price claims",
-          "body": "No prices or availability are shown as live in this demo."
+          "body": "No prices or availability are shown as live."
         },
         "planning": {
           "title": "Planning is in development",
-          "body": "Discovery is available now; planning and booking tools are not part of this demo."
+          "body": "Discovery and planning are available now; booking tools are not."
         }
       }
     },
@@ -130,9 +130,9 @@
   "discover": {
     "eyebrow": "Explore the catalog",
     "title": "Find places worth building a trip around.",
-    "description": "Search and filter demo places across Cairo and Giza by name, area, category, and visit length.",
-    "demoBadge": "Demo catalog",
-    "demoNote": "Sample places only. Details and imagery are being prepared.",
+    "description": "Search and filter places across Cairo and Giza by name, area, category, and visit length.",
+    "demoBadge": "Catalog",
+    "demoNote": "Details and imagery are being prepared.",
     "filters": {
       "title": "Refine the catalog",
       "searchLabel": "Search places",
@@ -145,9 +145,9 @@
       "allDurations": "Any visit length",
       "clear": "Clear filters",
       "submit": "Search places",
-      "durationNote": "Visit lengths are not yet available for the demo places, so a duration filter may return no results.",
-      "resultCount_one": "Showing {{shown}} of {{total}} demo place",
-      "resultCount_other": "Showing {{shown}} of {{total}} demo places"
+      "durationNote": "Visit lengths are not yet available for these places, so a duration filter may return no results.",
+      "resultCount_one": "Showing {{shown}} of {{total}} place",
+      "resultCount_other": "Showing {{shown}} of {{total}} places"
     },
     "context": {
       "label": "Trip context",
@@ -164,14 +164,14 @@
       "errorDescription": "Please try again. No place data has been changed.",
       "retry": "Retry",
       "emptyTitle": "No places match these filters.",
-      "emptyDescription": "Try a different search or clear the filters to see the full demo catalog.",
+      "emptyDescription": "Try a different search or clear the filters to see the full catalog.",
       "clear": "Clear filters",
       "catalogEmptyTitle": "The catalog is empty.",
-      "catalogEmptyDescription": "No demo places are available right now."
+      "catalogEmptyDescription": "No places are available right now."
     }
   },
   "place": {
-    "demo": "Demo place",
+    "demo": "Place",
     "view": "View place",
     "detailsPending": "Details are being prepared for this place.",
     "durationNotListed": "Visit length not listed",
@@ -180,8 +180,8 @@
   },
   "placeDetails": {
     "meta": {
-      "title": "{{name}} · Demo place",
-      "description": "Plan a visit to {{name}} in {{area}}. Demo details include estimated prices, opening hours, and visit length; no live availability.",
+      "title": "{{name}} · Cairo & Giza",
+      "description": "Plan a visit to {{name}} in {{area}}. Details include estimated prices, opening hours, and visit length; no live availability.",
       "notFoundTitle": "Place not found",
       "errorTitle": "Place details unavailable"
     },
@@ -190,15 +190,15 @@
       "discover": "Discover"
     },
     "demo": {
-      "badge": "Demo place",
-      "note": "This is a demo place. Descriptions, prices, hours, and availability are not live.",
+      "badge": "Place",
+      "note": "Prices, hours, and availability are estimates, not live.",
       "fixtureBadge": "Dev fixture",
       "fixtureNote": "Synthetic layout fixture for development only. Content and imagery are placeholders, not real destination information."
     },
     "gallery": {
       "label": "Place gallery",
       "emptyTitle": "Imagery is being prepared.",
-      "emptyDescription": "No photographs are available for this demo place yet.",
+      "emptyDescription": "No photographs are available for this place yet.",
       "open": "Open image {{index}} of {{total}}",
       "more": "+{{count}} more",
       "credit": "Photo: {{credit}}",
@@ -246,14 +246,14 @@
       "inTrip": "Already in draft",
       "retry": "Try again",
       "error": "We couldn’t add this place. Please try again.",
-      "demoNote": "This adds the place to a local demo draft only. No booking or live availability.",
+      "demoNote": "This adds the place to a draft saved in this browser. No booking or live availability.",
       "addedNote": "Added to {{trip}} · Day {{day}}, {{date}}.",
       "addedNoteNoDate": "Added to {{trip}} · Day {{day}}.",
       "inTripNote": "Already in {{trip}} · Day {{day}}, {{date}}.",
       "inTripNoteNoDate": "Already in {{trip}} · Day {{day}}.",
-      "addedGeneric": "Added to your demo draft trip.",
-      "inTripGeneric": "Already in your demo draft trip.",
-      "createdNote": "A new demo draft trip was created for you."
+      "addedGeneric": "Added to your draft trip.",
+      "inTripGeneric": "Already in your draft trip.",
+      "createdNote": "A new draft trip was created for you."
     },
     "weekdays": {
       "monday": "Monday",
@@ -268,20 +268,20 @@
       "eyebrow": "Location",
       "title": "Where you’ll find it",
       "mapLabel": "Map preview",
-      "available": "Coordinates are recorded for this demo place.",
-      "missing": "Coordinates are not available for this demo place.",
+      "available": "Coordinates are recorded for this place.",
+      "missing": "Coordinates are not available for this place.",
       "phase": "Interactive map in a later phase"
     },
     "nearby": {
       "eyebrow": "Keep exploring",
       "title": "Nearby places",
-      "description": "Other demo places in the catalog that may pair well with this visit.",
+      "description": "Other places in the catalog that may pair well with this visit.",
       "loading": "Loading nearby places",
       "errorTitle": "We couldn’t load nearby places.",
       "errorDescription": "Please try again. No place data has been changed.",
       "retry": "Retry",
       "emptyTitle": "No nearby places to show yet.",
-      "emptyDescription": "Related places have not been added to this demo catalog yet."
+      "emptyDescription": "Related places have not been added to the catalog yet."
     },
     "tips": {
       "eyebrow": "Good to know",
@@ -289,8 +289,8 @@
     },
     "states": {
       "loading": "Loading place details",
-      "notFoundTitle": "This place is not in the demo catalog.",
-      "notFoundDescription": "The link may be outdated, or the place may not be available in this demo.",
+      "notFoundTitle": "This place is not in the catalog.",
+      "notFoundDescription": "The link may be outdated, or the place may not be available.",
       "errorTitle": "We couldn’t load this place.",
       "errorDescription": "Please try again. No place data has been changed.",
       "retry": "Retry",
@@ -302,9 +302,9 @@
     "stepLabel": "Step {{current}} of {{total}}",
     "stepEyebrow": "Step {{number}} · {{label}}",
     "title": "Shape your Cairo trip.",
-    "description": "Answer six short questions and we’ll draft a demo itinerary from the places in the catalog. Review every step before generating.",
-    "demoBadge": "Demo planner",
-    "demoNote": "Demo planning only. No live prices, availability, or bookings.",
+    "description": "Answer six short questions and we’ll draft an itinerary from the places in the catalog. Review every step before generating.",
+    "demoBadge": "Trip planner",
+    "demoNote": "Prices, availability, and bookings are not live.",
     "reset": "Start over",
     "resetTitle": "Start over?",
     "resetDescription": "This clears the answers saved in this browser and returns you to the first step. Your draft trip is not deleted.",
@@ -369,7 +369,7 @@
     },
     "travelers": {
       "title": "Who’s traveling?",
-      "description": "We’ll note the group size on the draft. It does not change the demo places yet.",
+      "description": "We’ll note the group size on the draft. It does not change the places yet.",
       "label": "Travelers",
       "hint_one": "Between 1 and {{count}} traveler.",
       "hint_other": "Between 1 and {{count}} travelers.",
@@ -398,15 +398,15 @@
     "interests": {
       "title": "What are you interested in?",
       "description": "Choose one or more themes. The draft will match places by category or tag.",
-      "foodUnavailable": "Food places aren’t available in the demo catalog yet",
+      "foodUnavailable": "Food places aren’t available in the catalog yet",
       "selectedCount_one": "{{count}} interest selected",
       "selectedCount_other": "{{count}} interests selected",
-      "note": "Food is shown for context only. No food places are available in the demo catalog yet."
+      "note": "Food is shown for context only. No food places are available in the catalog yet."
     },
     "stay": {
       "title": "Where would you like to stay?",
       "description": "This is a preference for the draft. No accommodation is booked or shown as available.",
-      "note": "Accommodation options are not in the demo catalog yet.",
+      "note": "Accommodation options are not in the catalog yet.",
       "options": {
         "any": "Any stay",
         "hotel": "Hotel",
@@ -416,7 +416,7 @@
     "transport": {
       "title": "How would you like to get around?",
       "description": "This is a preference for the draft. No transport is booked or shown as available.",
-      "note": "Transport options are not in the demo catalog yet.",
+      "note": "Transport options are not in the catalog yet.",
       "options": {
         "any": "Any transport",
         "transfer": "Airport transfer",
@@ -428,7 +428,7 @@
     "summary": {
       "eyebrow": "Your choices",
       "title": "Trip summary",
-      "description": "Review the answers before generating a demo itinerary.",
+      "description": "Review the answers before generating an itinerary.",
       "datesLabel": "Dates",
       "travelersLabel": "Travelers",
       "budgetLabel": "Budget",
@@ -447,21 +447,21 @@
       "savedPlacesHint_other": "{{count}} saved places will be included if they fit the trip.",
       "savedPlacesExcluded": "Saved places will not be included.",
       "savedPlacesEmpty": "No saved places yet. You can add places from Discover.",
-      "generatedDraft": "Generating will replace the itinerary in your current demo draft.",
-      "existingDraft": "Generating will replace the itinerary in your existing demo draft. Your draft title is kept.",
-      "noMatches": "No demo places match these interests yet. Try another interest or add places to your draft.",
+      "generatedDraft": "Generating will replace the itinerary in your current draft.",
+      "existingDraft": "Generating will replace the itinerary in your existing draft. Your draft title is kept.",
+      "noMatches": "No places match these interests yet. Try another interest or add places to your draft.",
       "error": "We couldn’t generate the itinerary. Please try again. Your answers are saved.",
-      "demoNote": "Demo itinerary only. Place details, prices, and travel times are not live.",
+      "demoNote": "Place details, prices, and travel times are estimates, not live.",
       "generate": "Generate itinerary",
       "regenerate": "Regenerate itinerary",
       "generating": "Generating itinerary…",
       "saveNote": "Your answers are saved in this browser.",
       "confirmTitle": "Replace your draft itinerary?",
-      "confirmDescription": "Your existing demo draft will be updated with a new itinerary. The draft title stays. Saved places follow your Include saved places choice.",
+      "confirmDescription": "Your existing draft will be updated with a new itinerary. The draft title stays. Saved places follow your Include saved places choice.",
       "confirmAction": "Replace itinerary",
       "confirmCancel": "Cancel",
       "confirmGeneratedTitle": "Replace your generated itinerary?",
-      "confirmGeneratedDescription": "This will regenerate the itinerary in your current demo draft. The draft title stays. Saved places follow your Include saved places choice.",
+      "confirmGeneratedDescription": "This will regenerate the itinerary in your current draft. The draft title stays. Saved places follow your Include saved places choice.",
       "confirmGeneratedAction": "Regenerate itinerary"
     },
     "navigation": {
@@ -485,19 +485,19 @@
       "print": "Print",
       "download": "Download PDF",
       "fileName": "boarding-pass",
-      "demoTicket": "Demo ticket. Not a booking.",
+      "demoTicket": "Not a booking.",
       "routeFrom": "From",
       "routeTo": "To",
       "depart": "Departure",
       "return": "Return",
-      "ref": "Demo reference",
+      "ref": "Reference",
       "issued": "Issued"
     },
     "stage": {
       "title": "Route preview",
       "mapLabel": "Map of Egypt. Route: {{route}}",
       "routeLabel": "Route",
-      "hint": "Cities with places that match your interests in the demo catalog. A preview, not the final itinerary.",
+      "hint": "Cities with places that match your interests in the catalog. A preview, not the final itinerary.",
       "hintEmpty": "Choose your interests and the route will grow from Cairo.",
       "cities": {
         "cairo": "Cairo & Giza",
@@ -513,13 +513,13 @@
   },
   "trip": {
     "meta": {
-      "title": "{{title}} · Demo itinerary",
-      "description": "Edit a local demo itinerary for {{title}}, built from the Cairo and Giza demo catalog. Changes save in this browser; no live prices, availability, or bookings."
+      "title": "{{title}} · Your itinerary",
+      "description": "Shape your itinerary for {{title}}: reorder stops, adjust times and see the route and estimated costs. Changes save in this browser."
     },
     "eyebrow": "Your itinerary",
-    "demoBadge": "Demo itinerary",
+    "demoBadge": "Itinerary draft",
     "draftBadge": "Draft",
-    "demoNote": "This itinerary is a local demo draft. Place details, prices, and travel times are not live.",
+    "demoNote": "Prices and travel times are estimates, not live.",
     "backToPlanner": "Back to planner",
     "breadcrumbLabel": "Breadcrumb",
     "dateRange": "{{from}} – {{to}}",
@@ -530,10 +530,10 @@
     "days": {
       "dayLabel": "Day {{number}}",
       "emptyTitle": "A free day",
-      "emptyDescription": "No demo places are scheduled for this day yet.",
+      "emptyDescription": "No places are scheduled for this day yet.",
       "activitiesLabel": "Activities for {{date}}",
       "noDaysTitle": "This itinerary has no days yet.",
-      "noDaysDescription": "Return to the planner to generate a demo itinerary."
+      "noDaysDescription": "Return to the planner to create an itinerary."
     },
     "activity": {
       "customActivity": "Custom activity",
@@ -551,11 +551,11 @@
     },
     "builder": {
       "eyebrow": "Build your itinerary",
-      "demoNote": "This is a local demo draft. Changes save in this browser. Prices, travel times, availability, and bookings are not live.",
+      "demoNote": "Changes save in this browser. Prices and travel times are estimates, not live.",
       "editTitle": "Edit title",
       "titleDialog": {
         "title": "Rename this itinerary",
-        "description": "Update the demo draft title. This does not change the itinerary itself.",
+        "description": "Update the trip title. This does not change the itinerary itself.",
         "label": "Itinerary title",
         "required": "Enter an itinerary title.",
         "tooLong": "Use 120 characters or fewer.",
@@ -581,7 +581,7 @@
         "removeLastDay": "Remove last day",
         "dragHint": "Drag activities to reorder them, or drop one on a day tab to move it. You can also change its day in the edit form.",
         "dropHint": "Drop on a day tab to move this activity there.",
-        "dayLimit": "This demo itinerary is limited to 14 days."
+        "dayLimit": "An itinerary can have up to 14 days."
       },
       "dayPanel": {
         "description": "Reorder stops, adjust times, or add a catalog place or custom activity.",
@@ -614,10 +614,10 @@
         "day": "Day",
         "moveHint": "Choosing another day appends this activity to the end of that day.",
         "notes": "Notes",
-        "notesPlaceholder": "Optional notes for this demo itinerary",
+        "notesPlaceholder": "Optional notes for this itinerary",
         "customPriceNote": "Stored as your own estimate and dated today. This is not a live price.",
         "placePriceLabel": "Estimated price",
-        "placePriceNote": "Catalog prices are read-only here. Only stored demo data is shown.",
+        "placePriceNote": "Catalog prices are read-only here. They are estimates.",
         "priceMissing": "Estimated price is not listed."
       },
       "editForm": {
@@ -671,7 +671,7 @@
         "noCosts": "No estimated activity costs have been added yet.",
         "unpriced_one": "{{count}} activity has no estimated price.",
         "unpriced_other": "{{count}} activities have no estimated price.",
-        "costNote": "Costs are grouped by currency and are not converted. These are stored demo estimates, not live prices.",
+        "costNote": "Costs are grouped by currency and are not converted. They are estimates, not live prices.",
         "budgetTitle": "Budget check",
         "budgetPreference": "Budget preference: {{tier}}.",
         "budgetPreferenceMissing": "No budget preference has been set.",
@@ -687,8 +687,8 @@
         "missingStarts_other": "{{count}} activities have no start time.",
         "missingPrices_one": "{{count}} activity has no estimated price.",
         "missingPrices_other": "{{count}} activities have no estimated price.",
-        "stayTransport": "Stay and transport are not added to this demo itinerary yet.",
-        "demoNote": "Changes save locally in this browser. No live prices, availability, or bookings."
+        "stayTransport": "Stay and transport are not added to this itinerary yet.",
+        "demoNote": "Saved in this browser. Prices and availability are estimates, not live, and nothing is booked."
       },
       "removeActivity": {
         "title": "Remove this activity?",
@@ -730,12 +730,12 @@
       "emptyDays_other": "{{count}} days have no activities.",
       "missingTitle": "Some details are not available",
       "missingDescription": "Visit lengths, travel times, or prices are missing for some activities. They are shown as not listed rather than estimated.",
-      "demoNote": "Demo itinerary. No live prices, availability, or bookings."
+      "demoNote": "Prices are estimates, not live."
     },
     "states": {
       "loading": "Loading your itinerary",
       "notFoundTitle": "This trip is not available.",
-      "notFoundDescription": "The link may be outdated, or the trip may not exist in this local demo.",
+      "notFoundDescription": "The link may be outdated, or this trip may not exist in this browser.",
       "errorTitle": "We couldn’t load this trip.",
       "errorDescription": "Please try again. No trip data has been changed.",
       "retry": "Retry",
@@ -777,8 +777,11 @@
     "hoursMinutes": "{{hours}} hr {{minutes}} min"
   },
   "footer": {
+    "headline": "Egypt, your way.",
+    "cta": "Plan my trip",
+    "ghost": "Egypt",
     "description": "Discover places, shape a thoughtful itinerary, and keep the details of your Egypt trip together.",
-    "note": "Demo experience · No live bookings",
+    "note": "No live bookings",
     "legal": "© 2026 YourTrip. Transparent guidance; estimated prices.",
     "exploreHeading": "Explore",
     "planHeading": "Plan",
@@ -792,7 +795,7 @@
   },
   "common": {
     "loading": "Loading...",
-    "demo": "Demo",
+    "demo": "Preview",
     "close": "Close",
     "retry": "Retry"
   },

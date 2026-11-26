@@ -152,6 +152,9 @@ export function SiteLayout() {
         note={t('footer.note')}
         columns={footerColumns}
         legal={t('footer.legal')}
+        headline={t('footer.headline')}
+        cta={{ label: t('footer.cta'), href: '/plan' }}
+        ghost={t('footer.ghost')}
         linkComponent={AppLink}
       />
     </>

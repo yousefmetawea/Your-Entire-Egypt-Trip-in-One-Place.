@@ -18,7 +18,8 @@ export interface AccommodationCardProps {
   onFocusCard?: (id: string) => void;
 }
 
-type IconKey = 'wifi' | 'cup' | 'waves' | 'view' | 'leaf' | 'car' | 'key' | 'snow' | 'book' | 'spark';
+type IconKey =
+  'wifi' | 'cup' | 'waves' | 'view' | 'leaf' | 'car' | 'key' | 'snow' | 'book' | 'spark';
 
 const ICON_RULES: [RegExp, IconKey][] = [
   [/wi-?fi|internet/i, 'wifi'],
@@ -40,7 +41,9 @@ function iconFor(label: string): IconKey {
 const PATHS: Record<IconKey, ReactNode> = {
   wifi: <path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01" />,
   cup: <path d="M5 8h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8zM16 9h2a2 2 0 0 1 0 4h-2" />,
-  waves: <path d="M3 9c2.3 0 2.3 1.6 4.5 1.6S9.800 9 12 9s2.300 1.600 4.500 1.600S19 9 21 9M3 15c2.300 0 2.300 1.600 4.500 1.600S9.800 15 12 15s2.300 1.600 4.500 1.600S19 15 21 15" />,
+  waves: (
+    <path d="M3 9c2.3 0 2.3 1.6 4.5 1.6S9.800 9 12 9s2.300 1.600 4.500 1.600S19 9 21 9M3 15c2.300 0 2.300 1.600 4.500 1.600S9.800 15 12 15s2.300 1.600 4.500 1.600S19 15 21 15" />
+  ),
   view: (
     <>
       <path d="M2 12s3.500-6 10-6 10 6 10 6-3.500 6-10 6S2 12 2 12z" />

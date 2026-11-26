@@ -332,6 +332,7 @@ export function AddActivityDialog({
       description={t('trip.builder.addDialog.description', { date })}
       closeLabel={t('common.close')}
       size="md"
+      className="trip-stage"
       footer={
         <Button type="button" variant="secondary" size="sm" onClick={onClose}>
           {t('trip.builder.done')}

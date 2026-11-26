@@ -92,9 +92,6 @@ export function BuilderSummary({ trip, summary }: BuilderSummaryProps) {
             {t('trip.builder.summary.title')}
           </h2>
         </div>
-        <Badge tone="bronze" size="sm">
-          {t('trip.demoBadge')}
-        </Badge>
       </div>
 
       <dl className="grid grid-cols-2 gap-space-sm">
@@ -332,8 +329,6 @@ export function BuilderSummary({ trip, summary }: BuilderSummaryProps) {
           </div>
         </div>
       </div>
-
-      <p className="type-small text-on-surface-variant">{t('trip.builder.summary.demoNote')}</p>
     </Card>
   );
 }

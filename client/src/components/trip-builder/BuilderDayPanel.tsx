@@ -73,7 +73,9 @@ export function BuilderDayPanel({
               {t('trip.builder.dayTabs.activityCount', { count: day.activities.length })}
             </Badge>
           </div>
-          <h2 className="type-section mt-space-xs text-primary">{date}</h2>
+          <h2 className="type-section mt-space-xs text-primary">
+            <bdi>{date}</bdi>
+          </h2>
           <p className="type-small mt-space-xs max-w-xl text-on-surface-variant">
             {t('trip.builder.dayPanel.description')}
           </p>
@@ -91,12 +93,12 @@ export function BuilderDayPanel({
       </div>
 
       {hasScheduleWarning || timing.missingStartCount > 0 ? (
-        <div className="mx-space-lg mt-space-lg rounded-xl bg-secondary-fixed/30 p-space-md">
-          <p className="type-label-sm flex items-center gap-space-xs text-on-secondary-fixed-variant">
+        <div className="mx-space-lg mt-space-lg rounded-xl border border-secondary/25 bg-secondary/10 p-space-md">
+          <p className="type-label-sm flex items-center gap-space-xs text-secondary">
             <AlertTriangleIcon className="size-4 shrink-0" />
             {t('trip.builder.dayPanel.scheduleTitle')}
           </p>
-          <ul className="mt-space-xs list-disc space-y-0.5 ps-space-lg type-small text-on-secondary-fixed-variant">
+          <ul className="mt-space-xs list-disc space-y-0.5 ps-space-lg type-small text-secondary">
             {timing.missingStartCount > 0 ? (
               <li>
                 {t('trip.builder.dayPanel.missingStart', {

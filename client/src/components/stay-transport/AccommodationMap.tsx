@@ -131,7 +131,13 @@ export function AccommodationMap({
                       onClick={() => onSetAsStay(acc.id)}
                       className="mt-2 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#0a0e17] transition-colors hover:bg-[#ffb25a] disabled:bg-[#ffb25a]"
                     >
-                      {sel ? (isAr ? '✓ إقامتك' : '✓ Your stay') : isAr ? 'اجعلها إقامتي' : 'Set as my stay'}
+                      {sel
+                        ? isAr
+                          ? '✓ إقامتك'
+                          : '✓ Your stay'
+                        : isAr
+                          ? 'اجعلها إقامتي'
+                          : 'Set as my stay'}
                     </button>
                   ) : null}
                 </div>
@@ -143,7 +149,8 @@ export function AccommodationMap({
       <div className="pointer-events-none absolute inset-0 z-[500] rounded-3xl shadow-[inset_0_0_80px_rgba(5,7,13,0.65)]" />
       <div className="pointer-events-none absolute right-4 top-4 z-[600] flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3.5 py-1.5 text-xs font-medium tracking-wide text-white/85 backdrop-blur-md">
         <span className="size-1.5 rounded-full bg-[#ffb25a]" aria-hidden="true" />
-        {mapped.length} {isAr ? 'إقامة على الخريطة' : mapped.length === 1 ? 'stay on the map' : 'stays on the map'}
+        {mapped.length}{' '}
+        {isAr ? 'إقامة على الخريطة' : mapped.length === 1 ? 'stay on the map' : 'stays on the map'}
       </div>
     </div>
   );

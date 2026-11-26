@@ -37,14 +37,21 @@ export default function ResponsiveImage({
   const localPath = localFileName ? `/images/${localFileName}` : null;
 
   // Choose source: try srcOverride first, then local, then placeholder
-  const src = srcOverride ? (hasError ? '/images/placeholder.svg' : srcOverride) : (localPath && !hasError ? localPath : '/images/placeholder.svg');
-
+  const src = srcOverride
+    ? hasError
+      ? '/images/placeholder.svg'
+      : srcOverride
+    : localPath && !hasError
+      ? localPath
+      : '/images/placeholder.svg';
 
   const handleError = () => {
     if (!hasError) {
       setHasError(true);
       if (import.meta.env.DEV && placeId) {
-        console.warn(`[ResponsiveImage] Failed to load image for "${placeId}". Falling back to ${srcOverride ? 'external URL' : 'placeholder'}.'`);
+        console.warn(
+          `[ResponsiveImage] Failed to load image for "${placeId}". Falling back to ${srcOverride ? 'external URL' : 'placeholder'}.'`,
+        );
       }
     }
   };
