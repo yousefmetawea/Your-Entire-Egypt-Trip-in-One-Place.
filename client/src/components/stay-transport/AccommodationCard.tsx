@@ -142,11 +142,11 @@ export function AccommodationCard({
       onMouseEnter={() => onHover?.(accommodation.id)}
       onMouseLeave={() => onHover?.(null)}
       onClick={() => onFocusCard?.(accommodation.id)}
-      className={`group relative isolate flex h-full w-full flex-col justify-between overflow-hidden rounded-[1.75rem] bg-[#0a0e17] text-white shadow-[0_30px_60px_-34px_rgba(0,0,0,0.9)] ring-1 transition-[box-shadow,transform] duration-500 ${
+      className={`group relative isolate flex h-full w-full flex-col justify-between overflow-hidden rounded-[1.75rem] bg-[#101C15] text-white shadow-[0_30px_60px_-34px_rgba(0,0,0,0.9)] ring-1 transition-[box-shadow,transform] duration-500 ${
         featured ? 'min-h-[34rem]' : 'min-h-[22rem]'
       } ${
         isSelected
-          ? 'ring-2 ring-[#ffb25a]'
+          ? 'ring-2 ring-[#B6CE67]'
           : isFlashing
             ? 'ring-2 ring-white/80 stay-flash'
             : 'ring-white/10 hover:ring-white/30'
@@ -169,13 +169,13 @@ export function AccommodationCard({
           />
         ) : null}
       </motion.div>
-      <div className="absolute inset-0 -z-20 bg-gradient-to-t from-[#05070d] via-[#05070d]/55 to-[#05070d]/10" />
+      <div className="absolute inset-0 -z-20 bg-gradient-to-t from-[#0B1510] via-[#0B1510]/55 to-[#0B1510]/10" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:hidden"
         style={{
           background:
-            'radial-gradient(380px circle at var(--mx, 50%) var(--my, 40%), rgba(255,196,130,0.20), transparent 62%)',
+            'radial-gradient(380px circle at var(--mx, 50%) var(--my, 40%), rgba(182,206,103,0.20), transparent 62%)',
         }}
       />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
@@ -192,7 +192,7 @@ export function AccommodationCard({
         </div>
         <div className="flex items-center gap-2">
           {isSelected ? (
-            <span className="flex size-9 items-center justify-center rounded-full bg-[#ffb25a] text-sm font-bold text-black">
+            <span className="flex size-9 items-center justify-center rounded-full bg-[#B6CE67] text-sm font-bold text-[#101C15]">
               ✓
             </span>
           ) : null}
@@ -205,7 +205,7 @@ export function AccommodationCard({
                 e.stopPropagation();
                 onOpenExternalModal(accommodation.externalUrl!);
               }}
-              className="flex size-9 items-center justify-center rounded-full border border-white/25 bg-black/30 text-white/85 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="flex size-9 items-center justify-center rounded-full border border-white/25 bg-black/30 text-white/85 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white hover:text-[#101C15] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -297,8 +297,8 @@ export function AccommodationCard({
                   }}
                   className={`mt-3 w-full rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                     isSelected
-                      ? 'bg-[#ffb25a] text-black'
-                      : 'bg-white text-[#0a0e17] hover:bg-[#ffb25a]'
+                      ? 'bg-[#B6CE67] text-[#101C15]'
+                      : 'bg-white text-[#101C15] hover:bg-[#B6CE67]'
                   }`}
                 >
                   {stayLabel}

@@ -26,7 +26,7 @@ export function StatusTimeline({ history, dark = false }: StatusTimelineProps) {
         return (
           <div key={index} className="relative flex flex-col gap-0.5">
             <span
-              className={`absolute -start-[1.4375rem] top-1.5 size-2 rounded-full ${dark ? 'bg-[#ffb25a] shadow-[0_0_10px_rgba(255,178,90,0.8)]' : 'bg-secondary'}`}
+              className={`absolute -start-[1.4375rem] top-1.5 size-2 rounded-full ${dark ? 'bg-[#B6CE67] shadow-[0_0_10px_rgba(182,206,103,0.8)]' : 'bg-secondary'}`}
               aria-hidden="true"
             />
             <div className="flex items-center gap-space-xs">

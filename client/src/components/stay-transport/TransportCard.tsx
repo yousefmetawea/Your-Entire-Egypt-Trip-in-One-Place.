@@ -28,7 +28,7 @@ export function TransportCard({
   const hasAction = isInternal || !!option.externalUrl;
 
   return (
-    <article className="group relative isolate flex h-full min-h-[27rem] flex-col justify-between overflow-hidden rounded-[1.75rem] bg-[#0a0e17] text-white shadow-[0_30px_60px_-30px_rgba(5,8,16,0.7)] ring-1 ring-white/10">
+    <article className="group relative isolate flex h-full min-h-[27rem] flex-col justify-between overflow-hidden rounded-[1.75rem] bg-[#101C15] text-white shadow-[0_30px_60px_-30px_rgba(11,21,16,0.7)] ring-1 ring-white/10">
       <img
         src={TYPE_IMAGE[option.type] ?? TYPE_IMAGE.transfer}
         alt=""
@@ -36,7 +36,7 @@ export function TransportCard({
         decoding="async"
         className="absolute inset-0 -z-20 size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#070a12] via-[#070a12]/70 to-[#070a12]/5" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#101C15] via-[#101C15]/70 to-[#101C15]/5" />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
 
       <div className="flex items-start justify-between gap-3 p-5">
@@ -45,7 +45,7 @@ export function TransportCard({
         </span>
         <span className="flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-3 py-1.5 text-[0.68rem] font-medium tracking-wide text-white/85 backdrop-blur-md">
           <span
-            className={`size-1.5 rounded-full ${isInternal ? 'bg-[#ffb25a]' : 'bg-white/60'}`}
+            className={`size-1.5 rounded-full ${isInternal ? 'bg-[#B6CE67]' : 'bg-white/60'}`}
             aria-hidden
           />
           {isInternal
@@ -86,7 +86,7 @@ export function TransportCard({
               onClick={act}
               className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                 isInternal
-                  ? 'bg-white text-[#0a0e17] hover:bg-[#ffb25a]'
+                  ? 'bg-white text-[#101C15] hover:bg-[#B6CE67]'
                   : 'border border-white/40 bg-white/5 text-white backdrop-blur-md hover:bg-white/15'
               }`}
             >

@@ -9,7 +9,7 @@ import type { RouteLeg, RouteMode, RouteCity } from './route-data';
 import '../../styles/map.css';
 import '../../styles/stay-map.css';
 
-const COLOR: Record<RouteMode, string> = { flight: '#ffb25a', train: '#6db3ff', bus: '#5fd4a0' };
+const COLOR: Record<RouteMode, string> = { flight: '#B6CE67', train: '#6db3ff', bus: '#5fd4a0' };
 
 const ICON_PATH: Record<RouteMode, string> = {
   flight:
@@ -291,13 +291,13 @@ export function RouteMap({ stayLocation }: { stayLocation: { lat: number; lng: n
   return (
     <div
       ref={holder}
-      className="relative isolate overflow-hidden rounded-[2rem] bg-[#070a12] p-5 text-white shadow-[0_40px_80px_-40px_rgba(0,0,0,0.9)] ring-1 ring-white/10 md:p-8"
+      className="relative isolate overflow-hidden rounded-[2rem] bg-[#101C15] p-5 text-white shadow-[0_40px_80px_-40px_rgba(0,0,0,0.9)] ring-1 ring-white/10 md:p-8"
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(600px_280px_at_80%_0%,rgba(255,170,80,0.14),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(600px_280px_at_80%_0%,rgba(182,206,103,0.14),transparent_70%)]" />
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div className="flex flex-col gap-2">
-          <span className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#ffb25a]">
-            <span className="h-px w-10 bg-[#ffb25a]" />
+          <span className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#B6CE67]">
+            <span className="h-px w-10 bg-[#B6CE67]" />
             {copy.eyebrow}
           </span>
           <h3 className="text-3xl font-semibold leading-tight md:text-4xl">{copy.title}</h3>
@@ -314,7 +314,7 @@ export function RouteMap({ stayLocation }: { stayLocation: { lat: number; lng: n
                 setPlaying(true);
               }
             }}
-            className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0e17] transition-colors hover:bg-[#ffb25a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#101C15] transition-colors hover:bg-[#B6CE67] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             <svg
               viewBox="0 0 24 24"
@@ -329,7 +329,7 @@ export function RouteMap({ stayLocation }: { stayLocation: { lat: number; lng: n
       </div>
 
       <div
-        className="stay-map relative isolate h-[26rem] overflow-hidden rounded-3xl bg-[#0a0e17] ring-1 ring-white/10 md:h-[30rem]"
+        className="stay-map relative isolate h-[26rem] overflow-hidden rounded-3xl bg-[#101C15] ring-1 ring-white/10 md:h-[30rem]"
         dir="ltr"
       >
         <MapContainer
@@ -357,15 +357,15 @@ export function RouteMap({ stayLocation }: { stayLocation: { lat: number; lng: n
             onHover={setHover}
           />
         </MapContainer>
-        <div className="pointer-events-none absolute inset-0 z-[500] rounded-3xl shadow-[inset_0_0_80px_rgba(5,7,13,0.65)]" />
+        <div className="pointer-events-none absolute inset-0 z-[500] rounded-3xl shadow-[inset_0_0_80px_rgba(11,21,16,0.65)]" />
 
         {leg ? (
           <div
             dir={isAr ? 'rtl' : 'ltr'}
-            className="absolute bottom-4 left-4 right-4 z-[700] flex items-center gap-4 rounded-2xl border border-white/15 bg-[#0a0e17]/80 p-4 backdrop-blur-xl sm:right-auto sm:max-w-sm"
+            className="absolute bottom-4 left-4 right-4 z-[700] flex items-center gap-4 rounded-2xl border border-white/15 bg-[#101C15]/80 p-4 backdrop-blur-xl sm:right-auto sm:max-w-sm"
           >
             <span
-              className="flex size-11 shrink-0 items-center justify-center rounded-full text-[#070a12]"
+              className="flex size-11 shrink-0 items-center justify-center rounded-full text-[#101C15]"
               style={{ background: COLOR[leg.mode] }}
             >
               <ModeIcon mode={leg.mode} className="size-5" />
@@ -388,7 +388,7 @@ export function RouteMap({ stayLocation }: { stayLocation: { lat: number; lng: n
                 setActive(null);
               }}
               aria-label={copy.close}
-              className="flex size-8 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors hover:bg-white hover:text-black"
+              className="flex size-8 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors hover:bg-white hover:text-[#101C15]"
             >
               ×
             </button>

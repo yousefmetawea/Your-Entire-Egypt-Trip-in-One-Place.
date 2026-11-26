@@ -12,32 +12,28 @@ const steps = [
     key: 'explore',
     Icon: CompassIcon,
     available: true,
-    image:
-      'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=600&q=80',
+    image: '/images/places/pyramids-of-giza.jpg',
     alt: 'Pyramids of Giza exploration',
   },
   {
     key: 'refine',
     Icon: SearchIcon,
     available: true,
-    image:
-      'https://images.unsplash.com/photo-1553913861-c0fddf2619ee?auto=format&fit=crop&w=600&q=80',
+    image: '/images/places/khan-el-khalili.jpg',
     alt: 'Khan el-Khalili bazaar curation',
   },
   {
     key: 'shape',
     Icon: RouteIcon,
     available: false,
-    image:
-      'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=600&q=80',
+    image: '/images/places/nile-felucca-sailing.jpg',
     alt: 'Nile felucca sailing and itinerary route',
   },
   {
     key: 'keep',
     Icon: MapPinIcon,
     available: false,
-    image:
-      'https://images.unsplash.com/photo-1771838877341-36157f26dd58?auto=format&fit=crop&w=600&q=80',
+    image: '/images/places/shali-fortress.jpg',
     alt: 'Siwa oasis Shali fortress retreat',
   },
 ] as const;

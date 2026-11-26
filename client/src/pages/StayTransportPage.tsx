@@ -35,12 +35,12 @@ function SectionHead({
   return (
     <Reveal className="mb-space-sm flex flex-col gap-2">
       <span
-        className={`flex items-center gap-3 type-label font-semibold uppercase tracking-[0.25em] ${dark ? 'text-[#ffb25a]' : 'text-secondary'}`}
+        className={`flex items-center gap-3 type-label font-semibold uppercase tracking-[0.25em] ${dark ? 'text-[#B6CE67]' : 'text-[#536255]'}`}
       >
-        <span className={`h-px w-10 ${dark ? 'bg-[#ffb25a]' : 'bg-secondary'}`} />
+        <span className={`h-px w-10 ${dark ? 'bg-[#B6CE67]' : 'bg-[#536255]'}`} />
         {eyebrow}
       </span>
-      <h2 className={`type-display ${dark ? 'text-white' : 'text-primary'}`}>{title}</h2>
+      <h2 className={`type-display ${dark ? 'text-white' : 'text-[#101C15]'}`}>{title}</h2>
     </Reveal>
   );
 }
@@ -141,7 +141,7 @@ export default function StayTransportPage() {
       />
 
       {/* Tab switch + ticker */}
-      <div ref={contentRef} className="relative scroll-mt-4 bg-[#070a12] pb-10">
+      <div ref={contentRef} className="relative scroll-mt-4 bg-[#101C15] pb-10">
         <div className="flex justify-center">
           <TabSwitch
             tab={tab as 'accommodation' | 'transportation'}
@@ -162,7 +162,7 @@ export default function StayTransportPage() {
             {[...copy.ticker, ...copy.ticker, ...copy.ticker, ...copy.ticker].map((w, i) => (
               <span key={i} className="flex items-center gap-12">
                 {w}
-                <span className="text-[#ffb25a]">✦</span>
+                <span className="text-[#B6CE67]">✦</span>
               </span>
             ))}
           </motion.div>
@@ -176,7 +176,9 @@ export default function StayTransportPage() {
         tone="canvas"
         spacing="md"
         className={
-          tab === 'accommodation' && !loading && !error ? '!bg-[#070a12] !text-white' : undefined
+          tab === 'accommodation' && !loading && !error
+            ? '!bg-[#101C15] !text-white'
+            : '!bg-[#EAE9DF] !text-[#101C15]'
         }
       >
         <Container>
@@ -294,8 +296,8 @@ export default function StayTransportPage() {
       </Section>
 
       {/* Closing brand band */}
-      <section className="relative overflow-hidden bg-[#070a12] py-28 text-center text-white">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_300px_at_50%_100%,rgba(255,170,80,0.22),transparent_70%)]" />
+      <section className="relative overflow-hidden bg-[#101C15] py-28 text-center text-white">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_300px_at_50%_100%,rgba(182,206,103,0.22),transparent_70%)]" />
         <Container>
           <Reveal className="relative z-10 mx-auto flex max-w-3xl flex-col items-center gap-6">
             <h2 className="text-4xl font-semibold leading-tight md:text-6xl">
@@ -305,7 +307,7 @@ export default function StayTransportPage() {
             <button
               type="button"
               onClick={() => navigate('/plan')}
-              className="rounded-full bg-gradient-to-r from-[#ffd7a0] to-[#ffb25a] px-8 py-3.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
+              className="rounded-full bg-gradient-to-r from-[#D9E6A0] to-[#B6CE67] px-8 py-3.5 text-sm font-semibold text-[#101C15] transition-transform hover:-translate-y-0.5"
             >
               {copy.closingCta}
             </button>

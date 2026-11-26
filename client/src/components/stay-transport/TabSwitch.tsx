@@ -22,7 +22,7 @@ export function TabSwitch({
     <div
       role="tablist"
       aria-label="Stay and transport categories"
-      className="inline-flex gap-1 rounded-full border border-white/10 bg-[#0d1220]/90 p-1 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+      className="inline-flex gap-1 rounded-full border border-white/10 bg-[#101C15]/90 p-1 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] backdrop-blur-xl"
     >
       {items.map((it) => {
         const active = tab === it.id;
@@ -36,13 +36,13 @@ export function TabSwitch({
             tabIndex={active ? 0 : -1}
             onClick={() => onChange(it.id)}
             className={`relative flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition-colors ${
-              active ? 'text-black' : 'text-white/70 hover:text-white'
+              active ? 'text-[#101C15]' : 'text-white/70 hover:text-white'
             }`}
           >
             {active ? (
               <motion.span
                 layoutId="stay-tab-pill"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ffd7a0] to-[#ffb25a]"
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-[#D9E6A0] to-[#B6CE67]"
                 transition={{ type: 'spring', stiffness: 380, damping: 32 }}
               />
             ) : null}

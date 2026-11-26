@@ -85,7 +85,7 @@ export function AccommodationMap({
   }
 
   return (
-    <div className="stay-map relative isolate h-[26rem] w-full overflow-hidden rounded-3xl bg-[#0a0e17] shadow-[0_30px_60px_-34px_rgba(0,0,0,0.9)] ring-1 ring-white/10">
+    <div className="stay-map relative isolate h-[26rem] w-full overflow-hidden rounded-3xl bg-[#101C15] shadow-[0_30px_60px_-34px_rgba(0,0,0,0.9)] ring-1 ring-white/10">
       <MapContainer
         center={[28.2, 30.9]}
         zoom={6}
@@ -112,7 +112,7 @@ export function AccommodationMap({
             >
               <Popup>
                 <div className="flex flex-col gap-1 text-start">
-                  <span className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[#ffb25a]">
+                  <span className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[#B6CE67]">
                     {acc.type}
                   </span>
                   <p className="m-0 font-serif text-base font-semibold text-white">
@@ -129,7 +129,7 @@ export function AccommodationMap({
                       type="button"
                       disabled={sel}
                       onClick={() => onSetAsStay(acc.id)}
-                      className="mt-2 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#0a0e17] transition-colors hover:bg-[#ffb25a] disabled:bg-[#ffb25a]"
+                      className="mt-2 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#101C15] transition-colors hover:bg-[#B6CE67] disabled:bg-[#B6CE67]"
                     >
                       {sel
                         ? isAr
@@ -146,9 +146,9 @@ export function AccommodationMap({
           );
         })}
       </MapContainer>
-      <div className="pointer-events-none absolute inset-0 z-[500] rounded-3xl shadow-[inset_0_0_80px_rgba(5,7,13,0.65)]" />
+      <div className="pointer-events-none absolute inset-0 z-[500] rounded-3xl shadow-[inset_0_0_80px_rgba(11,21,16,0.65)]" />
       <div className="pointer-events-none absolute right-4 top-4 z-[600] flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3.5 py-1.5 text-xs font-medium tracking-wide text-white/85 backdrop-blur-md">
-        <span className="size-1.5 rounded-full bg-[#ffb25a]" aria-hidden="true" />
+        <span className="size-1.5 rounded-full bg-[#B6CE67]" aria-hidden="true" />
         {mapped.length}{' '}
         {isAr ? 'إقامة على الخريطة' : mapped.length === 1 ? 'stay on the map' : 'stays on the map'}
       </div>

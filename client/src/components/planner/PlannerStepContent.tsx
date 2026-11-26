@@ -13,6 +13,7 @@ import type {
 import { PLANNER_STEPS } from '../../types';
 import { cn } from '../../lib/cn';
 import { enumerateDates, isIsoDate } from '../../lib/date';
+import { fmtDate, fmtWeekday } from '../../lib/mytrip/format';
 import {
   ACCOMMODATION_PREFERENCES,
   BUDGET_TIERS,
@@ -251,10 +252,12 @@ interface DarkFieldProps {
   label: string;
   hint?: string;
   error?: string;
+  /** Human-readable echo of the value (native date inputs follow the browser locale). */
+  preview?: string | null;
   children: (props: { id: string; describedBy?: string }) => React.ReactNode;
 }
 
-function DarkField({ id, label, hint, error, children }: DarkFieldProps) {
+function DarkField({ id, label, hint, error, preview, children }: DarkFieldProps) {
   const describedBy = error ? `${id}-error` : hint ? `${id}-hint` : undefined;
   return (
     <div>
@@ -262,6 +265,11 @@ function DarkField({ id, label, hint, error, children }: DarkFieldProps) {
         {label}
       </label>
       {children({ id, describedBy })}
+      {preview ? (
+        <p className="mt-space-xs type-small font-semibold text-[#eef3e8]" aria-live="polite">
+          {preview}
+        </p>
+      ) : null}
       {error ? (
         <FieldError id={`${id}-error`} message={error} />
       ) : hint ? (
@@ -284,7 +292,13 @@ function DatesStep({
   headingRef,
   onChange,
 }: Omit<PlannerStepContentProps, 'step' | 'onToggleInterest'>) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.startsWith('ar') ? 'ar' : 'en';
+  const echo = (v: string) => {
+    const d = fmtDate(v, lang);
+    const w = fmtWeekday(v, lang);
+    return d && w ? `${w}, ${d}` : null;
+  };
   const reduce = useReducedMotion();
   const length = getTripLength(values.startDate, values.endDate);
   const startError = errors.startDate ? t(getPlannerErrorKey(errors.startDate)) : undefined;
@@ -305,6 +319,7 @@ function DatesStep({
           label={t('planner.dates.startLabel')}
           hint={t('planner.dates.startHint')}
           error={startError}
+          preview={echo(values.startDate)}
         >
           {({ id, describedBy }) => (
             <input
@@ -323,6 +338,7 @@ function DatesStep({
           label={t('planner.dates.endLabel')}
           hint={t('planner.dates.endHint')}
           error={endError}
+          preview={echo(values.endDate)}
         >
           {({ id, describedBy }) => (
             <input

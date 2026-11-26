@@ -89,11 +89,11 @@ export function FinalCtaSection() {
                 <div className="overflow-hidden rounded-2xl border border-hairline bg-surface-container shadow-floating">
                   <div className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] w-full overflow-hidden">
                     <img
-                      src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80"
+                      src="/images/places/philae-temple.jpg"
                       alt={
                         isAr
-                          ? 'غروب الشمس على نهر النيل ومعبد فيلة بأسوان'
-                          : 'Sunset over the Nile and temple sanctuaries in Aswan'
+                          ? 'معبد فيلة على جزيرته في أسوان'
+                          : 'The Temple of Philae on its island in Aswan'
                       }
                       className="h-full w-full object-cover transition-transform duration-1000 ease-out hover:scale-105"
                       loading="lazy"

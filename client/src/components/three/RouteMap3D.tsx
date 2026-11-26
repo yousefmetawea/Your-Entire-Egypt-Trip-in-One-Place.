@@ -1,7 +1,7 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
 import { useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { LabelAnchor, LabelLayer, type LabelItem, type LabelStore } from './ProjectedLabels';
 
 interface City {
   id: string;
@@ -165,12 +165,12 @@ function Route({ a, b, index }: { a: City; b: City; index: number }) {
 
 function CityNode({
   city,
-  isAr,
+  store,
   active,
   onHover,
 }: {
   city: City;
-  isAr: boolean;
+  store: LabelStore;
   active: boolean;
   onHover: (id: string | null) => void;
 }) {
@@ -199,17 +199,7 @@ function CityNode({
         <ringGeometry args={[0.2, 0.26, 40]} />
         <meshBasicMaterial color="#ffb25a" transparent toneMapped={false} depthWrite={false} />
       </mesh>
-      <Html center distanceFactor={14} position={[0, 0.7, 0]} style={{ pointerEvents: 'none' }}>
-        <span
-          className={`whitespace-nowrap rounded-full border px-3 py-1 text-xs font-semibold tracking-wide backdrop-blur-md transition-all duration-300 ${
-            active
-              ? 'scale-110 border-white bg-white text-black'
-              : 'border-white/25 bg-black/40 text-white/90'
-          }`}
-        >
-          {isAr ? city.ar : city.en}
-        </span>
-      </Html>
+      <LabelAnchor id={city.id} store={store} offset={[0, 0.7, 0]} />
     </group>
   );
 }
@@ -249,28 +239,47 @@ export default function RouteMap3D({
   const [hover, setHover] = useState<string | null>(null);
   const dot = useMemo(() => dotTexture(), []);
   const byId = useMemo(() => new Map(CITIES.map((c) => [c.id, c])), []);
+  const store = useMemo<LabelStore>(() => new Map(), []);
+  const labels: LabelItem[] = CITIES.map((c) => ({
+    id: c.id,
+    text: isAr ? c.ar : c.en,
+    className: `whitespace-nowrap rounded-full border px-3 py-1 text-xs font-semibold tracking-wide backdrop-blur-md transition-colors duration-300 ${
+      hover === c.id
+        ? 'border-white bg-white text-black'
+        : 'border-white/25 bg-black/40 text-white/90'
+    }`,
+  }));
   return (
-    <Canvas
-      frameloop={still ? 'demand' : 'always'}
-      dpr={[1, 1.6]}
-      camera={{ position: [1, 22, 15], fov: 40 }}
-      gl={{ antialias: true, alpha: true }}
-      onCreated={({ camera }) => camera.lookAt(1, 0, 0.2)}
-      aria-hidden="true"
-    >
-      <Fit />
-      <Rig>
-        <Land dot={dot} />
-        <Nile />
-        {ROUTES.map(([a, b], i) => {
-          const ca = byId.get(a);
-          const cb = byId.get(b);
-          return ca && cb ? <Route key={`${a}-${b}`} a={ca} b={cb} index={i} /> : null;
-        })}
-        {CITIES.map((c) => (
-          <CityNode key={c.id} city={c} isAr={isAr} active={hover === c.id} onHover={setHover} />
-        ))}
-      </Rig>
-    </Canvas>
+    <div className="relative h-full w-full">
+      <Canvas
+        frameloop={still ? 'demand' : 'always'}
+        dpr={[1, 1.6]}
+        camera={{ position: [1, 22, 15], fov: 40 }}
+        gl={{ antialias: true, alpha: true }}
+        onCreated={({ camera }) => camera.lookAt(1, 0, 0.2)}
+        aria-hidden="true"
+      >
+        <Fit />
+        <Rig>
+          <Land dot={dot} />
+          <Nile />
+          {ROUTES.map(([a, b], i) => {
+            const ca = byId.get(a);
+            const cb = byId.get(b);
+            return ca && cb ? <Route key={`${a}-${b}`} a={ca} b={cb} index={i} /> : null;
+          })}
+          {CITIES.map((c) => (
+            <CityNode
+              key={c.id}
+              city={c}
+              store={store}
+              active={hover === c.id}
+              onHover={setHover}
+            />
+          ))}
+        </Rig>
+      </Canvas>
+      <LabelLayer store={store} labels={labels} />
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
+import { LabelAnchor, LabelLayer, type LabelItem, type LabelStore } from './ProjectedLabels';
 
 interface City {
   id: string;
@@ -135,7 +135,7 @@ function Outline() {
     <line>
       <primitive object={geo} attach="geometry" />
       <lineBasicMaterial
-        color="#ffb25a"
+        color="#B6CE67"
         transparent
         opacity={0.35}
         blending={THREE.AdditiveBlending}
@@ -153,7 +153,7 @@ function Nile() {
   return (
     <mesh geometry={geo}>
       <meshBasicMaterial
-        color="#38c3e6"
+        color="#9CC5AA"
         toneMapped={false}
         transparent
         opacity={0.8}
@@ -224,7 +224,7 @@ function Streams({ dot, still }: { dot: THREE.Texture; still: boolean }) {
       {arcGeos.map((geo, i) => (
         <mesh key={i} geometry={geo}>
           <meshBasicMaterial
-            color="#ffb25a"
+            color="#B6CE67"
             transparent
             opacity={0.28}
             toneMapped={false}
@@ -253,7 +253,7 @@ function Streams({ dot, still }: { dot: THREE.Texture; still: boolean }) {
   );
 }
 
-function Node({ city, isAr }: { city: City; isAr: boolean }) {
+function Node({ city, store }: { city: City; store: LabelStore }) {
   const ring = useRef<THREE.Mesh>(null);
   const pos = useMemo(() => project(city.lat, city.lon, 0.1), [city]);
   useFrame(({ clock }) => {
@@ -267,25 +267,19 @@ function Node({ city, isAr }: { city: City; isAr: boolean }) {
     <group position={pos}>
       <mesh>
         <sphereGeometry args={[city.id === 'cairo' ? 0.2 : 0.14, 20, 20]} />
-        <meshBasicMaterial color={city.id === 'cairo' ? '#ffffff' : '#ffc27a'} toneMapped={false} />
+        <meshBasicMaterial color={city.id === 'cairo' ? '#ffffff' : '#D9E6A0'} toneMapped={false} />
       </mesh>
       <mesh ref={ring} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.2, 0.25, 40]} />
         <meshBasicMaterial
-          color="#ffb25a"
+          color="#B6CE67"
           transparent
           toneMapped={false}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
       </mesh>
-      {city.label ? (
-        <Html center distanceFactor={13} position={[0, 0.6, 0]} style={{ pointerEvents: 'none' }}>
-          <span className="whitespace-nowrap rounded-full border border-white/20 bg-black/35 px-3 py-1 text-[11px] font-semibold tracking-[0.12em] text-white/90 backdrop-blur-md">
-            {isAr ? city.ar : city.en}
-          </span>
-        </Html>
-      ) : null}
+      {city.label ? <LabelAnchor id={city.id} store={store} /> : null}
     </group>
   );
 }
@@ -308,7 +302,7 @@ function Dust({ dot, count }: { dot: THREE.Texture; count: number }) {
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        color="#ffd9a0"
+        color="#D9E6A0"
         map={dot}
         alphaMap={dot}
         size={0.1}
@@ -352,24 +346,38 @@ export default function TransitScene({
   still?: boolean;
 }) {
   const dot = useDot();
+  const store = useMemo<LabelStore>(() => new Map(), []);
+  const labels = useMemo<LabelItem[]>(
+    () =>
+      CITIES.filter((c) => c.label).map((c) => ({
+        id: c.id,
+        text: isAr ? c.ar : c.en,
+        className:
+          'whitespace-nowrap rounded-full border border-white/20 bg-black/35 px-3 py-1 text-[11px] font-semibold tracking-[0.12em] text-white/90 backdrop-blur-md',
+      })),
+    [isAr],
+  );
   return (
-    <Canvas
-      frameloop={still ? 'demand' : 'always'}
-      dpr={[1, 1.6]}
-      camera={{ position: [1, 22, 15], fov: 40 }}
-      gl={{ antialias: true, alpha: true }}
-      aria-hidden="true"
-    >
-      <Rig still={still}>
-        <Land dot={dot} />
-        <Outline />
-        <Nile />
-        <Streams dot={dot} still={still} />
-        {CITIES.map((c) => (
-          <Node key={c.id} city={c} isAr={isAr} />
-        ))}
-        <Dust dot={dot} count={still ? 60 : 140} />
-      </Rig>
-    </Canvas>
+    <div className="relative h-full w-full">
+      <Canvas
+        frameloop={still ? 'demand' : 'always'}
+        dpr={[1, 1.6]}
+        camera={{ position: [1, 22, 15], fov: 40 }}
+        gl={{ antialias: true, alpha: true }}
+        aria-hidden="true"
+      >
+        <Rig still={still}>
+          <Land dot={dot} />
+          <Outline />
+          <Nile />
+          <Streams dot={dot} still={still} />
+          {CITIES.map((c) => (
+            <Node key={c.id} city={c} store={store} />
+          ))}
+          <Dust dot={dot} count={still ? 60 : 140} />
+        </Rig>
+      </Canvas>
+      <LabelLayer store={store} labels={labels} />
+    </div>
   );
 }
