@@ -10,6 +10,7 @@ const HomePage = lazy(() => import('../pages/HomePage'));
 const DiscoverPage = lazy(() => import('../pages/DiscoverPage'));
 const PlaceDetailsPage = lazy(() => import('../pages/PlaceDetailsPage'));
 const TripCreatorPage = lazy(() => import('../pages/TripCreatorPage'));
+const AiPlannerPage = lazy(() => import('../pages/AiPlannerPage'));
 const TripPage = lazy(() => import('../pages/TripPage'));
 const StayTransportPage = lazy(() => import('../pages/StayTransportPage'));
 const AdminBookingsPage = lazy(() => import('../pages/AdminBookingsPage'));
@@ -57,6 +58,15 @@ const routes: RouteObject[] = [
               title: 'Plan a trip',
               description:
                 'Shape a Cairo itinerary in six short steps, from dates and travelers to interests and preferences.',
+            },
+          },
+          {
+            path: 'ai-planner',
+            element: <AiPlannerPage />,
+            handle: {
+              title: 'AI trip planner',
+              description:
+                'Get a day-by-day Egypt itinerary built only from the places in Discover. AI by Google Gemini, with a standard planner as backup.',
             },
           },
           {

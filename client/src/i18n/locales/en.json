@@ -9,7 +9,8 @@
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu",
     "signIn": "Sign in",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "aiPlanner": "AI Planner"
   },
   "home": {
     "hero": {
@@ -1177,6 +1178,111 @@
       "memoriesTitle": "Photos and memories",
       "memoriesBody": "YourTrip does not store photos or journal entries yet. For now your story is built from your itinerary and the notes you write on each stop in the builder. Those notes show up here under their day.",
       "addNotes": "Add notes to your stops"
+    }
+  },
+  "ai": {
+    "notice": "AI by Google Gemini. Don't enter personal info.",
+    "planner": {
+      "meta": {
+        "title": "AI trip planner",
+        "description": "Tell us your days, budget and interests and get a day-by-day Egypt itinerary built only from the places in Discover."
+      },
+      "eyebrow": "AI Trip Planner",
+      "title": "Your days in Egypt, planned for you",
+      "subtitle": "Pick your days, budget and interests. We build a day-by-day route using only the places in Discover. Every stop links to its full details.",
+      "form": {
+        "days": "Number of days",
+        "daysValue_one": "{{count}} day",
+        "daysValue_other": "{{count}} days",
+        "daysLess": "Fewer days",
+        "daysMore": "More days",
+        "budget": "Budget",
+        "interests": "Travel interests",
+        "interestsHint": "Leave empty for a mix.",
+        "regions": "Preferred destinations",
+        "regionsHint": "Optional. Pick up to {{count}}.",
+        "style": "Travel style",
+        "styles": {
+          "relaxed": "Relaxed",
+          "relaxedHint": "2 stops a day",
+          "balanced": "Balanced",
+          "balancedHint": "3 stops a day",
+          "packed": "Packed",
+          "packedHint": "4 stops a day"
+        },
+        "submit": "Plan my trip",
+        "submitting": "Planning..."
+      },
+      "loading": "Building your itinerary...",
+      "loadingDay": "Rebuilding day {{day}}...",
+      "result": {
+        "title": "Your itinerary",
+        "summary": "Summary",
+        "day": "Day {{day}}",
+        "stops": "{{count}} stops",
+        "regenerateAll": "Regenerate all",
+        "regenerateDay": "Regenerate day",
+        "viewPlace": "View place details",
+        "why": "Why this place",
+        "whyFallback": "Matches your interests and the places you picked.",
+        "visit": "Typical visit: {{duration}}",
+        "tryAi": "Try AI again",
+        "edit": "Change my choices",
+        "dayTitleFallback": "Day {{day}}"
+      },
+      "banner": {
+        "ai": "Built by AI from the Discover places. Check hours and prices on each place page before you go.",
+        "fallback": "This itinerary was NOT made by AI. It comes from our standard planner because AI is not available now.",
+        "warnings": "Some AI suggestions were removed because they did not match our places."
+      },
+      "errors": {
+        "rate_limited": "You reached the AI limit for now. Try again in a few minutes.",
+        "not_configured": "AI is not switched on for this site yet.",
+        "unavailable": "The AI service is busy or not reachable right now.",
+        "timeout": "The AI took too long to answer.",
+        "network": "Could not reach the AI service. Check your connection.",
+        "bad_request": "We could not use these choices. Change them and try again.",
+        "generic": "Something went wrong with the AI.",
+        "noPlan": "We could not build a plan from these choices. Try other interests or destinations.",
+        "dayFailed": "Could not regenerate day {{day}}. Your current plan is unchanged."
+      },
+      "cta": {
+        "title": "Want a plan in seconds?",
+        "body": "Let AI build a day-by-day Egypt route from the places in Discover.",
+        "button": "Try the AI planner"
+      }
+    },
+    "ask": {
+      "eyebrow": "Ask about this place",
+      "title": "Ask about {{name}}",
+      "subtitle": "Get quick answers about history, timing, what to expect and tips. Answers use this page's data.",
+      "presets": {
+        "history": "Historical background",
+        "bestTime": "Best time to visit",
+        "expect": "What to expect",
+        "tips": "Practical tips"
+      },
+      "presetQuestions": {
+        "history": "What is the historical background of this place?",
+        "bestTime": "What is the best time to visit this place?",
+        "expect": "What can I expect when I visit?",
+        "tips": "What practical tips do you have for visiting?"
+      },
+      "label": "Your question",
+      "placeholder": "Ask about this place...",
+      "send": "Ask",
+      "asking": "Thinking...",
+      "count": "{{count}}/{{max}}",
+      "you": "You",
+      "answer": "Answer",
+      "general": "Includes general knowledge. Double-check before you rely on it.",
+      "fromData": "From this page's data",
+      "local": "AI is not available now. This answer comes from the page data only.",
+      "noData": "We do not have this information for this place yet. Check the official source before you go.",
+      "noBestTime": "We do not have best-time information for this place yet. Check the opening hours and the official source before you go.",
+      "unavailable": "AI is not available now. Try one of the quick questions above.",
+      "rateLimited": "You reached the AI limit for now. Try again in a few minutes.",
+      "tooShort": "Write a short question first."
     }
   }
 }

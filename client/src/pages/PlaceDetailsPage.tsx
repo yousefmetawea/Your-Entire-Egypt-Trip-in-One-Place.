@@ -19,6 +19,7 @@ import { PlaceInfoCard } from '../components/places/PlaceInfoCard';
 import { PlaceLocation } from '../components/places/PlaceLocation';
 import { PlaceNarrative } from '../components/places/PlaceNarrative';
 import { PlaceTips } from '../components/places/PlaceTips';
+import { AskAboutPlace } from '../components/ai/AskAboutPlace';
 import '../components/ui/ivory-theme.css';
 
 interface PlaceDetailsContentProps {
@@ -50,6 +51,7 @@ function PlaceDetailsContent({ place, isFixture }: PlaceDetailsContentProps) {
               <PlaceNarrative place={place} />
               <PlaceLocation place={place} />
               <PlaceTips tips={place.tips} />
+              <AskAboutPlace key={place.id} place={place} />
             </div>
           </div>
 

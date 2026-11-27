@@ -1,0 +1,8 @@
+/* AI pages: keep long unbroken words from overflowing cards. */
+.yt-ai h1,
+.yt-ai h2,
+.yt-ai h3,
+.yt-ai h4,
+.yt-ai p {
+  overflow-wrap: anywhere;
+}

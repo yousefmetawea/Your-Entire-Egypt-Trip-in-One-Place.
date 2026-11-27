@@ -43,6 +43,11 @@ export function SiteLayout() {
       active: isActive(pathname, '/plan'),
     },
     {
+      label: t('nav.aiPlanner'),
+      href: '/ai-planner',
+      active: isActive(pathname, '/ai-planner'),
+    },
+    {
       label: t('nav.stayTransport'),
       href: '/stay-transport',
       active: isActive(pathname, '/stay-transport'),
